@@ -90,7 +90,7 @@
                     <col name="user.picture.thumbnail" width="100"/>
                     <col name="user.name.first"/>
                     <col name="user.name.last"/>
-                    <col name="user.email" flex=""/>
+                    <col name="user.email" />
                 </colgroup>
                 <thead>
                 <tr>

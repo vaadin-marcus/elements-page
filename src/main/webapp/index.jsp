@@ -93,7 +93,8 @@
   <div class="span6 tile">
     <div class="tile-details">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-icons.jsp" /></portlet:renderURL>">
-      <img src="<%=request.getContextPath()%>/img/preview/icons.png" alt="Free font icons for web applications">
+        <img src="<%=request.getContextPath()%>/img/preview/icons.png"
+             alt="Free font icons for web applications">
       </a>
       <div>
         Vaadin Icons is a set of 530 unique icons designed for web applications.
@@ -139,13 +140,14 @@
       <div>
         Vaadin ComboBox is a filterable select element for situations where you have more
         than a few dozen item to select from.
-                <span><a
-                    href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-                  Features</a>
-                    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-                      Demo</a>
-                    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-                      Source</a></span>
+        <span>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
+            Features</a>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
+            Demo</a>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
+            Source</a>
+        </span>
       </div>
     </div>
     <div class="tile-title row-fluid">
@@ -160,8 +162,14 @@
       <div>
         Vaadin ComboBox is a filterable select element for situations where you have more
         than a few dozen item to select from.
-                <span><a href="#">&rsaquo; Features</a> <a href="#">&rsaquo; Demo</a> <a
-                    href="#">&rsaquo; Source</a></span>
+        <span>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
+            Features</a>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
+            Demo</a>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
+            Source</a>
+        </span>
       </div>
     </div>
     <div class="tile-title row-fluid">
