@@ -2,6 +2,8 @@
 
 <portlet:defineObjects/>
 
+<%=request.getRequestURI()%>
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css"/>
 
 <div class="w-wallpaper-container elements-hero">

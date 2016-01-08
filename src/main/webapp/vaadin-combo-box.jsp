@@ -90,6 +90,15 @@
       #selector {
         max-width: 300px;
       }
+
+      /* Fixes needed for Liferay*/
+      #selector input[type='text'],
+      #selector input[type='text']:focus,
+      #selector input[type='text']:active {
+        border: none !important;
+        box-shadow: none !important;
+        background-color: transparent !important;
+      }
     </style>
 
     <script>

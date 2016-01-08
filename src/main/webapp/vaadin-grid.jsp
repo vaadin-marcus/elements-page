@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
+<%=request.getRequestURI()%>
+
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
 <link rel="import" href="<%=request.getContextPath()%>/bower_components/vaadin-icons/vaadin-icons.html">
