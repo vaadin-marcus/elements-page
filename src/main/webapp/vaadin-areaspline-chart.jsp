@@ -5,7 +5,7 @@
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
 <link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-arearange-chart.html">
+      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-areaspline-chart.html">
 <link rel="import" href="<%=request.getContextPath()%>/bower_components/iron-ajax/iron-ajax.html">
 <!-- Imports end -->
 

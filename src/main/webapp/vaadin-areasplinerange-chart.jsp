@@ -5,7 +5,7 @@
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
 <link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-arearange-chart.html">
+      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-areasplinerange-chart.html">
 <link rel="import" href="<%=request.getContextPath()%>/bower_components/iron-ajax/iron-ajax.html">
 <!-- Imports end -->
 
@@ -95,7 +95,6 @@
 <div class="elements-section">
 
   <h4>Demo</h4>
-  <view-source head="#stuff-for-head">
     <view-source head="#stuff-for-head" json="temp-variation.json">
       <template is="dom-bind">
         <iron-ajax auto url="temp-variation.json" handle-as="json" last-response="{{temperatureData}}"></iron-ajax>
@@ -111,12 +110,6 @@
           <data-series data="[[temperatureData]]"></data-series>
         </vaadin-areasplinerange-chart>
       </template>
-      <style>
-
-      </style>
-
-      <script>
-      </script>
     </view-source>
 </div>
 <!-- Demo section end -->
