@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <h1 class="helvetica-light">&lt;vaadin-arearange-chart&gt;
+  <h1 class="helvetica-light">&lt;vaadin-areaspline-chart&gt;
     <span>1.0</span>
   </h1>
 </div>
@@ -38,7 +38,7 @@
 
   <div class="row-fluid">
     <div class="span8">
-      <p class="lead helvetica-light">Area range chart is good for the following things for SEO
+      <p class="lead helvetica-light">Area spline chart is good for the following things for SEO
         reasons</p>
     </div>
 
@@ -73,8 +73,8 @@
       <h5>Similar charts</h5>
       <ul>
         <li>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>">Area
-            spline chart</a></li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>">Area
+            range chart</a></li>
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">Area
             chart</a></li>
@@ -92,33 +92,40 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<template id="stuff-for-head">
-  <script
-      src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-  <link rel="import"
-        href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/vaadin-arearange-chart.html">
-
-</template>
-
 <div class="elements-section">
 
   <h4>Demo</h4>
-  <view-source head="#stuff-for-head" json="temp-variation.json">
-    <template is="dom-bind">
-      <iron-ajax auto url="temp-variation.json" handle-as="json"
-                 last-response="{{temperatureData}}"></iron-ajax>
-      <vaadin-arearange-chart id="area-range">
-        <chart zoom-type="x"></chart>
-        <title>Temperature variation by day</title>
-        <x-axis type="datetime"></x-axis>
-        <y-axis>
-          <title text="null"></title>
-        </y-axis>
-        <tooltip crosshairs="true" shared="true" value-suffix="°C"></tooltip>
-        <legend enabled="false"></legend>
-        <data-series data="[[temperatureData]]"></data-series>
-      </vaadin-arearange-chart>
-    </template>
+  <view-source head="#stuff-for-head">
+    <vaadin-areaspline-chart id="area-spline">
+      <title>Average fruit consumption during one week</title>
+
+      <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true">
+      </legend>
+
+      <x-axis>
+        <categories>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday</categories>
+        <plot-bands from="4.5" to="6.5" color="rgba(68, 170, 213, .2)">
+        </plot-bands>
+      </x-axis>
+      <y-axis>
+        <title>Fruit units</title>
+      </y-axis>
+
+      <tooltip shared="true" value-suffix="units">
+      </tooltip>
+      <plot-options>
+        <areaspline fill-opacity="0.5">
+        </areaspline>
+      </plot-options>
+
+      <data-series name="John">
+        <data>3, 4, 3, 5, 4, 10, 12</data>
+      </data-series>
+      <data-series name="Jane">
+        <data>1, 3, 4, 3, 3, 5, 4</data>
+      </data-series>
+    </vaadin-areaspline-chart>
+
     <style>
 
     </style>
@@ -127,5 +134,4 @@
     </script>
   </view-source>
 </div>
-
 <!-- Demo section end -->
