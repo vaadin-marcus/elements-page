@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>vaadin-combo basic tests</title>
+  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+  <script src="../bower_components/test-fixture/test-fixture-mocha.js"></script>
+
+  <link rel="import" href="common.html">
+  <script src="../bower_components/promise-polyfill/Promise.js"></script>
+  <script src="common.js"></script>
+</head>
+
+<body>
+
+<test-fixture id="combobox">
+  <template>
+    <vaadin-combo-box></vaadin-combo-box>
+  </template>
+</test-fixture>
+
+
+<script>
+  describe('toggling the dropdown', function() {
+    var combobox;
+
+    beforeEach(function() {
+      combobox = fixture('combobox');
+    });
+
+    describe('opening', function() {
+      it('should open on click', function() {
+        combobox.$$('paper-input-container').fire('tap');
+
+        return waitUntilOpen().then(function() {
+          expect(combobox.opened).to.be.true;
+        });
+      });
+
+      it('should open on function call', function() {
+        combobox.open();
+
+        return waitUntilOpen().then(function() {
+          expect(combobox.opened).to.be.true;
+        });
+      });
+
+      it('should not close an open popup', function() {
+        combobox.open();
+
+        return waitUntilOpen().then(function() {
+          combobox.open();
+
+          expect(combobox.opened).to.be.true;
+        });
+      });
+
+      describeIf(fullScreen, 'fullscreen', function() {
+        beforeEach(function() {
+          combobox.$.overlay.fullScreen = true;
+          combobox.open();
+
+          return waitUntilOpen();
+        });
+
+        it('should focus input on fullscreen dropdown open', function() {
+          var focusedInput = Polymer.dom(combobox.$.overlay).querySelector('input:focus');
+
+          expect(focusedInput).to.equal(combobox.$.fullScreenInput);
+        });
+
+        it('should blur input when closing', function() {
+          combobox.close();
+
+          return waitUntilClosed().then(function() {
+            var focusedInput = Polymer.dom(combobox.$.overlay).querySelector('input:focus');
+
+            expect(focusedInput).to.be.undefined;
+          });
+        });
+
+        it('should prevent focus of non-fullscreen input field', function() {
+          expect(combobox.$.input.tabIndex).to.equal(-1);
+        });
+      });
+    });
+
+    describe('closing', function() {
+      it('should close fullscreen popup when tapping on modal curtain', function() {
+        combobox.$.overlay.fullScreen = true;
+        combobox.open();
+
+        return waitUntilOpen()
+          .then(function() {
+            // Fake a tap event for the #dropdownContent.
+            Polymer.Base.fire('tap', {}, {
+              bubbles: true,
+              node: combobox.$.overlay.$.dropdownContent
+            });
+          })
+          .then(waitUntilClosed)
+          .then(function() {
+            expect(combobox.opened).to.be.false;
+          });
+      });
+
+      describeIf(!fullScreen, 'on blur', function() {
+        it('should close the overlay when focus is lost', function() {
+          combobox.open();
+
+          return waitUntilOpen()
+            .then(function() {
+              MockInteractions.blur(combobox.$.input);
+            })
+            .then(waitUntilClosed)
+            .then(function() {
+              expect(combobox.opened).to.equal(false);
+            });
+        });
+      });
+
+      describeIf(fullScreen, 'on blur fullscreen', function() {
+        it('should close the overlay when focus is lost', function() {
+          // We need a dummy input as a focus target in fullscreen mode.
+          var dummyInput = document.createElement('input');
+          document.body.appendChild(dummyInput);
+
+          combobox.open();
+
+          return waitUntilOpen()
+            .then(function() {
+              dummyInput.focus();
+            })
+            .then(waitUntilClosed)
+            .then(function() {
+              expect(combobox.opened).to.equal(false);
+              document.body.removeChild(dummyInput);
+            });
+        });
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>
