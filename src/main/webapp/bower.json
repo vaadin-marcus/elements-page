@@ -1,0 +1,38 @@
+{
+  "name": "elements-page",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Marcus Hellberg <marcus@vaadin.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "paper-button": "PolymerElements/paper-button#~1.0.11",
+    "vaadin-charts": "^3.0.0-alpha8",
+    "vaadin-elements": "0.3.0-beta13",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.2.2",
+    "waypoints": "~4.0.0",
+    "page": "~1.6.4",
+    "vaadin-grid": "~1.0.0",
+    "paper-styles": "PolymerElements/paper-styles#~1.1.1",
+    "vaadin-icons": "vaadin/vaadin-icons#~1.0.0-alpha1",
+    "marked-element": "PolymerElements/marked-element#~1.1.1",
+    "prism-element": "PolymerElements/prism-element#~1.0.3",
+    "iron-ajax": "PolymerElements/iron-ajax#~1.1.1",
+    "vaadin-combo-box": "~1.0.0-alpha3",
+    "neon-animation": "PolymerElements/neon-animation#~1.0.8",
+    "iron-selector": "PolymerElements/iron-selector#~1.0.8",
+    "iron-pages": "PolymerElements/iron-pages#~1.0.5",
+    "js-beautify": "~1.5.10"
+  }
+}

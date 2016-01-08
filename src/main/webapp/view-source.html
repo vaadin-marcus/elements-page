@@ -1,0 +1,354 @@
+<dom-module id="view-source">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+      }
+      
+      .tabs {
+        box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+        margin-bottom: 12px;
+      }
+      
+      .tabs button {
+        border: 0;
+        border-bottom: 3px solid transparent;
+        background: transparent;
+        font: 500 14px/1 "Helvetica Neue", sans-serif;
+        height: 40px;
+        padding: 0 0.4em;
+        margin: 0 0.6em;
+        opacity: 0.7;
+        color: #333;
+        cursor: pointer;
+      }
+      
+      .tabs button:focus,
+      .tabs button:hover {
+        outline: none;
+        opacity: 1;
+      }
+      
+      .tabs button.selected {
+        border-bottom-color: #666;
+      }
+      
+      .tabs button.edit {
+        border: 0;
+        font-size: 12px;
+        text-transform: uppercase;
+        height: 24px;
+        padding: 0 8px;
+        border-radius: 3px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        margin: 8px 1em;
+        vertical-align: middle;
+      }
+      
+      ::content .view-source-source {
+        background: #fdfdfd;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: .4em .8em;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+        min-height: 500px;
+      }
+      
+      ::content .view-source-source pre,
+      ::content .view-source-source pre code {
+        /* Override stupid Liferay AUI "enhancements" */
+        border: none !important;
+        background: transparent !important;
+        white-space: pre !important;
+        word-break: normal !important;
+        word-wrap: normal !important;
+      }
+    </style>
+    <div class="demo">
+      <content></content>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'view-source',
+
+    properties: {
+      show: {
+        type: String,
+        observer: '_showChanged',
+        value: 'html'
+      },
+      loaded: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+      json: String,
+      demoName: {
+        type: String,
+        value: 'Demo'
+      }
+    },
+
+    _htmlText: '',
+    _scriptText: '',
+    _styleText: '',
+    _headText: '',
+
+    created: function() {
+      // Add only one Prism highlighter on the page
+      if (!window._viewSource) {
+        window._viewSource = {};
+        window._viewSource.prism = document.createElement('prism-highlighter');
+        this.ownerDocument.body.appendChild(window._viewSource.prism);
+      }
+
+      // We need to read the HTML source before any elements are upgraded and
+      // rendered, in order to not get the full rendered DOM, just the authored
+      // source.
+      for (var i = 0; i < this.childNodes.length; i++) {
+        var el = this.childNodes[i];
+        if (el.nodeName === 'STYLE') {
+          this._styleText += el.textContent;
+        } else if (el.nodeName !== 'SCRIPT' && (!el.classList || !el.classList.contains('view-source-head'))) {
+          this._htmlText += (el.nodeType === 1 ? el.outerHTML : el.textContent);
+        }
+      }
+
+      // Strip empty attribute values (="" or ='')
+      this._htmlText = this._htmlText.replace(/=["']{2}/g, '');
+
+      var headTemplate = Polymer.dom(this).querySelector('template.view-source-head') || document.querySelector(this.getAttribute('head'));
+      if (headTemplate) {
+        this._headText = headTemplate.innerHTML;
+      }
+    },
+
+    attached: function() {
+      // Script tags need to be collected deferred, as they block the rendering of
+      // any subsequence elements on the page, so we would not be able to get to
+      // those. At this phase they have been evaluated already.
+      var scripts = this.getElementsByTagName('script');
+      for (var i = 0; i < scripts.length; i++) {
+        this._scriptText += scripts[i].textContent;
+      }
+
+
+      if (this.json) {
+        var _this = this;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              _this._jsonText = xhr.responseText;
+              _this._build();
+            }
+          }
+        };
+        xhr.open('GET', this.json, true);
+        xhr.send();
+      } else {
+        this._build();
+      }
+      this.loaded = true;
+    },
+
+    _build: function() {
+      this._parseSource();
+      this._createTabs();
+      this._showSource(this.show);
+    },
+
+    _parseSource: function() {
+
+      var formatOptions = {
+        'indent_size': 2,
+        'indent_char': ' '
+      };
+      if (this._htmlText.trim().length > 0) {
+        this._htmlEl = document.createElement('marked-element');
+        // this._htmlText = this._htmlEl._unindent(this._htmlText).trim();
+        this._htmlText = html_beautify(this._htmlText, formatOptions);
+        this._htmlEl.markdown = '\`\`\`html\n' + this._htmlText + '\n\`\`\`';
+      }
+
+      if (this._scriptText.trim().length > 0) {
+        this._scriptEl = document.createElement('marked-element');
+        // this._scriptText = this._scriptEl._unindent(this._scriptText).trim();
+        this._scriptText = js_beautify(this._scriptText, formatOptions);
+        this._scriptEl.markdown = '\`\`\`js\n' + this._scriptText + '\n\`\`\`';
+      }
+
+      if (this._styleText.trim().length > 0) {
+        this._styleEl = document.createElement('marked-element');
+        // this._styleText = this._styleEl._unindent(this._styleText).trim();
+        this._styleText = css_beautify(this._styleText, formatOptions);
+        this._styleEl.markdown = '\`\`\`css\n' + this._styleText + '\n\`\`\`';
+      }
+
+      if (this._headText && this._headText.trim().length > 0) {
+        this._importsEl = document.createElement('marked-element');
+        this._headText = html_beautify(this._headText, formatOptions);
+        this._importsEl.markdown = '\`\`\`html\n' + this._headText + '\n\`\`\`';
+      }
+
+      if (this._jsonText && this._jsonText.trim().length > 0) {
+        this._jsonEl = document.createElement('marked-element');
+        this._jsonText = js_beautify(this._jsonText, formatOptions);
+        this._jsonEl.markdown = '\`\`\`js\n' + this._jsonText + '\n\`\`\`';
+      }
+    },
+
+    _createTabs: function() {
+      if (!this._htmlEl && !this._scriptEl &&  !this._styleEl) {
+        return;
+      }
+
+      this._tabs = document.createElement('div');
+      this._tabs.className = 'tabs';
+      Polymer.dom(this.root).appendChild(this._tabs);
+
+      this._sourceView = document.createElement('div');
+      this._sourceView.className = 'view-source-source';
+
+      if (this._htmlEl) {
+        this._htmlTab = document.createElement('button');
+        this._htmlTab.textContent = 'HTML';
+        this._htmlTab.className = 'html selected';
+        Polymer.dom(this._tabs).appendChild(this._htmlTab);
+        this._htmlTab.addEventListener('click', function() {
+          this._showSource('html');
+        }.bind(this));
+      }
+
+      if (this._scriptEl) {
+        this._scriptTab = document.createElement('button');
+        this._scriptTab.textContent = 'JS';
+        this._scriptTab.className = 'js';
+        Polymer.dom(this._tabs).appendChild(this._scriptTab);
+        this._scriptTab.addEventListener('click', function() {
+          this._showSource('js');
+        }.bind(this));
+      }
+
+      if (this._styleEl) {
+        this._styleTab = document.createElement('button');
+        this._styleTab.textContent = 'CSS';
+        this._styleTab.className = 'css';
+        Polymer.dom(this._tabs).appendChild(this._styleTab);
+        this._styleTab.addEventListener('click', function() {
+          this._showSource('css');
+        }.bind(this));
+      }
+
+      if (this._importsEl) {
+        this._importsTab = document.createElement('button');
+        this._importsTab.textContent = 'Imports';
+        this._importsTab.className = 'imports';
+        Polymer.dom(this._tabs).appendChild(this._importsTab);
+        this._importsTab.addEventListener('click', function() {
+          this._showSource('imports');
+        }.bind(this));
+      }
+
+      if (this._jsonEl) {
+        this._jsonTab = document.createElement('button');
+        this._jsonTab.textContent = this.json;
+        this._jsonTab.className = 'json';
+        Polymer.dom(this._tabs).appendChild(this._jsonTab);
+        this._jsonTab.addEventListener('click', function() {
+          this._showSource('json');
+        }.bind(this));
+      }
+
+      this._editButton = document.createElement('button');
+      this._editButton.className = 'edit';
+      this._editButton.title = 'Edit in Codepen.io';
+      this._editButton.innerHTML = 'Edit &rsaquo;';
+      Polymer.dom(this._tabs).appendChild(this._editButton);
+      this._editButton.addEventListener('click', function() {
+        this._postToCodepen();
+      }.bind(this));
+
+      Polymer.dom(this.root).appendChild(this._sourceView);
+    },
+
+    _showSource: function(which) {
+      if (this._htmlEl && this._htmlEl.parentNode) {
+        Polymer.dom(this._sourceView).removeChild(this._htmlEl);
+        this._htmlTab.classList.remove('selected');
+      }
+
+      if (this._scriptEl && this._scriptEl.parentNode) {
+        Polymer.dom(this._sourceView).removeChild(this._scriptEl);
+        this._scriptTab.classList.remove('selected');
+      }
+
+      if (this._styleEl && this._styleEl.parentNode) {
+        Polymer.dom(this._sourceView).removeChild(this._styleEl);
+        this._styleTab.classList.remove('selected');
+      }
+
+      if (this._importsEl && this._importsEl.parentNode) {
+        Polymer.dom(this._sourceView).removeChild(this._importsEl);
+        this._importsTab.classList.remove('selected');
+      }
+
+      if (this._jsonEl && this._jsonEl.parentNode) {
+        Polymer.dom(this._sourceView).removeChild(this._jsonEl);
+        this._jsonTab.classList.remove('selected');
+      }
+
+
+      if (which === 'html') {
+        Polymer.dom(this._sourceView).appendChild(this._htmlEl);
+        this._htmlTab.classList.add('selected');
+      } else if (which === 'js') {
+        Polymer.dom(this._sourceView).appendChild(this._scriptEl);
+        this._scriptTab.classList.add('selected');
+      } else if (which === 'css') {
+        Polymer.dom(this._sourceView).appendChild(this._styleEl);
+        this._styleTab.classList.add('selected');
+      } else if (which === 'imports') {
+        Polymer.dom(this._sourceView).appendChild(this._importsEl);
+        this._importsTab.classList.add('selected');
+      } else if (which === 'json') {
+        Polymer.dom(this._sourceView).appendChild(this._jsonEl);
+        this._jsonTab.classList.add('selected');
+      }
+    },
+
+    _showChanged: function(show) {
+      if (this._sourceView) {
+        this._showSource(show);
+      }
+    },
+
+    _postToCodepen: function() {
+      var data = {
+        html: this._htmlText,
+        css: this._styleText,
+        js: this._scriptText,
+        head: this._headText
+      };
+
+      // Quotes will screw up the JSON
+      var JSONstring = JSON.stringify(data).replace(/"/g, '&​quot;').replace(/'/g, '&apos;');
+
+      var form =
+        '<form action="http://codepen.io/pen/define" method="POST" target="_blank">' +
+        '<input type="hidden" name="data" value=\'' + JSONstring + '\'>' +
+        '</form>';
+
+
+      var formEl = document.createElement('div');
+      formEl.innerHTML = form;
+      // Polymer.dom(this).appendChild(formEl);
+      formEl.firstChild.submit();
+    }
+  });
+</script>

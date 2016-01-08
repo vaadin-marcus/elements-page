@@ -1,0 +1,379 @@
+/* General Fixes */
+
+    #vaadintopbar {
+        min-height: 91px;
+        background-color: transparent;
+    }
+
+    #vaadintopbar #topitems #topnav a.selected::after {
+        color: #041a25;
+        top: 36px;
+    }
+
+    .vaadin-theme #wrapper {
+        margin-top: 0px;
+    }
+
+/* EO General Fixes */
+
+/* Index Hero */
+
+    #vaadintopbar {
+        min-height: 91px;
+        background-color: transparent;
+    }
+
+    #vaadintopbar #topitems #topnav a.selected::after {
+        color: #041a25;
+        top: 36px;
+    }
+
+    .vaadin-theme #wrapper {
+        margin-top: 0px;
+    }
+
+    .elements-hero .w-wallpaper {
+        background: #041a25 url('../img/hero-bg.png') center -200px no-repeat;
+        background-size: 966px;
+    }
+
+    .elements-hero {
+        padding: 360px 0 60px 0;
+        color: #fff;
+    }
+
+    .elements-hero .elements-hero-title {
+        border-bottom: 2px solid #3a5360;
+        margin-top: 40px;
+    }
+
+    .elements-hero .elements-hero-title h1 {
+        margin: 0px 0px 5px;
+        color: #fff;
+    }
+
+    .elements-hero p.lead {
+        font-size: 20px;
+        margin: 20px 0px 40px;
+    }
+
+    .elements-hero-buttons .button {
+        display: block;
+        padding: 14px;
+        text-align: center;
+        border-radius: 4px;
+        border: 2px solid #3a5360;
+        font-weight: bold;
+        color: #fff;
+        font-size: 16px;
+        transition: all 0.3s;
+        margin-bottom: 20px;
+    }
+
+    .elements-hero-buttons .button:hover {
+        background-color: #3a5360;
+        color: #fff;
+        transition: all 0.3s;
+    }
+
+    .elements-hero-buttons .button:focus {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .elements-hero-buttons .primary {
+        background-color: #c0ee33;
+        color: #041a25;
+        border: 0;
+        padding: 16px;
+    }
+
+    .elements-hero-buttons .primary:hover {
+        background-color: #d0ff41;
+        color: #041a25;
+    }
+
+    .polymer-tag {
+        color: #648A9D;
+        display: block;
+        padding: 12px;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 4px;
+        background: #1e313b url('../img/p-logo.png') right center no-repeat;
+        background-size: 32px;
+        margin-bottom: 5px;
+    }
+
+    @media (max-width: 1024px) {
+        .elements-hero .w-wallpaper {
+            background: #041a25 url('../img/hero-bg.png') 20px -200px no-repeat;
+            background-size: 966px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .elements-hero {
+            padding: 240px 0 60px 0;
+        }
+        
+        .elements-hero .w-wallpaper {
+            background: #041a25 url('../img/hero-bg.png') 20px -200px no-repeat;
+            background-size: 768px;
+        }
+    }
+
+/* EO Index Hero */
+
+/* Index Listing */
+
+    .elements-category {
+        border: 2px solid #e1e1e1;
+        border-width: 2px 0;
+        margin: 60px 0 20px;
+    }
+
+    .elements-category .span9 {
+        padding: 20px 0; 
+    }
+
+    .elements-category .span9 h5 {
+        margin: 0 0 10px;
+    }
+
+    .elements-category .span9 h5 span {
+        font-family: "Helvetica Neue","Helvetica","Arial","Microsoft YaHei New","Microsoft Yahei","SimSun","STXihei",sans-serif;
+        font-weight: bold;
+        font-size: 16px;
+        color: #9b9b9b;
+    }
+
+    .elements-category .span3 {
+        background-color: #f7f7f7;
+        padding: 20px;
+    }
+
+    .elements-category .span3 span {
+        font-weight: bold;
+        font-size: 20px;
+        color: #00b4f0;
+        text-transform: uppercase;
+        display: block;
+    }
+
+    .elements-category .span3 a {
+        margin-top: 35px;
+    }
+
+    .elements-category-tiles .tile {
+        padding: 20px;
+        background-color: #efefef;
+        margin-bottom: 20px;
+    }
+
+    .elements-category-tiles .tile-title {
+        background-color: #041a25;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .elements-category-tiles .tile-title div {
+        min-height: 10px !important; 
+    }
+
+    .elements-category-tiles .tile-title div span {
+        color: #648a9d;
+        text-align: right;
+        display: block;
+    }
+
+    .elements-category-tiles .tile-details {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .elements-category-tiles .tile-details div {
+        position: absolute;
+        background-color: #073045;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 40px;
+        color: #fff;
+        height: 100%;
+        box-sizing: border-box;
+        transform: translate(1000px,1000px);
+        transition: all 0.3s;
+        text-align: center;
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .elements-category-tiles .tile-details div span {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .elements-category-tiles .tile-details div span a {
+        margin: 0 10px;
+    }
+
+    .tile:hover .tile-details div {
+        transform: translate(0, 0);
+        transition: all 0.3s;
+    }
+
+    @media (max-width: 1024px) {
+        .elements-category-tiles .tile-details div {
+            background-color: #073045;
+            position: relative;
+            padding: 20px;
+            color: #fff;
+            height: 100%;
+            box-sizing: border-box;
+            transform: translate(0px, 0px);
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .elements-category-tiles .tile-title div span {
+            text-align: left;
+        }
+    }
+
+/* EO Index Listing */
+
+/* Template Hero */
+
+    .elements-hero-mini .w-wallpaper {
+        background: #041a25 url('../img/hero-bg-mini.png') center center no-repeat;
+        background-size: cover;
+    }
+
+    .elements-hero-mini {
+        padding: 60px 0 60px 0;
+        color: #fff;
+    }
+
+    .elements-hero-mini .elements-hero-title {
+        border-bottom: 2px solid #3a5360;
+    }
+
+    .elements-hero-mini .elements-hero-title h5 {
+        margin: 10px 0;
+    }
+
+    .elements-hero-mini .elements-hero-title h5 a {
+        color: #fff;
+    }
+
+    .elements-hero-mini .elements-hero-title h5 a:hover,
+    .elements-hero-mini .elements-hero-title h5 a:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .elements-hero-mini .elements-hero-title h5 a:after {
+        content: "Back to listing";
+        font-family: "Helvetica Neue","Helvetica","Arial","Microsoft YaHei New","Microsoft Yahei","SimSun","STXihei",sans-serif;
+        font-weight: bold;
+        font-size: 14px;
+        color: #648a9d;
+        margin-left: 10px;
+        opacity: 0;
+        transition: 0.3s all;       
+    }
+
+    .elements-hero-mini .elements-hero-title h5 a:hover:after {
+        opacity: 1;
+        transition: 0.3s all;
+    }
+
+    .elements-hero-mini h1 {
+        margin: 10px 0 0;
+        color: #fff;
+    }
+
+    .elements-hero-mini h1 span {
+        font-family: "Helvetica Neue","Helvetica","Arial","Microsoft YaHei New","Microsoft Yahei","SimSun","STXihei",sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+        color: #648a9d;
+    }
+
+/* EO Template Hero */
+
+/* Template Intro */
+
+    .elements-intro {
+        padding: 60px 0;
+    }
+
+    .elements-intro .w-wallpaper {
+        background-color: #f4f4f4;
+    }
+
+    .elements-intro p.lead {
+        font-size: 20px;
+    }
+
+    .elements-install {
+        padding: 20px;
+        background-color: #e5e5e5;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .elements-install h4 {
+        margin: 0;
+    }
+
+/* EO Template Intro */
+
+/* Template Section */
+
+    .elements-section {
+        margin: 60px 0 0;
+    }
+
+    .elements-section h4 {
+        margin: 0 0 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e1e1e1;
+    }
+
+    .elements-section ul {
+        list-style: none;
+        padding:0;
+        margin:0;
+    }
+
+    .elements-section ul li {
+        margin-bottom: 10px;
+        padding-left: 1em; 
+        text-indent: -.7em;
+    }
+
+    .elements-section li:before {
+        content: "• ";
+        color: #648a9d;
+        font-size: 16px;
+    }
+
+/* EO Template Section */
+
+/* Demo Section */
+
+view-source {
+    margin-bottom: 50px;
+}
+
+/* EO Demo Section */
