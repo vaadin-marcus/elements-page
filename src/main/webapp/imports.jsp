@@ -8,7 +8,6 @@
 <script src="<%=request.getContextPath()%>/bower_components/js-beautify/js/lib/beautify-css.js"></script>
 
 <link rel="import" href="<%=request.getContextPath()%>/bower_components/iron-flex-layout/classes/iron-flex-layout.html">
-<link rel="import" href="<%=request.getContextPath()%>/bower_components/paper-styles/demo-pages.html">
 <link rel="import" href="<%=request.getContextPath()%>/bower_components/polymer/polymer.html">
 <link rel="import" href="<%=request.getContextPath()%>/bower_components/marked-element/marked-element.html">
 <link rel="import" href="<%=request.getContextPath()%>/bower_components/prism-element/prism-highlighter.html">
