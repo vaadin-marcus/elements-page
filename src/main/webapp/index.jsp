@@ -39,27 +39,19 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-grid.jsp" /></portlet:renderURL>">
-        <img src="<%=request.getContextPath()%>/img/preview/grid.png" alt="">
-      </a>
-      <div>
-        Vaadin Grid is a fully featured datagrid for showing table data. It performs great
-        even with huge data sets.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-grid.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-grid.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-grid.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-grid.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="img/preview/grid.png" alt="">
+        <div>
+          Vaadin Grid is a fully featured datagrid for showing table data. It performs great even with huge data sets.
+          <span>Learn more</span>
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-grid</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-grid</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
