@@ -41,9 +41,10 @@
   <div class="span6 tile">
     <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-grid.jsp" /></portlet:renderURL>">
       <div class="tile-details">
-        <img src="img/preview/grid.png" alt="">
+        <img src="<%=request.getContextPath()%>/img/preview/grid.png" alt="">
         <div>
-          Vaadin Grid is a fully featured datagrid for showing table data. It performs great even with huge data sets.
+          Vaadin Grid is a fully featured datagrid for showing table data. It performs great even
+          with huge data sets.
           <span>Learn more</span>
         </div>
       </div>
@@ -55,57 +56,39 @@
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-combo-box.jsp" /></portlet:renderURL>">
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-combo-box.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/combobox.png" alt="">
-      </a>
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-combo-box.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-combo-box.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-combo-box.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-combo-box</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-combo-box</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
 
 <div class="row-fluid elements-category-tiles">
-
   <div class="span6 tile">
-    <div class="tile-details">
-      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-icons.jsp" /></portlet:renderURL>">
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-icons.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/icons.png"
              alt="Free font icons for web applications">
-      </a>
-      <div>
-        Vaadin Icons is a set of 530 unique icons designed for web applications.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-icons.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-icons.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-icons.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+        <div>
+          Vaadin Icons is a set of 530 unique icons designed for web applications.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-icons</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-icons</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
-
 </div>
 
 
@@ -125,27 +108,19 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/area.png" alt="">
-      </a>
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-area-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-area-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
@@ -175,47 +150,36 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/areaspline.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/areaspline.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-areaspline-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-areaspline-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/areasplinerange.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/areasplinerange.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-areasplinerange-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-areasplinerange-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -223,47 +187,36 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/bar.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bar-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bar-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bar-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bar-chart.jsp" /></portlet:renderURL>">
+
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/bar.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-bar-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-bar-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/boxplot.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-boxplot-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-boxplot-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-boxplot-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-boxplot-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/boxplot.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-boxplot-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-boxplot-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -271,47 +224,36 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/bubble.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bubble-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bubble-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bubble-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span></a></span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bubble-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/bubble.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-bubble-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-bubble-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/column.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-column-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-column-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-column-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-column-chart.jsp" /></portlet:renderURL>">
+
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/column.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-column-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-column-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -319,47 +261,38 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/columnrange.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-columnrange-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-columnrange-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-columnrange-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-columnrange-chart.jsp" /></portlet:renderURL>">
+
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/columnrange.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-columnrange-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-columnrange-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/errorbar.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-errorbar-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-errorbar-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-errorbar-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-errorbar-chart.jsp" /></portlet:renderURL>">
+
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/errorbar.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-errorbar-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-errorbar-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -367,47 +300,37 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/funnel.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-funnel-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-funnel-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-funnel-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-funnel-chart.jsp" /></portlet:renderURL>">
+
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/funnel.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-funnel-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-funnel-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/gauge.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-gauge-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-gauge-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-gauge-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-gauge-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/gauge.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-gauge-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-gauge-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -415,47 +338,36 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/heatmap.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-heatmap-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-heatmap-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-heatmap-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-heatmap-chart.jsp" /></portlet:renderURL>">
+
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/heatmap.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-heatmap-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-heatmap-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/line.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/line.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-line-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-line-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -463,47 +375,36 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/pie.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pie-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pie-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pie-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pie-chart.jsp" /></portlet:renderURL>#features">
+
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/pie.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-pie-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-pie-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/polygon.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-polygon-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-polygon-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-polygon-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-polygon-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/polygon.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-polygon-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-polygon-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -511,47 +412,36 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/pyramid.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pyramid-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pyramid-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pyramid-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pyramid-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/pyramid.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-pyramid-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-pyramid-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/scatter.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-scatter-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-scatter-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-scatter-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-scatter-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/scatter.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-scatter-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-scatter-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -559,47 +449,38 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/solidgauge.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-solidgauge-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-solidgauge-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-solidgauge-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-solidgauge-chart.jsp" /></portlet:renderURL>">
+
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/solidgauge.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-solidgauge-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-solidgauge-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/sparkline.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-sparkline-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-sparkline-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-sparkline-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-sparkline-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/sparkline.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-sparkline</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-sparkline</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -607,47 +488,37 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/spline.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-spline-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-spline-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-spline-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-spline-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/spline.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-spline-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-spline-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/treemap.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-treemap-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-treemap-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-treemap-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-treemap-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/treemap.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-treemap-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-treemap-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -655,25 +526,20 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/waterfall.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-waterfall-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-waterfall-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-waterfall-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-waterfall-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/waterfall.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-waterfall-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-waterfall-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
