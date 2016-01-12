@@ -22,8 +22,8 @@
   <div class="elements-hero-buttons">
     <div class="row-fluid">
       <div class="span3"><a class="button" href="#demos">Demos</a></div>
-      <div class="span3"><a class="button" href="#">Videos</a></div>
-      <div class="span3 offset3"><a class="button primary" href="#">Get Started</a></div>
+      <div class="span3"><a class="button" href="https://vaadin.com/elements/videos">Videos</a></div>
+      <div class="span3 offset3"><a class="button primary" href="https://vaadin.com/docs/-/part/elements/elements-getting-started.html">Get Started</a></div>
     </div>
   </div>
 </div>
