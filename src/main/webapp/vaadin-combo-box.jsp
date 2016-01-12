@@ -10,7 +10,7 @@
 
 <!-- Hero section start -->
 
-<div class="w-wallpaper-container elements-hero-mini">
+<div class="w-wallpaper-container elements-hero-mini-mini">
   <div class="w-wallpaper"></div>
   <div class="elements-hero-title row-fluid">
     <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5>

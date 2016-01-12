@@ -11,7 +11,7 @@
 
 <!-- Hero section start -->
 
-<div class="w-wallpaper-container elements-hero">
+<div class="w-wallpaper-container elements-hero-mini">
   <div class="w-wallpaper">&nbsp;</div>
 
   <div class="elements-hero-title row-fluid">
