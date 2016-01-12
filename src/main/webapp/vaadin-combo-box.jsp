@@ -27,7 +27,7 @@
 <div class="w-wallpaper-container elements-intro">
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
-    <div class="span8">
+    <div class="span7">
       <p class="lead helvetica-light">
         Vaadin ComboBox is a filterable select element for
         situations where you have more than a few dozen item to select from. It adapts to
@@ -35,7 +35,7 @@
         users.
       </p>
     </div>
-    <div class="span4">
+    <div class="span5">
       <div class="elements-install">
         <h4>Install</h4>
         <code>bower install --save vaadin-combo-box</code>

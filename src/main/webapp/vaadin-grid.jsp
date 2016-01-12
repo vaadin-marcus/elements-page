@@ -27,10 +27,10 @@
 <div class="w-wallpaper-container elements-intro">
     <div class="w-wallpaper"></div>
     <div class="row-fluid">
-        <div class="span8">
+        <div class="span7">
             <p class="lead helvetica-light">Vaadin Grid is a fully featured datagrid for showing table data. It performs great even with huge data sets, fully supporting paging and lazy loading from any data source like a REST API. Grid allows you sort and filter data and customize how each cell gets rendered.</p>
         </div>
-        <div class="span4">
+        <div class="span5">
             <div class="elements-install">
                 <h4>Install</h4>
                 <code>bower install --save vaadin-grid</code>

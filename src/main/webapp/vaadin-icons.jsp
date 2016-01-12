@@ -29,11 +29,11 @@
 <div class="w-wallpaper-container elements-intro">
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
-    <div class="span8">
+    <div class="span7">
       <p class="lead helvetica-light">Vaadin-icons contains 530 unique icons designed for web
         applications.</p>
     </div>
-    <div class="span4">
+    <div class="span5">
       <div class="elements-install">
         <h4>Install</h4>
         <code>bower install --save vaadin-icons</code>

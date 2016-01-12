@@ -334,6 +334,10 @@
     margin: 0;
 }
 
+.elements-install code {
+    white-space: normal;
+}
+
 /* EO Template Intro */
 
 /* Template Section */
