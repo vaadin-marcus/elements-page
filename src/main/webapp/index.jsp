@@ -16,8 +16,9 @@
     maintained and tested to ensure compatibility with the latest Polymer releases.</p>
   <div class="elements-hero-buttons">
     <div class="row-fluid">
-      <div class="span3 offset6"><a class="button" href="#">Videos</a></div>
-      <div class="span3"><a class="button primary" href="#">Get Started</a></div>
+      <div class="span3"><a class="button" href="#demos">Demos</a></div>
+      <div class="span3"><a class="button" href="#">Videos</a></div>
+      <div class="span3 offset3"><a class="button primary" href="#">Get Started</a></div>
     </div>
   </div>
 </div>
@@ -62,6 +63,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -81,6 +83,7 @@
              alt="Free font icons for web applications">
         <div>
           Vaadin Icons is a set of 530 unique icons designed for web applications.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -114,6 +117,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -124,25 +128,20 @@
   </div>
 
   <div class="span6 tile">
-    <div class="tile-details">
-      <img src="<%=request.getContextPath()%>/img/preview/arearange.png" alt="">
-      <div>
-        Vaadin ComboBox is a filterable select element for situations where you have more
-        than a few dozen item to select from.
-        <span>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>#features">&rsaquo;
-            Features</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>#demo">&rsaquo;
-            Demo</a>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>#source">&rsaquo;
-            Source</a>
-        </span>
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>">
+      <div class="tile-details">
+        <img src="<%=request.getContextPath()%>/img/preview/arearange.png" alt="">
+        <div>
+          Vaadin ComboBox is a filterable select element for situations where you have more
+          than a few dozen item to select from.
+          <span>Learn more</span>
+        </div>
       </div>
-    </div>
-    <div class="tile-title row-fluid">
-      <div class="span6">vaadin-arearange-chart</div>
-      <div class="span6"><span>1.0</span></div>
-    </div>
+      <div class="tile-title row-fluid">
+        <div class="span6">vaadin-arearange-chart</div>
+        <div class="span6"><span>1.0</span></div>
+      </div>
+    </a>
   </div>
 
 </div>
@@ -156,6 +155,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -173,6 +173,7 @@
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
 
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -194,6 +195,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -210,6 +212,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -230,6 +233,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -247,6 +251,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -268,6 +273,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -285,7 +291,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
-
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -307,6 +313,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -323,7 +330,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
-
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -345,6 +352,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -361,6 +369,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -375,13 +384,14 @@
 <div class="row-fluid elements-category-tiles">
 
   <div class="span6 tile">
-    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pie-chart.jsp" /></portlet:renderURL>#features">
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pie-chart.jsp" /></portlet:renderURL>">
 
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/pie.png" alt="">
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -398,6 +408,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -418,6 +429,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -434,7 +446,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
-
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -456,7 +468,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
-
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -473,7 +485,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
-
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -494,7 +506,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
-
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -511,7 +523,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
-
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -532,7 +544,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
-
+          <span>Learn more</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -543,3 +555,45 @@
   </div>
 
 </div>
+
+<div class="w-wallpaper-container elements-demos">
+  <a name="demos"></a>
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <h2 class="helvetica-light">Demos</h2>
+
+  <div class="row-fluid elements-demos-demo">
+    <div class="span8"><img alt=""
+                            src="https://vaadin.com/documents/10187/11914215/demo-expense_manager/f254d03f-368c-4793-baa9-a46ad1ad6ea1?t=1452512389930"/>
+    </div>
+
+    <div class="span4">
+      <div>
+        <h5>Expense Manager</h5>
+
+        <p class="lead helvetica-light">Fully responsive and offline enabled application that
+          showcases Grid and Charts.</p>
+        <a class="w-arrow-button blue" href="https://demo.vaadin.com/expense-manager/">See live
+          demo</a> <a class="w-arrow-button small"
+                      href="https://github.com/vaadin/expense-manager-demo">Fork on GitHub</a></div>
+    </div>
+  </div>
+
+  <div class="row-fluid elements-demos-demo">
+    <div class="span8"><img alt=""
+                            src="https://vaadin.com/documents/10187/11914215/demo-fitness_tracker/52cdff09-c1e6-4299-b0d1-3cf54f30b1de?t=1452512402093"/>
+    </div>
+
+    <div class="span4">
+      <div>
+        <h5>Fitness Tracker</h5>
+
+        <p class="lead helvetica-light">Fully responsive and offline enabled application that
+          showcases Grid and Charts.</p>
+        <a class="w-arrow-button blue" href="http://demo.vaadin.com/fitness-tracker/">See live
+          demo</a> <a class="w-arrow-button small"
+                      href="https://github.com/vaadin/fitness-tracker-demo">Fork on GitHub</a></div>
+    </div>
+  </div>
+</div>
+

@@ -142,7 +142,7 @@
 }
 
 .elements-category .span9 h5 span {
-    font-family: "Helvetica Neue","Helvetica","Arial","Microsoft YaHei New","Microsoft Yahei","SimSun","STXihei",sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun", "STXihei", sans-serif;
     font-weight: bold;
     font-size: 16px;
     color: #9b9b9b;
@@ -206,7 +206,7 @@
     color: #fff;
     height: 100%;
     box-sizing: border-box;
-    transform: translate(1000px,1000px);
+    transform: translate(1000px, 1000px);
     transition: all 0.3s;
     text-align: center;
     font-size: 16px;
@@ -281,7 +281,7 @@
 
 .elements-hero-mini .elements-hero-title h5 a:after {
     content: "Back to listing";
-    font-family: "Helvetica Neue","Helvetica","Arial","Microsoft YaHei New","Microsoft Yahei","SimSun","STXihei",sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun", "STXihei", sans-serif;
     font-weight: bold;
     font-size: 14px;
     color: #648a9d;
@@ -301,7 +301,7 @@
 }
 
 .elements-hero-mini h1 span {
-    font-family: "Helvetica Neue","Helvetica","Arial","Microsoft YaHei New","Microsoft Yahei","SimSun","STXihei",sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun", "STXihei", sans-serif;
     font-weight: bold;
     font-size: 20px;
     color: #648a9d;
@@ -350,8 +350,8 @@
 
 .elements-section ul {
     list-style: none;
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
 }
 
 .elements-section ul li {
@@ -367,3 +367,52 @@
 }
 
 /* EO Template Section */
+
+/* Demo Footer */
+#footer-wrapper {
+    margin-top: 0px;
+}
+
+.elements-demos {
+    color: #fff;
+    padding: 60px 0;
+    margin-top: 60px;
+}
+
+.elements-demos .w-wallpaper {
+    background-color: #041a25;
+}
+
+.elements-demos h2 {
+    font-size: 48px;
+    color: #fff;
+}
+
+.elements-demos h5 {
+    margin-top: 0;
+}
+
+.elements-demos p.lead {
+    font-size: 20px;
+}
+
+.elements-demos-demo {
+    padding: 20px 0;
+    border-top: 2px solid #194c66;
+}
+
+.elements-demos-demo .span4 div {
+    padding: 20px 0 20px 20px;
+}
+
+.elements-demos-demo .w-arrow-button {
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .elements-demos-demo .span4 div {
+        padding: 0;
+    }
+}
+
+/* EO Demo Footer */

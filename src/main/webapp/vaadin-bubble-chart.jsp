@@ -64,6 +64,10 @@
         <li>Vector Graphics</li>
         <li>Dynamic data</li>
         <li>Multiple axes</li>
+      </ul>
+    </div>
+    <div class="span6">
+      <ul>
         <li>Zooming</li>
         <li>Branding</li>
         <li>Touch support</li>
