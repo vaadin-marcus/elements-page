@@ -80,10 +80,12 @@
 
   <h4>Demo</h4>
   <view-source head="#stuff-for-head">
-    <template id="stuff-for-head">
+    <div class="head">
+      <!--
       <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-errorbar-chart.html">
-    </template>
+      -->
+    </div>
     <vaadin-errorbar-chart id="error-bar">
       <title>Temperature vs Rainfall</title>
       <x-axis>

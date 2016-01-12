@@ -114,7 +114,7 @@
         var el = this.childNodes[i];
         if (el.nodeName === 'STYLE') {
           this._styleText += el.textContent;
-        } else if (el.nodeName !== 'SCRIPT' && (!el.classList || !el.classList.contains('view-source-head'))) {
+        } else if (el.nodeName !== 'SCRIPT' && (!el.classList || !el.classList.contains('head'))) {
           this._htmlText += (el.nodeType === 1 ? el.outerHTML : el.textContent);
         }
       }
@@ -122,9 +122,9 @@
       // Strip empty attribute values (="" or ='')
       this._htmlText = this._htmlText.replace(/=["']{2}/g, '');
 
-      var headTemplate = Polymer.dom(this).querySelector('template.view-source-head') || document.querySelector(this.getAttribute('head'));
+      var headTemplate = Polymer.dom(this).querySelector('.head');
       if (headTemplate) {
-        this._headText = headTemplate.innerHTML;
+        this._headText = headTemplate.innerHTML.replace(/<!--/g, '').replace(/-->/g, '');
       }
     },
 

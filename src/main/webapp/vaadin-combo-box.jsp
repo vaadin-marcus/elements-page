@@ -73,7 +73,14 @@
 <a name="demo"></a>
 <div class="elements-section">
   <h4>Demo</h4>
-  <view-source head="#stuff-for-head" json="countries.json">
+  <view-source head="#stuff-for-head">
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import"
+            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-combo-box/vaadin-combo-box.html">
+      -->
+    </div>
     <template is="dom-bind" id="demo">
       <iron-ajax auto url="<%=request.getContextPath()%>/countries.json" handle-as="json"
                  last-response="{{countries}}"></iron-ajax>

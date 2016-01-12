@@ -87,16 +87,19 @@
 </div>
 
 <!-- Info section end -->
-<template id="stuff-for-head">
-    <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import"
-          href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
-</template>
+
 
 <div class="elements-section">
 
     <h4>Basic area chart</h4>
     <view-source head="#stuff-for-head" demo-name="Basic area chart">
+        <div class="head">
+            <!--
+            <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+            <link rel="import"
+                href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
+            -->
+        </div>
         <vaadin-area-chart id="basic-area">
             <title>US and USSR nuclear stockpiles</title>
             <subtitle>Source: thebulletin.metapress.com</subtitle>
@@ -142,7 +145,14 @@
     </view-source>
 
     <h4>Area chart with negative values</h4>
-    <view-source head="#stuff-for-head" demo-name="Area chart with negative values">
+    <view-source demo-name="Area chart with negative values">
+        <div class="head">
+            <!--
+            <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+            <link rel="import"
+                href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
+            -->
+        </div>
         <vaadin-area-chart id="area-with-negative-values">
             <title>Area chart with negative values</title>
 
@@ -166,7 +176,14 @@
     </view-source>
 
     <h4>Area chart with missing points</h4>
-    <view-source head="#stuff-for-head" demo-name="Area chart with missing points">
+    <view-source demo-name="Area chart with missing points">
+        <div class="head">
+            <!--
+            <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+            <link rel="import"
+                href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
+            -->
+        </div>
         <vaadin-area-chart id="area-with-missing-points">
             <title>Fruit consumption *</title>
             <subtitle floating="true" y="10" align="right" vertical-align="bottom">* Jane's banana
@@ -191,7 +208,14 @@
     </view-source>
 
     <h4>Area chart with inverted axis</h4>
-    <view-source head="#stuff-for-head" demo-name="Area chart with inverted axis">
+    <view-source demo-name="Area chart with inverted axis">
+        <div class="head">
+            <!--
+            <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+            <link rel="import"
+                href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
+            -->
+        </div>
         <vaadin-area-chart id="inverted-axes">
             <chart inverted="true"></chart>
             <title>Average fruit consumption during one week</title>
@@ -222,7 +246,14 @@
     </view-source>
 
     <h4>Percentage area chart</h4>
-    <view-source head="#stuff-for-head" demo-name="Percentage area chart">
+    <view-source demo-name="Percentage area chart">
+        <div class="head">
+            <!--
+            <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+            <link rel="import"
+                href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
+            -->
+        </div>
         <vaadin-area-chart id="percentage-area">
             <title>Historic World Population by Region</title>
             <subtitle>Source: Wikipedia.org</subtitle>
@@ -261,7 +292,14 @@
     </view-source>
 
     <h4>Stacked area chart</h4>
-    <view-source head="#stuff-for-head" demo-name="Stacked area chart">
+    <view-source demo-name="Stacked area chart">
+        <div class="head">
+            <!--
+            <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+            <link rel="import"
+                href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
+            -->
+        </div>
         <vaadin-area-chart id="stacked-area">
             <title>Historic and Estimated Worldwide Population Growth by Region</title>
             <subtitle>Source: Wikipedia.org</subtitle>

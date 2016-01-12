@@ -80,12 +80,14 @@
 <div class="elements-section">
 
   <h4>Demo</h4>
-  <template id="stuff-for-head">
-    <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/vaadin-boxplot-chart.html">
 
-  </template>
-  <view-source head="#stuff-for-head">
+  <view-source>
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-boxplot-chart.html">
+      -->
+    </div>
     <vaadin-boxplot-chart id="box-plot">
       <title>Vaadin Charts Box Plot Example</title>
       <legend enabled="false"></legend>

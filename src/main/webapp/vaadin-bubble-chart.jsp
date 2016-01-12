@@ -83,12 +83,13 @@
 <div class="elements-section">
 
   <h4>Demo</h4>
-  <view-source head="#stuff-for-head">
-    <template id="stuff-for-head">
-      <script
-          src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <view-source>
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-bubble-chart.html">
-    </template>
+      -->
+
     <vaadin-bubble-chart id="bubble-chart">
       <chart zoom-type="xy"></chart>
       <title>Vaadin Charts Bubbles</title>

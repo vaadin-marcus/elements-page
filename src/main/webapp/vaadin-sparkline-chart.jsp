@@ -89,7 +89,14 @@
   </template>
 
   <h4>Demo</h4>
-  <view-source head="#stuff-for-head" json="stockData.json">
+  <view-source>
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-line-chart.html">
+      link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+      -->
+    </div>
     <dom-module id="sparkline-example">
       <template>
         <vaadin-grid id="grid">
@@ -102,7 +109,7 @@
           </table>
         </vaadin-grid>
 
-        <iron-ajax auto id="dataFetcher" url="stockData.json" handle-as="json"
+        <iron-ajax auto id="dataFetcher" url="<%=request.getContextPath()%>/stockData.json" handle-as="json"
                    on-response="_dataLoaded" debounce-duration="300"></iron-ajax>
       </template>
 

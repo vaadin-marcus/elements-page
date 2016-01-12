@@ -50,13 +50,14 @@
 <!-- Demo section start -->
 <a name="demo"></a>
 <div class="elements-section">
-  <template id="stuff-for-head">
-    <script
-        src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import"
-          href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-combo-box/vaadin-combo-box.html">
-  </template>
-  <view-source head="#stuff-for-head" demo-name="Demo">
+
+  <view-source demo-name="Demo">
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-icons/latest/vaadin-icons.html">
+      -->
+    </div>
     <template is="dom-bind" id="demo">
       <paper-input label="Filter" value="{{query}}" class="icons-filter"></paper-input>
       <!-- Icon sets are registered globally when imported -->

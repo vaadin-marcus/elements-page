@@ -92,20 +92,19 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<template id="stuff-for-head">
-  <script
-      src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-  <link rel="import"
-        href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/vaadin-arearange-chart.html">
-
-</template>
 
 <div class="elements-section">
 
   <h4>Demo</h4>
-  <view-source head="#stuff-for-head" json="temp-variation.json">
+  <view-source head="#stuff-for-head">
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-arearange-chart.html">
+      -->
+    </div>
     <template is="dom-bind">
-      <iron-ajax auto url="temp-variation.json" handle-as="json"
+      <iron-ajax auto url="<%=request.getContextPath()%>/temp-variation.json" handle-as="json"
                  last-response="{{temperatureData}}"></iron-ajax>
       <vaadin-arearange-chart id="area-range">
         <chart zoom-type="x"></chart>

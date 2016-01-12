@@ -77,16 +77,15 @@
 
 <!-- Demo section start -->
 <div class="elements-section">
-  <template id="stuff-for-head">
-    <script
-        src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import"
-          href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-pyramid-chart.html">
-  </template>
 
   <h4>Demo</h4>
-  <view-source head="#stuff-for-head">
-
+  <view-source>
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-pyramid-chart.html">
+      -->
+    </div>
     <vaadin-pyramid-chart id="pyramid">
       <title>Sales pyramid</title>
       <plot-options>

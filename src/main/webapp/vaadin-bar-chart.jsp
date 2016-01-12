@@ -75,7 +75,13 @@
 <div class="elements-section">
 
   <h4>Basic bar chart</h4>
-  <view-source head="#stuff-for-head" demo-name="Basic bar chart">
+  <view-source demo-name="Basic bar chart">
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-bar-chart.html">
+      -->
+    </div>
     <vaadin-bar-chart id="basic-bar">
       <title>Stacked bar chart</title>
       <x-axis>

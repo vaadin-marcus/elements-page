@@ -77,15 +77,15 @@
 
 <!-- Demo section start -->
 <div class="elements-section">
-  <template id="stuff-for-head">
-    <script
-        src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import"
-          href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-line-chart.html">
-  </template>
 
   <h4>Demo</h4>
-  <view-source head="#stuff-for-head">
+  <view-source>
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-line-chart.html">
+      -->
+    </div>
     <vaadin-line-chart id="lines-with-complex-html-tooltip">
       <title>Complex tooltip</title>
 

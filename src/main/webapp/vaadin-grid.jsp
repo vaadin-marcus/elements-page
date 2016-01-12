@@ -76,12 +76,15 @@
 <!-- Demo section start -->
 <a name="demo"></a>
 <div class="elements-section">
-    <template id="stuff-for-head">
-        <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import"
-              href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-    </template>
-    <view-source head="#stuff-for-head" demo-name="Basic use">
+
+    <view-source demo-name="Basic use">
+        <div class="head">
+            <!--
+            <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+            <link rel="import"
+                  href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+            -->
+        </div>
         <vaadin-grid selection-mode="multi" id="basic-grid" visible-rows="5">
             <table>
                 <colgroup>

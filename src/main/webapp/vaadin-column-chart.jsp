@@ -94,14 +94,14 @@
 
 <!-- Demo section start -->
 <div class="elements-section">
-  <template id="stuff-for-head">
-    <script
-        src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import"
-          href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
-  </template>
   <h4>Column chart with drilldown</h4>
-  <view-source head="#stuff-for-head" demo-name="Column chart with drilldown">
+  <view-source demo-name="Column chart with drilldown">
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
+      -->
+    </div>
     <vaadin-column-chart class="chart">
       <title>Browser market shares at a specific website, March 2015</title>
       <subtitle>Source: statcounter.com</subtitle>
@@ -191,7 +191,13 @@
   </view-source>
 
   <h4>Stacked column chart</h4>
-  <view-source head="#stuff-for-head" demo-name="Stacked column chart">
+  <view-source demo-name="Stacked column chart">
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
+      -->
+    </div>
     <vaadin-column-chart class="chart">
       <title>Total fruit consumption, grouped by gender</title>
       <x-axis>
@@ -225,7 +231,13 @@
   </view-source>
 
   <h4>Column chart with negative values</h4>
-  <view-source head="#stuff-for-head" demo-name="Column chart with negative values">
+  <view-source demo-name="Column chart with negative values">
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
+      -->
+    </div>
     <vaadin-column-chart class="chart">
       <title>Column chart with negative values</title>
       <subtitle>Source: WorldClimate.com</subtitle>
@@ -250,7 +262,13 @@
   </view-source>
 
   <h4>3D column chart</h4>
-  <view-source head="#stuff-for-head" demo-name="3D column chart">
+  <view-source demo-name="3D column chart">
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
+      -->
+    </div>
     <vaadin-column-chart class="chart">
       <title>Monthly Average Rainfall</title>
       <subtitle>Source: WorldClimate.com</subtitle>
