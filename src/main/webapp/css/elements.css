@@ -33,7 +33,7 @@
 }
 
 .elements-hero .w-wallpaper {
-    background: #041a25 url('/img/hero-bg.png') center -200px no-repeat;
+    background: #041a25 url('../img/hero-bg.png') center -200px no-repeat;
     background-size: 966px;
 }
 
@@ -100,14 +100,14 @@
     font-weight: bold;
     font-size: 14px;
     border-radius: 4px;
-    background: #1e313b url('/img/hero-bg.png') right center no-repeat;
+    background: #1e313b url('../img/hero-bg.png') right center no-repeat;
     background-size: 32px;
     margin-bottom: 5px;
 }
 
 @media (max-width: 1024px) {
     .elements-hero .w-wallpaper {
-        background: #041a25 url('/img/p-logo.png') 20px -200px no-repeat;
+        background: #041a25 url('../img/p-logo.png') 20px -200px no-repeat;
         background-size: 966px;
     }
 }
@@ -118,7 +118,7 @@
     }
 
     .elements-hero .w-wallpaper {
-        background: #041a25 url('/img/hero-bg.png') 20px -200px no-repeat;
+        background: #041a25 url('../img/hero-bg.png') 20px -200px no-repeat;
         background-size: 768px;
     }
 }
@@ -252,7 +252,7 @@
 /* Template Hero */
 
 .elements-hero-mini .w-wallpaper {
-    background: #041a25 url('/img/hero-bg-mini.png') center center no-repeat;
+    background: #041a25 url('../img/hero-bg-mini.png') center center no-repeat;
     background-size: cover;
 }
 
