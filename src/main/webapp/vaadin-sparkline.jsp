@@ -5,7 +5,7 @@
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
 <link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-sparkline-chart.html">
+      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-sparkline.html">
 <link rel="import"
       href="<%=request.getContextPath()%>/bower_components/vaadin-grid/vaadin-grid.html">
 <!-- Imports end -->
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <h1 class="helvetica-light">&lt;vaadin-sparkline-chart&gt;
+  <h1 class="helvetica-light">&lt;vaadin-sparkline&gt;
     <span>1.0</span>
   </h1>
 </div>
@@ -79,22 +79,14 @@
 
 <!-- Demo section start -->
 <div class="elements-section">
-  <template id="stuff-for-head">
-    <script
-        src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import"
-          href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-sparkline-chart.html">
-    <link rel="import"
-          href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-  </template>
 
   <h4>Demo</h4>
   <view-source>
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-line-chart.html">
-      link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-sparkline.html">
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
       -->
     </div>
     <dom-module id="sparkline-example">
@@ -109,7 +101,8 @@
           </table>
         </vaadin-grid>
 
-        <iron-ajax auto id="dataFetcher" url="<%=request.getContextPath()%>/stockData.json" handle-as="json"
+        <iron-ajax auto id="dataFetcher" url="<%=request.getContextPath()%>/stockData.json"
+                   handle-as="json"
                    on-response="_dataLoaded" debounce-duration="300"></iron-ajax>
       </template>
 
@@ -127,8 +120,8 @@
               grid.columns[1].renderer = function(cell) {
                 var sparkline = document.createElement('vaadin-sparkline');
                 //TODO fix when styling has been fixed
-                sparkline.querySelector('#chartContainer').style.width = '150px';
-                sparkline.querySelector('#chartContainer').style.height = '48px';
+                sparkline.style.width = '150px';
+                sparkline.style.height = '48px';
                 sparkline.setAttribute('data', cell.data);
 
                 cell.element.innerHTML = '';

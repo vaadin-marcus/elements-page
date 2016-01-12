@@ -3,6 +3,11 @@
 <portlet:defineObjects/>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css"/>
+<style>
+  #footer-wrapper {
+    margin-top: 0px;
+  }
+</style>
 
 <div class="w-wallpaper-container elements-hero">
   <div class="w-wallpaper"></div>
@@ -479,7 +484,7 @@
   </div>
 
   <div class="span6 tile">
-    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-sparkline-chart.jsp" /></portlet:renderURL>">
+    <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-sparkline.jsp" /></portlet:renderURL>">
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/sparkline.png" alt="">
         <div>

@@ -89,7 +89,7 @@
       <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-bubble-chart.html">
       -->
-
+    </div>
     <vaadin-bubble-chart id="bubble-chart">
       <chart zoom-type="xy"></chart>
       <title>Vaadin Charts Bubbles</title>
