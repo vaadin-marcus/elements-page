@@ -1,3 +1,5 @@
+<%@ page import="com.liferay.portal.model.ReleaseSoap" %>
+<%@ page import="com.vaadin.elements.Releases" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -5,7 +7,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css"/>
 <style>
   #footer-wrapper {
-    margin-top: 0px;
+    margin-top: 0;
   }
 </style>
 
@@ -30,7 +32,7 @@
 
 <div class="elements-category row-fluid">
   <div class="span9">
-    <h5>Core Elements <span>0.3</span></h5>
+    <h5>Core Elements <span><%=Releases.getLatestVersionNumber("vaadin-core-elements")%></span></h5>
     <p>Vaadin Core elements is an Apache 2.0 licensed set of web components designed for
       business applications. The set contains elements like data grids, combo boxes and date
       pickers.</p>
@@ -55,8 +57,8 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-grid</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span8">vaadin-grid</div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-grid")%></span></div>
       </div>
     </a>
   </div>
@@ -72,8 +74,8 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-combo-box</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span8">vaadin-combo-box</div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-combo-box")%></span></div>
       </div>
     </a>
   </div>
@@ -92,8 +94,8 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-icons</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span8">vaadin-icons</div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-icons")%></span></div>
       </div>
     </a>
   </div>
@@ -102,7 +104,7 @@
 
 <div class="elements-category row-fluid">
   <div class="span9">
-    <h5>Charts <span>3.0.0</span></h5>
+    <h5>Charts <span><%=Releases.getLatestVersionNumber("vaadin-charts")%></span></h5>
     <p>Vaadin Charts contains tens of different types of charts that allow you to visualize and
       interact with data. All charts support declarative and dynamic data binding.</p>
   </div>
@@ -126,8 +128,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-area-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-area-chart</div>
       </div>
     </a>
   </div>
@@ -143,8 +144,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-arearange-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-arearange-chart</div>
       </div>
     </a>
   </div>
@@ -164,8 +164,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-areaspline-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-areaspline-chart</div>
       </div>
     </a>
   </div>
@@ -182,8 +181,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-areasplinerange-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-areasplinerange-chart</div>
       </div>
     </a>
   </div>
@@ -204,8 +202,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-bar-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-bar-chart</div>
       </div>
     </a>
   </div>
@@ -221,8 +218,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-boxplot-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-boxplot-chart</div>
       </div>
     </a>
   </div>
@@ -242,8 +238,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-bubble-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-bubble-chart</div>
       </div>
     </a>
   </div>
@@ -260,8 +255,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-column-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-column-chart</div>
       </div>
     </a>
   </div>
@@ -282,8 +276,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-columnrange-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-columnrange-chart</div>
       </div>
     </a>
   </div>
@@ -300,8 +293,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-errorbar-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-errorbar-chart</div>
       </div>
     </a>
   </div>
@@ -322,8 +314,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-funnel-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-funnel-chart</div>
       </div>
     </a>
   </div>
@@ -339,8 +330,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-gauge-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-gauge-chart</div>
       </div>
     </a>
   </div>
@@ -361,8 +351,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-heatmap-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-heatmap-chart</div>
       </div>
     </a>
   </div>
@@ -378,8 +367,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-line-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-line-chart</div>
       </div>
     </a>
   </div>
@@ -400,8 +388,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-pie-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-pie-chart</div>
       </div>
     </a>
   </div>
@@ -417,8 +404,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-polygon-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-polygon-chart</div>
       </div>
     </a>
   </div>
@@ -438,8 +424,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-pyramid-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-pyramid-chart</div>
       </div>
     </a>
   </div>
@@ -455,8 +440,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-scatter-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-scatter-chart</div>
       </div>
     </a>
   </div>
@@ -477,8 +461,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-solidgauge-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-solidgauge-chart</div>
       </div>
     </a>
   </div>
@@ -494,8 +477,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-sparkline</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-sparkline</div>
       </div>
     </a>
   </div>
@@ -515,8 +497,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-spline-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-spline-chart</div>
       </div>
     </a>
   </div>
@@ -532,8 +513,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-treemap-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-treemap-chart</div>
       </div>
     </a>
   </div>
@@ -553,8 +533,7 @@
         </div>
       </div>
       <div class="tile-title row-fluid">
-        <div class="span6">vaadin-waterfall-chart</div>
-        <div class="span6"><span>1.0</span></div>
+        <div class="span12">vaadin-waterfall-chart</div>
       </div>
     </a>
   </div>
