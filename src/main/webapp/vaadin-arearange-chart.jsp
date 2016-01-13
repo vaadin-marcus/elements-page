@@ -62,14 +62,24 @@
         <li>Vector Graphics</li>
         <li>Dynamic data</li>
         <li>Multiple axes</li>
+      </ul>
+    </div>
+
+    <div class="span6">
+      <ul>
         <li>Zooming</li>
         <li>Branding</li>
         <li>Touch support</li>
       </ul>
     </div>
+  </div>
+</div>
 
+<div class="elements-section">
+  <h4>Similar charts</h4>
+
+  <div class="row-fluid">
     <div class="span6">
-      <h5>Similar charts</h5>
       <ul>
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>">Area
@@ -77,6 +87,11 @@
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">Area
             chart</a></li>
+      </ul>
+    </div>
+
+    <div class="span6">
+      <ul>
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">Area
             spline range chart</a></li>
