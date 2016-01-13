@@ -1,3 +1,4 @@
+<%@ page import="com.vaadin.elements.Releases" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -19,7 +20,7 @@
     </div>
     <div class="span3"><span class="polymer-tag">Built with Polymer</span></div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-icons&gt; <span>1.0</span></h1>
+  <h1 class="helvetica-light">&lt;vaadin-icons&gt; <span><%=Releases.getLatestVersionNumber("vaadin-icons")%></span></h1>
 </div>
 
 <!-- Hero section end -->

@@ -24,7 +24,6 @@
   </div>
 
   <h1 class="helvetica-light">&lt;vaadin-funnel-chart&gt;
-    <span>1.0</span>
   </h1>
 </div>
 

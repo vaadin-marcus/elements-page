@@ -23,7 +23,6 @@
   </div>
 
   <h1 class="helvetica-light">&lt;vaadin-bar-chart&gt;
-    <span>1.0</span>
   </h1>
 </div>
 
@@ -72,7 +71,7 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<div class="elements-section demo">
 
   <h4>Basic bar chart</h4>
   <view-source demo-name="Basic bar chart">

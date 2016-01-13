@@ -22,7 +22,6 @@
     </div>
 
     <h1 class="helvetica-light">&lt;vaadin-area-chart&gt;
-        <span>1.0</span>
     </h1>
 </div>
 
@@ -89,7 +88,7 @@
 <!-- Info section end -->
 
 
-<div class="elements-section">
+<div class="elements-section demo">
 
     <h4>Basic area chart</h4>
     <view-source head="#stuff-for-head" demo-name="Basic area chart">

@@ -1,3 +1,4 @@
+<%@ page import="com.vaadin.elements.Releases" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -17,7 +18,7 @@
         <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5></div>
         <div class="span3"><span class="polymer-tag">Built with Polymer</span></div>
     </div>
-    <h1 class="helvetica-light">&lt;vaadin-grid&gt; <span>1.0</span></h1>
+    <h1 class="helvetica-light">&lt;vaadin-grid&gt; <span><%=Releases.getLatestVersionNumber("vaadin-grid")%></span></h1>
 </div>
 
 <!-- Hero section end -->

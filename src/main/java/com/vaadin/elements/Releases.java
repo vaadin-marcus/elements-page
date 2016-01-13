@@ -8,22 +8,17 @@ import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class Releases {
 
     public static final int CACHE_MINUTES = 15;
-    private static final List<String> REPOSITORIES = Arrays.asList(
-            "vaadin-core-elements",
-            "vaadin-grid",
-            "vaadin-combo-box",
-            "vaadin-charts");
 
     private static LoadingCache<String, GitHubRelease> cache;
+    private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     private static LoadingCache<String, GitHubRelease> getCache() {
         if (cache == null) {
@@ -64,6 +59,12 @@ public class Releases {
         return latestRelease == null || latestRelease.tagName == null ? "pre-release" : latestRelease.tagName;
     }
 
+    public static String getLatestVersionDate(String repo) {
+        GitHubRelease latestRelease = getLatestRelease(repo);
+
+        return latestRelease == null || latestRelease.publishedAt == null ? "" : dateFormat.format(latestRelease.publishedAt);
+    }
+
     private static GitHubRelease getLatestRelease(String repo) {
         try {
             return getCache().get(repo);
@@ -73,20 +74,6 @@ public class Releases {
         }
     }
 
-
-    public List<GitHubRelease> getLatestReleases() {
-        ArrayList<GitHubRelease> releases = new ArrayList<GitHubRelease>();
-
-        for (String repository : REPOSITORIES) {
-            GitHubRelease latestRelease = getLatestRelease(repository);
-            if(latestRelease != null){
-                releases.add(latestRelease);
-            }
-        }
-
-        return releases;
-
-    }
 
     private static GitHubRelease getGitHubRelease(String repository) {
         try {

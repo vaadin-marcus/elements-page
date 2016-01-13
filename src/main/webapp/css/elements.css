@@ -148,6 +148,10 @@
     color: #9b9b9b;
 }
 
+.elements-category .span9 h5 span.date {
+    font-weight: normal;
+}
+
 .elements-category .span3 {
     background-color: #f7f7f7;
     padding: 20px;
@@ -350,6 +354,10 @@
     margin: 0 0 20px;
     padding-bottom: 10px;
     border-bottom: 2px solid #e1e1e1;
+}
+
+.elements-section.demo h4 {
+    margin-top: 60px;
 }
 
 .elements-section ul {
