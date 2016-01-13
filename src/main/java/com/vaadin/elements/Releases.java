@@ -61,7 +61,7 @@ public class Releases {
 
     public static String getLatestVersionNumber(String repo) {
         GitHubRelease latestRelease = getLatestRelease(repo);
-        return latestRelease == null || latestRelease.tagName == null ? "not released" : latestRelease.tagName;
+        return latestRelease == null || latestRelease.tagName == null ? "pre-release" : latestRelease.tagName;
     }
 
     private static GitHubRelease getLatestRelease(String repo) {
