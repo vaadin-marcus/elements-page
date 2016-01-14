@@ -32,7 +32,7 @@
 
 <div class="elements-category row-fluid">
   <div class="span9">
-    <h5>Core Elements <span class="version"><%=Releases.getLatestVersionNumber("vaadin-core-elements")%></span> (<span class="date"><%=Releases.getLatestVersionDate("vaadin-core-elements")%></span>)</h5>
+    <h5>Core Elements <span class="version"><%=Releases.getLatestVersionNumber("vaadin-core-elements")%></span> <span class="date">(<%=Releases.getLatestVersionDate("vaadin-core-elements")%>)</span></h5>
     <p>Vaadin Core elements is an Apache 2.0 licensed set of web components designed for
       business applications. The set contains elements like data grids, combo boxes and date
       pickers.</p>
