@@ -1,6 +1,3 @@
-<%@ page import="java.util.Enumeration" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.Collection" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <portlet:defineObjects/>
 

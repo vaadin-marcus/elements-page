@@ -49,9 +49,13 @@
 
 
 <!-- Demo section start -->
-<a name="demo"></a>
 <div class="elements-section">
 
+  <style>
+    .aui .vaadin-theme .vaadin-icons-container input:focus {
+      border: none!important;
+    }
+  </style>
   <view-source demo-name="Demo">
     <div class="head">
       <!--

@@ -54,27 +54,8 @@
 <!-- Intro section start -->
 
 <!-- Info section start -->
-<div class="elements-section">
-  <h4>Features</h4>
+<jsp:include page="charts-features.jsp"/>
 
-  <div class="row-fluid">
-    <div class="span6">
-      <ul>
-        <li>Vector Graphics</li>
-        <li>Dynamic data</li>
-        <li>Multiple axes</li>
-      </ul>
-    </div>
-    <div class="span6">
-      <ul>
-        <li>Zooming</li>
-        <li>Branding</li>
-        <li>Touch support</li>
-      </ul>
-    </div>
-
-  </div>
-</div>
 
 <!-- Info section end -->
 

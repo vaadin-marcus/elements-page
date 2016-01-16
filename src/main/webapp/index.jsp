@@ -32,7 +32,7 @@
 
 <div class="elements-category row-fluid">
   <div class="span9">
-    <h5>Core Elements <span class="version"><%=Releases.getLatestVersionNumber("vaadin-core-elements")%></span> <span class="date">(<%=Releases.getLatestVersionDate("vaadin-core-elements")%>)</span></h5>
+    <h5>Core Elements <span class="version">0.3.0</span> </h5>
     <p>Vaadin Core elements is an Apache 2.0 licensed set of web components designed for
       business applications. The set contains elements like data grids, combo boxes and date
       pickers.</p>
@@ -58,7 +58,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-grid</div>
-        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-grid")%></span></div>
+        <div class="span4"><span>1.0.0</span></div>
       </div>
     </a>
   </div>
@@ -75,7 +75,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-combo-box</div>
-        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-combo-box")%></span></div>
+        <div class="span4"><span>1.0.0-alpha3</span></div>
       </div>
     </a>
   </div>
@@ -95,7 +95,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-icons</div>
-        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-icons")%></span></div>
+        <div class="span4"><span>pre-release</span></div>
       </div>
     </a>
   </div>
@@ -104,7 +104,7 @@
 
 <div class="elements-category row-fluid">
   <div class="span9">
-    <h5>Charts <span><%=Releases.getLatestVersionNumber("vaadin-charts")%></span></h5>
+    <h5>Charts <span>3.0.0-alpha8</span></h5>
     <p>Vaadin Charts contains tens of different types of charts that allow you to visualize and
       interact with data. All charts support declarative and dynamic data binding.</p>
   </div>
@@ -122,8 +122,7 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/area.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Area chart highlights the area between a line chart and the axis. Areas can be on top of each other or stacked.
           <span>Learn more</span>
         </div>
       </div>
@@ -138,8 +137,7 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/arearange.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          An area range chart highlights the area between two line charts.
           <span>Learn more</span>
         </div>
       </div>
@@ -158,8 +156,7 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/areaspline.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          An area spline chart highlights the area between the axis and a curved line chart.
           <span>Learn more</span>
         </div>
       </div>
@@ -174,8 +171,7 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/areasplinerange.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          An area spline range chart highlights the area between two spline charts.
 
           <span>Learn more</span>
         </div>

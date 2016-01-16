@@ -35,8 +35,9 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Bar chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">
+        A bar chart
+      </p>
     </div>
 
     <div class="span5">
@@ -53,20 +54,8 @@
 <!-- Intro section start -->
 
 <!-- Info section start -->
-<div class="elements-section">
-  <h4>Features</h4>
+<jsp:include page="charts-features.jsp"/>
 
-  <div class="row-fluid">
-    <div class="span6">
-      <ul>
-        <li>Shows bars</li>
-        <li>Bars in a chart</li>
-
-      </ul>
-    </div>
-
-  </div>
-</div>
 
 <!-- Info section end -->
 

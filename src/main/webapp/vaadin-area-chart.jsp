@@ -34,8 +34,9 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Area chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">
+        Area chart highlights the area between a line chart and the axis. Areas can be on top of each other or stacked.
+      </p>
     </div>
 
     <div class="span5">
@@ -52,26 +53,7 @@
 <!-- Intro section start -->
 
 <!-- Info section start -->
-<div class="elements-section">
-  <h4>Features</h4>
-
-  <div class="row-fluid">
-    <div class="span6">
-      <ul>
-        <li>Vector Graphics</li>
-        <li>Dynamic data</li>
-        <li>Multiple axes</li>
-      </ul>
-    </div>
-    <div class="span6">
-      <ul>
-        <li>Zooming</li>
-        <li>Branding</li>
-        <li>Touch support</li>
-      </ul>
-    </div>
-  </div>
-</div>
+<jsp:include page="charts-features.jsp"/>
 
 <div class="elements-section">
   <h4>Similar charts</h4>
@@ -110,7 +92,7 @@
   <view-source head="#stuff-for-head" demo-name="Basic area chart">
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
           href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
       -->
@@ -163,7 +145,7 @@
   <view-source demo-name="Area chart with negative values">
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
           href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
       -->
@@ -194,7 +176,7 @@
   <view-source demo-name="Area chart with missing points">
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
           href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
       -->
@@ -226,7 +208,7 @@
   <view-source demo-name="Area chart with inverted axis">
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
           href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
       -->
@@ -264,7 +246,7 @@
   <view-source demo-name="Percentage area chart">
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
           href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
       -->
@@ -310,7 +292,7 @@
   <view-source demo-name="Stacked area chart">
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
           href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-area-chart.html">
       -->

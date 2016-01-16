@@ -37,8 +37,9 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Area spline chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">
+        An area spline chart highlights the area between the axis and a curved line chart.
+      </p>
     </div>
 
     <div class="span5">
@@ -53,28 +54,8 @@
 <!-- Intro section start -->
 
 <!-- Info section start -->
-<div class="elements-section">
-  <h4>Features</h4>
+<jsp:include page="charts-features.jsp"/>
 
-  <div class="row-fluid">
-    <div class="span6">
-      <ul>
-        <li>Vector Graphics</li>
-        <li>Dynamic data</li>
-        <li>Multiple axes</li>
-      </ul>
-    </div>
-
-    <div class="span6">
-      <h5>Similar charts</h5>
-      <ul>
-        <li>Zooming</li>
-        <li>Branding</li>
-        <li>Touch support</li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 <div class="elements-section">
   <h4>Similar charts</h4>

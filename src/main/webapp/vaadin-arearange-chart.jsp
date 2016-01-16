@@ -37,8 +37,9 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Area range chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">
+        An area range chart highlights the area between two line charts.
+      </p>
     </div>
 
     <div class="span5">
@@ -53,27 +54,8 @@
 <!-- Intro section start -->
 
 <!-- Info section start -->
-<div class="elements-section">
-  <h4>Features</h4>
+<jsp:include page="charts-features.jsp"/>
 
-  <div class="row-fluid">
-    <div class="span6">
-      <ul>
-        <li>Vector Graphics</li>
-        <li>Dynamic data</li>
-        <li>Multiple axes</li>
-      </ul>
-    </div>
-
-    <div class="span6">
-      <ul>
-        <li>Zooming</li>
-        <li>Branding</li>
-        <li>Touch support</li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 <div class="elements-section">
   <h4>Similar charts</h4>
@@ -113,7 +95,7 @@
   <view-source head="#stuff-for-head">
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-arearange-chart.html">
       -->
     </div>

@@ -60,8 +60,12 @@
           A filterable select element for situations when you have more than a few dozens
           of items to select from.
         </li>
+      </ul>
+    </div>
+    <div class="span6">
+      <ul>
         <li>
-          Automatic support for small screens (i.e. smartphones), the layout/UI adapts to
+          Automatic support for small screens (i.e. smart phones), the layout/UI adapts to
           provide the best experience for the user.
         </li>
       </ul>
@@ -74,6 +78,16 @@
 <a name="demo"></a>
 <div class="elements-section">
   <h4>Demo</h4>
+  <style>
+    /* Hacks needed for Liferay*/
+    #selector input[type='text'],
+    #selector input[type='text']:focus,
+    #selector input[type='text']:active {
+      border: none !important;
+      box-shadow: none !important;
+      background-color: transparent !important;
+    }
+  </style>
   <view-source head="#stuff-for-head">
     <div class="head">
       <!--
@@ -88,24 +102,15 @@
       <vaadin-combo-box label="Select a country" id="selector" items={{countries}}
                         value="{{country}}"></vaadin-combo-box>
 
-      <p>
+      <div>
         You have selected:
         <span>{{country}}</span>
-      </p>
+      </div>
     </template>
 
     <style>
       #selector {
         max-width: 300px;
-      }
-
-      /* Fixes needed for Liferay*/
-      #selector input[type='text'],
-      #selector input[type='text']:focus,
-      #selector input[type='text']:active {
-        border: none !important;
-        box-shadow: none !important;
-        background-color: transparent !important;
       }
     </style>
 
