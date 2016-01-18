@@ -52,7 +52,7 @@
 <div class="elements-section">
 
   <style>
-    .vaadin-icons-container input:focus {
+    .aui .vaadin-theme .vaadin-icons-container input:focus {
       border: none!important;
     }
   </style>

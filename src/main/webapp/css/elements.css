@@ -146,6 +146,7 @@
     font-weight: bold;
     font-size: 16px;
     color: #9b9b9b;
+    letter-spacing: normal;
 }
 
 .elements-category .span3 {
@@ -305,6 +306,7 @@
     font-weight: bold;
     font-size: 20px;
     color: #648a9d;
+    letter-spacing: normal;
 }
 
 @media (max-width: 768px) {
@@ -386,6 +388,11 @@
 .charts-links {
     margin-top: 60px;
 }
+
+.charts-links a {
+    margin-bottom: 12px;
+}
+
 /* EO Template Section */
 
 /* Demo Footer */
