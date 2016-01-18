@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Tree map chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Displays a set of hierarchical data in nested rectangles.</p>
     </div>
 
     <div class="span5">

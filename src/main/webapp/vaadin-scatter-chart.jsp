@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Scatter chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">A scatter chart or scatter plot is a set of points from a two dimensional data set.</p>
     </div>
 
     <div class="span5">

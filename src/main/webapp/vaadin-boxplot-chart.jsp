@@ -37,8 +37,7 @@
   <div class="row-fluid">
     <div class="span7">
       <p class="lead helvetica-light">
-        Box plot chart is good for the following things for SEO
-        reasons</p>
+        Box plot charts are used to indicate variability outside upper and lower quartiles.</p>
     </div>
 
     <div class="span5">

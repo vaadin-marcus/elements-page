@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Spline chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Displays a set of data points connected by a curved line.</p>
     </div>
 
     <div class="span5">

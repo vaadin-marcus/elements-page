@@ -36,8 +36,8 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Funnel chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Funnel charts are most often used to visualize the different stages in a company's sales
+        process.</p>
     </div>
 
     <div class="span5">

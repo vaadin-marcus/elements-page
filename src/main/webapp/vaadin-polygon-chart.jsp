@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Polygon chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Highlights an area defined by data points making up a polygon.</p>
     </div>
 
     <div class="span5">

@@ -36,8 +36,8 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Waterfall chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">A waterfall chart shows the cumulative effects of a step of sequentially applied positive
+        or negative values.</p>
     </div>
 
     <div class="span5">

@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Solid gauge chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">A solid gauge chart shows a value as a colored angle of an arc.</p>
     </div>
 
     <div class="span5">

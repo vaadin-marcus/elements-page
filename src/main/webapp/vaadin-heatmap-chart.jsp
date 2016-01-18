@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Heat map chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Highlight areas in a matrix with a gradient to easily compare large amounts of data.</p>
     </div>
 
     <div class="span5">

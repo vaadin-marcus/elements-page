@@ -36,8 +36,8 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Bubble chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">A bubble chart can be used to display three dimensions of data with disks proportional to
+        a value at a given x, y point.</p>
     </div>
 
     <div class="span5">

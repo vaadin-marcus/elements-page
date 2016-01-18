@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Pie chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Display proportions of values clearly with a pie chart.</p>
     </div>
 
     <div class="span5">

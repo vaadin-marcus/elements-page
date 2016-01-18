@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Gauge chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Displays a gauge where the angle corresponds to the value. Supports multiple axes.</p>
     </div>
 
     <div class="span5">

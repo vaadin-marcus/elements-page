@@ -18,7 +18,7 @@
     </div>
     <div class="span3 hidden-phone"><span class="polymer-tag">Built with Polymer</span></div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-combo-box&gt; <span><%=Releases.getLatestVersionNumber("vaadin-combo-box")%></span></h1>
+  <h1 class="helvetica-light">&lt;vaadin-combo-box&gt; <span>1.0.0-alpha3</span></h1>
 </div>
 
 <!-- Hero section end -->

@@ -1,5 +1,3 @@
-<%@ page import="com.liferay.portal.model.ReleaseSoap" %>
-<%@ page import="com.vaadin.elements.Releases" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -24,15 +22,18 @@
   <div class="elements-hero-buttons">
     <div class="row-fluid">
       <div class="span3"><a class="button" href="#demos">Demos</a></div>
-      <div class="span3"><a class="button" href="https://vaadin.com/elements/videos">Videos</a></div>
-      <div class="span3 offset3"><a class="button primary" href="https://vaadin.com/docs/-/part/elements/elements-getting-started.html">Get Started</a></div>
+      <div class="span3"><a class="button" href="https://vaadin.com/elements/videos">Videos</a>
+      </div>
+      <div class="span3 offset3"><a class="button primary"
+                                    href="https://vaadin.com/docs/-/part/elements/elements-getting-started.html">Get
+        Started</a></div>
     </div>
   </div>
 </div>
 
 <div class="elements-category row-fluid">
   <div class="span9">
-    <h5>Core Elements <span class="version">0.3.0</span> </h5>
+    <h5>Core Elements <span class="version">0.3.0</span></h5>
     <p>Vaadin Core elements is an Apache 2.0 licensed set of web components designed for
       business applications. The set contains elements like data grids, combo boxes and date
       pickers.</p>
@@ -122,7 +123,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/area.png" alt="">
         <div>
-          Area chart highlights the area between a line chart and the axis. Areas can be on top of each other or stacked.
+          Area chart highlights the area between a line chart and the axis. Areas can be on top of
+          each other or stacked.
           <span>Learn more</span>
         </div>
       </div>
@@ -192,8 +194,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/bar.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Display data with horizontal bars proportional to values. Bars can be grouped and
+          stacked.
           <span>Learn more</span>
         </div>
       </div>
@@ -208,8 +210,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/boxplot.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Box plot charts are used to indicate variability outside upper and lower quartiles.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -228,8 +230,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/bubble.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          A bubble chart can be used to display three dimensions of data with disks proportional to
+          a value at a given x, y point.
           <span>Learn more</span>
         </div>
       </div>
@@ -245,8 +247,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/column.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Display data with vertical bars proportional to values. Bars can be grouped and
+          stacked.
           <span>Learn more</span>
         </div>
       </div>
@@ -266,8 +268,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/columnrange.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Displays two values per data point, highlighting the range between them.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -283,8 +285,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/errorbar.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Error bars can be used to indicate error or uncertainty in measurements.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -304,8 +306,9 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/funnel.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Funnel charts are most often used to visualize the different stages in a company's sales
+          process.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -320,8 +323,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/gauge.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Displays a gauge where the angle corresponds to the value. Supports multiple axes.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -341,8 +344,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/heatmap.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Highlight areas in a matrix with a gradient to easily compare large amounts of data.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -357,8 +360,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/line.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Displays a series of data connected with straight lines.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -378,8 +381,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/pie.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Display proportions of values clearly with a pie chart.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -394,8 +397,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/polygon.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Highlights an area defined by data points making up a polygon.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -414,8 +417,9 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/pyramid.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Used to show hierarchically structured data in a pyramid shaped chart divided into
+          vertical slices.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -430,8 +434,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/scatter.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          A scatter chart or scatter plot is a set of points from a two dimensional data set.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -451,8 +455,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/solidgauge.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          A solid gauge chart shows a value as a colored angle of an arc.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -467,8 +471,9 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/sparkline.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Sparklines are small line charts that are displayed without axes or coordinates and are
+          typically used to show time series data inline.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -487,8 +492,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/spline.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Displays a set of data points connected by a curved line.
+
           <span>Learn more</span>
         </div>
       </div>
@@ -503,8 +508,9 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/treemap.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          Displays a set of hierarchical data in nested rectangles.
+
+
           <span>Learn more</span>
         </div>
       </div>
@@ -523,8 +529,8 @@
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/waterfall.png" alt="">
         <div>
-          Vaadin ComboBox is a filterable select element for situations where you have more
-          than a few dozen item to select from.
+          A waterfall chart shows the cumulative effects of a step of sequentially applied positive
+          or negative values.
           <span>Learn more</span>
         </div>
       </div>

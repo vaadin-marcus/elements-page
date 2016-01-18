@@ -36,7 +36,8 @@
   <div class="row-fluid">
     <div class="span7">
       <p class="lead helvetica-light">
-        A bar chart
+        Display data with horizontal bars proportional to values. Bars can be grouped and
+        stacked.
       </p>
     </div>
 

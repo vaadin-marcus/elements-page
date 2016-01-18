@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Column range chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Displays two values per data point, highlighting the range between them.</p>
     </div>
 
     <div class="span5">
@@ -93,12 +92,12 @@
         <categories>Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec</categories>
       </x-axis>
       <y-axis>
-        <title>Temperature ( °C )</title>
+        <title>Temperature ( C )</title>
       </y-axis>
-      <tooltip value-suffix="°C"></tooltip>
+      <tooltip value-suffix="C"></tooltip>
       <plot-options>
         <columnrange>
-          <data-labels enabled="true" formatter="function () {return this.y + '°C';}"></data-labels>
+          <data-labels enabled="true" formatter="function () {return this.y + 'C';}"></data-labels>
         </columnrange>
       </plot-options>
       <legend enabled="false"></legend>

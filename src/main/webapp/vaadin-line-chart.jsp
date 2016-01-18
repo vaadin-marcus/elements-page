@@ -36,8 +36,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Line chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Displays a series of data connected with straight lines.</p>
     </div>
 
     <div class="span5">

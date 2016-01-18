@@ -38,10 +38,8 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">A sparkline is a very small line chart, typically drawn
-        without axes or coordinates. It presents the general shape of the variation (typically over
-        time) in some measurement, such as temperature or stock market price, in a simple and highly
-        condensed way [wikipedia]</p>
+      <p class="lead helvetica-light">Sparklines are small line charts that are displayed without axes or coordinates and are
+        typically used to show time series data inline.</p>
     </div>
 
     <div class="span5">

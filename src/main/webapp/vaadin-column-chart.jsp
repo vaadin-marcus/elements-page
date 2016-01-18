@@ -36,8 +36,8 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Column chart is good for the following things for SEO
-        reasons</p>
+      <p class="lead helvetica-light">Display data with vertical bars proportional to values. Bars can be grouped and
+        stacked.</p>
     </div>
 
     <div class="span5">
