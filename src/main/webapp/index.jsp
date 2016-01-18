@@ -41,7 +41,7 @@
   <div class="span3">
     <span>Free</span>
     Apache 2.0 license
-    <a href="#" class="w-arrow-button blue small">See on GitHub</a>
+    <a href="https://github.com/vaadin/vaadin-core-elements" class="w-arrow-button blue small">See on GitHub</a>
   </div>
 </div>
 
@@ -112,7 +112,7 @@
   <div class="span3">
     <span>$ 795.00</span>
     Commercial license
-    <a href="#" class="w-arrow-button blue small">Buy license</a>
+    <a href="https://vaadin.com/charts" class="w-arrow-button blue small">Buy license</a>
   </div>
 </div>
 

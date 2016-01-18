@@ -1,4 +1,3 @@
-<%@ page import="com.vaadin.elements.Releases" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -6,7 +5,8 @@
 <!-- Imports -->
 
 <jsp:include page="imports.jsp"/>
-<link rel="import" href="<%=request.getContextPath()%>/bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import"
+      href="<%=request.getContextPath()%>/bower_components/vaadin-combo-box/vaadin-combo-box.html">
 <link rel="import" href="<%=request.getContextPath()%>/bower_components/iron-ajax/iron-ajax.html">
 
 <!-- Hero section start -->
@@ -80,9 +80,9 @@
   <h4>Examples</h4>
   <style>
     /* Hacks needed for Liferay*/
-    #selector input[type='text'],
-    #selector input[type='text']:focus,
-    #selector input[type='text']:active {
+    vaadin-combo-box input[type='text'],
+    vaadin-combo-box input[type='text']:focus,
+    vaadin-combo-box input[type='text']:active {
       border: none !important;
       box-shadow: none !important;
       background-color: transparent !important;
@@ -97,26 +97,145 @@
       -->
     </div>
     <template is="dom-bind" id="demo">
-      <iron-ajax auto url="<%=request.getContextPath()%>/countries.json" handle-as="json"
-                 last-response="{{countries}}"></iron-ajax>
-      <vaadin-combo-box label="Select a country" id="selector" items={{countries}}
-                        value="{{country}}"></vaadin-combo-box>
-
-      <div>
-        You have selected:
-        <span>{{country}}</span>
+      <div class="fieldset">
+        <vaadin-combo-box label="Language" class="languages" items="[[languages]]" required
+                          value="[[item.language]]"></vaadin-combo-box>
+        <vaadin-combo-box label="Skill level" class="skillLevels" items="[[skillLevels]]"
+                          value="[[item.skillLevel]]"></vaadin-combo-box>
       </div>
     </template>
 
     <style>
-      #selector {
-        max-width: 300px;
+      .fieldset {
+        max-width: 800px;
+        margin: 0 auto 20px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+
+
+      /* Responsive styling */
+      @media all and (min-width: 600px) {
+
+        .fieldset {
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+          flex-direction: row;
+          -webkit-box-pack: justify;
+          -webkit-justify-content: space-between;
+          -ms-flex-pack: justify;
+          justify-content: space-between;
+        }
+
+        vaadin-combo-box {
+          -webkit-flex-basis: 40%;
+          -ms-flex-preferred-size: 40%;
+          flex-basis: 40%;
+        }
       }
     </style>
 
     <script>
+      var demo = document.querySelector('#demo');
+      demo.addEventListener('dom-change', function() {
+
+        demo.languages = [
+          'Afrikaans',
+          'Albanian',
+          'Amharic',
+          'Arabic',
+          'Armenian',
+          'Basque',
+          'Bengali',
+          'Byelorussian',
+          'Burmese',
+          'Bulgarian',
+          'Catalan',
+          'Czech',
+          'Chinese',
+          'Croatian',
+          'Danish',
+          'Dari',
+          'Dzongkha',
+          'Dutch',
+          'English',
+          'Esperanto',
+          'Estonian',
+          'Faroese',
+          'Farsi',
+          'Finnish',
+          'French',
+          'Gaelic',
+          'Galician',
+          'German',
+          'Greek',
+          'Hebrew',
+          'Hindi',
+          'Hungarian',
+          'Icelandic',
+          'Indonesian',
+          'Inuktitut (Eskimo)',
+          'Italian',
+          'Japanese',
+          'Khmer',
+          'Korean',
+          'Kurdish',
+          'Laotian',
+          'Latvian',
+          'Lappish',
+          'Lithuanian',
+          'Macedonian',
+          'Malay',
+          'Maltese',
+          'Nepali',
+          'Norwegian',
+          'Pashto',
+          'Polish',
+          'Portuguese',
+          'Romanian',
+          'Russian',
+          'Scots',
+          'Serbian',
+          'Slovak',
+          'Slovenian',
+          'Somali',
+          'Spanish',
+          'Swedish',
+          'Swahili',
+          'Tagalog-Filipino',
+          'Tajik',
+          'Tamil',
+          'Thai',
+          'Tibetan',
+          'Tigrinya',
+          'Tongan',
+          'Turkish',
+          'Turkmen',
+          'Ucrainian',
+          'Urdu',
+          'Uzbek',
+          'Vietnamese',
+          'Welsh'
+        ];
+
+        demo.skillLevels = [
+          'Beginner',
+          'Intermediate',
+          'Advanced',
+          'Profesional',
+          'Native'
+        ];
+      });
     </script>
   </view-source>
-  <a name="source"></a>
 </div>
 <!-- Demo section end -->
