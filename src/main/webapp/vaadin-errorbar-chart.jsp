@@ -74,7 +74,7 @@
         <categories>Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec</categories>
       </x-axis>
       <y-axis>
-        <labels format="{value} °C">
+        <labels format="{value} C">
           <style color="#EC6464"></style>
         </labels>
         <title text="Temperature">
@@ -98,7 +98,7 @@
           <tooltip point-format=" (error range: {point.low}-{point.high} mm)<br/>"></tooltip>
         </errorbar>
         <spline>
-          <tooltip point-format="<span style='font-weight: bold; color: {series.color}'>{series.name}</span>: <b>{point.y:.1f}°C</b>"></tooltip>
+          <tooltip point-format="<span style='font-weight: bold; color: {series.color}'>{series.name}</span>: <b>{point.y:.1f}C</b>"></tooltip>
         </spline>
       </plot-options>
       <data-series name="Rainfall" type="column" y-axis="1">

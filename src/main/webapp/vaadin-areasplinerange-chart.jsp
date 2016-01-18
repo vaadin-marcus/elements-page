@@ -111,7 +111,7 @@
           <y-axis>
             <title text="null"></title>
           </y-axis>
-          <tooltip crosshairs="true" shared="true" value-suffix="°C"></tooltip>
+          <tooltip crosshairs="true" shared="true" value-suffix="C"></tooltip>
           <legend enabled="false"></legend>
           <data-series data="[[temperatureData]]"></data-series>
         </vaadin-areasplinerange-chart>
