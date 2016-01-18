@@ -69,17 +69,21 @@
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">Area
             chart</a></li>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">Area
+            spline range chart</a></li>
       </ul>
     </div>
 
     <div class="span6">
       <h5>Similar charts</h5>
       <ul>
-        <li>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">Area
-            spline range chart</a></li>
+
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>">Line
+            Chart</a></li>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-spline-chart.jsp" /></portlet:renderURL>">Spline
             Chart</a></li>
       </ul>
     </div>
@@ -90,7 +94,7 @@
 <!-- Demo section start -->
 <div class="elements-section">
 
-  <h4>Demo</h4>
+  <h4>Examples</h4>
   <view-source head="#stuff-for-head">
     <div class="head">
       <!--
@@ -137,3 +141,4 @@
   </view-source>
 </div>
 <!-- Demo section end -->
+<jsp:include page="charts-links.jsp"/>

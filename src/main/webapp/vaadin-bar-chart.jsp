@@ -57,13 +57,31 @@
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
 
+<div class="elements-section">
+  <h4>Similar charts</h4>
 
+  <div class="row-fluid">
+    <div class="span6">
+      <ul>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-column-chart.jsp" /></portlet:renderURL>">Column chart</a></li>
+      </ul>
+    </div>
+    <div class="span6">
+      <ul>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-columnrange-chart.jsp" /></portlet:renderURL>">Column range chart</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 <!-- Info section end -->
 
 <!-- Demo section start -->
 <div class="elements-section demo">
 
-  <h4>Basic bar chart</h4>
+  <h4>Examples</h4>
+  <h5>Basic bar chart</h5>
   <view-source demo-name="Basic bar chart">
     <div class="head">
       <!--
@@ -97,7 +115,7 @@
     </vaadin-bar-chart>
   </view-source>
 
-  <h4>Bar chart with negative stack</h4>
+  <h5>Bar chart with negative stack</h5>
   <view-source head="#stuff-for-head" demo-name="Bar with negative stack">
     <vaadin-bar-chart id="bar-with-negative-stack">
       <title>Population pyramid for Germany, midyear 2010</title>
@@ -137,7 +155,7 @@
     </vaadin-bar-chart>
   </view-source>
 
-  <h4>Stacked bar chart</h4>
+  <h5>Stacked bar chart</h5>
   <view-source head="#stuff-for-head" demo-name="Stacked bar chart">
     <vaadin-bar-chart id="stacked-bar">
       <title>Stacked bar chart</title>
@@ -166,3 +184,4 @@
   </view-source>
 </div>
 <!-- Demo section end -->
+<jsp:include page="charts-links.jsp"/>

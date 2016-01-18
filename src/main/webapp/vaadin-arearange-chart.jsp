@@ -47,7 +47,9 @@
         <h4>Install</h4>
         <code>bower install --save vaadin-charts</code>
       </div>
-      <a class="w-arrow-button blue small" href="https://vaadin.com/docs/-/part/charts/webcomponents-api/charts-getting-started.html">Show documentation</a></div>
+      <a class="w-arrow-button blue small"
+         href="https://vaadin.com/docs/-/part/charts/webcomponents-api/charts-getting-started.html">Show
+        documentation</a></div>
   </div>
 </div>
 
@@ -69,16 +71,20 @@
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">Area
             chart</a></li>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">Area
+            spline range chart</a></li>
       </ul>
     </div>
 
     <div class="span6">
       <ul>
-        <li>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">Area
-            spline range chart</a></li>
+
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>">Line
+            Chart</a></li>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-spline-chart.jsp" /></portlet:renderURL>">Spline
             Chart</a></li>
       </ul>
     </div>
@@ -91,7 +97,7 @@
 
 <div class="elements-section">
 
-  <h4>Demo</h4>
+  <h4>Examples</h4>
   <view-source head="#stuff-for-head">
     <div class="head">
       <!--
@@ -123,4 +129,4 @@
   </view-source>
 </div>
 
-<!-- Demo section end -->
+<jsp:include page="charts-links.jsp"/>

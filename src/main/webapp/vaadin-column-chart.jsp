@@ -58,25 +58,20 @@
 
 <div class="elements-section">
   <h4>Similar charts</h4>
-  <div class="span6">
-    <ul>
-      <li>
-        <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>">Area
-          range chart</a></li>
-      <li>
-        <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">Area
-          chart</a></li>
-    </ul>
-  </div>
-  <div class="span6">
-    <ul>
-      <li>
-        <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">Area
-          spline range chart</a></li>
-      <li>
-        <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>">Line
-          Chart</a></li>
-    </ul>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <ul>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bar-chart.jsp" /></portlet:renderURL>">Bar chart</a></li>
+      </ul>
+    </div>
+    <div class="span6">
+      <ul>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-columnrange-chart.jsp" /></portlet:renderURL>">Column range chart</a></li>
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -84,7 +79,8 @@
 
 <!-- Demo section start -->
 <div class="elements-section">
-  <h4>Column chart with drilldown</h4>
+  <h4>Examples</h4>
+  <h5>Column chart with drilldown</h5>
   <view-source demo-name="Column chart with drilldown">
     <div class="head">
       <!--
@@ -180,7 +176,7 @@
     </vaadin-column-chart>
   </view-source>
 
-  <h4>Stacked column chart</h4>
+  <h5>Stacked column chart</h5>
   <view-source demo-name="Stacked column chart">
     <div class="head">
       <!--
@@ -220,7 +216,7 @@
     </vaadin-column-chart>
   </view-source>
 
-  <h4>Column chart with negative values</h4>
+  <h5>Column chart with negative values</h5>
   <view-source demo-name="Column chart with negative values">
     <div class="head">
       <!--
@@ -251,7 +247,7 @@
     </vaadin-column-chart>
   </view-source>
 
-  <h4>3D column chart</h4>
+  <h5>3D column chart</h5>
   <view-source demo-name="3D column chart">
     <div class="head">
       <!--
@@ -298,7 +294,7 @@
     </vaadin-column-chart>
   </view-source>
 
-  <h4>Wind rose chart</h4>
+  <h5>Wind rose chart</h5>
   <view-source>
     <div class="head">
       <!--
@@ -365,3 +361,5 @@
 
 </div>
 <!-- Demo section end -->
+
+<jsp:include page="charts-links.jsp"/>

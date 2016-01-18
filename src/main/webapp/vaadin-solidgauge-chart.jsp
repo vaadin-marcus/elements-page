@@ -54,12 +54,25 @@
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
+<div class="elements-section">
+  <h4>Similar charts</h4>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <ul>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-gauge-chart.jsp" /></portlet:renderURL>">Gauge chart</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
 
 <!-- Info section end -->
 
 <!-- Demo section start -->
 <div class="elements-section">
-  <h4>Demo</h4>
+  <h4>Examples</h4>
   <view-source>
     <div class="head">
       <!--
@@ -94,3 +107,4 @@
 </div>
 
 
+<jsp:include page="charts-links.jsp"/>

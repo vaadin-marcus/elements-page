@@ -75,9 +75,9 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<a name="demo"></a>
-<div class="elements-section">
 
+<div class="elements-section">
+    <h4>Examples</h4>
     <view-source demo-name="Basic use">
         <div class="head">
             <!--

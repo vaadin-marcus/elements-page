@@ -56,6 +56,7 @@
       border: none!important;
     }
   </style>
+  <h4>Examples</h4>
   <view-source demo-name="Demo">
     <div class="head">
       <!--

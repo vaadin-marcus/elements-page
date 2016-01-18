@@ -67,17 +67,20 @@
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>">Area
             range chart</a></li>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">Area
+            spline range chart</a></li>
       </ul>
     </div>
     <div class="span6">
       <ul>
-
-        <li>
-          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">Area
-            spline range chart</a></li>
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>">Line
             Chart</a></li>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-spline-chart.jsp" /></portlet:renderURL>">Spline
+            Chart</a></li>
+
       </ul>
     </div>
   </div>
@@ -86,9 +89,9 @@
 <!-- Info section end -->
 
 
-<div class="elements-section demo">
-
-  <h4>Basic area chart</h4>
+<div class="elements-section">
+  <h4>Examples</h4>
+  <h5>Basic area chart</h5>
   <view-source head="#stuff-for-head" demo-name="Basic area chart">
     <div class="head">
       <!--
@@ -141,7 +144,7 @@
     </vaadin-area-chart>
   </view-source>
 
-  <h4>Area chart with negative values</h4>
+  <h5>Area chart with negative values</h5>
   <view-source demo-name="Area chart with negative values">
     <div class="head">
       <!--
@@ -172,7 +175,7 @@
     </vaadin-area-chart>
   </view-source>
 
-  <h4>Area chart with missing points</h4>
+  <h5>Area chart with missing points</h5>
   <view-source demo-name="Area chart with missing points">
     <div class="head">
       <!--
@@ -204,7 +207,7 @@
     </vaadin-area-chart>
   </view-source>
 
-  <h4>Area chart with inverted axis</h4>
+  <h5>Area chart with inverted axis</h5>
   <view-source demo-name="Area chart with inverted axis">
     <div class="head">
       <!--
@@ -242,7 +245,7 @@
     </vaadin-area-chart>
   </view-source>
 
-  <h4>Percentage area chart</h4>
+  <h5>Percentage area chart</h5>
   <view-source demo-name="Percentage area chart">
     <div class="head">
       <!--
@@ -288,7 +291,7 @@
     </vaadin-area-chart>
   </view-source>
 
-  <h4>Stacked area chart</h4>
+  <h5>Stacked area chart</h5>
   <view-source demo-name="Stacked area chart">
     <div class="head">
       <!--
@@ -331,4 +334,7 @@
       </data-series>
     </vaadin-area-chart>
   </view-source>
+
 </div>
+
+<jsp:include page="charts-links.jsp"/>

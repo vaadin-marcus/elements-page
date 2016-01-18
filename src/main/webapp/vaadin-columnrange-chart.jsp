@@ -76,7 +76,8 @@
 <!-- Demo section start -->
 <div class="elements-section">
 
-  <h4>Basic column range chart</h4>
+  <h4>Examples</h4>
+  <h5>Basic column range chart</h5>
   <view-source title="Basic column range chart">
     <div class="head">
       <!--
@@ -109,7 +110,7 @@
     </vaadin-columnrange-chart>
   </view-source>
 
-  <h4>Resource usage chart</h4>
+  <h5>Resource usage chart</h5>
   <view-source head="#stuff-for-head" title="Resource usage">
     <vaadin-columnrange-chart id="column-range-resource-usage">
       <chart inverted="true"></chart>
@@ -142,3 +143,4 @@
     </vaadin-columnrange-chart>
   </view-source>
 </div>
+<jsp:include page="charts-links.jsp"/>

@@ -36,7 +36,8 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Displays a gauge where the angle corresponds to the value. Supports multiple axes.</p>
+      <p class="lead helvetica-light">Displays a gauge where the angle corresponds to the value.
+        Supports multiple axes.</p>
     </div>
 
     <div class="span5">
@@ -55,12 +56,27 @@
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
 
+<div class="elements-section">
+  <h4>Similar charts</h4>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <ul>
+        <li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-solidgauge-chart.jsp" /></portlet:renderURL>">Solid
+            gauge chart</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
 <!-- Info section end -->
 
 <!-- Demo section start -->
 <div class="elements-section">
-
-  <h4>Angular gauge chart</h4>
+  <h4>Examples</h4>
+  <h5>Angular gauge chart</h5>
   <view-source demo-name="Angular gauge chart">
     <div class="head">
       <!--
@@ -113,7 +129,7 @@
     </vaadin-gauge-chart>
   </view-source>
 
-  <h4>Dual axis gauge chart</h4>
+  <h5>Dual axis gauge chart</h5>
   <view-source demo-name="Dual axis gauge chart">
     <div class="head">
       <!--

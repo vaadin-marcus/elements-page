@@ -77,7 +77,7 @@
 <!-- Demo section start -->
 <a name="demo"></a>
 <div class="elements-section">
-  <h4>Demo</h4>
+  <h4>Examples</h4>
   <style>
     /* Hacks needed for Liferay*/
     #selector input[type='text'],

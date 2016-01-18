@@ -60,7 +60,7 @@
 <!-- Demo section start -->
 <div class="elements-section">
 
-  <h4>Demo</h4>
+  <h4>Examples</h4>
   <view-source head="#stuff-for-head">
     <div class="head">
       <!--
@@ -121,3 +121,5 @@
     </vaadin-errorbar-chart>
   </view-source>
 </div>
+
+<jsp:include page="charts-links.jsp"/>

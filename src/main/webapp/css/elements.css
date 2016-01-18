@@ -204,7 +204,7 @@
     bottom: 0;
     padding: 40px;
     color: #fff;
-    height: 100%;
+    height: 101%;
     box-sizing: border-box;
     transform: translate(1000px, 1000px);
     transition: all 0.3s;
@@ -342,6 +342,10 @@
     margin: 0;
 }
 
+.elements-install code {
+    white-space: normal;
+}
+
 /* EO Template Intro */
 
 /* Template Section */
@@ -374,6 +378,14 @@
     font-size: 16px;
 }
 
+.elements-section h5 {
+    margin-top: 80px;
+    font-size: 18px;
+}
+
+.charts-links {
+    margin-top: 60px;
+}
 /* EO Template Section */
 
 /* Demo Footer */

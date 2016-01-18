@@ -63,7 +63,7 @@
 <!-- Demo section start -->
 <div class="elements-section">
 
-  <h4>Demo</h4>
+  <h4>Examples</h4>
   <view-source>
     <div class="head">
       <!--
@@ -132,3 +132,4 @@
   </view-source>
 </div>
 
+<jsp:include page="charts-links.jsp"/>
