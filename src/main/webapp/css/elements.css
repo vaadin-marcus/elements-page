@@ -148,10 +148,6 @@
     color: #9b9b9b;
 }
 
-.elements-category .span9 h5 span.date {
-    font-weight: normal;
-}
-
 .elements-category .span3 {
     background-color: #f7f7f7;
     padding: 20px;
@@ -208,7 +204,7 @@
     bottom: 0;
     padding: 40px;
     color: #fff;
-    height: 101%;
+    height: 100%;
     box-sizing: border-box;
     transform: translate(1000px, 1000px);
     transition: all 0.3s;
@@ -311,6 +307,14 @@
     color: #648a9d;
 }
 
+@media (max-width: 768px) {
+    .elements-hero-mini .elements-hero-title h5 {
+        font-size: 20px;
+        background: transparent url("../img/p-logo.png") no-repeat scroll right 6px;
+        background-size: 32px auto;
+    }
+}
+
 /* EO Template Hero */
 
 /* Template Intro */
@@ -338,10 +342,6 @@
     margin: 0;
 }
 
-.elements-install code {
-    white-space: normal;
-}
-
 /* EO Template Intro */
 
 /* Template Section */
@@ -354,10 +354,6 @@
     margin: 0 0 20px;
     padding-bottom: 10px;
     border-bottom: 2px solid #e1e1e1;
-}
-
-.elements-section.demo h4 {
-    margin-top: 60px;
 }
 
 .elements-section ul {

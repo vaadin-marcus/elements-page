@@ -15,7 +15,7 @@
   <div class="w-wallpaper"></div>
   <div class="elements-hero-title row-fluid">
     <div class="span9"><h1 class="helvetica-light">Vaadin Elements</h1></div>
-    <div class="span3"><span class="polymer-tag">Built with Polymer</span></div>
+    <div class="span3 hidden-phone"><span class="polymer-tag">Built with Polymer</span></div>
   </div>
   <p class="lead helvetica-light">Vaadin Elements is a set of custom HTML elements tailored for
     business applications. It extends the Google Polymer library with elements like data grid,

@@ -16,9 +16,9 @@
     <div class="w-wallpaper"></div>
     <div class="elements-hero-title row-fluid">
         <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5></div>
-        <div class="span3"><span class="polymer-tag">Built with Polymer</span></div>
+        <div class="span3 hidden-phone"><span class="polymer-tag">Built with Polymer</span></div>
     </div>
-    <h1 class="helvetica-light">&lt;vaadin-grid&gt; <span><%=Releases.getLatestVersionNumber("vaadin-grid")%></span></h1>
+    <h1 class="helvetica-light">&lt;vaadin-grid&gt; <span>1.0</span></h1>
 </div>
 
 <!-- Hero section end -->
@@ -63,7 +63,7 @@
             <ul>
                 <li>Touch event and mobile support, and keyboard navigation</li>
                 <li>Can be used with any JavaScript library or framework that supports Web Components</li>
-                <li>Built on top of Google’s Polymer</li>
+                <li>Built on top of Google Polymer</li>
                 <li>Material Design inspired styles</li>
                 <li>Customize the theme of the data grid to match the rest of your application</li>
                 <li>Free to use under Apache License 2.0</li>

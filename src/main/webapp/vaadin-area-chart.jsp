@@ -16,7 +16,7 @@
       <h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5>
     </div>
 
-    <div class="span3">
+    <div class="span3 hidden-phone">
       <span class="polymer-tag">Built with Polymer</span>
     </div>
   </div>

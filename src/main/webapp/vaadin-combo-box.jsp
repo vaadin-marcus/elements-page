@@ -16,7 +16,7 @@
   <div class="elements-hero-title row-fluid">
     <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5>
     </div>
-    <div class="span3"><span class="polymer-tag">Built with Polymer</span></div>
+    <div class="span3 hidden-phone"><span class="polymer-tag">Built with Polymer</span></div>
   </div>
   <h1 class="helvetica-light">&lt;vaadin-combo-box&gt; <span><%=Releases.getLatestVersionNumber("vaadin-combo-box")%></span></h1>
 </div>
