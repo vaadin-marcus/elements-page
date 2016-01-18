@@ -38,7 +38,8 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Sparklines are small line charts that are displayed without axes or coordinates and are
+      <p class="lead helvetica-light">Sparklines are small line charts that are displayed without
+        axes or coordinates and are
         typically used to show time series data inline.</p>
     </div>
 
@@ -90,40 +91,38 @@
       </template>
 
       <script>
-        HTMLImports.whenReady(function() {
-          Polymer({
-            is: 'sparkline-example',
+        Polymer({
+          is: 'sparkline-example',
 
-            ready: function() {
-              var grid = this.$.grid;
+          ready: function() {
+            var grid = this.$.grid;
 
-              grid.style.width = '450px';
+            grid.style.width = '450px';
 
-              //vaadin-charts as a renderer for a vaadin-grid cell
-              grid.columns[1].renderer = function(cell) {
-                var sparkline = document.createElement('vaadin-sparkline');
-                //TODO fix when styling has been fixed
-                sparkline.style.width = '150px';
-                sparkline.style.height = '48px';
-                sparkline.setAttribute('data', cell.data);
+            //vaadin-charts as a renderer for a vaadin-grid cell
+            grid.columns[1].renderer = function(cell) {
+              var sparkline = document.createElement('vaadin-sparkline');
+              //TODO fix when styling has been fixed
+              sparkline.style.width = '150px';
+              sparkline.style.height = '48px';
+              sparkline.setAttribute('data', cell.data);
 
-                cell.element.innerHTML = '';
-                cell.element.appendChild(sparkline);
-              };
+              cell.element.innerHTML = '';
+              cell.element.appendChild(sparkline);
+            };
 
-              grid.columns[2].renderer = function(cell) {
-                cell.element.innerHTML = '';
+            grid.columns[2].renderer = function(cell) {
+              cell.element.innerHTML = '';
 
-                //show the last value of the data array
-                var dataArray = cell.row.data.data;
-                cell.element.innerHTML = '$' + dataArray[dataArray.length - 1];
-              };
-            },
+              //show the last value of the data array
+              var dataArray = cell.row.data.data;
+              cell.element.innerHTML = '$' + dataArray[dataArray.length - 1];
+            };
+          },
 
-            _dataLoaded: function(event) {
-              this.$.grid.items = event.detail.response;
-            }
-          });
+          _dataLoaded: function(event) {
+            this.$.grid.items = event.detail.response;
+          }
         });
       </script>
     </dom-module>

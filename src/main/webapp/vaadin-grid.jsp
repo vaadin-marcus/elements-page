@@ -60,7 +60,7 @@
         <div class="span6">
             <ul>
                 <li>Touch event and mobile support, and keyboard navigation</li>
-                <li>Can be used with any JavaScript library or framework that supports Web Components</li>
+                <li>Can be used with any JavaScript library or framework that supports Web Components, like Angular 2, React, Ember 2, jQuery</li>
                 <li>Built on top of Google Polymer</li>
                 <li>Material Design inspired styles</li>
                 <li>Customize the theme of the data grid to match the rest of your application</li>
