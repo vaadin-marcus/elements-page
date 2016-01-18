@@ -96,7 +96,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-icons</div>
-        <div class="span4"><span>pre-release</span></div>
+        <div class="span4"><span>1.0.0-alpha1</span></div>
       </div>
     </a>
   </div>

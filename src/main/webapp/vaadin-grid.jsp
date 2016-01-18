@@ -34,7 +34,7 @@
                 <h4>Install</h4>
                 <code>bower install --save vaadin-grid</code>
             </div>
-            <a href="#" class="w-arrow-button blue small">Show documentation</a>
+            <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/overview.html" class="w-arrow-button blue small">Show documentation</a>
         </div>
     </div>
 </div>

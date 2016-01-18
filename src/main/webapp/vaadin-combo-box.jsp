@@ -41,7 +41,7 @@
         <h4>Install</h4>
         <code>bower install --save vaadin-combo-box</code>
       </div>
-      <a href="#" class="w-arrow-button blue small">Show documentation</a>
+      <a href="https://github.com/vaadin/vaadin-combo-box" class="w-arrow-button blue small">Show documentation</a>
     </div>
   </div>
 </div>
@@ -86,6 +86,7 @@
       border: none !important;
       box-shadow: none !important;
       background-color: transparent !important;
+      padding: 0;
     }
   </style>
   <view-source head="#stuff-for-head">

@@ -20,7 +20,7 @@
     </div>
     <div class="span3 hidden-phone"><span class="polymer-tag">Built with Polymer</span></div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-icons&gt; <span><%=Releases.getLatestVersionNumber("vaadin-icons")%></span></h1>
+  <h1 class="helvetica-light">&lt;vaadin-icons&gt; <span>1.0.0-alpha1</span></h1>
 </div>
 
 <!-- Hero section end -->
@@ -39,7 +39,7 @@
         <h4>Install</h4>
         <code>bower install --save vaadin-icons</code>
       </div>
-      <a href="#" class="w-arrow-button blue small">Show documentation</a>
+      <a href="https://github.com/vaadin/vaadin-icons" class="w-arrow-button blue small">Show documentation</a>
     </div>
   </div>
 </div>
@@ -52,7 +52,7 @@
 <div class="elements-section">
 
   <style>
-    .aui .vaadin-theme .vaadin-icons-container input:focus {
+    .vaadin-icons-container input:focus {
       border: none!important;
     }
   </style>
