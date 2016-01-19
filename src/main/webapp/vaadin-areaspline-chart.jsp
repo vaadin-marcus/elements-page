@@ -20,7 +20,7 @@
     </div>
 
     <div class="span3 hidden-phone">
-      <span class="polymer-tag">Built with Polymer</span>
+      <a href="https://www.polymer-project.org" class="polymer-tag">Built with Polymer</a>
     </div>
   </div>
 

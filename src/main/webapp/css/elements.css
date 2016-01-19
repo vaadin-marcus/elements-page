@@ -93,7 +93,7 @@
     color: #041a25;
 }
 
-.polymer-tag {
+.polymer-tag.polymer-tag {
     color: #648A9D;
     display: block;
     padding: 12px;
@@ -103,6 +103,14 @@
     background: #1e313b url('../img/p-logo.png') right center no-repeat;
     background-size: 32px;
     margin-bottom: 5px;
+    text-decoration: none;
+}
+
+.polymer-tag.polymer-tag:focus,
+.polymer-tag.polymer-tag:active,
+.polymer-tag.polymer-tag:hover{
+    text-decoration: none;
+    color: #7EA4B7;
 }
 
 @media (max-width: 1024px) {

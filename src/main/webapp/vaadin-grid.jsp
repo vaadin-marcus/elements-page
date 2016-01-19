@@ -14,7 +14,7 @@
     <div class="w-wallpaper"></div>
     <div class="elements-hero-title row-fluid">
         <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5></div>
-        <div class="span3 hidden-phone"><span class="polymer-tag">Built with Polymer</span></div>
+        <div class="span3 hidden-phone"><a href="https://www.polymer-project.org" class="polymer-tag">Built with Polymer</a></div>
     </div>
     <h1 class="helvetica-light">&lt;vaadin-grid&gt; <span>1.0</span></h1>
 </div>
