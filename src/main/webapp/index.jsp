@@ -1,6 +1,8 @@
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
+<%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css"/>
 <style>

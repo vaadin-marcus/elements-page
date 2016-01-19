@@ -1,7 +1,10 @@
-<%@ page import="com.vaadin.elements.Releases" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
+
+<%PortalUtil.setPageTitle("530+ free Polymer compatible icons | Vaadin Elements", request);%>
+
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
 <link rel="import"

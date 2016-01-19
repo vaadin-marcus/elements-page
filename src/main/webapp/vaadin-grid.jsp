@@ -1,7 +1,8 @@
-<%@ page import="com.vaadin.elements.Releases" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
+<%PortalUtil.setPageTitle("Material design data table for Polymer | Vaadin Elements", request);%>
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
