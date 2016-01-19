@@ -40,6 +40,7 @@
         <code>bower install --save vaadin-icons</code>
       </div>
       <a href="https://github.com/vaadin/vaadin-icons" class="w-arrow-button blue small">Show documentation</a>
+      <a href="https://github.com/vaadin/vaadin-icons" class="w-arrow-button github small">View on GitHub</a>
     </div>
   </div>
 </div>

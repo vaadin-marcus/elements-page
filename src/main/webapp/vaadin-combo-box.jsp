@@ -42,6 +42,7 @@
         <code>bower install --save vaadin-combo-box</code>
       </div>
       <a href="https://github.com/vaadin/vaadin-combo-box" class="w-arrow-button blue small">Show documentation</a>
+      <a href="https://github.com/vaadin/vaadin-combo-box" class="w-arrow-button github small">View on GitHub</a>
     </div>
   </div>
 </div>

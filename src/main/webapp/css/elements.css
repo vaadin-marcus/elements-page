@@ -317,6 +317,7 @@
     letter-spacing: normal;
 }
 
+
 @media (max-width: 768px) {
     .elements-hero-mini .elements-hero-title h5 {
         font-size: 20px;
@@ -354,6 +355,12 @@
 
 .elements-install code {
     white-space: normal;
+}
+
+.elements-intro a.w-arrow-button.github {
+    margin-top: 10px;
+    background: #648A9D;
+    color: #fff;
 }
 
 /* EO Template Intro */
