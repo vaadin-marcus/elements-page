@@ -77,7 +77,6 @@
     </div>
 
     <div class="span6">
-      <h5>Similar charts</h5>
       <ul>
 
         <li>

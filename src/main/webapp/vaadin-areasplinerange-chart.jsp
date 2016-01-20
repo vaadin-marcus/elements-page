@@ -79,7 +79,6 @@
 
     <div class="span6">
       <ul>
-
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>">Line
             Chart</a></li>
