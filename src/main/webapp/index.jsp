@@ -23,7 +23,7 @@
     maintained and tested to ensure compatibility with the latest Polymer releases.</p>
   <div class="elements-hero-buttons">
     <div class="row-fluid">
-      <div class="span3"><a class="button" href="#demos">Demos</a></div>
+      <div class="span3"><a class="button" id="demos-button" href="#demos">Demos</a></div>
       <div class="span3"><a class="button" href="https://vaadin.com/elements/videos">Videos</a>
       </div>
       <div class="span3 offset3"><a class="button primary"
@@ -585,3 +585,11 @@
   </div>
 </div>
 
+<script>
+  $('#demos-button').click(function(event) {
+    event.preventDefault();
+    $('body, html').animate({
+      scrollTop: $('.elements-demos').offset().top
+    }, 200);
+  });
+</script>
