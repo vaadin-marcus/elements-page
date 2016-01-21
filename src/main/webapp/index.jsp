@@ -584,12 +584,12 @@
     </div>
   </div>
 </div>
-
+<%--<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>--%>
 <script>
   $('#demos-button').click(function(event) {
     event.preventDefault();
     $('body, html').animate({
       scrollTop: $('.elements-demos').offset().top
-    }, 200);
+    }, 800);
   });
 </script>
