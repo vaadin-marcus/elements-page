@@ -56,7 +56,7 @@
         <div>
           Vaadin Grid is a fully featured datagrid for showing table data. It performs great even
           with huge data sets.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -73,7 +73,7 @@
         <div>
           Vaadin ComboBox is a filterable select element for situations where you have more
           than a few dozen item to select from.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -93,7 +93,7 @@
              alt="Free font icons for web applications">
         <div>
           Vaadin Icons is a set of 530 unique icons designed for web applications.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -127,7 +127,7 @@
         <div>
           Area chart highlights the area between a line chart and the axis. Areas can be on top of
           each other or stacked.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -142,7 +142,7 @@
         <img src="<%=request.getContextPath()%>/img/preview/arearange.png" alt="Polymer area range chart element">
         <div>
           An area range chart highlights the area between two line charts.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -161,7 +161,7 @@
         <img src="<%=request.getContextPath()%>/img/preview/areaspline.png" alt="Polymer area spline chart element">
         <div>
           An area spline chart highlights the area between the axis and a curved line chart.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -177,7 +177,7 @@
         <div>
           An area spline range chart highlights the area between two spline charts.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -198,7 +198,7 @@
         <div>
           Display data with horizontal bars proportional to values. Bars can be grouped and
           stacked.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -214,7 +214,7 @@
         <div>
           Box plot charts are used to indicate variability outside upper and lower quartiles.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -234,7 +234,7 @@
         <div>
           A bubble chart can be used to display three dimensions of data with disks proportional to
           a value at a given x, y point.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -251,7 +251,7 @@
         <div>
           Display data with vertical bars proportional to values. Bars can be grouped and
           stacked.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -272,7 +272,7 @@
         <div>
           Displays two values per data point, highlighting the range between them.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -289,7 +289,7 @@
         <div>
           Error bars can be used to indicate error or uncertainty in measurements.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -311,7 +311,7 @@
           Funnel charts are most often used to visualize the different stages in a company's sales
           process.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -327,7 +327,7 @@
         <div>
           Displays a gauge where the angle corresponds to the value. Supports multiple axes.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -348,7 +348,7 @@
         <div>
           Highlight areas in a matrix with a gradient to easily compare large amounts of data.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -364,7 +364,7 @@
         <div>
           Displays a series of data connected with straight lines.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -385,7 +385,7 @@
         <div>
           Display proportions of values clearly with a pie chart.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -401,7 +401,7 @@
         <div>
           Highlights an area defined by data points making up a polygon.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -422,7 +422,7 @@
           Used to show hierarchically structured data in a pyramid shaped chart divided into
           vertical slices.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -438,7 +438,7 @@
         <div>
           A scatter chart or scatter plot is a set of points from a two dimensional data set.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -459,7 +459,7 @@
         <div>
           A solid gauge chart shows a value as a colored angle of an arc.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -476,7 +476,7 @@
           Sparklines are small line charts that are displayed without axes or coordinates and are
           typically used to show time series data inline.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -496,7 +496,7 @@
         <div>
           Displays a set of data points connected by a curved line.
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -513,7 +513,7 @@
           Displays a set of hierarchical data in nested rectangles.
 
 
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
@@ -533,7 +533,7 @@
         <div>
           A waterfall chart shows the cumulative effects of a step of sequentially applied positive
           or negative values.
-          <span>Learn more</span>
+          <span>Live demo and source</span>
         </div>
       </div>
       <div class="tile-title row-fluid">
