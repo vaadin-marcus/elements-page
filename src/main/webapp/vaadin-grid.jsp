@@ -1,4 +1,6 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.vaadin.elements.GitHubRelease" %>
+<%@ page import="com.vaadin.elements.Releases" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -7,6 +9,8 @@
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
 <link rel="import" href="<%=request.getContextPath()%>/bower_components/vaadin-grid/vaadin-grid.html">
+<script
+    src="<%=request.getContextPath()%>/bower_components/time-elements/time-elements.js"></script>
 <!-- Imports end -->
 
 <!-- Hero section start -->
@@ -17,7 +21,7 @@
         <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5></div>
         <div class="span3 hidden-phone"><a href="https://www.polymer-project.org" class="polymer-tag">Built with Polymer</a></div>
     </div>
-    <h1 class="helvetica-light">&lt;vaadin-grid&gt; <span>1.0</span></h1>
+    <h1 class="helvetica-light">&lt;vaadin-grid&gt; <span><%=Releases.getLatestVersionNumber("vaadin-grid", "1.0.0")%></span></h1>
 </div>
 
 <!-- Hero section end -->
@@ -73,7 +77,16 @@
 </div>
 
 <!-- Info section end -->
-
+<div class="elements-section">
+    <h4>Latest releases</h4>
+    <%--A small part of me died for writing this--%>
+    <% for (GitHubRelease release : Releases.getLatestReleases("vaadin-grid")) {%>
+    <div class="row-fluid">
+        <span class="span9"><a href="<%=release.htmlUrl%>"><%=release.name%></a></span>
+        <time is="relative-time" datetime="<%=release.publishedAt%>" class="span3"></time>
+    </div>
+    <%}%>
+</div>
 <!-- Demo section start -->
 
 <div class="elements-section">

@@ -1,4 +1,5 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.vaadin.elements.Releases" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -61,7 +62,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-grid</div>
-        <div class="span4"><span>1.0.0</span></div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-grid", "1.0.0")%></span></div>
       </div>
     </a>
   </div>
@@ -78,7 +79,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-combo-box</div>
-        <div class="span4"><span>1.0.0-alpha3</span></div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-alpha4")%></span></div>
       </div>
     </a>
   </div>

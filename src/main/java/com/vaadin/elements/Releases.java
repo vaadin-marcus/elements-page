@@ -8,19 +8,19 @@ import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class Releases {
 
-    public static final int CACHE_MINUTES = 15;
+    public static final int CACHE_MINUTES = 60;
 
-    private static LoadingCache<String, GitHubRelease> cache;
-    private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static LoadingCache<String, List<GitHubRelease>> cache;
 
-    private static LoadingCache<String, GitHubRelease> getCache() {
+    private static LoadingCache<String, List<GitHubRelease>> getCache() {
         if (cache == null) {
             init();
         }
@@ -31,10 +31,10 @@ public class Releases {
         cache = CacheBuilder
                 .newBuilder()
                 .expireAfterWrite(CACHE_MINUTES, TimeUnit.MINUTES)
-                .build(new CacheLoader<String, GitHubRelease>() {
+                .build(new CacheLoader<String, List<GitHubRelease>>() {
                     @Override
-                    public GitHubRelease load(String repo) throws Exception {
-                        return getGitHubRelease(repo);
+                    public List<GitHubRelease> load(String repo) throws Exception {
+                        return getGitHubReleases(repo);
                     }
                 });
 
@@ -54,38 +54,40 @@ public class Releases {
     }
 
 
-    public static String getLatestVersionNumber(String repo) {
+    public static String getLatestVersionNumber(String repo, String fallback) {
         GitHubRelease latestRelease = getLatestRelease(repo);
-        return latestRelease == null || latestRelease.tagName == null ? "pre-release" : latestRelease.tagName;
-    }
-
-    public static String getLatestVersionDate(String repo) {
-        GitHubRelease latestRelease = getLatestRelease(repo);
-
-        return latestRelease == null || latestRelease.publishedAt == null ? "" : dateFormat.format(latestRelease.publishedAt);
+        return latestRelease == null || latestRelease.tagName == null ? fallback : latestRelease.tagName;
     }
 
     private static GitHubRelease getLatestRelease(String repo) {
         try {
-            return getCache().get(repo);
+            return getCache().get(repo).get(0);
         } catch (ExecutionException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-
-    private static GitHubRelease getGitHubRelease(String repository) {
+    public static List<GitHubRelease> getLatestReleases(String repo) {
         try {
-            return Unirest.get("https://api.github.com/repos/vaadin/{repo}/releases/latest")
+            return getCache().get(repo);
+        } catch (ExecutionException e) {
+            return new ArrayList<GitHubRelease>();
+        }
+    }
+
+    private static List<GitHubRelease> getGitHubReleases(String repository) {
+        try {
+            return Arrays.asList(Unirest.get("https://api.github.com/repos/vaadin/{repo}/releases")
                     .routeParam("repo", repository)
                     .header("Accept", "application/vnd.github.v3+json")
                     .header("User-Agent", "Vaadin")
-                    .asObject(GitHubRelease.class)
-                    .getBody();
+                    .asObject(GitHubRelease[].class)
+                    .getBody());
         } catch (UnirestException e) {
             e.printStackTrace();
             return null;
         }
     }
+
 }

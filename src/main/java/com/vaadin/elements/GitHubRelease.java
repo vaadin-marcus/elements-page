@@ -3,8 +3,6 @@ package com.vaadin.elements;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
-
 public class GitHubRelease {
 
     @SerializedName("html_url")
@@ -21,6 +19,6 @@ public class GitHubRelease {
 
     @SerializedName("published_at")
     @Expose
-    public Date publishedAt;
+    public String publishedAt;
 
 }
