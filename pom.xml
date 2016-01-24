@@ -6,8 +6,9 @@
 	<artifactId>elements-page</artifactId>
 	<packaging>war</packaging>
 	<name>elements-page Portlet</name>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<build>
+		<finalName>elements-page</finalName>
 		<plugins>
 			<plugin>
 				<groupId>com.liferay.maven.plugins</groupId>
