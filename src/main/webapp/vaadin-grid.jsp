@@ -135,8 +135,7 @@
     name="json.property.path"&gt;</code>.
   </p>
   <p>
-    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Read about lazy
-      loading from REST data sources and other data source options.</a>
+    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Lazy loading, infinite scrolling and other data sources are documented here.</a>
   </p>
   <view-source>
     <div class="head">
@@ -260,6 +259,13 @@
     to display an image instead of the URL we have in our JSON object.
   </p>
   <view-source>
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import"
+            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+      -->
+    </div>
     <style>
       .photo {
         width: 36px;
@@ -312,13 +318,16 @@
       href="https://vaadin.com/docs/-/part/elements/vaadin-grid/details.html">Read more about
     showing row details.</a>
   </p>
-  <view-source>
-    <style>
-      .photo {
-        width: 36px;
-        border-radius: 3px;
-      }
-    </style>
+  <view-source externals="<%=request.getContextPath()%>/details-row.html">
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import"
+            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+      -->
+    </div>
+    <link rel="import" href="<%=request.getContextPath()%>/details-row.html">
+
     <vaadin-grid id="details" visible-rows="10">
       <table>
         <colgroup>
@@ -362,63 +371,7 @@
         });
       })();
     </script>
-      <dom-module id="details-row">
-        <template>
-          <style>
-            :host {
-              display: flex;
-            }
 
-            .userdetails {
-              padding: 20px;
-            }
-
-            .userdata {
-              -webkit-flex: 1;
-              flex: 1;
-              max-height: 20px;
-            }
-
-            .usercolumn {
-              margin-left: 10px;
-              display: -webkit-flex;
-              display: flex;
-              -webkit-flex-direction: column;
-              flex-direction: column;
-            }
-          </style>
-
-          <div class="userdetails" style="display: -webkit-flex; display: flex; height: 170px;">
-            <img src="{{user.picture.large}}" style="height: 100px; width: 100px;">
-            <div class="usercolumn">
-              <small>Name</small>
-              <div class="userdata">{{user.name.first}}</div>
-              <small>Surname</small>
-              <div class="userdata">{{user.name.last}}</div>
-              <small>Title</small>
-              <div class="userdata">Designer</div>
-              <small>Hire date</small>
-              <div class="userdata">10th August 2015</div>
-            </div>
-            <div class="usercolumn">
-              <small>City</small>
-              <div class="userdata">{{user.location.city}}</div>
-              <small>Street</small>
-              <div class="userdata">{{user.location.street}}</div>
-              <small>Phone</small>
-              <div class="userdata">{{user.phone}}</div>
-            </div>
-          </div>
-        </template>
-        <script>
-          Polymer({
-            is: 'details-row',
-            properties: {
-              user: Object
-            }
-          });
-        </script>
-      </dom-module>
   </view-source>
 </div>
 <!-- Demo section end -->
