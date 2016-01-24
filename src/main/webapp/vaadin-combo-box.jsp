@@ -86,7 +86,7 @@
 
 <!-- Info section end -->
 
-<%--A small part of me died for writing this--%>
+<%--A small part of me died writing this--%>
 <% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-combo-box");
   if (latestReleases != null && !latestReleases.isEmpty()) {
 %>
