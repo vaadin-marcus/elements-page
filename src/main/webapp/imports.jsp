@@ -19,5 +19,10 @@
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css" media="screen" charset="utf-8">
 
+<style is="custom-style">
+  :root {
+    --default-primary-color: #00b4f0;
+  }
+</style>
 
 

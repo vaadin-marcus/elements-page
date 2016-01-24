@@ -135,7 +135,8 @@
     name="json.property.path"&gt;</code>.
   </p>
   <p>
-    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Lazy loading, infinite scrolling and other data sources are documented here.</a>
+    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Lazy loading,
+      infinite scrolling and other data sources are documented here.</a>
   </p>
   <view-source>
     <div class="head">
@@ -168,12 +169,17 @@
     </script>
   </view-source>
 
-  <h5>Sorting and Filtering</h5>
+  <h5>Sorting, filtering and selection</h5>
   <p>
     Vaadin Grid support sorting and filtering data. Here we have added simple sorting on all columns
     and filtering on the first name column. <a
       href="https://vaadin.com/docs/-/part/elements/vaadin-grid/sort.html">Read more about the
     available sorting options.</a>
+  </p>
+  <p>
+    This demo also shows multiple selection with keyboard navigation support. For more info on
+    selection modes, check out the <a
+      href="https://vaadin.com/docs/-/part/elements/vaadin-grid/selection.html">documentation</a>.
   </p>
   <view-source>
     <div class="head">

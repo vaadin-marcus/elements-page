@@ -160,7 +160,6 @@
 
     _addSources: function() {
       if (this._htmlText) {
-        console.log(this._htmlText);
         this.push('sources', {
           name: 'HTML',
           source: this._htmlText,
@@ -191,9 +190,7 @@
     },
 
     _getMarkdownFor: function(sourceItem) {
-      var md = '\`\`\`' + sourceItem.type + '\n' + this._getFormattedContents(sourceItem) + '\n\`\`\`';
-      console.log(md);
-      return md;
+      return '\`\`\`' + sourceItem.type + '\n' + this._getFormattedContents(sourceItem) + '\n\`\`\`';
     },
 
     _getFormattedContents: function(sourceItem) {
