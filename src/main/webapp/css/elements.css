@@ -401,8 +401,18 @@
 }
 
 .elements-section input,
-.elements-section input[type='text']{
+.elements-section input[type='text'] {
     border: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+.elements-section .label-and-input-container {
+	line-height: 24px;
+}
+
+.elements-section .label-and-input-container label {
+	line-height: 30px;
 }
 
 .charts-links {
