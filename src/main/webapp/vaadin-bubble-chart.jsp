@@ -6,8 +6,7 @@
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-bubble-chart.html">
+
 <!-- Imports end -->
 
 <!-- Hero section start -->

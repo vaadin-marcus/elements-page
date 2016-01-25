@@ -5,9 +5,7 @@
 <%PortalUtil.setPageTitle("Area Spline Chart for Polymer, HTML5 frameworks | Vaadin Elements", request);%>
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-areaspline-chart.html">
-<link rel="import" href="<%=request.getContextPath()%>/bower_components/iron-ajax/iron-ajax.html">
+
 <!-- Imports end -->
 
 <!-- Hero section start -->

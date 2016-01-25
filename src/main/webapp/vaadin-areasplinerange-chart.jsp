@@ -6,9 +6,7 @@
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-areasplinerange-chart.html">
-<link rel="import" href="<%=request.getContextPath()%>/bower_components/iron-ajax/iron-ajax.html">
+
 <!-- Imports end -->
 
 <!-- Hero section start -->

@@ -6,10 +6,7 @@
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-sparkline.html">
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-grid/vaadin-grid.html">
+
 <!-- Imports end -->
 
 <!-- Hero section start -->

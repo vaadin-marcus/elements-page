@@ -7,10 +7,7 @@
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-icons/vaadin-icons.html">
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/paper-input/paper-input.html">
+
 <!-- Imports end -->
 
 

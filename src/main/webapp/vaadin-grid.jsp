@@ -8,14 +8,7 @@
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/polymer/polymer.html">
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/paper-input/paper-input.html">
-<script
-    src="<%=request.getContextPath()%>/bower_components/time-elements/time-elements.js"></script>
+
 <!-- Imports end -->
 
 <!-- Hero section start -->
@@ -126,6 +119,8 @@
       xhr.open('GET', url, true);
       xhr.send();
     }
+
+    var usersArray = [];
   </script>
 
   <h5>Simple use with an array data source</h5>
@@ -146,7 +141,12 @@
             href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
       -->
     </div>
-    <vaadin-grid id="simple" visible-rows="5">
+    <style>
+      #simple {
+        height: 300px;
+      }
+    </style>
+    <vaadin-grid id="simple">
       <table>
         <colgroup>
           <col name="user.name.first"/>
@@ -189,8 +189,13 @@
             href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
       -->
     </div>
+    <style>
+      #sort {
+        height: 300px;
+      }
+    </style>
     <paper-input id="filter" label="Filter by first name"></paper-input>
-    <vaadin-grid id="sort" selection-mode="multi" visible-rows="5">
+    <vaadin-grid id="sort" selection-mode="multi">
       <table>
         <colgroup>
           <col name="user.name.first" sortable/>
@@ -277,8 +282,13 @@
         width: 36px;
         border-radius: 3px;
       }
+
+       #frozen {
+         height: 300px;
+       }
+
     </style>
-    <vaadin-grid id="frozen" visible-rows="5" frozen-columns="1">
+    <vaadin-grid id="frozen" frozen-columns="2">
       <table>
         <colgroup>
           <col name="user.picture.thumbnail"/>
@@ -317,67 +327,72 @@
     </script>
   </view-source>
 
-  <h5>Details row</h5>
-  <p>
-    Sometimes you need to show more information than you can fit on a single row. In those cases,
-    you can use a details row to display any element below the row. <a
-      href="https://vaadin.com/docs/-/part/elements/vaadin-grid/details.html">Read more about
-    showing row details.</a>
-  </p>
-  <view-source externals="<%=request.getContextPath()%>/details-row.html">
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import"
-            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-      -->
-    </div>
-    <link rel="import" href="<%=request.getContextPath()%>/details-row.html">
+  <%--<h5>Details row</h5>--%>
+  <%--<p>--%>
+    <%--Sometimes you need to show more information than you can fit on a single row. In those cases,--%>
+    <%--you can use a details row to display any element below the row. <a--%>
+      <%--href="https://vaadin.com/docs/-/part/elements/vaadin-grid/details.html">Read more about--%>
+    <%--showing row details.</a>--%>
+  <%--</p>--%>
+  <%--<view-source externals="<%=request.getContextPath()%>/details-row.html">--%>
+    <%--<div class="head">--%>
+      <%--<!----%>
+      <%--<script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>--%>
+      <%--<link rel="import"--%>
+            <%--href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">--%>
+      <%---->--%>
+    <%--</div>--%>
+    <%--<style>--%>
+      <%--#details {--%>
+        <%--height: 500px;--%>
+      <%--}--%>
+    <%--</style>--%>
+    <%--<link rel="import" href="<%=request.getContextPath()%>/details-row.html">--%>
 
-    <vaadin-grid id="details" visible-rows="10">
-      <table>
-        <colgroup>
-          <col name="user.name.first"/>
-          <col name="user.name.last"/>
-          <col name="user.email"/>
-        </colgroup>
-      </table>
-    </vaadin-grid>
+    <%--<vaadin-grid id="details">--%>
+      <%--<table>--%>
+        <%--<colgroup>--%>
+          <%--<col name="user.name.first"/>--%>
+          <%--<col name="user.name.last"/>--%>
+          <%--<col name="user.email"/>--%>
+        <%--</colgroup>--%>
+      <%--</table>--%>
+    <%--</vaadin-grid>--%>
 
-    <script>
-      (function() {
-        HTMLImports.whenReady(function() {
-          var grid = document.querySelector('#details');
+    <%--<script>--%>
+      <%--(function() {--%>
+        <%--HTMLImports.whenReady(function() {--%>
+          <%--var grid = document.querySelector('#details');--%>
 
-          getJSON('<%=request.getContextPath()%>/users.json', function(result) {
-            grid.items = result;
-          });
+          <%--getJSON('<%=request.getContextPath()%>/users.json', function(result) {--%>
+            <%--grid.items = result;--%>
+          <%--});--%>
 
-          grid.rowDetailsGenerator = function(index) {
-            var detailsRow = document.createElement('details-row');
-            grid.getItem(index, function(err, item) {
-              if (!err) {
-                detailsRow.user = item.user;
-              }
-            });
-            return detailsRow;
-          };
+          <%--grid.rowDetailsGenerator = function(index) {--%>
+            <%--var detailsRow = document.createElement('details-row');--%>
+            <%--grid.getItem(index, function(err, item) {--%>
+              <%--if (!err) {--%>
+                <%--detailsRow.user = item.user;--%>
+              <%--}--%>
+            <%--});--%>
+            <%--return detailsRow;--%>
+          <%--};--%>
 
-          var detailsOpenIndex = -1;
+          <%--var detailsOpenIndex = -1;--%>
 
-          grid.addEventListener('selected-items-changed', function() {
-            grid.setRowDetailsVisible(detailsOpenIndex, false);
-            var selected = grid.selection.selected();
-            if (selected.length === 1) {
-              grid.setRowDetailsVisible(selected[0], true);
-              detailsOpenIndex = selected[0];
-            }
-          });
+          <%--grid.addEventListener('selected-items-changed', function() {--%>
+            <%--grid.setRowDetailsVisible(detailsOpenIndex, false);--%>
+            <%--var selected = grid.selection.selected();--%>
+            <%--if (selected.length === 1) {--%>
+              <%--grid.setRowDetailsVisible(selected[0], true);--%>
+              <%--detailsOpenIndex = selected[0];--%>
+            <%--}--%>
+          <%--});--%>
 
-        });
-      })();
-    </script>
+        <%--});--%>
+      <%--})();--%>
+    <%--</script>--%>
 
-  </view-source>
+  <%--</view-source>--%>
 </div>
 <!-- Demo section end -->

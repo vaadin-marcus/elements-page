@@ -6,8 +6,7 @@
 <%PortalUtil.setPageTitle("Area Chart for Polymer, HTML5 frameworks | Vaadin Elements", request);%>
 
 <jsp:include page="imports.jsp"/>
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-charts/vaadin-area-chart.html">
+
 
 <!-- Hero section start -->
 

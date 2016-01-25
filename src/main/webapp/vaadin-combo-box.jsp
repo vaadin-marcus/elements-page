@@ -10,11 +10,7 @@
 <!-- Imports -->
 
 <jsp:include page="imports.jsp"/>
-<link rel="import"
-      href="<%=request.getContextPath()%>/bower_components/vaadin-combo-box/vaadin-combo-box.html">
-<link rel="import" href="<%=request.getContextPath()%>/bower_components/iron-ajax/iron-ajax.html">
-<script
-    src="<%=request.getContextPath()%>/bower_components/time-elements/time-elements.js"></script>
+
 
 <!-- Hero section start -->
 
