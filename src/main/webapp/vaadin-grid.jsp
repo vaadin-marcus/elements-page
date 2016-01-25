@@ -1,6 +1,7 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.vaadin.elements.GitHubRelease" %>
 <%@ page import="com.vaadin.elements.Releases" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -93,10 +94,13 @@
 </div>
 
 <!-- Info section end -->
+<% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-grid");
+  if (latestReleases != null && !latestReleases.isEmpty()) {
+%>
 <div class="elements-section">
   <h4>Latest releases</h4>
   <%--A small part of me died for writing this--%>
-  <% for (GitHubRelease release : Releases.getLatestReleases("vaadin-grid")) {%>
+  <% for (GitHubRelease release : latestReleases) {%>
   <div class="row-fluid">
     <span class="span9"><a href="<%=release.htmlUrl%>"><%=release.name%>
     </a></span>
@@ -104,6 +108,7 @@
   </div>
   <%}%>
 </div>
+<%}%>
 <!-- Demo section start -->
 
 <div class="elements-section">
