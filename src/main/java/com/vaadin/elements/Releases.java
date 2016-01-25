@@ -2,6 +2,7 @@ package com.vaadin.elements;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
+import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.ObjectMapper;
@@ -62,7 +63,7 @@ public class Releases {
     private static GitHubRelease getLatestRelease(String repo) {
         try {
             return getCache().get(repo).get(0);
-        } catch (ExecutionException e) {
+        } catch (ExecutionException | InvalidCacheLoadException e) {
             e.printStackTrace();
             return null;
         }
