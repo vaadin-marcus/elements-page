@@ -154,7 +154,11 @@
       // those. At this phase they have been evaluated already.
       var scripts = this.getElementsByTagName('script');
       for (var i = 0; i < scripts.length; i++) {
-        this._scriptText += scripts[i].textContent;
+        var script = scripts[i];
+        // Scripts that are a part of a dom module are already shown in the HTML tab
+        if(script.parentNode.nodeName !== 'DOM-MODULE'){
+          this._scriptText += script.textContent;
+        }
       }
 
       this._addSources();

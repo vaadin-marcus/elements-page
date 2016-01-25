@@ -65,9 +65,9 @@
     <div class="span6">
       <ul>
         <li>
-        <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">Area
             chart</a></li>
+        <li>
         <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>">Area
           spline chart</a></li>
         <li>
