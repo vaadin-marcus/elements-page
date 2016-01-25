@@ -415,6 +415,11 @@
 	line-height: 30px;
 }
 
+.elements-section .column-hiding-toggle.hidden {
+	display: block;
+	visibility: visible;
+}
+
 .charts-links {
     margin-top: 60px;
 }
