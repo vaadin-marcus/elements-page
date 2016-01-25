@@ -67,7 +67,7 @@
 <div class="elements-section">
 
   <h4>Examples</h4>
-  <view-source>
+  <view-source externals="<%=request.getContextPath()%>/sparkline-example.html">
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -75,61 +75,10 @@
       <link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
       -->
     </div>
-    <dom-module id="sparkline-example">
-      <template>
-        <vaadin-grid id="grid">
-          <table>
-            <colgroup>
-              <col name="month" header-text="Month" width="100"/>
-              <col name="data" header-text="Trend" width="200"/>
-              <col name="latest" header-text="Latest value"/>
-            </colgroup>
-          </table>
-        </vaadin-grid>
 
-        <iron-ajax auto id="dataFetcher" url="<%=request.getContextPath()%>/stockData.json"
-                   handle-as="json"
-                   on-response="_dataLoaded" debounce-duration="300"></iron-ajax>
-      </template>
+    <link rel="import" href="<%=request.getContextPath()%>/sparkline-example.html">
 
-      <script>
-        Polymer({
-          is: 'sparkline-example',
-
-          ready: function() {
-            var grid = this.$.grid;
-
-            grid.style.width = '450px';
-
-            //vaadin-charts as a renderer for a vaadin-grid cell
-            grid.columns[1].renderer = function(cell) {
-              var sparkline = document.createElement('vaadin-sparkline');
-              //TODO fix when styling has been fixed
-              sparkline.style.width = '150px';
-              sparkline.style.height = '48px';
-              sparkline.setAttribute('data', cell.data);
-
-              cell.element.innerHTML = '';
-              cell.element.appendChild(sparkline);
-            };
-
-            grid.columns[2].renderer = function(cell) {
-              cell.element.innerHTML = '';
-
-              //show the last value of the data array
-              var dataArray = cell.row.data.data;
-              cell.element.innerHTML = '$' + dataArray[dataArray.length - 1];
-            };
-          },
-
-          _dataLoaded: function(event) {
-            this.$.grid.items = event.detail.response;
-          }
-        });
-      </script>
-    </dom-module>
-
-    <sparkline-example></sparkline-example>
+    <sparkline-example data-url="<%=request.getContextPath()%>/stockData.json"></sparkline-example>
   </view-source>
 </div>
 
