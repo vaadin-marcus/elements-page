@@ -2,17 +2,14 @@ package com.vaadin.elements;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
-import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class Releases {
@@ -63,7 +60,7 @@ public class Releases {
     private static GitHubRelease getLatestRelease(String repo) {
         try {
             return getCache().get(repo).get(0);
-        } catch (ExecutionException | InvalidCacheLoadException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -72,8 +69,9 @@ public class Releases {
     public static List<GitHubRelease> getLatestReleases(String repo) {
         try {
             return getCache().get(repo);
-        } catch (ExecutionException e) {
-            return new ArrayList<GitHubRelease>();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 
@@ -85,7 +83,7 @@ public class Releases {
                     .header("User-Agent", "Vaadin")
                     .asObject(GitHubRelease[].class)
                     .getBody());
-        } catch (UnirestException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
