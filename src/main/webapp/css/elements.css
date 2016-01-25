@@ -108,7 +108,7 @@
 
 .polymer-tag.polymer-tag:focus,
 .polymer-tag.polymer-tag:active,
-.polymer-tag.polymer-tag:hover{
+.polymer-tag.polymer-tag:hover {
     text-decoration: none;
     color: #7EA4B7;
 }
@@ -204,23 +204,23 @@
     overflow: hidden;
 }
 
-.elements-category-tiles .tile-details div {
-    position: absolute;
-    background-color: #073045;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 40px;
-    color: #fff;
-    height: 101%;
-    box-sizing: border-box;
-    transform: translate(1000px, 1000px);
-    transition: all 0.3s;
-    text-align: center;
-    font-size: 16px;
-    line-height: 28px;
-}
+/*.elements-category-tiles .tile-details div {*/
+    /*position: absolute;*/
+    /*background-color: #073045;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*padding: 40px;*/
+    /*color: #fff;*/
+    /*height: 101%;*/
+    /*box-sizing: border-box;*/
+    /*transform: translate(1000px, 1000px);*/
+    /*transition: all 0.3s;*/
+    /*text-align: center;*/
+    /*font-size: 16px;*/
+    /*line-height: 28px;*/
+/*}*/
 
 .elements-category-tiles .tile-details div span {
     display: block;
@@ -229,32 +229,29 @@
     font-weight: bold;
 }
 
-.tile:hover .tile-details div {
-    transform: translate(0, 0);
+
+
+.elements-category-tiles .tile-details div {
+    background-color: #073045;
+    position: relative;
+    padding: 20px;
+    color: #fff;
+    height: 100%;
+    box-sizing: border-box;
+    transform: translate(0px, 0px);
     transition: all 0.3s;
+    text-align: center;
+    font-size: 16px;
+    line-height: 28px;
 }
 
-@media (max-width: 1024px) {
-    .elements-category-tiles .tile-details div {
-        background-color: #073045;
-        position: relative;
-        padding: 20px;
-        color: #fff;
-        height: 100%;
-        box-sizing: border-box;
-        transform: translate(0px, 0px);
-        transition: all 0.3s;
-        text-align: center;
+@media(max-width: 1024px) {
+    .elements-category-tiles .title-details div {
         font-size: 14px;
         line-height: 20px;
     }
 }
 
-@media (max-width: 768px) {
-    .elements-category-tiles .tile-title div span {
-        text-align: left;
-    }
-}
 
 /* EO Index Listing */
 
@@ -316,7 +313,6 @@
     color: #648a9d;
     letter-spacing: normal;
 }
-
 
 @media (max-width: 768px) {
     .elements-hero-mini .elements-hero-title h5 {
@@ -408,16 +404,16 @@
 }
 
 .elements-section .label-and-input-container {
-	line-height: 24px;
+    line-height: 24px;
 }
 
 .elements-section .label-and-input-container label {
-	line-height: 30px;
+    line-height: 30px;
 }
 
 .elements-section .column-hiding-toggle.hidden {
-	display: block;
-	visibility: visible;
+    display: block;
+    visibility: visible;
 }
 
 .charts-links {
