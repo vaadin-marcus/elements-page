@@ -331,7 +331,7 @@
       })();
     </script>
   </view-source>
-<%--
+
   <h5>Details row</h5>
   <p>
     Sometimes you need to show more information than you can fit on a single row. In those cases,
@@ -399,6 +399,6 @@
     </script>
 
   </view-source>
-  --%>
+
 </div>
 <!-- Demo section end -->
