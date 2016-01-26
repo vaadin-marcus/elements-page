@@ -176,7 +176,7 @@
 
   <h5>Sorting, filtering and selection</h5>
   <p>
-    Vaadin Grid support sorting and filtering data. Here we have added simple sorting on all columns
+    Vaadin Grid supports sorting and filtering data. Here we have added simple sorting on all columns
     and filtering on the first name column. <a
       href="https://vaadin.com/docs/-/part/elements/vaadin-grid/sort.html">Read more about the
     available sorting options.</a>
