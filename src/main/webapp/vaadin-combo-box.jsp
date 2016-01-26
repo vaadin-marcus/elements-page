@@ -123,10 +123,8 @@
     </div>
     <template is="dom-bind" id="demo">
       <div class="fieldset">
-        <vaadin-combo-box label="Language" class="languages" items="[[languages]]"
-                          value="[[item.language]]"></vaadin-combo-box>
-        <vaadin-combo-box label="Skill level" class="skillLevels" items="[[skillLevels]]"
-                          value="[[item.skillLevel]]"></vaadin-combo-box>
+        <vaadin-combo-box label="Language" class="languages" items="[[languages]]"></vaadin-combo-box>
+        <vaadin-combo-box label="Skill level" class="skillLevels" items="[[skillLevels]]"></vaadin-combo-box>
       </div>
     </template>
 
