@@ -31270,7 +31270,7 @@ Example:
     },
 
     _getMarkdownFor: function(sourceItem) {
-      return '\`\`\`' + sourceItem.type + '\n' + this._getFormattedContents(sourceItem) + '\n\`\`\`';
+      return '\`\`\`' + sourceItem.type + '\n' + sourceItem.source.trim() + '\n\`\`\`';
     },
 
     _getFormattedContents: function(sourceItem) {
