@@ -255,7 +255,7 @@
           'Beginner',
           'Intermediate',
           'Advanced',
-          'Profesional',
+          'Professional',
           'Native'
         ];
       });
