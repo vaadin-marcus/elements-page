@@ -31270,18 +31270,43 @@ Example:
     },
 
     _getMarkdownFor: function(sourceItem) {
-      return '\`\`\`' + sourceItem.type + '\n' + sourceItem.source.trim() + '\n\`\`\`';
+      return '\`\`\`' + sourceItem.type + '\n' + this._unindent(sourceItem.source) + '\n\`\`\`';
     },
 
-    _getFormattedContents: function(sourceItem) {
-      if (sourceItem.source) {
-        return window[sourceItem.type + '_beautify'](sourceItem.source, {
-          'indent_size': 2,
-          'indent_char': ' '
-        });
-      } else {
-        return '';
+    /* Unindent code modified from https://github.com/curvedmark/unindent under MIT license:
+     * https://github.com/curvedmark/unindent/blob/master/LICENSE
+     */
+    _unindent: function(source) {
+      if(!source) return '';
+
+      var indent;
+      var lines = source.split(/\r\n|[\r\n]/);
+      for (var i = 0, len = lines.length; i < len; ++i) {
+        var line = lines[i];
+
+        if (!line) continue;
+
+        if (!indent) {
+          indent = /^\s+/.exec(line);
+          if (!indent) break;
+          indent = indent[0];
+        }
+
+        if (/^\s+$/.test(line)) {
+          lines[i] = '';
+          continue;
+        }
+
+        if (line.substr(0, indent.length) === indent) {
+          line = line.substr(indent.length);
+        }
+
+        lines[i] = line;
       }
+
+      source = lines.join('\n');
+
+      return source.trim();
     },
 
     _postToCodepen: function() {
