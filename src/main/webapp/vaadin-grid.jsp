@@ -306,7 +306,6 @@
           <col name="user.location.city" hidable/>
           <col name="user.location.state" hidable/>
           <col name="user.location.zip" hidable/>
-
         </colgroup>
       </table>
     </vaadin-grid>
