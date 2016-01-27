@@ -94,7 +94,7 @@
 <div class="elements-section">
   <h4>Examples</h4>
   <h5>Basic area chart</h5>
-  <view-source head="#stuff-for-head" demo-name="Basic area chart">
+  <view-source>
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -147,7 +147,7 @@
   </view-source>
 
   <h5>Area chart with negative values</h5>
-  <view-source demo-name="Area chart with negative values">
+  <view-source>
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -178,7 +178,7 @@
   </view-source>
 
   <h5>Area chart with missing points</h5>
-  <view-source demo-name="Area chart with missing points">
+  <view-source>
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -210,7 +210,7 @@
   </view-source>
 
   <h5>Area chart with inverted axis</h5>
-  <view-source demo-name="Area chart with inverted axis">
+  <view-source>
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -248,7 +248,7 @@
   </view-source>
 
   <h5>Percentage area chart</h5>
-  <view-source demo-name="Percentage area chart">
+  <view-source>
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -294,7 +294,7 @@
   </view-source>
 
   <h5>Stacked area chart</h5>
-  <view-source demo-name="Stacked area chart">
+  <view-source>
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>

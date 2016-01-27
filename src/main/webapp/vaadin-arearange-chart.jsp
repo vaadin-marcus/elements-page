@@ -97,7 +97,7 @@
 <div class="elements-section">
 
   <h4>Examples</h4>
-  <view-source head="#stuff-for-head">
+  <view-source>
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>

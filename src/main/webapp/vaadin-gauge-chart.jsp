@@ -78,10 +78,10 @@
 <div class="elements-section">
   <h4>Examples</h4>
   <h5>Angular gauge chart</h5>
-  <view-source demo-name="Angular gauge chart">
+  <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-gauge-chart.html">
       -->
     </div>
@@ -131,10 +131,10 @@
   </view-source>
 
   <h5>Dual axis gauge chart</h5>
-  <view-source demo-name="Dual axis gauge chart">
+  <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-gauge-chart.html">
       -->
     </div>

@@ -58,10 +58,10 @@
     }
   </style>
   <h4>Examples</h4>
-  <view-source demo-name="Demo">
+  <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-icons/latest/vaadin-icons.html">
       -->
     </div>

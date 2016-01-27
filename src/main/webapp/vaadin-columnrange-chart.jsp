@@ -65,7 +65,7 @@
   <view-source title="Basic column range chart">
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-columnrange-chart.html">
       -->
     </div>
@@ -95,7 +95,7 @@
   </view-source>
 
   <h5>Resource usage chart</h5>
-  <view-source head="#stuff-for-head" title="Resource usage">
+  <view-source title="Resource usage">
     <vaadin-columnrange-chart id="column-range-resource-usage">
       <chart inverted="true"></chart>
       <title>Resource usage</title>

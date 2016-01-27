@@ -84,10 +84,10 @@
 
   <h4>Examples</h4>
   <h5>Basic bar chart</h5>
-  <view-source demo-name="Basic bar chart">
+  <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-bar-chart.html">
       -->
     </div>
@@ -118,7 +118,7 @@
   </view-source>
 
   <h5>Bar chart with negative stack</h5>
-  <view-source head="#stuff-for-head" demo-name="Bar with negative stack">
+  <view-source>
     <vaadin-bar-chart id="bar-with-negative-stack">
       <title>Population pyramid for Germany, midyear 2010</title>
       <subtitle>Source: www.census.gov</subtitle>
@@ -158,7 +158,7 @@
   </view-source>
 
   <h5>Stacked bar chart</h5>
-  <view-source head="#stuff-for-head" demo-name="Stacked bar chart">
+  <view-source>
     <vaadin-bar-chart id="stacked-bar">
       <title>Stacked bar chart</title>
       <x-axis>

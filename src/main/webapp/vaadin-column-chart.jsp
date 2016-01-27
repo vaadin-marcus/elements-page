@@ -82,10 +82,10 @@
 <div class="elements-section">
   <h4>Examples</h4>
   <h5>Column chart with drilldown</h5>
-  <view-source demo-name="Column chart with drilldown">
+  <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
       -->
     </div>
@@ -178,10 +178,10 @@
   </view-source>
 
   <h5>Stacked column chart</h5>
-  <view-source demo-name="Stacked column chart">
+  <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
       -->
     </div>
@@ -218,10 +218,10 @@
   </view-source>
 
   <h5>Column chart with negative values</h5>
-  <view-source demo-name="Column chart with negative values">
+  <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
       -->
     </div>
@@ -249,10 +249,10 @@
   </view-source>
 
   <h5>3D column chart</h5>
-  <view-source demo-name="3D column chart">
+  <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
       -->
     </div>
@@ -299,7 +299,7 @@
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-components/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
       -->
     </div>
