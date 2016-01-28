@@ -128,6 +128,8 @@
     var usersArray = [];
   </script>
 
+
+
   <h5>Simple use with an array data source</h5>
   <p>
     Simple use case where the grid is populated with data from an array. The array data is fetched
@@ -135,13 +137,12 @@
     name="json.property.path"&gt;</code>.
   </p>
   <p>
-    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Lazy loading,
-      infinite scrolling and other data sources are documented here.</a>
+    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Other data sources are documented here.</a>
   </p>
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
             href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
       -->
@@ -154,9 +155,9 @@
     <vaadin-grid id="simple">
       <table>
         <colgroup>
-          <col name="user.name.first"/>
-          <col name="user.name.last"/>
-          <col name="user.email"/>
+          <col name="firstName"/>
+          <col name="lastName"/>
+          <col name="email"/>
         </colgroup>
       </table>
     </vaadin-grid>
@@ -166,9 +167,70 @@
         HTMLImports.whenReady(function() {
           var grid = document.querySelector('#simple');
 
-          getJSON('<%=request.getContextPath()%>/users.json', function(result) {
-            grid.items = result;
+          getJSON('http://demo.vaadin.com/demo-data/1.0/people', function(json) {
+            grid.items = json.result;
           });
+        });
+      })();
+    </script>
+  </view-source>
+
+  <h5>Lazy loading a large data set</h5>
+  <p>
+    When you have more than a few items, it makes sense to only fetch a smaller subset up front and
+    then load the rest of rows as (and if) you need them. With Vaadin Grid you can do this easily by
+    defining a function data source. We also customized the header texts with a <code>&lt;thead&gt;</code>.
+  </p>
+  <p>
+    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Read more about
+      vaadin-grid data sources.</a>
+  </p>
+  <view-source>
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import"
+            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+      -->
+    </div>
+    <style>
+      #lazy {
+        height: 300px;
+      }
+    </style>
+    <vaadin-grid id="lazy">
+      <table>
+        <colgroup>
+          <col name="number" width="80"/>
+          <col name="firstName"/>
+          <col name="lastName"/>
+          <col name="email"/>
+        </colgroup>
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+        </tr>
+        </thead>
+      </table>
+    </vaadin-grid>
+
+    <script>
+      (function() {
+        HTMLImports.whenReady(function() {
+          var grid = document.querySelector('#lazy');
+
+          grid.columns[0].renderer = function(cell){
+            cell.element.innerText = cell.row.index;
+          };
+
+          grid.items = function(params, callback) {
+            getJSON('http://demo.vaadin.com/demo-data/1.0/people?index=' + params.index + '&count=' + params.count, function(json) {
+              callback(json.result, json.size);
+            });
+          };
         });
       })();
     </script>
@@ -176,7 +238,8 @@
 
   <h5>Sorting, filtering and selection</h5>
   <p>
-    Vaadin Grid supports sorting and filtering data. Here we have added simple sorting on all columns
+    Vaadin Grid supports sorting and filtering data. Here we have added simple sorting on all
+    columns
     and filtering on the first name column. <a
       href="https://vaadin.com/docs/-/part/elements/vaadin-grid/sort.html">Read more about the
     available sorting options.</a>
@@ -189,7 +252,7 @@
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
             href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
       -->
@@ -203,9 +266,9 @@
     <vaadin-grid id="sort" selection-mode="multi">
       <table>
         <colgroup>
-          <col name="user.name.first" sortable/>
-          <col name="user.name.last" sortable/>
-          <col name="user.email" sortable/>
+          <col name="firstName" sortable/>
+          <col name="lastName" sortable/>
+          <col name="email" sortable/>
         </colgroup>
       </table>
     </vaadin-grid>
@@ -216,8 +279,8 @@
           var grid = document.querySelector('#sort');
           var users = [];
 
-          getJSON('<%=request.getContextPath()%>/users.json', function(result) {
-            users = result;
+          getJSON('http://demo.vaadin.com/demo-data/1.0/people', function(json) {
+            users = json.result;
             grid.items = users;
           });
 
@@ -250,7 +313,7 @@
             var filterText = filterInput.value.toLowerCase();
             grid.items = users.filter(function(val) {
               if (filterText) {
-                return (val.user.name.first.toLowerCase()).indexOf(filterText) > -1;
+                return (val.firstName.toLowerCase()).indexOf(filterText) > -1;
               } else {
                 return true;
               }
@@ -269,43 +332,34 @@
       href="https://vaadin.com/docs/-/part/elements/vaadin-grid/columns.html">Read more about
     configuring columns.</a>
   </p>
-  <p>
-    We are also using a <a
-      href="https://vaadin.com/docs/-/part/elements/vaadin-grid/formatting.html#defining_data_renderers">renderer</a>
-    to display an image instead of the URL we have in our JSON object.
-  </p>
+
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
             href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
       -->
     </div>
     <style>
-      .photo {
-        width: 36px;
-        border-radius: 3px;
+
+      #frozen {
+        height: 300px;
       }
 
-       #frozen {
-         height: 300px;
-       }
-
     </style>
-    <vaadin-grid id="frozen" frozen-columns="1">
+    <vaadin-grid id="frozen" frozen-columns="2">
       <table>
         <colgroup>
-          <col name="user.picture.thumbnail"/>
-          <col name="user.name.first"/>
-          <col name="user.name.last"/>
-          <col name="user.email"/>
-          <col name="user.cell" hidable/>
-          <col name="user.phone" hidable hidden/>
-          <col name="user.location.street" hidable/>
-          <col name="user.location.city" hidable/>
-          <col name="user.location.state" hidable/>
-          <col name="user.location.zip" hidable/>
+          <col name="firstName"/>
+          <col name="lastName"/>
+          <col name="email"/>
+          <col name="address.phone" hidable/>
+          <col name="address.street" hidable/>
+          <col name="address.city" hidable/>
+          <col name="address.state" hidable/>
+          <col name="address.zip" hidable/>
+          <col name="address.country" hidable hidden/>
         </colgroup>
       </table>
     </vaadin-grid>
@@ -315,89 +369,82 @@
         HTMLImports.whenReady(function() {
           var grid = document.querySelector('#frozen');
 
-          getJSON('<%=request.getContextPath()%>/users.json', function(result) {
-            grid.items = result;
+          getJSON('http://demo.vaadin.com/demo-data/1.0/people', function(json) {
+            grid.items = json.result;
           });
 
-          grid.columns[0].renderer = function(cell) {
-            cell.element.innerHTML = '';
-            var img = document.createElement('img');
-            img.setAttribute('src', cell.data);
-            img.className = 'photo';
-            cell.element.appendChild(img);
-          };
         });
       })();
     </script>
   </view-source>
-<%--
-  <h5>Details row</h5>
-  <p>
-    Sometimes you need to show more information than you can fit on a single row. In those cases,
-    you can use a details row to display any element below the row. <a
-      href="https://vaadin.com/docs/-/part/elements/vaadin-grid/details.html">Read more about
-    showing row details.</a>
-  </p>
-  <view-source externals="<%=request.getContextPath()%>/details-row.html">
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import"
-            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-      -->
-    </div>
-    <style>
-      #details {
-        height: 500px;
-      }
-    </style>
-    <link rel="import" href="<%=request.getContextPath()%>/details-row.html">
+  <%--
+    <h5>Details row</h5>
+    <p>
+      Sometimes you need to show more information than you can fit on a single row. In those cases,
+      you can use a details row to display any element below the row. <a
+        href="https://vaadin.com/docs/-/part/elements/vaadin-grid/details.html">Read more about
+      showing row details.</a>
+    </p>
+    <view-source externals="<%=request.getContextPath()%>/details-row.html">
+      <div class="head">
+        <!--
+        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+        <link rel="import"
+              href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+        -->
+      </div>
+      <style>
+        #details {
+          height: 500px;
+        }
+      </style>
+      <link rel="import" href="<%=request.getContextPath()%>/details-row.html">
 
-    <vaadin-grid id="details">
-      <table>
-        <colgroup>
-          <col name="user.name.first"/>
-          <col name="user.name.last"/>
-          <col name="user.email"/>
-        </colgroup>
-      </table>
-    </vaadin-grid>
+      <vaadin-grid id="details">
+        <table>
+          <colgroup>
+            <col name="user.name.first"/>
+            <col name="user.name.last"/>
+            <col name="user.email"/>
+          </colgroup>
+        </table>
+      </vaadin-grid>
 
-    <script>
-      (function() {
-        HTMLImports.whenReady(function() {
-          var grid = document.querySelector('#details');
+      <script>
+        (function() {
+          HTMLImports.whenReady(function() {
+            var grid = document.querySelector('#details');
 
-          getJSON('<%=request.getContextPath()%>/users.json', function(result) {
-            grid.items = result;
-          });
+            getJSON('<%=request.getContextPath()%>/users.json', function(result) {
+              grid.items = result;
+            });
 
-          grid.rowDetailsGenerator = function(index) {
-            var detailsRow = document.createElement('details-row');
-            grid.getItem(index, function(err, item) {
-              if (!err) {
-                detailsRow.user = item.user;
+            grid.rowDetailsGenerator = function(index) {
+              var detailsRow = document.createElement('details-row');
+              grid.getItem(index, function(err, item) {
+                if (!err) {
+                  detailsRow.user = item.user;
+                }
+              });
+              return detailsRow;
+            };
+
+            var detailsOpenIndex = -1;
+
+            grid.addEventListener('selected-items-changed', function() {
+              grid.setRowDetailsVisible(detailsOpenIndex, false);
+              var selected = grid.selection.selected();
+              if (selected.length === 1) {
+                grid.setRowDetailsVisible(selected[0], true);
+                detailsOpenIndex = selected[0];
               }
             });
-            return detailsRow;
-          };
 
-          var detailsOpenIndex = -1;
-
-          grid.addEventListener('selected-items-changed', function() {
-            grid.setRowDetailsVisible(detailsOpenIndex, false);
-            var selected = grid.selection.selected();
-            if (selected.length === 1) {
-              grid.setRowDetailsVisible(selected[0], true);
-              detailsOpenIndex = selected[0];
-            }
           });
+        })();
+      </script>
 
-        });
-      })();
-    </script>
-
-  </view-source>
---%>
+    </view-source>
+  --%>
 </div>
 <!-- Demo section end -->

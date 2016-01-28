@@ -1,2 +1,2 @@
 #!/bin/sh
-vulcanize --inline-css --inline-scripts imports.html > html-minifier --minify-js --minify-css > all-the-things.html
+vulcanize --inline-css --inline-scripts imports.html > all-the-things.html
