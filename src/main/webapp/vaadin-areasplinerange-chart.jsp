@@ -94,10 +94,10 @@
 <div class="elements-section">
 
   <h4>Examples</h4>
-    <view-source>
+    <view-source externals="<%=request.getContextPath()%>/temp-variation.json">
       <div class="head">
         <!--
-         <%request.setAttribute("chart", "vaadin-areasplinerange-chart.jsp");%>
+         <%request.setAttribute("chart", "vaadin-areasplinerange-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
         -->
       </div>

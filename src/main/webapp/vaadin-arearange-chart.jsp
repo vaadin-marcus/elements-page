@@ -97,10 +97,10 @@
 <div class="elements-section">
 
   <h4>Examples</h4>
-  <view-source>
+  <view-source externals="<%=request.getContextPath()%>/temp-variation.json">
     <div class="head">
       <!--
-       <%request.setAttribute("chart", "vaadin-arearange-chart.jsp");%>
+       <%request.setAttribute("chart", "vaadin-arearange-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
@@ -119,12 +119,6 @@
         <data-series data="[[temperatureData]]"></data-series>
       </vaadin-arearange-chart>
     </template>
-    <style>
-
-    </style>
-
-    <script>
-    </script>
   </view-source>
 </div>
 

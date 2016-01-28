@@ -66,7 +66,7 @@
   <view-source>
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-waterfall-chart.jsp");%>
+      <%request.setAttribute("chart", "vaadin-waterfall-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>

@@ -97,7 +97,7 @@
   <view-source externals="<%=request.getContextPath()%>/spline-demo.html">
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-spline-chart.jsp");%>
+      <%request.setAttribute("chart", "vaadin-spline-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>

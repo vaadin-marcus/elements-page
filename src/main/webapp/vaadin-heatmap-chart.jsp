@@ -64,7 +64,7 @@
   <view-source>
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-heatmap-chart.jsp");%>
+      <%request.setAttribute("chart", "vaadin-heatmap-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>

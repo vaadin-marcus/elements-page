@@ -75,7 +75,7 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<%request.setAttribute("chart", "vaadin-gauge-chart.jsp");%>
+<%request.setAttribute("chart", "vaadin-gauge-chart.html");%>
 <div class="elements-section">
   <h4>Examples</h4>
   <h5>Angular gauge chart</h5>

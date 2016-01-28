@@ -67,7 +67,7 @@
   <view-source externals="<%=request.getContextPath()%>/sparkline-example.html">
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-sparkline.jsp");%>
+      <%request.setAttribute("chart", "vaadin-sparkline.html");%>
       <jsp:include page="charts-imports.jsp"/>
       <link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
       -->

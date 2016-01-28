@@ -49,7 +49,17 @@
       }
 
       .edit-button {
+        height: 30px;
         margin-left: 20px;
+        background: #00b4f0;
+        color: #fff;
+        padding: 0.4em 0.57em;
+      }
+
+      @media (max-width: 600px) {
+        .edit-button {
+          display: none;
+        }
       }
     </style>
     <div class="demo">
@@ -62,9 +72,7 @@
             <paper-tab>[[item.name]]</paper-tab>
           </template>
         </paper-tabs>
-        <template is="dom-if" if="[[editable]]">
         <paper-button on-tap="_postToCodepen" raised class="edit-button">Edit</paper-button>
-        </template>
       </div>
       <iron-pages selected="{{selected}}">
         <template is="dom-repeat" items="[[sources]]">
@@ -156,7 +164,7 @@
       for (var i = 0; i < scripts.length; i++) {
         var script = scripts[i];
         // Scripts that are a part of a dom module are already shown in the HTML tab
-        if(script.parentNode.nodeName !== 'DOM-MODULE'){
+        if (script.parentNode.nodeName !== 'DOM-MODULE') {
           this._scriptText += script.textContent;
         }
       }
@@ -215,7 +223,7 @@
      * https://github.com/curvedmark/unindent/blob/master/LICENSE
      */
     _unindent: function(source) {
-      if(!source) return '';
+      if (!source) return '';
 
       var indent;
       var lines = source.split(/\r\n|[\r\n]/);

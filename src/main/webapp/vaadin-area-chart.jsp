@@ -90,7 +90,7 @@
 
 <!-- Info section end -->
 
-<%request.setAttribute("chart", "vaadin-area-chart.jsp");%>
+<%request.setAttribute("chart", "vaadin-area-chart.html");%>
 <div class="elements-section">
   <h4>Examples</h4>
   <h5>Basic area chart</h5>

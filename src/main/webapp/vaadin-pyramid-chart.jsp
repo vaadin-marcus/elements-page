@@ -67,7 +67,7 @@
   <view-source>
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-pyramid-chart.jsp");%>
+      <%request.setAttribute("chart", "vaadin-pyramid-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>

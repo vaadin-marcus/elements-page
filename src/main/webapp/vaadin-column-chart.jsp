@@ -79,7 +79,7 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<%request.setAttribute("chart", "vaadin-column-chart.jsp");%>
+<%request.setAttribute("chart", "vaadin-column-chart.html");%>
 <div class="elements-section">
   <h4>Examples</h4>
   <h5>Column chart with drilldown</h5>

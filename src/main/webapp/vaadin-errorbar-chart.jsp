@@ -65,7 +65,7 @@
   <view-source>
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-errorbar-chart.jsp");%>
+      <%request.setAttribute("chart", "vaadin-errorbar-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>

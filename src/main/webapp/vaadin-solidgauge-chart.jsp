@@ -77,7 +77,7 @@
   <view-source>
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-solidgauge-chart.jsp");%>
+      <%request.setAttribute("chart", "vaadin-solidgauge-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>

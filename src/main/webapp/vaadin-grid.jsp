@@ -113,21 +113,6 @@
 
 <div class="elements-section">
   <h4>Examples</h4>
-  <script>
-    function getJSON(url, callback) {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-          callback(JSON.parse(xhr.responseText));
-        }
-      };
-      xhr.open('GET', url, true);
-      xhr.send();
-    }
-
-    var usersArray = [];
-  </script>
-
 
 
   <h5>Simple use with an array data source</h5>
@@ -137,7 +122,8 @@
     name="json.property.path"&gt;</code>.
   </p>
   <p>
-    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Other data sources are documented here.</a>
+    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Other data
+      sources are documented here.</a>
   </p>
   <view-source>
     <div class="head">
@@ -171,7 +157,19 @@
             grid.items = json.result;
           });
         });
+
+        function getJSON(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              callback(JSON.parse(xhr.responseText));
+            }
+          };
+          xhr.open('GET', url, true);
+          xhr.send();
+        }
       })();
+
     </script>
   </view-source>
 
@@ -179,7 +177,8 @@
   <p>
     When you have more than a few items, it makes sense to only fetch a smaller subset up front and
     then load the rest of rows as (and if) you need them. With Vaadin Grid you can do this easily by
-    defining a function data source. We also customized the header texts with a <code>&lt;thead&gt;</code>.
+    defining a function data source. We also customized the header texts with a <code>
+    &lt;thead&gt;</code>.
   </p>
   <p>
     <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Read more about
@@ -222,7 +221,7 @@
         HTMLImports.whenReady(function() {
           var grid = document.querySelector('#lazy');
 
-          grid.columns[0].renderer = function(cell){
+          grid.columns[0].renderer = function(cell) {
             cell.element.innerText = cell.row.index;
           };
 
@@ -232,6 +231,17 @@
             });
           };
         });
+
+        function getJSON(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              callback(JSON.parse(xhr.responseText));
+            }
+          };
+          xhr.open('GET', url, true);
+          xhr.send();
+        }
       })();
     </script>
   </view-source>
@@ -320,6 +330,17 @@
             });
           });
         });
+
+        function getJSON(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              callback(JSON.parse(xhr.responseText));
+            }
+          };
+          xhr.open('GET', url, true);
+          xhr.send();
+        }
       })();
     </script>
   </view-source>
@@ -353,7 +374,7 @@
         <colgroup>
           <col name="firstName"/>
           <col name="lastName"/>
-          <col name="email"/>
+          <col name="email" width="250"/>
           <col name="address.phone" hidable/>
           <col name="address.street" hidable/>
           <col name="address.city" hidable/>
@@ -374,9 +395,21 @@
           });
 
         });
+
+        function getJSON(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              callback(JSON.parse(xhr.responseText));
+            }
+          };
+          xhr.open('GET', url, true);
+          xhr.send();
+        }
       })();
     </script>
   </view-source>
+
   <%--
     <h5>Details row</h5>
     <p>
@@ -439,12 +472,22 @@
                 detailsOpenIndex = selected[0];
               }
             });
-
           });
+
+          function getJSON(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                callback(JSON.parse(xhr.responseText));
+              }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+          }
         })();
       </script>
 
     </view-source>
-  --%>
+--%>
 </div>
 <!-- Demo section end -->

@@ -58,7 +58,7 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<%request.setAttribute("chart", "vaadin-columnrange-chart.jsp");%>
+<%request.setAttribute("chart", "vaadin-columnrange-chart.html");%>
 <div class="elements-section">
 
   <h4>Examples</h4>

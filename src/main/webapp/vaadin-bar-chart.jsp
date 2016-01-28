@@ -80,6 +80,7 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
+<%request.setAttribute("chart", "vaadin-bar-chart.html");%>
 <div class="elements-section demo">
 
   <h4>Examples</h4>
@@ -87,7 +88,6 @@
   <view-source>
     <div class="head">
       <!--
-       <%request.setAttribute("chart", "vaadin-bar-chart.jsp");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
@@ -119,6 +119,11 @@
 
   <h5>Bar chart with negative stack</h5>
   <view-source>
+    <div class="head">
+      <!--
+      <jsp:include page="charts-imports.jsp"/>
+      -->
+    </div>
     <vaadin-bar-chart id="bar-with-negative-stack">
       <title>Population pyramid for Germany, midyear 2010</title>
       <subtitle>Source: www.census.gov</subtitle>
@@ -159,6 +164,11 @@
 
   <h5>Stacked bar chart</h5>
   <view-source>
+    <div class="head">
+      <!--
+      <jsp:include page="charts-imports.jsp"/>
+      -->
+    </div>
     <vaadin-bar-chart id="stacked-bar">
       <title>Stacked bar chart</title>
       <x-axis>

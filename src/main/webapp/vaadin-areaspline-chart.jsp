@@ -96,7 +96,7 @@
   <view-source>
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-areaspline-chart.jsp");%>
+      <%request.setAttribute("chart", "vaadin-areaspline-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>

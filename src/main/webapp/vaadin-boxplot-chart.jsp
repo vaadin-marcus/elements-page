@@ -66,7 +66,7 @@
   <view-source>
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-boxplot-chart.jsp");%>
+      <%request.setAttribute("chart", "vaadin-boxplot-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
@@ -107,12 +107,6 @@
         </data>
       </data-series>
     </vaadin-boxplot-chart>
-    <style>
-
-    </style>
-
-    <script>
-    </script>
   </view-source>
 </div>
 <!-- Demo section end -->

@@ -65,7 +65,7 @@
   <view-source>
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-scatter-chart.jsp");%>
+      <%request.setAttribute("chart", "vaadin-scatter-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
