@@ -65,8 +65,8 @@
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-errorbar-chart.html">
+      <%request.setAttribute("chart", "vaadin-errorbar-chart.jsp");%>
+      <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
     <vaadin-errorbar-chart id="error-bar">

@@ -96,10 +96,8 @@
   <view-source>
     <div class="head">
       <!--
-      <jsp:include page="charts-imports.jsp">
-         <jsp:param name="chart" value="vaadin-areaspline-chart.html"/>
-      </jsp:include>
-
+      <%request.setAttribute("chart", "vaadin-areaspline-chart.jsp");%>
+      <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
     <vaadin-areaspline-chart id="area-spline">
@@ -131,13 +129,6 @@
         <data>1, 3, 4, 3, 3, 5, 4</data>
       </data-series>
     </vaadin-areaspline-chart>
-
-    <style>
-
-    </style>
-
-    <script>
-    </script>
   </view-source>
 </div>
 <!-- Demo section end -->

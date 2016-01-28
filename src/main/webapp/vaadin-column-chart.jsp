@@ -79,14 +79,14 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
+<%request.setAttribute("chart", "vaadin-column-chart.jsp");%>
 <div class="elements-section">
   <h4>Examples</h4>
   <h5>Column chart with drilldown</h5>
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
+      <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
     <vaadin-column-chart class="chart">
@@ -181,8 +181,7 @@
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
+      <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
     <vaadin-column-chart class="chart">
@@ -221,8 +220,7 @@
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
+      <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
     <vaadin-column-chart class="chart">
@@ -252,8 +250,7 @@
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
+      <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
     <vaadin-column-chart class="chart">
@@ -299,8 +296,7 @@
   <view-source>
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-column-chart.html">
+      <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
     <vaadin-column-chart id="windrose">

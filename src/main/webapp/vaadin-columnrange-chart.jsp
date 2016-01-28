@@ -58,6 +58,7 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
+<%request.setAttribute("chart", "vaadin-columnrange-chart.jsp");%>
 <div class="elements-section">
 
   <h4>Examples</h4>
@@ -65,8 +66,7 @@
   <view-source title="Basic column range chart">
     <div class="head">
       <!--
-      <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha8/vaadin-columnrange-chart.html">
+      <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
     <vaadin-columnrange-chart id="column-range">
@@ -96,6 +96,11 @@
 
   <h5>Resource usage chart</h5>
   <view-source title="Resource usage">
+    <div class="head">
+      <!--
+      <jsp:include page="charts-imports.jsp"/>
+      -->
+    </div>
     <vaadin-columnrange-chart id="column-range-resource-usage">
       <chart inverted="true"></chart>
       <title>Resource usage</title>
