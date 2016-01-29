@@ -153,7 +153,7 @@
         HTMLImports.whenReady(function() {
           var grid = document.querySelector('#simple');
 
-          getJSON('http://demo.vaadin.com/demo-data/1.0/people', function(json) {
+          getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
             grid.items = json.result;
           });
         });
@@ -226,7 +226,7 @@
           };
 
           grid.items = function(params, callback) {
-            getJSON('http://demo.vaadin.com/demo-data/1.0/people?index=' + params.index + '&count=' + params.count, function(json) {
+            getJSON('https://demo.vaadin.com/demo-data/1.0/people?index=' + params.index + '&count=' + params.count, function(json) {
               callback(json.result, json.size);
             });
           };
@@ -289,7 +289,7 @@
           var grid = document.querySelector('#sort');
           var users = [];
 
-          getJSON('http://demo.vaadin.com/demo-data/1.0/people', function(json) {
+          getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
             users = json.result;
             grid.items = users;
           });
@@ -390,7 +390,7 @@
         HTMLImports.whenReady(function() {
           var grid = document.querySelector('#frozen');
 
-          getJSON('http://demo.vaadin.com/demo-data/1.0/people', function(json) {
+          getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
             grid.items = json.result;
           });
 
