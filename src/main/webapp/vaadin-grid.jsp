@@ -222,7 +222,7 @@
           var grid = document.querySelector('#lazy');
 
           grid.columns[0].renderer = function(cell) {
-            cell.element.innerText = cell.row.index;
+            cell.element.textContent = cell.row.index;
           };
 
           grid.items = function(params, callback) {
