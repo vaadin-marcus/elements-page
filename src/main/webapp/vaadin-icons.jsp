@@ -18,7 +18,8 @@
   <div class="elements-hero-title row-fluid">
     <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5>
     </div>
-    <div class="span3 hidden-phone"><a href="https://www.polymer-project.org" class="polymer-tag">Built with Polymer</a></div>
+    <div class="span3 hidden-phone"><a href="https://www.polymer-project.org" class="polymer-tag">Built
+      with Polymer</a></div>
   </div>
   <h1 class="helvetica-light">&lt;vaadin-icons&gt; <span>1.0.0-alpha1</span></h1>
 </div>
@@ -39,8 +40,10 @@
         <h4>Install</h4>
         <code>bower install --save vaadin-icons</code>
       </div>
-      <a href="https://github.com/vaadin/vaadin-icons" class="w-arrow-button blue small">Show documentation</a>
-      <a href="https://github.com/vaadin/vaadin-icons" class="w-arrow-button github small">View on GitHub</a>
+      <a href="https://github.com/vaadin/vaadin-icons" class="w-arrow-button blue small">Show
+        documentation</a>
+      <a href="https://github.com/vaadin/vaadin-icons" class="w-arrow-button github small">View on
+        GitHub</a>
     </div>
   </div>
 </div>
@@ -54,10 +57,43 @@
 
   <style>
     .aui .vaadin-theme .vaadin-icons-container input:focus {
-      border: none!important;
+      border: none !important;
     }
   </style>
   <h4>Examples</h4>
+
+  <h5>Simple usage</h5>
+  <view-source>
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-icons/latest/vaadin-icons.html">
+      -->
+    </div>
+    <style>
+      .example {
+        background: #fdfdfd;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: .4em .8em;
+      }
+    </style>
+    <div class="example">
+      <p>
+        <iron-icon icon="vaadin-icons:arrow-forward"></iron-icon>
+        Vaadin icons can be used anywhere iron-icons can be used in Polymer apps.
+      </p>
+      <p>For instance, in
+        <paper-button raised>
+          <iron-icon icon="vaadin-icons:check"></iron-icon>
+          Buttons
+        </paper-button>
+      </p>
+    </div>
+  </view-source>
+
+  <h5>All icons</h5>
+  Below you can find the names of all the icons included in vaadin-icons.
+
   <view-source>
     <div class="head">
       <!--
@@ -70,13 +106,13 @@
       <!-- Icon sets are registered globally when imported -->
       <iron-meta type="iconset" list="{{iconsets}}"></iron-meta>
       <div class="vaadin-icons-container">
-        <template is="dom-repeat" items="{{iconsets}}">
-          <template is="dom-repeat" items="{{getIconNames(item)}}" filter="{{filterByName(query)}}">
-            <div class="icon">
-              <iron-icon icon="[[item]]"></iron-icon>
-              <span>{{item}}</span>
-            </div>
-          </template>
+
+        <template is="dom-repeat" items="{{getIconNames(iconsets)}}"
+                  filter="{{filterByName(query)}}">
+          <div class="icon">
+            <iron-icon icon="[[item]]"></iron-icon>
+            <span>{{item}}</span>
+          </div>
         </template>
       </div>
     </template>
@@ -126,8 +162,13 @@
 
     <script>
       var demo = document.querySelector('#demo');
-      demo.getIconNames = function(iconset) {
-        return iconset.getIconNames();
+      demo.getIconNames = function(iconsets) {
+        for(var i = 0; i < iconsets.length; i++){
+          if(iconsets[i].name === 'vaadin-icons'){
+            return iconsets[i].getIconNames();
+          }
+        }
+        return [];
       };
 
       demo.filterByName = function(query) {
