@@ -67,6 +67,9 @@
           A filterable select element for situations when you have more than a few dozens
           of items to select from.
         </li>
+        <li>Keyboard navigation</li>
+        <li>Compatible with <a href="https://elements.polymer-project.org/elements/iron-form">iron-form</a>
+        </li>
       </ul>
     </div>
     <div class="span6">
@@ -74,6 +77,11 @@
         <li>
           Automatic support for small screens (i.e. smart phones), the layout/UI adapts to
           provide the best experience for the user.
+        </li>
+        <li>
+          Material Design inspired styles to fit in with <a
+            href="https://elements.polymer-project.org/browse?package=paper-elements">Paper
+          Elements</a>
         </li>
       </ul>
     </div>
@@ -113,6 +121,10 @@
       padding: 0;
     }
   </style>
+
+  <h5>Basic functionality</h5>
+  vaadin-combo-box comes with styling that matches the Material Design styling of Polymer Paper
+  Elements. It supports keyboard navigation and works great on mobile devices.
   <view-source>
     <div class="head">
       <!--
@@ -123,8 +135,10 @@
     </div>
     <template is="dom-bind" id="demo">
       <div class="fieldset">
-        <vaadin-combo-box label="Language" class="languages" items="[[languages]]"></vaadin-combo-box>
-        <vaadin-combo-box label="Skill level" class="skillLevels" items="[[skillLevels]]"></vaadin-combo-box>
+        <vaadin-combo-box label="Language" class="languages"
+                          items="[[languages]]"></vaadin-combo-box>
+        <vaadin-combo-box label="Skill level" class="skillLevels"
+                          items="[[skillLevels]]"></vaadin-combo-box>
       </div>
     </template>
 
@@ -158,7 +172,7 @@
           justify-content: space-between;
         }
 
-        vaadin-combo-box {
+        .fieldset vaadin-combo-box {
           -webkit-flex-basis: 40%;
           -ms-flex-preferred-size: 40%;
           flex-basis: 40%;
@@ -258,6 +272,65 @@
         ];
       });
     </script>
+  </view-source>
+
+  <h5>Submitting combo-box value through a form</h5>
+  vaadin-combo-box can be used like any other input in a form. It's selected value will be
+  serialized as the input value.
+  <view-source>
+    <style>
+      .form-wrapper vaadin-combo-box {
+        width: 300px;
+      }
+      .form-wrapper button {
+        margin-top: 20px;
+      }
+    </style>
+    <form is="iron-form" id="example-form" method="post">
+
+      <div class="form-wrapper">
+        <vaadin-combo-box name='name' required label="Element"></vaadin-combo-box>
+        <button>Submit</button>
+      </div>
+    </form>
+    <script>
+      var elements = ['Actinium', 'Aluminium', 'Americium', 'Antimony', 'Argon',
+        'Arsenic', 'Astatine', 'Barium', 'Berkelium', 'Beryllium', 'Bismuth',
+        'Bohrium', 'Boron', 'Bromine', 'Cadmium', 'Caesium', 'Calcium',
+        'Californium', 'Carbon', 'Cerium', 'Chlorine', 'Chromium', 'Cobalt',
+        'Copernicium', 'Copper', 'Curium', 'Darmstadtium', 'Dubnium',
+        'Dysprosium', 'Einsteinium', 'Erbium', 'Europium', 'Fermium',
+        'Flerovium', 'Fluorine', 'Francium', 'Gadolinium', 'Gallium',
+        'Germanium', 'Gold', 'Hafnium', 'Hassium', 'Helium', 'Holmium',
+        'Hydrogen', 'Indium', 'Iodine', 'Iridium', 'Iron', 'Krypton',
+        'Lanthanum', 'Lawrencium', 'Lead', 'Lithium', 'Livermorium', 'Lutetium',
+        'Magnesium', 'Manganese', 'Meitnerium', 'Mendelevium', 'Mercury',
+        'Molybdenum', 'Neodymium', 'Neon', 'Neptunium', 'Nickel', 'Niobium',
+        'Nitrogen', 'Nobelium', 'Osmium', 'Oxygen', 'Palladium', 'Phosphorus',
+        'Platinum', 'Plutonium', 'Polonium', 'Potassium', 'Praseodymium',
+        'Promethium', 'Protactinium', 'Radium', 'Radon', 'Rhenium', 'Rhodium',
+        'Roentgenium', 'Rubidium', 'Ruthenium', 'Rutherfordium', 'Samarium',
+        'Scandium', 'Seaborgium', 'Selenium', 'Silicon', 'Silver', 'Sodium',
+        'Strontium', 'Sulfur', 'Tantalum', 'Technetium', 'Tellurium', 'Terbium',
+        'Thallium', 'Thorium', 'Thulium', 'Tin', 'Titanium', 'Tungsten',
+        'Ununoctium', 'Ununpentium', 'Ununseptium', 'Ununtrium', 'Uranium',
+        'Vanadium', 'Xenon', 'Ytterbium', 'Yttrium', 'Zinc', 'Zirconium'];
+
+      HTMLImports.whenReady(function() {
+
+        var form = document.querySelector('#example-form');
+        var combobox = form.querySelector('vaadin-combo-box');
+        combobox.items = elements;
+
+
+        form.addEventListener('iron-form-submit', function(evt){
+          evt.preventDefault();
+          alert('Form submitted with name: ' + form.serialize().name);
+          return false;
+        });
+      });
+    </script>
+
   </view-source>
 </div>
 <!-- Demo section end -->
