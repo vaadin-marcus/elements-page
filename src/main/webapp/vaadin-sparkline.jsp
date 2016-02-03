@@ -64,7 +64,7 @@
 <div class="elements-section">
 
   <h4>Examples</h4>
-  <view-source externals="<%=request.getContextPath()%>/sparkline-example.html">
+  <view-source externals="<%=request.getContextPath()%>/sparkline-example.html" editable="no">
     <div class="head">
       <!--
       <%request.setAttribute("chart", "vaadin-sparkline.html");%>

@@ -94,7 +94,7 @@
 <div class="elements-section">
 
   <h4>Examples</h4>
-  <view-source externals="<%=request.getContextPath()%>/spline-demo.html">
+  <view-source externals="<%=request.getContextPath()%>/spline-demo.html" editable="no">
     <div class="head">
       <!--
       <%request.setAttribute("chart", "vaadin-spline-chart.html");%>

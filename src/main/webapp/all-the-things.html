@@ -31148,7 +31148,9 @@ Example:
             <paper-tab>[[item.name]]</paper-tab>
           </template>
         </paper-tabs>
-        <paper-button on-tap="_postToCodepen" raised="" class="edit-button">Edit</paper-button>
+        <template is="dom-if" if="{{_isEditable(editable)}}">
+          <paper-button on-tap="_postToCodepen" raised="" class="edit-button">Edit</paper-button>
+        </template>
       </div>
       <iron-pages selected="{{selected}}">
         <template is="dom-repeat" items="[[sources]]">
@@ -31177,22 +31179,22 @@ Example:
         value: ''
       },
 
-      //[{
-      //  name: String,
-      //  source: String,
-      //  type: <html, js, css>
-      //}]
       sources: {
         type: Array,
         value: function() {
           return [];
         }
       },
+
       editable: {
         type: Boolean,
-        value: false,
-        reflectToAttribute: true
+        value: 'yes'
       }
+    },
+
+    _isEditable: function(){
+      console.log('Editable? ' + this.editable);
+      return this.editable === 'yes';
     },
 
     _htmlText: '',
