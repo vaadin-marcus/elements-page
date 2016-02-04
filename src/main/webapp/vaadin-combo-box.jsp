@@ -36,9 +36,9 @@
     <div class="span7">
       <p class="lead helvetica-light">
         Vaadin ComboBox is a filterable select element for
-        situations where you have more than a few dozen item to select from. It adapts to
-        small screens like smartphones to provide an optimal user experience for all your
-        users.
+        situations where you have more than a few dozen item to select from. It provides an optimal
+        user experience for all your
+        users regardless of if they are on desktop or mobile.
       </p>
     </div>
     <div class="span5">
@@ -75,8 +75,7 @@
     <div class="span6">
       <ul>
         <li>
-          Automatic support for small screens (i.e. smart phones), the layout/UI adapts to
-          provide the best experience for the user.
+          Works great on mobile and desktop
         </li>
         <li>
           Material Design inspired styles to fit in with <a
@@ -282,6 +281,7 @@
       .form-wrapper vaadin-combo-box {
         width: 300px;
       }
+
       .form-wrapper button {
         margin-top: 20px;
       }
@@ -322,8 +322,7 @@
         var combobox = form.querySelector('vaadin-combo-box');
         combobox.items = elements;
 
-
-        form.addEventListener('iron-form-submit', function(evt){
+        form.addEventListener('iron-form-submit', function(evt) {
           evt.preventDefault();
           alert('Form submitted with name: ' + form.serialize().name);
           return false;
