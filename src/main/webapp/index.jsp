@@ -108,7 +108,7 @@
 
 <div class="elements-category row-fluid">
   <div class="span9">
-    <h5>Charts <span>3.0.0-alpha8</span></h5>
+    <h5>Charts <span>3.0.0-alpha9</span></h5>
     <p>Vaadin Charts contains tens of different types of charts that allow you to visualize and
       interact with data. All charts support declarative and dynamic data binding.</p>
   </div>

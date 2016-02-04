@@ -67,8 +67,8 @@
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">Area
             chart</a></li>
         <li>
-        <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>">Area
-          spline chart</a></li>
+          <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>">Area
+            spline chart</a></li>
         <li>
           <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>">Area
             range chart</a></li>
@@ -94,10 +94,11 @@
 <div class="elements-section">
 
   <h4>Examples</h4>
+  <%request.setAttribute("chart", "vaadin-line-chart.html");%>
+  <h5>Basic line chart</h5>
   <view-source>
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-line-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
@@ -121,6 +122,32 @@
         </data>
       </data-series>
     </vaadin-line-chart>
+  </view-source>
+
+  <h5>Timeline chart</h5>
+  <p>Any time based chart can be turned into a timeline chart by adding the <code>timeline</code>
+    attribute to the chart element.</p>
+
+  <view-source>
+    <div class="head">
+      <!--
+      <jsp:include page="charts-imports.jsp"/>
+      -->
+    </div>
+    <template is="dom-bind">
+      <iron-ajax auto id="dataFetcher" url="<%=request.getContextPath()%>/aaplData.json"
+                 handle-as="json"
+                 last-response="{{seriesData}}"></iron-ajax>
+      <vaadin-line-chart id="single-line-series" timeline>
+        <title>AAPL Stock Price</title>
+        <range-selector selected="1">
+        </range-selector>
+        <data-series name="AAPL" data="[[seriesData]]">
+          <tooltip value-decimals="2">
+          </tooltip>
+        </data-series>
+      </vaadin-line-chart>
+    </template>
   </view-source>
 </div>
 

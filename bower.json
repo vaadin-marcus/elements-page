@@ -17,10 +17,10 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#1.2.3",
+    "polymer": "Polymer/polymer#~1.2.3",
     "paper-button": "PolymerElements/paper-button#~1.0.11",
     "paper-input": "PolymerElements/paper-input#~1.1.5",
-    "vaadin-charts": "^3.0.0-alpha8",
+    "vaadin-charts": "^3.0.0-alpha9",
     "vaadin-elements": "0.3.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.2.2",
     "waypoints": "~4.0.0",
