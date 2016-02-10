@@ -63,11 +63,11 @@
   <h4>Examples</h4>
 
   <h5>Simple usage</h5>
-  <view-source>
+  <view-source editable="no">
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-icons/latest/vaadin-icons.html">
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-icons/master/vaadin-icons.html">
       -->
     </div>
     <style>
@@ -94,11 +94,11 @@
   <h5>All icons</h5>
   Below you can find the names of all the icons included in vaadin-icons.
 
-  <view-source>
+  <view-source editable="no">
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-icons/latest/vaadin-icons.html">
+      <link rel="import" href="https://cdn.vaadin.com/vaadin-icons/master/vaadin-icons.html">
       -->
     </div>
     <template is="dom-bind" id="demo">

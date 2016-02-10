@@ -23,7 +23,7 @@
       with Polymer</a></div>
   </div>
   <h1 class="helvetica-light">&lt;vaadin-combo-box&gt;
-    <span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-alpha4")%></span></h1>
+    <span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-alpha5")%></span></h1>
 </div>
 
 <!-- Hero section end -->
@@ -129,7 +129,7 @@
       <!--
       <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
       <link rel="import"
-            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-combo-box/vaadin-combo-box.html">
+            href="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/vaadin-combo-box.html">
       -->
     </div>
     <template is="dom-bind" id="demo">
@@ -277,6 +277,13 @@
   vaadin-combo-box can be used like any other input in a form. It's selected value will be
   serialized as the input value.
   <view-source>
+    <div class="head">
+      <!--
+      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import"
+            href="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/vaadin-combo-box.html">
+      -->
+    </div>
     <style>
       .form-wrapper vaadin-combo-box {
         width: 300px;
