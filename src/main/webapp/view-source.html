@@ -206,19 +206,9 @@
     },
 
     _getMarkdownFor: function(sourceItem) {
-      return '\`\`\`' + sourceItem.type + '\n' + this._getFormattedContents(sourceItem) + '\n\`\`\`';
+      return '\`\`\`' + sourceItem.type + '\n' + this._unindent(sourceItem.source) + '\n\`\`\`';
     },
 
-    _getFormattedContents: function(sourceItem) {
-      if (sourceItem.source) {
-        return window[sourceItem.type + '_beautify'](sourceItem.source, {
-          'indent_size': 2,
-          'indent_char': ' '
-        });
-      } else {
-        return '';
-      }
-    },
 
     /* Unindent code modified from https://github.com/curvedmark/unindent under MIT license:
      * https://github.com/curvedmark/unindent/blob/master/LICENSE
