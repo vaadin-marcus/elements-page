@@ -79,7 +79,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-combo-box</div>
-        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-alpha4")%></span></div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-alpha5")%></span></div>
       </div>
     </a>
   </div>
