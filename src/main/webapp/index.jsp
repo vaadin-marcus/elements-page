@@ -133,7 +133,7 @@
     <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-date-picker.jsp" /></portlet:renderURL>">
       <div class="tile-details">
         <img src="<%=request.getContextPath()%>/img/preview/date-picker.png"
-             alt="Free font icons for web applications">
+             alt="Polymer date picker">
         <div>
           Vaadin DatePicker allows you to select a date from a dropdown calendar.
           <span>Live demo and source</span>
