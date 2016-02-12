@@ -43,7 +43,7 @@
       <a href="https://cdn.vaadin.com/vaadin-elements/master/vaadin-date-picker/"
          class="w-arrow-button blue small">Show
         documentation</a>
-      <a href="https://github.com/vaadin/vaadin-upload" class="w-arrow-button github small">View on
+      <a href="https://github.com/vaadin/vaadin-date-picker" class="w-arrow-button github small">View on
         GitHub</a>
     </div>
   </div>
