@@ -32,7 +32,8 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Vaadin DatePicker allows you to select a date from a dropdown calendar.</p>
+      <p class="lead helvetica-light">Vaadin DatePicker allows you to select a date from a dropdown
+        calendar.</p>
     </div>
     <div class="span5">
       <div class="elements-install">
@@ -66,6 +67,10 @@
       box-shadow: none !important;
       background-color: transparent !important;
       padding: 0;
+    }
+
+    vaadin-date-picker input[readonly] {
+      cursor: inherit !important;
     }
   </style>
   <h4>Features</h4>
