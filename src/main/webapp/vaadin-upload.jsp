@@ -60,13 +60,11 @@
       <ul>
         <li>Multiple file upload</li>
         <li>Drag and drop support</li>
-        <li>Compatible with <a href="https://elements.polymer-project.org/elements/iron-form">iron-form</a>
-        </li>
+        <li>Upload process indication</li>
       </ul>
     </div>
     <div class="span6">
       <ul>
-        <li>Upload process indication</li>
         <li>Fully customizable upload request</li>
         <li>
           Material Design inspired styles to fit in with <a
