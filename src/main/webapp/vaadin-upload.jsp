@@ -146,7 +146,7 @@
     </vaadin-upload>
   </view-source>
 
-  <div class="links row-fluid">
+  <div class="links row-fluid" style="margin-top: 20px;">
     <a class="w-arrow-button blue span6"
        href="https://cdn.vaadin.com/vaadin-elements/master/vaadin-upload/">More Vaadin Upload demos</a>
   </div>
