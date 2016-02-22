@@ -109,3 +109,4 @@
 
 
 <jsp:include page="charts-links.jsp"/>
+<jsp:include page="suggestion-box.jsp"/>

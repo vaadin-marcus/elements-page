@@ -186,3 +186,4 @@
     </script>
   </view-source>
 </div>
+<jsp:include page="suggestion-box.jsp"/>

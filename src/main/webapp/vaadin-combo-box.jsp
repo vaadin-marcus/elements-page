@@ -46,7 +46,7 @@
         <h4>Install</h4>
         <code>bower install --save vaadin-combo-box</code>
       </div>
-      <a href="https://github.com/vaadin/vaadin-combo-box" class="w-arrow-button blue small">Show
+      <a href="https://cdn.vaadin.com/vaadin-elements/master/vaadin-combo-box/" class="w-arrow-button blue small">Show
         documentation</a>
       <a href="https://github.com/vaadin/vaadin-combo-box" class="w-arrow-button github small">View
         on GitHub</a>
@@ -339,4 +339,6 @@
 
   </view-source>
 </div>
+
+<jsp:include page="suggestion-box.jsp"/>
 <!-- Demo section end -->

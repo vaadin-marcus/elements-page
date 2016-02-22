@@ -245,13 +245,26 @@
     line-height: 28px;
 }
 
+
+.elements-category-tiles.signup-form {
+    background: #F4F4F4;
+    margin-top: 50px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.elements-category-tiles.signup-form .hbspt-form {
+    padding: 0;
+}
+
 @media(max-width: 1024px) {
     .elements-category-tiles .title-details div {
         font-size: 14px;
         line-height: 20px;
     }
 }
-
 
 /* EO Index Listing */
 
@@ -462,6 +475,10 @@
 
 .elements-demos-demo .w-arrow-button {
     margin: 10px 0;
+}
+
+.suggest-box {
+    text-align: center;
 }
 
 @media (max-width: 768px) {

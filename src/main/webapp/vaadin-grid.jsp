@@ -491,3 +491,4 @@
 --%>
 </div>
 <!-- Demo section end -->
+<jsp:include page="suggestion-box.jsp"/>
