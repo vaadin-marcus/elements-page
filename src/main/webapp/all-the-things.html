@@ -12176,6 +12176,7 @@ is separate from validation, and `allowed-pattern` does not affect how the input
         this._oldTabIndex = this.tabIndex;
         this.focused = false;
         this.tabIndex = -1;
+        this.blur();
       } else if (this._oldTabIndex !== undefined) {
         this.tabIndex = this._oldTabIndex;
       }
@@ -12544,12 +12545,7 @@ is separate from validation, and `allowed-pattern` does not affect how the input
 
     listeners: {
       'addon-attached': '_onAddonAttached',
-      'focus': '_onFocus'
     },
-
-    observers: [
-      '_focusedControlStateChanged(focused)'
-    ],
 
     keyBindings: {
       'shift+tab:keydown': '_onShiftTabDown'
@@ -12619,12 +12615,17 @@ is separate from validation, and `allowed-pattern` does not affect how the input
     },
 
     /**
-     * Forward focus to inputElement
+     * Forward focus to inputElement. Overriden from IronControlState.
      */
-    _onFocus: function() {
-      if (!this._shiftTabPressed) {
+    _focusBlurHandler: function(event) {
+      if (this._shiftTabPressed)
+        return;
+
+      Polymer.IronControlState._focusBlurHandler.call(this, event);
+
+      // Forward the focus to the nested input.
+      if (this.focused)
         this._focusableElement.focus();
-      }
     },
 
     /**
@@ -12674,24 +12675,6 @@ is separate from validation, and `allowed-pattern` does not affect how the input
 
     _computeAlwaysFloatLabel: function(alwaysFloatLabel, placeholder) {
       return placeholder || alwaysFloatLabel;
-    },
-
-    _focusedControlStateChanged: function(focused) {
-      // IronControlState stops the focus and blur events in order to redispatch them on the host
-      // element, but paper-input-container listens to those events. Since there are more
-      // pending work on focus/blur in IronControlState, I'm putting in this hack to get the
-      // input focus state working for now.
-      if (!this.$.container) {
-        this.$.container = Polymer.dom(this.root).querySelector('paper-input-container');
-        if (!this.$.container) {
-          return;
-        }
-      }
-      if (focused) {
-        this.$.container._onFocus();
-      } else {
-        this.$.container._onBlur();
-      }
     },
 
     _updateAriaLabelledBy: function() {
@@ -12984,13 +12967,13 @@ Custom property | Description | Default
 
       state.value = state.value || '';
 
-      // Account for the textarea's new lines.
-      var str = state.value.replace(/(\r\n|\n|\r)/g, '--').length;
+      var counter = state.value.length;
 
       if (state.inputElement.hasAttribute('maxlength')) {
-        str += '/' + state.inputElement.getAttribute('maxlength');
+        counter += '/' + state.inputElement.getAttribute('maxlength');
       }
-      this._charCounterStr = str;
+
+      this._charCounterStr = counter;
     }
   });
 </script>
@@ -13201,7 +13184,7 @@ A complete [guide](https://elements.polymer-project.org/guides/flex-layout) to `
     };
 
     --layout-around-justified: {
-      -ms-flex-pack: around;
+      -ms-flex-pack: distribute;
       -webkit-justify-content: space-around;
       justify-content: space-around;
     };
@@ -13647,24 +13630,26 @@ A complete [guide](https://elements.polymer-project.org/guides/flex-layout) to `
     --secondary-text-color: var(--light-theme-secondary-color);
     --disabled-text-color: var(--light-theme-disabled-color);
     --divider-color: var(--light-theme-divider-color);
+    --error-color: var(--paper-deep-orange-a700);
 
     /*
      * Primary and accent colors. Also see color.html for more colors.
      */
-    --primary-color: #3f51b5;  /* --paper-indigo-500 */
-    --light-primary-color: #c5cae9;  /* --paper-indigo-100 */
-    --dark-primary-color: #303f9f;  /* --paper-indigo-700 */
+    --primary-color: var(--paper-indigo-500);
+    --light-primary-color: var(--paper-indigo-100);
+    --dark-primary-color: var(--paper-indigo-700);
 
-    --accent-color: #ff4081;  /* --paper-pink-a200 */
-    --light-accent-color: #ff80ab;  /* --paper-pink-a100 */
-    --dark-accent-color: #f50057;  /* --paper-pink-a400 */
+    --accent-color: var(--paper-pink-a200);
+    --light-accent-color: var(--paper-pink-a100);
+    --dark-accent-color: var(--paper-pink-a400);
+
 
     /*
      * Material Design Light background theme
      */
     --light-theme-background-color: #ffffff;
     --light-theme-base-color: #000000;
-    --light-theme-text-color: #212121;
+    --light-theme-text-color: var(--paper-grey-900);
     --light-theme-secondary-color: #737373;  /* for secondary text and icons */
     --light-theme-disabled-color: #9b9b9b;  /* disabled/hint text */
     --light-theme-divider-color: #dbdbdb;
@@ -13672,7 +13657,7 @@ A complete [guide](https://elements.polymer-project.org/guides/flex-layout) to `
     /*
      * Material Design Dark background theme
      */
-    --dark-theme-background-color: #212121;
+    --dark-theme-background-color: var(--paper-grey-900);
     --dark-theme-base-color: #ffffff;
     --dark-theme-text-color: #ffffff;
     --dark-theme-secondary-color: #bcbcbc;  /* for secondary text and icons */
@@ -13748,8 +13733,8 @@ The following custom properties and mixins are available for styling:
 Custom property | Description | Default
 ----------------|-------------|----------
 `--paper-input-container-color` | Label and underline color when the input is not focused | `--secondary-text-color`
-`--paper-input-container-focus-color` | Label and underline color when the input is focused | `--default-primary-color`
-`--paper-input-container-invalid-color` | Label and underline color when the input is is invalid | `--google-red-500`
+`--paper-input-container-focus-color` | Label and underline color when the input is focused | `--primary-color`
+`--paper-input-container-invalid-color` | Label and underline color when the input is is invalid | `--error-color`
 `--paper-input-container-input-color` | Input foreground color | `--primary-text-color`
 `--paper-input-container` | Mixin applied to the container | `{}`
 `--paper-input-container-disabled` | Mixin applied to the container when it's disabled | `{}`
@@ -13799,8 +13784,9 @@ This element is `display:block` by default, but you can set the `inline` attribu
       .focused-line {
         @apply(--layout-fit);
 
-        background: var(--paper-input-container-focus-color, --default-primary-color);
+        background: var(--paper-input-container-focus-color, --primary-color);
         height: 2px;
+
         -webkit-transform-origin: center center;
         transform-origin: center center;
         -webkit-transform: scale3d(0,1,1);
@@ -13819,7 +13805,7 @@ This element is `display:block` by default, but you can set the `inline` attribu
       }
 
       .underline.is-invalid .focused-line {
-        background: var(--paper-input-container-invalid-color, --google-red-500);
+        background: var(--paper-input-container-invalid-color, --error-color);
         -webkit-transform: none;
         transform: none;
         -webkit-transition: -webkit-transform 0.25s;
@@ -13831,8 +13817,8 @@ This element is `display:block` by default, but you can set the `inline` attribu
       .unfocused-line {
         @apply(--layout-fit);
 
-        height: 1px;
         background: var(--paper-input-container-color, --secondary-text-color);
+        height: 1px;
 
         @apply(--paper-input-container-underline);
       }
@@ -13848,6 +13834,7 @@ This element is `display:block` by default, but you can set the `inline` attribu
       .label-and-input-container {
         @apply(--layout-flex-auto);
         @apply(--layout-relative);
+
         width: 100%;
         max-width: 100%;
       }
@@ -13868,26 +13855,26 @@ This element is `display:block` by default, but you can set the `inline` attribu
         width: 100%;
         font: inherit;
         color: var(--paper-input-container-color, --secondary-text-color);
+        -webkit-transition: -webkit-transform 0.25s, width 0.25s;
+        transition: transform 0.25s, width 0.25s;
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
 
         @apply(--paper-font-common-nowrap);
         @apply(--paper-font-subhead);
         @apply(--paper-input-container-label);
+        @apply(--paper-transition-easing);
       }
 
       .input-content.label-is-floating ::content label,
       .input-content.label-is-floating ::content .paper-input-label {
         -webkit-transform: translateY(-75%) scale(0.75);
         transform: translateY(-75%) scale(0.75);
-        -webkit-transition: -webkit-transform 0.25s, width 0.25s;
-        transition: transform 0.25s, width 0.25s;
-        -webkit-transform-origin: left top;
-        transform-origin: left top;
 
         /* Since we scale to 75/100 of the size, we actually have 100/75 of the
         original space now available */
         width: 133%;
 
-        @apply(--paper-transition-easing);
         @apply(--paper-input-container-label-floating);
       }
 
@@ -13903,14 +13890,14 @@ This element is `display:block` by default, but you can set the `inline` attribu
 
       .input-content.label-is-highlighted ::content label,
       .input-content.label-is-highlighted ::content .paper-input-label {
-        color: var(--paper-input-container-focus-color, --default-primary-color);
+        color: var(--paper-input-container-focus-color, --primary-color);
 
         @apply(--paper-input-container-label-focus);
       }
 
       .input-content.is-invalid ::content label,
       .input-content.is-invalid ::content .paper-input-label {
-        color: var(--paper-input-container-invalid-color, --google-red-500);
+        color: var(--paper-input-container-invalid-color, --error-color);
       }
 
       .input-content.label-is-hidden ::content label,
@@ -13940,12 +13927,14 @@ This element is `display:block` by default, but you can set the `inline` attribu
 
       ::content [prefix] {
         @apply(--paper-font-subhead);
+
         @apply(--paper-input-prefix);
         @apply(--layout-flex-none);
       }
 
       ::content [suffix] {
         @apply(--paper-font-subhead);
+
         @apply(--paper-input-suffix);
         @apply(--layout-flex-none);
       }
@@ -13964,11 +13953,11 @@ This element is `display:block` by default, but you can set the `inline` attribu
       }
 
       .add-on-content.is-invalid ::content * {
-        color: var(--paper-input-container-invalid-color, --google-red-500);
+        color: var(--paper-input-container-invalid-color, --error-color);
       }
 
       .add-on-content.is-highlighted ::content * {
-        color: var(--paper-input-container-focus-color, --default-primary-color);
+        color: var(--paper-input-container-focus-color, --primary-color);
       }
     </style>
 
@@ -14292,7 +14281,7 @@ The following custom properties and mixins are available for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--paper-input-container-invalid-color` | The foreground color of the error | `--google-red-500`
+`--paper-input-container-invalid-color` | The foreground color of the error | `--error-color`
 `--paper-input-error`                   | Mixin applied to the error        | `{}`
 -->
 
@@ -14303,7 +14292,7 @@ Custom property | Description | Default
         display: inline-block;
         visibility: hidden;
 
-        color: var(--paper-input-container-invalid-color, --google-red-500);
+        color: var(--paper-input-container-invalid-color, --error-color);
 
         @apply(--paper-font-caption);
         @apply(--paper-input-error);
@@ -15419,6 +15408,7 @@ Custom property | Description | Default
     _onUpKey: function(event) {
       // up and down arrows moves the focus
       this._focusPrevious();
+      event.detail.keyboardEvent.preventDefault();
     },
 
     /**
@@ -15428,6 +15418,7 @@ Custom property | Description | Default
      */
     _onDownKey: function(event) {
       this._focusNext();
+      event.detail.keyboardEvent.preventDefault();
     },
 
     /**
@@ -15502,20 +15493,22 @@ Custom property | Description | Default
       return window.getComputedStyle(this)['direction'] === 'rtl';
     },
 
-    _onLeftKey: function() {
+    _onLeftKey: function(event) {
       if (this._isRTL) {
         this._focusNext();
       } else {
         this._focusPrevious();
       }
+      event.detail.keyboardEvent.preventDefault();
     },
 
-    _onRightKey: function() {
+    _onRightKey: function(event) {
       if (this._isRTL) {
         this._focusPrevious();
       } else {
         this._focusNext();
       }
+      event.detail.keyboardEvent.preventDefault();
     },
 
     _onKeydown: function(event) {
@@ -15543,11 +15536,13 @@ Custom property | Description | Default
    * size or hidden state of their children) and "resizables" (elements that need to be
    * notified when they are resized or un-hidden by their parents in order to take
    * action on their new measurements).
+   * 
    * Elements that perform measurement should add the `IronResizableBehavior` behavior to
    * their element definition and listen for the `iron-resize` event on themselves.
    * This event will be fired when they become showing after having been hidden,
    * when they are resized explicitly by another resizable, or when the window has been
    * resized.
+   * 
    * Note, the `iron-resize` event is non-bubbling.
    *
    * @polymerBehavior Polymer.IronResizableBehavior
@@ -17338,7 +17333,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
       }
 
       .tab-content > ::content > a {
-        @apply(--layout-flex-auto)
+        @apply(--layout-flex-auto);
 
         height: 100%;
       }
@@ -17422,24 +17417,26 @@ element in `paper-tab`.
 
 Example:
 
-    <style is="custom-style">
-      .link {
-        @apply(--layout-horizontal);
-        @apply(--layout-center-center);
-      }
-    </style>
+<pre><code>
+&lt;style is="custom-style">
+  .link {
+    &#64;apply(--layout-horizontal);
+    &#64;apply(--layout-center-center);
+  }
+&lt;/style>
 
-    <paper-tabs selected="0">
-      <paper-tab link>
-        <a href="#link1" class="link">TAB ONE</a>
-      </paper-tab>
-      <paper-tab link>
-        <a href="#link2" class="link">TAB TWO</a>
-      </paper-tab>
-      <paper-tab link>
-        <a href="#link3" class="link">TAB THREE</a>
-      </paper-tab>
-    </paper-tabs>
+&lt;paper-tabs selected="0">
+  &lt;paper-tab link>
+    &lt;a href="#link1" class="link">TAB ONE&lt;/a>
+  &lt;/paper-tab>
+  &lt;paper-tab link>
+    &lt;a href="#link2" class="link">TAB TWO&lt;/a>
+  &lt;/paper-tab>
+  &lt;paper-tab link>
+    &lt;a href="#link3" class="link">TAB THREE&lt;/a>
+  &lt;/paper-tab>
+&lt;/paper-tabs>
+</code></pre>
 
 ### Styling
 
@@ -17469,7 +17466,10 @@ Custom property | Description | Default
           -ms-user-select: none;
           -webkit-user-select: none;
         user-select: none;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+        /* NOTE: Both values are needed, since some phones require the value to be `transparent`. */
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
 
         @apply(--paper-tabs);
       }
@@ -23375,41 +23375,90 @@ after the list became visible again. e.g.
       verticalOffset: {
         type: Number,
         value: 0
+      },
+
+      /**
+       * If `true`, overlay is aligned above the `positionTarget`
+       */
+      _alignedAbove: {
+        type: Boolean,
+        value: false
       }
     },
 
     listeners: {
-      'iron-resize': '_setOverlayPosition'
+      'iron-resize': '_setPosition'
     },
 
     created: function() {
-      this._boundSetOverlayPosition = this._setOverlayPosition.bind(this);
+      this._boundSetPosition = this._setPosition.bind(this);
     },
 
     attached: function() {
       if (this.parentElement === document.body) {
-        window.addEventListener('scroll', this._boundSetOverlayPosition, true);
-        this._setOverlayPosition();
+        this.style.position = this._isPositionFixed(this.positionTarget) ? 'fixed' : 'absolute';
+        window.addEventListener('scroll', this._boundSetPosition, true);
+        this._setPosition();
       }
     },
 
     detached: function() {
-      window.removeEventListener('scroll', this._boundSetOverlayPosition, true);
+      window.removeEventListener('scroll', this._boundSetPosition, true);
     },
 
-    _setOverlayPosition: function() {
+    _verticalOffset: function(overlayRect, targetRect) {
+      if (this._alignedAbove) {
+        return -overlayRect.height;
+      } else {
+        return targetRect.height + this.verticalOffset;
+      }
+    },
+
+    _isPositionFixed: function(element) {
+      var parentElement = element.parentElement || element.domHost;
+      return window.getComputedStyle(element).position === 'fixed' ||
+        (parentElement && this._isPositionFixed(parentElement));
+    },
+
+    _maxHeight: function(targetRect) {
+      var margin = 8;
+      var minHeight = 116; // Height of two items in combo-box
+      var bottom = Math.min(window.innerHeight, document.body.getBoundingClientRect().bottom);
+
+      if (this._alignedAbove) {
+        return Math.max(targetRect.top - margin, minHeight) + 'px';
+      } else {
+        return Math.max(bottom - targetRect.bottom - margin, minHeight) + 'px';
+      }
+    },
+
+    _setPosition: function() {
       if (this.parentElement === document.body) {
-        var overlayRect = this.getBoundingClientRect();
         var targetRect = this.positionTarget.getBoundingClientRect();
+        this._alignedAbove = this._shouldAlignAbove();
+
+        // overlay max height is restrained by the #scroller max height which is set to 65vh in CSS.
+        this.style.maxHeight = this._maxHeight(targetRect);
+
+        // we need to set height for iron-list to make its `firstVisibleIndex` work correctly.
+        this.$.selector.style.maxHeight = this._maxHeight(targetRect);
+
+        var overlayRect = this.getBoundingClientRect();
 
         this._translateX = targetRect.left - overlayRect.left + (this._translateX || 0);
         this._translateY = targetRect.top - overlayRect.top + (this._translateY || 0) +
-          this.positionTarget.clientHeight + this.verticalOffset;
+          this._verticalOffset(overlayRect, targetRect);
 
         this.translate3d(this._translateX + 'px', this._translateY + 'px', '0');
 
         this.style.width = this.positionTarget.clientWidth + 'px';
       }
+    },
+
+    _shouldAlignAbove: function() {
+      var spaceBelow = (window.innerHeight - this.positionTarget.getBoundingClientRect().bottom) / window.innerHeight;
+
+      return spaceBelow < 0.30;
     }
   };
 
@@ -23423,10 +23472,16 @@ after the list became visible again. e.g.
   <style>
     :host {
       position: absolute;
-      z-index: 100;
       @apply(--shadow-elevation-2dp);
       background: #fff;
       border-radius: 0 0 2px 2px;
+
+      /**
+      * Keep the vaadin-combo-box-overlay above paper-dialogs.
+      * iron-overlay-manager.html: Polymer.IronOverlayManagerClass.prototype._applyOverlayZ
+      */
+      z-index: 200;
+      overflow: hidden;
     }
 
     #scroller {
@@ -23466,7 +23521,7 @@ after the list became visible again. e.g.
       <iron-list id="selector" touch-device$="[[touchDevice]]" role="listbox" data-selection$="[[_ariaActiveIndex]]" on-touchend="_preventDefault" selected-item="{{_selectedItem}}" items="[[_items]]" selection-enabled="">
         <template>
           <div class="item" id$="it[[index]]" selected$="[[selected]]" role$="[[_getAriaRole(index)]]" aria-selected$="[[_getAriaSelected(_focusedIndex,index)]]" focused$="[[_isItemFocused(_focusedIndex,index)]]">
-              [[item]]
+              [[getItemLabel(item)]]
           </div>
         </template>
       </iron-list>
@@ -23516,15 +23571,65 @@ after the list became visible again. e.g.
         observer: '_focusedIndexChanged'
       },
 
+      _focusedItem: {
+        type: String,
+        computed: '_getFocusedItem(_focusedIndex)'
+      },
+
       _ariaActiveIndex: {
         type: Number,
         notify: true,
         computed: '_getAriaActiveIndex(_focusedIndex)'
+      },
+
+      _itemLabelPath: {
+        type: String,
+        value: 'label'
+      },
+
+      _itemValuePath: {
+        type: String,
+        value: 'value'
       }
     },
 
     ready: function() {
       this._patchWheelOverScrolling();
+    },
+
+    _getFocusedItem: function(focusedIndex) {
+      if (focusedIndex >= 0) {
+        return this._items[focusedIndex];
+      }
+    },
+
+    /**
+     * Gets the index of the item with the provided label.
+     * @return {Number}
+     */
+    indexOfLabel: function(label) {
+      if (this._items && label) {
+        for (var i = 0; i < this._items.length; i++) {
+          if (this.getItemLabel(this._items[i]).toString().toLowerCase() ===
+              label.toString().toLowerCase()) {
+            return i;
+          }
+        }
+      }
+
+      return -1;
+    },
+
+    /**
+     * Gets the label string for the item based on the `_itemLabelPath`.
+     * @return {String}
+     */
+    getItemLabel: function(item) {
+      var label = this.get(this._itemLabelPath, item);
+      if (label === undefined || label === null) {
+        label = item ? item.toString() : '';
+      }
+      return label;
     },
 
     _isItemFocused: function(focusedIndex, itemIndex) {
@@ -23627,6 +23732,22 @@ after the list became visible again. e.g.
         notify: true,
         value: false,
         observer: '_openedChanged'
+      },
+
+      /**
+       * Set to true to disable this element.
+       */
+      disabled: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * When present, it specifies that the element field is read-only.
+       */
+      readonly: {
+        type: Boolean,
+        value: false
       }
     },
 
@@ -23645,7 +23766,10 @@ after the list became visible again. e.g.
      * Opens the dropdown list.
      */
     open: function() {
-      this.opened = true;
+      // Prevent _open() being called when input is disabled or read-only
+      if (!this.disabled && !this.readonly) {
+        this.opened = true;
+      }
     },
 
     /**
@@ -23794,20 +23918,20 @@ after the list became visible again. e.g.
   </style>
 
   <template>
-    <paper-input-container class="dropdown-input" id="inputContainer" opened$="[[opened]]">
+    <paper-input-container disabled$="[[disabled]]" class="dropdown-input" id="inputContainer" opened$="[[opened]]">
       <label id="label" on-tap="open">[[label]]</label>
-      <input is="iron-input" id="input" role="combobox" aria-activedescendant$="[[_ariaActiveIndex]]" aria-expanded$="[[_getAriaExpanded(opened)]]" aria-labelledby="label" aria-autocomplete="list" aria-owns="overlay" autocomplete="off" bind-value="[[value]]" name$="[[name]]" type="text" required$="[[required]]" on-input="_inputValueChanged" on-blur="_onBlur" on-tap="open" key-event-target="">
+      <input is="iron-input" id="input" role="combobox" disabled$="[[disabled]]" readonly$="[[readonly]]" aria-activedescendant$="[[_ariaActiveIndex]]" aria-expanded$="[[_getAriaExpanded(opened)]]" aria-labelledby="label" aria-autocomplete="list" aria-owns="overlay" autocomplete="off" name$="[[name]]" type="text" required$="[[required]]" on-input="_inputValueChanged" on-blur="_onBlur" on-tap="open" key-event-target="">
       <div suffix="" id="clearIcon" on-tap="_clear" hidden$="[[_hideClearIcon(value, opened)]]">
         <iron-icon icon="clear"></iron-icon>
         <paper-ripple class="circle" center=""></paper-ripple>
       </div>
-      <div suffix="" id="toggleIcon" on-tap="_toggle" on-touchend="_preventDefault">
+      <div suffix="" id="toggleIcon" on-tap="_toggle" on-touchend="_preventDefault" hidden$="[[_hideToggleIcon(disabled, readonly)]]">
         <iron-icon icon="arrow-drop-down" aria-controls="overlay"></iron-icon>
         <paper-ripple class="circle" center=""></paper-ripple>
       </div>
     </paper-input-container>
 
-    <vaadin-combo-box-overlay id="overlay" _aria-active-index="{{_ariaActiveIndex}}" _selected-item="{{_selectedItem}}" position-target="[[_positionTarget]]" _focused-index="[[_focusedIndex]]" on-down="_blurInput" vertical-offset="2">
+    <vaadin-combo-box-overlay id="overlay" _aria-active-index="{{_ariaActiveIndex}}" position-target="[[_positionTarget]]" _focused-index="[[_focusedIndex]]" _item-label-path="[[itemLabelPath]]" on-down="_blurInput" vertical-offset="2">
     </vaadin-combo-box-overlay>
   </template>
 </dom-module>
@@ -23825,7 +23949,8 @@ after the list became visible again. e.g.
 
     properties: {
       /**
-       * An array of `String` values to be displayed as options in the dropdown.
+       * An array of values to be displayed as options in the dropdown. The
+       * options could be either `String` or `Object`.
        */
       items: {
         type: Array,
@@ -23833,12 +23958,29 @@ after the list became visible again. e.g.
       },
 
       /**
-       * The value for this element.
+       * The `String` value for the selected item of the combo box. Provides
+       * the value for `iron-form`.
+       *
+       * When there’s no item selected, the value is an empty string.
+       *
+       * Use `selectedItem` property to get the raw selected item from
+       * the `items` array.
        */
       value: {
         type: String,
         observer: '_valueChanged',
         value: ''
+      },
+
+      /**
+       * If `true`, user can input a value that is not present in the items list.
+       * `value` property will be set to the input value in this case.
+       * Also, when `value` is set programmatically, the input value will be set
+       * to reflect that value.
+       */
+      allowCustomValue: {
+        type: Boolean,
+        value: false
       },
 
       /**
@@ -23864,6 +24006,41 @@ after the list became visible again. e.g.
       _filter: {
         type: String,
         value: ''
+      },
+
+      /**
+       * The selected item from the `items` array.
+       */
+      selectedItem: {
+        type: Object,
+        readOnly: true,
+        notify: true
+      },
+
+      /**
+       * Path for label of the item. If `items` is an array of objects, the
+       * `itemLabelPath` is used to fetch the displayed string label for each
+       * item.
+       *
+       * The item label is also used for matching items when processing user
+       * input, i.e., for filtering and selecting items.
+       */
+      itemLabelPath: {
+        type: String,
+        value: 'label'
+      },
+
+      /**
+       * Path for value of the item. If `items` is an array of objects, the
+       * `itemValuePath:` is used to fetch the string value for the selected
+       * item.
+       *
+       * The item value is to be used in the `value` property of the combo box,
+       * to provide the form value.
+       */
+      itemValuePath: {
+        type: String,
+        value: 'value'
       }
     },
 
@@ -23919,12 +24096,23 @@ after the list became visible again. e.g.
       return Polymer.IronA11yKeysBehavior.keyboardEventMatchesKeys(e, k);
     },
 
+    _getItemLabel: function(item) {
+      return this.$.overlay.getItemLabel(item);
+    },
+
+    _getItemValue: function(item) {
+      var value = this.get(this.itemValuePath, item);
+      if (value === undefined || value === null) {
+        value = item ? item.toString() : '';
+      }
+      return value;
+    },
+
     _onArrowDown: function() {
       if (this.opened) {
-        this._focusedIndex = Math.min(this.$.overlay._items.length - 1, this._focusedIndex + 1);
-        if (this._focusedIndex > -1) {
-          this.$.input.bindValue = this.$.overlay._items[this._focusedIndex];
-          this._setSelectionRange();
+        if (this.$.overlay._items) {
+          this._focusedIndex = Math.min(this.$.overlay._items.length - 1, this._focusedIndex + 1);
+          this._prefillFocusedItemLabel();
         }
       } else {
         this.open();
@@ -23936,20 +24124,28 @@ after the list became visible again. e.g.
         if (this._focusedIndex > -1) {
           this._focusedIndex = Math.max(0, this._focusedIndex - 1);
         } else {
-          this._focusedIndex = this.$.overlay._items.length - 1;
+          if (this.$.overlay._items) {
+            this._focusedIndex = this.$.overlay._items.length - 1;
+          }
         }
 
-        if (this._focusedIndex > -1) {
-          this.$.input.bindValue = this.$.overlay._items[this._focusedIndex];
-          this._setSelectionRange();
-        }
+        this._prefillFocusedItemLabel();
       } else {
         this.open();
       }
     },
 
+    _prefillFocusedItemLabel: function() {
+      if (this._focusedIndex > -1) {
+        this.$.input.bindValue = this._getItemLabel(this.$.overlay._focusedItem);
+        this._setSelectionRange();
+      }
+    },
+
     _onEnter: function(e) {
-      if (this.opened) {
+      // should close on enter when custom values are allowed, input field is cleared, or when an existing
+      // item is focused with keyboard.
+      if (this.opened && (this.allowCustomValue || this.$.input.bindValue === '' || this._focusedIndex > -1)) {
         this.close();
 
         // Do not submit the surrounding form.
@@ -24017,7 +24213,7 @@ after the list became visible again. e.g.
      * Reverts back to original value.
      */
     cancel: function() {
-      this.$.input.bindValue = this.value;
+      this.$.input.bindValue = this._getItemLabel(this.selectedItem);
       this.close();
     },
 
@@ -24025,18 +24221,28 @@ after the list became visible again. e.g.
       this.$.overlay.notifyResize();
 
       this.async(function() {
+        this.$.overlay.hidden = (this.items === undefined || this.items === null);
         this.$.overlay._scrollIntoView(this._focusedIndex);
       });
     },
 
     _onClosed: function() {
-      this._focusedIndex = this._indexOf(this.$.input.bindValue);
+      this._focusedIndex = this.$.overlay.indexOfLabel(this.$.input.bindValue);
 
       if (this._focusedIndex > -1) {
         this.$.overlay._selectItem(this._focusedIndex);
-        this.$.input.bindValue = this.value;
+        this.$.input.bindValue = this._getItemLabel(this.selectedItem);
+      } else if (this.$.input.bindValue === '') {
+        this._clear();
       } else {
-        this.value = this.$.input.bindValue;
+        if (this.allowCustomValue) {
+          var e = this.fire('custom-value-set', this.$.input.bindValue, {cancelable: true});
+          if (!e.defaultPrevented) {
+            this.value = this.$.input.bindValue;
+          }
+        } else {
+          this.$.input.bindValue = this._getItemLabel(this.selectedItem);
+        }
       }
 
       this._clearSelectionRange();
@@ -24058,7 +24264,7 @@ after the list became visible again. e.g.
 
     _inputValueChanged: function(e) {
       this._filter = this.$.input.bindValue;
-      this._focusedIndex = this._indexOf(this.$.input.bindValue);
+      this._focusedIndex = this.$.overlay.indexOfLabel(this.$.input.bindValue);
 
       if (!this.opened) {
         this.open();
@@ -24069,7 +24275,7 @@ after the list became visible again. e.g.
       if (this._filter !== '') {
         this.$.input.bindValue = this._filter;
       } else {
-        this.$.input.bindValue = this.value;
+        this.$.input.bindValue = this._getItemLabel(this.selectedItem);
       }
 
       this._clearSelectionRange();
@@ -24105,13 +24311,13 @@ after the list became visible again. e.g.
     },
 
     _filterItems: function(arr, filter) {
-      return arr.filter(function(item) {
-        filter = filter || '';
+      return arr.filter((function(item) {
+        filter = filter.toString().toLowerCase() || '';
 
         // Check if item contains input value.
-        return item.toString().toLowerCase()
-                .indexOf(filter.toString().toLowerCase()) > -1;
-      });
+        return this._getItemLabel(item).toString().toLowerCase()
+          .indexOf(filter) > -1;
+      }).bind(this));
     },
 
     _setItems: function(items) {
@@ -24123,19 +24329,25 @@ after the list became visible again. e.g.
       this.$.overlay.notifyPath('_items');
       this.$.overlay.set('_items', items);
 
-      if (this.$.overlay._items && this.$.overlay._items.indexOf(this.value) > -1) {
-        this.$.overlay._selectItem(this.value);
-        this._focusedIndex = this._indexOf(this.value);
+      if (this.$.overlay._items && this.$.overlay._items.indexOf(this.selectedItem) > -1) {
+        this.$.overlay._selectItem(this.selectedItem);
+        this._focusedIndex = this.items.indexOf(this.selectedItem);
       }
 
+      this.$.overlay.hidden = (items === undefined || items === null || items.length === 0);
+
       this.listen(this.$.overlay, '_selected-item-changed', '_selectedItemChanged');
+
+      // async needed to reposition correctly after filtering
+      this.async(function() {
+        this.$.overlay.notifyResize();
+      }.bind(this));
     },
 
-    _indexOf: function(value) {
-      if (this.$.overlay._items && value) {
-        for (var i = 0; i < this.$.overlay._items.length; i++) {
-          if (this.$.overlay._items[i].toString().toLowerCase() ===
-              this.$.input.bindValue.toString().toLowerCase()) {
+    _indexOfValue: function(value) {
+      if (this.items && value) {
+        for (var i = 0; i < this.items.length; i++) {
+          if (this._getItemValue(this.items[i]) === value) {
             return i;
           }
         }
@@ -24144,10 +24356,14 @@ after the list became visible again. e.g.
       return -1;
     },
 
-    _selectedItemChanged: function(event, selectedItem) {
-      if (selectedItem.value !== null) {
-        this.value = selectedItem.value;
-      } else if (this.opened) {
+    _selectedItemChanged: function(event, detail) {
+      if (detail.value !== null) {
+        this._setSelectedItem(detail.value);
+        this.$.input.bindValue = this._getItemLabel(this.selectedItem);
+        this.value = this._getItemValue(this.selectedItem);
+      }
+
+      if (this.opened) {
         this.close();
       }
     },
@@ -24157,19 +24373,27 @@ after the list became visible again. e.g.
         this.value = '';
       }
 
-      if (this.$.overlay._items && this.$.overlay._items.indexOf(value) > -1) {
-        this.$.overlay._selectItem(value);
+      var valueIndex = this._indexOfValue(value);
+      var item = valueIndex > -1 && this.items[valueIndex];
+      if (this.$.overlay._items && item && this.$.overlay._items.indexOf(item) > -1) {
+        this.$.overlay._selectItem(item);
       } else {
+        this.$.input.bindValue = this.allowCustomValue ? value : '';
+        this._setSelectedItem(null);
         this.$.overlay.$.selector.clearSelection();
       }
 
-      this._focusedIndex = this._indexOf(value);
+      this._focusedIndex = valueIndex;
 
       this.close();
     },
 
     _hideClearIcon: function(value, opened) {
       return this.$.overlay.touchDevice || value === '' || !opened;
+    },
+
+    _hideToggleIcon: function(disabled, readonly) {
+      return readonly || disabled;
     },
 
     _preventDefault: function(e) {
@@ -24190,6 +24414,14 @@ after the list became visible again. e.g.
    * Fired when the value changes.
    *
    * @event value-changed
+   * @param {Object} detail
+   *  @param {String} detail.value the combobox value
+   */
+
+  /**
+   * Fired when the user sets a custom value.
+   * @event custom-value-set
+   * @param {String} detail the custom value
    */
 </script>
 <!--
@@ -26649,6 +26881,15 @@ context. You should place this element as a child of `<body>` whenever possible.
         type: Object
       },
 
+      /**
+       * The HTMLElement that will be firing relevant KeyboardEvents.
+       * Used for capturing esc and tab. Overridden from `IronA11yKeysBehavior`.
+       */
+      keyEventTarget: {
+        type: Object,
+        value: document
+      },
+
       _manager: {
         type: Object,
         value: Polymer.IronOverlayManager
@@ -26661,13 +26902,6 @@ context. You should place this element as a child of `<body>` whenever possible.
         }
       },
 
-      _boundOnCaptureKeydown: {
-        type: Function,
-        value: function() {
-          return this._onCaptureKeydown.bind(this);
-        }
-      },
-
       _boundOnCaptureFocus: {
         type: Function,
         value: function() {
@@ -26675,11 +26909,19 @@ context. You should place this element as a child of `<body>` whenever possible.
         }
       },
 
-      /** @type {?Node} */
+      /**
+       * The node being focused.
+       * @type {?Node}
+       */
       _focusedChild: {
         type: Object
       }
 
+    },
+
+    keyBindings: {
+      'esc': '__onEsc',
+      'tab': '__onTab'
     },
 
     listeners: {
@@ -26688,20 +26930,78 @@ context. You should place this element as a child of `<body>` whenever possible.
 
     /**
      * The backdrop element.
-     * @type Node
+     * @type {Node}
      */
     get backdropElement() {
       return this._manager.backdropElement;
     },
 
+    /**
+     * Returns the node to give focus to.
+     * @type {Node}
+     */
     get _focusNode() {
       return this._focusedChild || Polymer.dom(this).querySelector('[autofocus]') || this;
+    },
+
+    /**
+     * Array of nodes that can receive focus (overlay included), ordered by `tabindex`.
+     * This is used to retrieve which is the first and last focusable nodes in order
+     * to wrap the focus for overlays `with-backdrop`.
+     *
+     * If you know what is your content (specifically the first and last focusable children),
+     * you can override this method to return only `[firstFocusable, lastFocusable];`
+     * @type {[Node]}
+     * @protected
+     */
+    get _focusableNodes() {
+      // Elements that can be focused even if they have [disabled] attribute.
+      var FOCUSABLE_WITH_DISABLED = [
+        'a[href]',
+        'area[href]',
+        'iframe',
+        '[tabindex]',
+        '[contentEditable=true]'
+      ];
+
+      // Elements that cannot be focused if they have [disabled] attribute.
+      var FOCUSABLE_WITHOUT_DISABLED = [
+        'input',
+        'select',
+        'textarea',
+        'button'
+      ];
+
+      // Discard elements with tabindex=-1 (makes them not focusable).
+      var selector = FOCUSABLE_WITH_DISABLED.join(':not([tabindex="-1"]),') +
+        ':not([tabindex="-1"]),' +
+        FOCUSABLE_WITHOUT_DISABLED.join(':not([disabled]):not([tabindex="-1"]),') +
+        ':not([disabled]):not([tabindex="-1"])';
+
+      var focusables = Polymer.dom(this).querySelectorAll(selector);
+      if (this.tabIndex >= 0) {
+        // Insert at the beginning because we might have all elements with tabIndex = 0,
+        // and the overlay should be the first of the list.
+        focusables.splice(0, 0, this);
+      }
+      // Sort by tabindex.
+      return focusables.sort(function (a, b) {
+        if (a.tabIndex === b.tabIndex) {
+          return 0;
+        }
+        if (a.tabIndex === 0 || a.tabIndex > b.tabIndex) {
+          return 1;
+        }
+        return -1;
+      });
     },
 
     ready: function() {
       // with-backdrop need tabindex to be set in order to trap the focus.
       // If it is not set, IronOverlayBehavior will set it, and remove it if with-backdrop = false.
       this.__shouldRemoveTabIndex = false;
+      // Used for wrapping the focus on TAB / Shift+TAB.
+      this.__firstFocusableNode = this.__lastFocusableNode = null;
       this._ensureSetup();
     },
 
@@ -26710,9 +27010,12 @@ context. You should place this element as a child of `<body>` whenever possible.
       if (this._callOpenedWhenReady) {
         this._openedChanged();
       }
+      this._observer = Polymer.dom(this).observeNodes(this._onNodesChange);
     },
 
     detached: function() {
+      Polymer.dom(this).unobserveNodes(this._observer);
+      this._observer = null;
       this.opened = false;
       this._manager.trackBackdrop(this);
       this._manager.removeOverlay(this);
@@ -26744,9 +27047,10 @@ context. You should place this element as a child of `<body>` whenever possible.
 
     /**
      * Cancels the overlay.
+     * @param {?Event} event The original event
      */
-    cancel: function() {
-      var cancelEvent = this.fire('iron-overlay-canceled', undefined, {cancelable: true});
+    cancel: function(event) {
+      var cancelEvent = this.fire('iron-overlay-canceled', event, {cancelable: true});
       if (cancelEvent.defaultPrevented) {
         return;
       }
@@ -26769,7 +27073,6 @@ context. You should place this element as a child of `<body>` whenever possible.
         this.removeAttribute('aria-hidden');
       } else {
         this.setAttribute('aria-hidden', 'true');
-        Polymer.dom(this).unobserveNodes(this._observer);
       }
 
       // wait to call after ready only if we're initially open
@@ -26849,22 +27152,30 @@ context. You should place this element as a child of `<body>` whenever possible.
       }
     },
 
-    _toggleListeners: function () {
+    _toggleListeners: function() {
       this._toggleListener(this.opened, document, 'tap', this._boundOnCaptureClick, true);
-      this._toggleListener(this.opened, document, 'keydown', this._boundOnCaptureKeydown, true);
       this._toggleListener(this.opened, document, 'focus', this._boundOnCaptureFocus, true);
     },
 
     // tasks which must occur before opening; e.g. making the element visible
     _prepareRenderOpened: function() {
+
       this._manager.addOverlay(this);
 
+      // Needed to calculate the size of the overlay so that transitions on its size
+      // will have the correct starting points.
       this._preparePositioning();
       this.fit();
       this._finishPositioning();
 
       if (this.withBackdrop) {
         this.backdropElement.prepare();
+      }
+
+      // Safari will apply the focus to the autofocus element when displayed for the first time,
+      // so we blur it. Later, _applyFocus will set the focus if necessary.
+      if (this.noAutoFocus && document.activeElement === this._focusNode) {
+        this._focusNode.blur();
       }
     },
 
@@ -26885,23 +27196,24 @@ context. You should place this element as a child of `<body>` whenever possible.
     },
 
     _finishRenderOpened: function() {
-      // focus the child node with [autofocus]
+      // This ensures the overlay is visible before we set the focus
+      // (by calling _onIronResize -> refit).
+      this.notifyResize();
+      // Focus the child node with [autofocus]
       this._applyFocus();
 
-      this._observer = Polymer.dom(this).observeNodes(this.notifyResize);
       this.fire('iron-overlay-opened');
     },
 
     _finishRenderClosed: function() {
-      // hide the overlay and remove the backdrop
+      // Hide the overlay and remove the backdrop.
       this.resetFit();
       this.style.display = 'none';
       this._manager.removeOverlay(this);
 
-      this._focusedChild = null;
       this._applyFocus();
-
       this.notifyResize();
+
       this.fire('iron-overlay-closed', this.closingReason);
     },
 
@@ -26914,8 +27226,9 @@ context. You should place this element as a child of `<body>` whenever possible.
     _finishPositioning: function() {
       this.style.display = 'none';
       this.style.transform = this.style.webkitTransform = '';
-      // force layout to avoid application of transform
-      /** @suppress {suspiciousCode} */ this.offsetWidth;
+      // Force layout layout to avoid application of transform.
+      // Set offsetWidth to itself so that compilers won't remove it.
+      this.offsetWidth = this.offsetWidth;
       this.style.transition = this.style.webkitTransition = '';
     },
 
@@ -26926,6 +27239,7 @@ context. You should place this element as a child of `<body>` whenever possible.
         }
       } else {
         this._focusNode.blur();
+        this._focusedChild = null;
         this._manager.focusOverlay();
       }
     },
@@ -26936,23 +27250,13 @@ context. You should place this element as a child of `<body>` whenever possible.
         if (this.noCancelOnOutsideClick) {
           this._applyFocus();
         } else {
-          this.cancel();
+          this.cancel(event);
         }
       }
     },
 
-    _onCaptureKeydown: function(event) {
-      var ESC = 27;
-      if (this._manager.currentOverlay() === this &&
-          !this.noCancelOnEscKey &&
-          event.keyCode === ESC) {
-        this.cancel();
-      }
-    },
-
     _onCaptureFocus: function (event) {
-      if (this._manager.currentOverlay() === this &&
-          this.withBackdrop) {
+      if (this._manager.currentOverlay() === this && this.withBackdrop) {
         var path = Polymer.dom(event).path;
         if (path.indexOf(this) === -1) {
           event.stopPropagation();
@@ -26967,29 +27271,73 @@ context. You should place this element as a child of `<body>` whenever possible.
       if (this.opened) {
         this.refit();
       }
+    },
+
+    /**
+     * @protected
+     * Will call notifyResize if overlay is opened.
+     * Can be overridden in order to avoid multiple observers on the same node.
+     */
+    _onNodesChange: function() {
+      if (this.opened) {
+        this.notifyResize();
+      }
+      // Store it so we don't query too much.
+      var focusableNodes = this._focusableNodes;
+      this.__firstFocusableNode = focusableNodes[0];
+      this.__lastFocusableNode = focusableNodes[focusableNodes.length - 1];
+    },
+
+    __onEsc: function(event) {
+      // Not opened or not on top, so return.
+      if (this._manager.currentOverlay() !== this) {
+        return;
+      }
+      if (!this.noCancelOnEscKey) {
+        this.cancel(event);
+      }
+    },
+
+    __onTab: function(event) {
+      // Not opened or not on top, so return.
+      if (this._manager.currentOverlay() !== this) {
+        return;
+      }
+      // TAB wraps from last to first focusable.
+      // Shift + TAB wraps from first to last focusable.
+      var shift = event.detail.keyboardEvent.shiftKey;
+      var nodeToCheck = shift ? this.__firstFocusableNode : this.__lastFocusableNode;
+      var nodeToSet = shift ? this.__lastFocusableNode : this.__firstFocusableNode;
+      if (this.withBackdrop && this._focusedChild === nodeToCheck) {
+        // We set here the _focusedChild so that _onCaptureFocus will handle the
+        // wrapping of the focus (the next event after tab is focus).
+        this._focusedChild = nodeToSet;
+      }
     }
-
-/**
- * Fired after the `iron-overlay` opens.
- * @event iron-overlay-opened
- */
-
-/**
- * Fired when the `iron-overlay` is canceled, but before it is closed.
- * Cancel the event to prevent the `iron-overlay` from closing.
- * @event iron-overlay-canceled
- */
-
-/**
- * Fired after the `iron-overlay` closes.
- * @event iron-overlay-closed
- * @param {{canceled: (boolean|undefined)}} set to the `closingReason` attribute
- */
   };
 
   /** @polymerBehavior */
-  Polymer.IronOverlayBehavior = [Polymer.IronFitBehavior, Polymer.IronResizableBehavior, Polymer.IronOverlayBehaviorImpl];
+  Polymer.IronOverlayBehavior = [Polymer.IronA11yKeysBehavior, Polymer.IronFitBehavior, Polymer.IronResizableBehavior, Polymer.IronOverlayBehaviorImpl];
 
+  /**
+  * Fired after the `iron-overlay` opens.
+  * @event iron-overlay-opened
+  */
+
+  /**
+  * Fired when the `iron-overlay` is canceled, but before it is closed.
+  * Cancel the event to prevent the `iron-overlay` from closing.
+  * @event iron-overlay-canceled
+  * @param {Event} event The closing of the `iron-overlay` can be prevented
+  * by calling `event.preventDefault()`. The `event.detail` is the original event that originated
+  * the canceling (e.g. ESC keyboard event or click event outside the `iron-overlay`).
+  */
+
+  /**
+  * Fired after the `iron-overlay` closes.
+  * @event iron-overlay-closed
+  * @param {{canceled: (boolean|undefined)}} closingReason Contains `canceled` (whether the overlay was canceled).
+  */
 
 </script>
 <script>
