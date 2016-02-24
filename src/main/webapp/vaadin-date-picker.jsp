@@ -21,7 +21,7 @@
     <div class="span3 hidden-phone"><a href="https://www.polymer-project.org" class="polymer-tag">Built
       with Polymer</a></div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-date-picker&gt; <span>1.0.0-alpha1</span></h1>
+  <h1 class="helvetica-light">&lt;vaadin-date-picker&gt; <span>1.0.0-alpha2</span></h1>
 </div>
 
 <!-- Hero section end -->

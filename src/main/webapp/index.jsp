@@ -5,7 +5,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?1"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -141,7 +141,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-date-picker</div>
-        <div class="span4"><span>1.0.0-alpha1</span></div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha2")%></span></div>
       </div>
     </a>
   </div>

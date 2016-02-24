@@ -2,11 +2,11 @@
 
 <portlet:defineObjects />
 <script src="<%=request.getContextPath()%>/script/webcomponents-lite.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css" media="screen" charset="utf-8">
-<link rel="import" href="<%=request.getContextPath()%>/all-the-things.html">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?1" media="screen" charset="utf-8">
+<link rel="import" href="<%=request.getContextPath()%>/all-the-things.html?1">
 <style is="custom-style">
   :root {
-    --default-primary-color: #00b4f0;
+    --primary-color: #00b4f0;
   }
 </style>
 
