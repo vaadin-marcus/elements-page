@@ -112,7 +112,7 @@
     <div class="head">
       <!--
       <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-date-picker/master/vaadin-date-picker.html">
+      <link rel="import" href="https://cdn-origin.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/vaadin-date-picker.html">
       -->
     </div>
     <vaadin-date-picker label="Pick a date"></vaadin-date-picker>
