@@ -85,7 +85,7 @@
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-combo-box</div>
         <div class="span4">
-          <span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-alpha6")%></span>
+          <span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-beta1")%></span>
         </div>
       </div>
     </a>
@@ -106,7 +106,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-icons</div>
-        <div class="span4"><span>1.0.0-alpha1</span></div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-icons", "1.0.0-alpha2")%></span></div>
       </div>
     </a>
   </div>
@@ -123,7 +123,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-upload</div>
-        <div class="span4"><span>1.0.0-alpha1</span></div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-alpha2")%></span></div>
       </div>
     </a>
   </div>
@@ -141,7 +141,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-date-picker</div>
-        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha2")%></span></div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha3")%></span></div>
       </div>
     </a>
   </div>
@@ -166,7 +166,7 @@
 
 <div class="elements-category row-fluid">
   <div class="span9">
-    <h5>Charts <span>3.0.0-alpha9</span></h5>
+    <h5>Charts <span>3.0.0-beta1</span></h5>
     <p>Vaadin Charts contains tens of different types of charts that allow you to visualize and
       interact with data. All charts support declarative and dynamic data binding.</p>
   </div>

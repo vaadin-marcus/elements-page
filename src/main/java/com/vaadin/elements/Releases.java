@@ -84,6 +84,7 @@ public class Releases {
                     .asObject(GitHubRelease[].class)
                     .getBody());
         } catch (Exception e) {
+            System.err.println("Failed to fetch releases for " + repository);
             e.printStackTrace();
             return null;
         }

@@ -23,7 +23,7 @@
       with Polymer</a></div>
   </div>
   <h1 class="helvetica-light">&lt;vaadin-combo-box&gt;
-    <span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-alpha6")%></span></h1>
+    <span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-beta1")%></span></h1>
 </div>
 
 <!-- Hero section end -->

@@ -12893,10 +12893,10 @@ is separate from validation, and `allowed-pattern` does not affect how the input
     /**
      * The function called by `<paper-input-container>` when the input value or validity changes.
      * @param {{
-     *   inputElement: (Node|undefined),
+     *   inputElement: (Element|undefined),
      *   value: (string|undefined),
-     *   invalid: (boolean|undefined)
-     * }} state All properties are optional -
+     *   invalid: boolean
+     * }} state -
      *     inputElement: The input element.
      *     value: The input value.
      *     invalid: True if the input value is invalid.
@@ -12960,6 +12960,17 @@ Custom property | Description | Default
       }
     },
 
+    /**
+     * This overrides the update function in PaperInputAddonBehavior.
+     * @param {{
+     *   inputElement: (Element|undefined),
+     *   value: (string|undefined),
+     *   invalid: boolean
+     * }} state -
+     *     inputElement: The input element.
+     *     value: The input value.
+     *     invalid: True if the input value is invalid.
+     */
     update: function(state) {
       if (!state.inputElement) {
         return;
@@ -12967,7 +12978,7 @@ Custom property | Description | Default
 
       state.value = state.value || '';
 
-      var counter = state.value.length;
+      var counter = state.value.length.toString();
 
       if (state.inputElement.hasAttribute('maxlength')) {
         counter += '/' + state.inputElement.getAttribute('maxlength');
@@ -13685,6 +13696,9 @@ For example:
       <input is="iron-input">
     </paper-input-container>
 
+Do not wrap <paper-input-contanter> around elements that already include it, such as <paper-input>.
+Doing so may cause events to bounce infintely between the container and its contained element.
+
 ### Listening for input changes
 
 By default, it listens for changes on the `bind-value` attribute on its children nodes and perform
@@ -13702,6 +13716,11 @@ compound input field like a social security number input. The custom input eleme
       <label>Social security number</label>
       <ssn-input class="paper-input-input"></ssn-input>
     </paper-input-container>
+
+
+If you're using a `<paper-input-container>` imperatively, it's important to make sure
+that you attach its children (the `iron-input` and the optional `label`) before you
+attach the `<paper-input-container>` itself, so that it can be set up correctly.
 
 ### Validation
 
@@ -14117,14 +14136,15 @@ This element is `display:block` by default, but you can set the `inline` attribu
       }
       this.addEventListener('focus', this._boundOnFocus, true);
       this.addEventListener('blur', this._boundOnBlur, true);
+    },
+
+    attached: function() {
       if (this.attrForValue) {
         this._inputElement.addEventListener(this._valueChangedEvent, this._boundValueChanged);
       } else {
         this.addEventListener('input', this._onInput);
       }
-    },
 
-    attached: function() {
       // Only validate when attached if the input already has a value.
       if (this._inputElementValue != '') {
         this._handleValueAndAutoValidate(this._inputElement);
@@ -14329,6 +14349,17 @@ Custom property | Description | Default
       }
     },
 
+    /**
+     * This overrides the update function in PaperInputAddonBehavior.
+     * @param {{
+     *   inputElement: (Element|undefined),
+     *   value: (string|undefined),
+     *   invalid: boolean
+     * }} state -
+     *     inputElement: The input element.
+     *     value: The input value.
+     *     invalid: True if the input value is invalid.
+     */
     update: function(state) {
       this._setInvalid(state.invalid);
     }
@@ -14487,6 +14518,10 @@ how to create a custom iconset.
 See the [iron-icons demo](iron-icons?view=demo:demo/index.html) to see the icons available
 in the various iconsets.
 
+To load a subset of icons from one of the default `iron-icons` sets, you can
+use the [poly-icon](https://poly-icon.appspot.com/) tool. It allows you
+to select individual icons, and creates an iconset from them that you can
+use directly in your elements.
 
 ### Styling
 
@@ -14567,7 +14602,8 @@ Custom property | Description | Default
          * @type {!Polymer.IronMeta}
          */
         _meta: {
-          value: Polymer.Base.create('iron-meta', {type: 'iconset'})
+          value: Polymer.Base.create('iron-meta', {type: 'iconset'}),
+          observer: '_updateIcon'
         }
 
       },
@@ -14592,7 +14628,14 @@ Custom property | Description | Default
       /** @suppress {visibility} */
       _updateIcon: function() {
         if (this._usesIconset()) {
-          if (this._iconsetName) {
+          if (this._img && this._img.parentNode) {
+            Polymer.dom(this.root).removeChild(this._img);
+          }
+          if (this._iconName === "") {
+            if (this._iconset) {
+              this._iconset.removeIcon(this);
+            }
+          } else if (this._iconsetName && this._meta) {
             this._iconset = /** @type {?Polymer.Iconset} */ (
               this._meta.byKey(this._iconsetName));
             if (this._iconset) {
@@ -14603,6 +14646,9 @@ Custom property | Description | Default
             }
           }
         } else {
+          if (this._iconset) {
+            this._iconset.removeIcon(this);
+          }
           if (!this._img) {
             this._img = document.createElement('img');
             this._img.style.width = '100%';
@@ -15376,7 +15422,8 @@ Custom property | Description | Default
 
       // Do not focus the selected tab if the deepest target is part of the
       // menu element's local DOM and is focusable.
-      var rootTarget = Polymer.dom(event).rootTarget;
+      var rootTarget = /** @type {?HTMLElement} */(
+          Polymer.dom(event).rootTarget);
       if (rootTarget !== this && typeof rootTarget.tabIndex !== "undefined" && !this.isLightDescendant(rootTarget)) {
         return;
       }
@@ -16790,95 +16837,6 @@ Apply `circle` class to make the rippling effect within a circle.
 </script>
 <script>
 
-  /** @polymerBehavior Polymer.PaperButtonBehavior */
-  Polymer.PaperButtonBehaviorImpl = {
-
-    properties: {
-
-      /**
-       * The z-depth of this element, from 0-5. Setting to 0 will remove the
-       * shadow, and each increasing number greater than 0 will be "deeper"
-       * than the last.
-       *
-       * @attribute elevation
-       * @type number
-       * @default 1
-       */
-      elevation: {
-        type: Number,
-        reflectToAttribute: true,
-        readOnly: true
-      }
-
-    },
-
-    observers: [
-      '_calculateElevation(focused, disabled, active, pressed, receivedFocusFromKeyboard)',
-      '_computeKeyboardClass(receivedFocusFromKeyboard)'
-    ],
-
-    hostAttributes: {
-      role: 'button',
-      tabindex: '0',
-      animated: true
-    },
-
-    _calculateElevation: function() {
-      var e = 1;
-      if (this.disabled) {
-        e = 0;
-      } else if (this.active || this.pressed) {
-        e = 4;
-      } else if (this.receivedFocusFromKeyboard) {
-        e = 3;
-      }
-      this._setElevation(e);
-    },
-
-    _computeKeyboardClass: function(receivedFocusFromKeyboard) {
-      this.toggleClass('keyboard-focus', receivedFocusFromKeyboard);
-    },
-
-    /**
-     * In addition to `IronButtonState` behavior, when space key goes down,
-     * create a ripple down effect.
-     *
-     * @param {!KeyboardEvent} event .
-     */
-    _spaceKeyDownHandler: function(event) {
-      Polymer.IronButtonStateImpl._spaceKeyDownHandler.call(this, event);
-      // Ensure that there is at most one ripple when the space key is held down.
-      if (this.hasRipple() && this.getRipple().ripples.length < 1) {
-        this._ripple.uiDownAction();
-      }
-    },
-
-    /**
-     * In addition to `IronButtonState` behavior, when space key goes up,
-     * create a ripple up effect.
-     *
-     * @param {!KeyboardEvent} event .
-     */
-    _spaceKeyUpHandler: function(event) {
-      Polymer.IronButtonStateImpl._spaceKeyUpHandler.call(this, event);
-      if (this.hasRipple()) {
-        this._ripple.uiUpAction();
-      }
-    }
-
-  };
-
-  /** @polymerBehavior */
-  Polymer.PaperButtonBehavior = [
-    Polymer.IronButtonState,
-    Polymer.IronControlState,
-    Polymer.PaperRippleBehavior,
-    Polymer.PaperButtonBehaviorImpl
-  ];
-
-</script>
-<script>
-
   /**
    * `Polymer.PaperInkyFocusBehavior` implements a ripple when the element has keyboard focus.
    *
@@ -16929,7 +16887,7 @@ from the icon set to use.
 
     <paper-icon-button icon="menu"></paper-icon-button>
 
-See [`iron-iconset`](#iron-iconset) for more information about
+See [`iron-iconset`](iron-iconset) for more information about
 how to use a custom icon set.
 
 Example:
@@ -16938,6 +16896,14 @@ Example:
 
     <paper-icon-button icon="favorite"></paper-icon-button>
     <paper-icon-button src="star.png"></paper-icon-button>
+
+To use `paper-icon-button` as a link, wrap it in an anchor tag. Since `paper-icon-button`
+will already receive focus, you may want to prevent the anchor tag from receiving focus
+as well by setting its tabindex to -1.
+
+    <a href="https://www.polymer-project.org" tabindex="-1">
+      <paper-icon-button icon="polymer"></paper-icon-button>
+    </a>
 
 ### Styling
 
@@ -16981,12 +16947,13 @@ Custom property | Description | Default
         cursor: pointer;
         z-index: 0;
         line-height: 1;
-        
+
         width: 40px;
         height: 40px;
 
         /* Because of polymer/2558, this style has lower specificity than * */
         box-sizing: border-box !important;
+
         @apply(--paper-icon-button);
       }
 
@@ -16999,10 +16966,11 @@ Custom property | Description | Default
         color: var(--paper-icon-button-disabled-text, --disabled-text-color);
         pointer-events: none;
         cursor: auto;
+
         @apply(--paper-icon-button-disabled);
       }
-      
-      :host(:hover) { 
+
+      :host(:hover) {
         @apply(--paper-icon-button-hover);
       }
 
@@ -17011,6 +16979,7 @@ Custom property | Description | Default
         --iron-icon-height: 100%;
       }
     </style>
+
     <iron-icon id="icon" src="[[src]]" icon="[[icon]]" alt$="[[alt]]"></iron-icon>
   </template>
 
@@ -17445,6 +17414,7 @@ The following custom properties and mixins are available for styling:
 Custom property | Description | Default
 ----------------|-------------|----------
 `--paper-tabs-selection-bar-color` | Color for the selection bar | `--paper-yellow-a100`
+`--paper-tabs-selection-bar` | Mixin applied to the selection bar | {}
 `--paper-tabs` | Mixin applied to the tabs | `{}`
 
 @hero hero.svg
@@ -17559,8 +17529,8 @@ Custom property | Description | Default
 
     <div id="tabsContainer" on-track="_scroll" on-down="_down">
       <div id="tabsContent" class$="[[_computeTabsContentClass(scrollable)]]">
-        <content select="*"></content>
         <div id="selectionBar" class$="[[_computeSelectionBarClass(noBar, alignBottom)]]" on-transitionend="_onBarTransitionEnd"></div>
+        <content select="*"></content>
       </div>
     </div>
 
@@ -18051,6 +18021,95 @@ Example:
       }
     }
   });
+</script>
+<script>
+
+  /** @polymerBehavior Polymer.PaperButtonBehavior */
+  Polymer.PaperButtonBehaviorImpl = {
+
+    properties: {
+
+      /**
+       * The z-depth of this element, from 0-5. Setting to 0 will remove the
+       * shadow, and each increasing number greater than 0 will be "deeper"
+       * than the last.
+       *
+       * @attribute elevation
+       * @type number
+       * @default 1
+       */
+      elevation: {
+        type: Number,
+        reflectToAttribute: true,
+        readOnly: true
+      }
+
+    },
+
+    observers: [
+      '_calculateElevation(focused, disabled, active, pressed, receivedFocusFromKeyboard)',
+      '_computeKeyboardClass(receivedFocusFromKeyboard)'
+    ],
+
+    hostAttributes: {
+      role: 'button',
+      tabindex: '0',
+      animated: true
+    },
+
+    _calculateElevation: function() {
+      var e = 1;
+      if (this.disabled) {
+        e = 0;
+      } else if (this.active || this.pressed) {
+        e = 4;
+      } else if (this.receivedFocusFromKeyboard) {
+        e = 3;
+      }
+      this._setElevation(e);
+    },
+
+    _computeKeyboardClass: function(receivedFocusFromKeyboard) {
+      this.toggleClass('keyboard-focus', receivedFocusFromKeyboard);
+    },
+
+    /**
+     * In addition to `IronButtonState` behavior, when space key goes down,
+     * create a ripple down effect.
+     *
+     * @param {!KeyboardEvent} event .
+     */
+    _spaceKeyDownHandler: function(event) {
+      Polymer.IronButtonStateImpl._spaceKeyDownHandler.call(this, event);
+      // Ensure that there is at most one ripple when the space key is held down.
+      if (this.hasRipple() && this.getRipple().ripples.length < 1) {
+        this._ripple.uiDownAction();
+      }
+    },
+
+    /**
+     * In addition to `IronButtonState` behavior, when space key goes up,
+     * create a ripple up effect.
+     *
+     * @param {!KeyboardEvent} event .
+     */
+    _spaceKeyUpHandler: function(event) {
+      Polymer.IronButtonStateImpl._spaceKeyUpHandler.call(this, event);
+      if (this.hasRipple()) {
+        this._ripple.uiUpAction();
+      }
+    }
+
+  };
+
+  /** @polymerBehavior */
+  Polymer.PaperButtonBehavior = [
+    Polymer.IronButtonState,
+    Polymer.IronControlState,
+    Polymer.PaperRippleBehavior,
+    Polymer.PaperButtonBehaviorImpl
+  ];
+
 </script>
 <!--
 Material design: [Buttons](https://www.google.com/design/spec/components/buttons.html)
@@ -19762,6 +19821,18 @@ event and do your own custom submission:
             el.checked = this._customElementsInitialValues[i];
           } else {
             el.value = this._customElementsInitialValues[i];
+
+            // In the shady DOM, the native form is all-seeing, and will
+            // reset the nested inputs inside <paper-input> and <paper-textarea>.
+            // In particular, it resets them to what it thinks the default value
+            // is (i.e. "", before the bindings have ran), and since this is
+            // a programmatic update, it also doesn't fire any events.
+            // Which means we need to manually update the native element's value.
+            if (el.inputElement) {
+              el.inputElement.value = el.value;
+            } else if (el.textarea) {
+              el.textarea.value = el.value;
+            }
           }
           el.invalid = false;
         }
@@ -19783,8 +19854,8 @@ event and do your own custom submission:
         // Use logical parentnode, or native ShadowRoot host.
         parent = Polymer.dom(parent).parentNode || parent.host;
 
-        // Check if the parent was registered.
-        if (parent && parent._parentForm === this) {
+        // Check if the parent was registered and submittable.
+        if (parent && parent.name && parent._parentForm === this) {
           return true;
         }
       }
@@ -23475,10 +23546,10 @@ after the list became visible again. e.g.
     _maxHeight: function(targetRect) {
       var margin = 8;
       var minHeight = 116; // Height of two items in combo-box
-      var bottom = Math.min(window.innerHeight, document.body.getBoundingClientRect().bottom);
+      var bottom = Math.min(window.innerHeight, document.body.scrollHeight - document.body.scrollTop);
 
       if (this._alignedAbove) {
-        return Math.max(targetRect.top - margin, minHeight) + 'px';
+        return Math.max(targetRect.top - margin + Math.min(document.body.scrollTop, 0), minHeight) + 'px';
       } else {
         return Math.max(bottom - targetRect.bottom - margin, minHeight) + 'px';
       }
@@ -23508,7 +23579,11 @@ after the list became visible again. e.g.
     },
 
     _shouldAlignAbove: function() {
-      var spaceBelow = (window.innerHeight - this.positionTarget.getBoundingClientRect().bottom) / window.innerHeight;
+      var spaceBelow = (
+          window.innerHeight -
+          this.positionTarget.getBoundingClientRect().bottom -
+          Math.min(document.body.scrollTop, 0)
+        ) / window.innerHeight;
 
       return spaceBelow < 0.30;
     }
@@ -23538,7 +23613,7 @@ after the list became visible again. e.g.
 
     #scroller {
       overflow: auto;
-      max-height: 65vh;
+      max-height: var(--vaadin-combo-box-overlay-max-height, 65vh);
 
       /* Fixes item background from getting on top of scrollbars on Safari */
       transform: translate3d(0,0,0);
@@ -23933,34 +24008,33 @@ after the list became visible again. e.g.
       position: relative;
       width: 24px;
       height: 24px;
+      text-align: center;
     }
 
     paper-input-container iron-icon {
       fill: rgba(0, 0, 0, .26);
       cursor: pointer;
-      padding: 0px;
-      --iron-icon-width: 24px;
-      --iron-icon-height: 24px;
-      transition: all .2s;
+      --iron-icon-width: 20px;
+      --iron-icon-height: 20px;
+      margin-top: -1px;
+      transition: fill 0.2s;
     }
 
     paper-input-container paper-ripple {
       color: rgba(0, 0, 0, .54);
     }
 
+    paper-input-container iron-icon:hover,
     paper-input-container[opened] iron-icon {
       fill: rgba(0, 0, 0, .54);
     }
 
-    paper-input-container[opened] #toggleIcon iron-icon {
-      transform: rotate(-180deg);
+    paper-input-container[opened] iron-icon:hover {
+      fill: rgba(0, 0, 0, .86);
     }
 
-    #clearIcon iron-icon {
-      padding-left: 2px;
-      padding-bottom: 2px;
-      --iron-icon-width: 20px;
-      --iron-icon-height: 20px;
+    #clearIcon {
+      margin-right: 4px;
     }
 
     #input::-ms-clear {
@@ -23978,7 +24052,7 @@ after the list became visible again. e.g.
         <paper-ripple class="circle" center=""></paper-ripple>
       </div>
       <div suffix="" id="toggleIcon" on-tap="_toggle" on-touchend="_preventDefault" hidden$="[[_hideToggleIcon(disabled, readonly)]]">
-        <iron-icon icon="arrow-drop-down" aria-controls="overlay"></iron-icon>
+        <iron-icon icon="menu" aria-controls="overlay"></iron-icon>
         <paper-ripple class="circle" center=""></paper-ripple>
       </div>
     </paper-input-container>
@@ -24021,6 +24095,8 @@ after the list became visible again. e.g.
       value: {
         type: String,
         observer: '_valueChanged',
+        //notify: true already set in IronFormBehavior, setting this to true will make two value-changed events(?)
+        notify: false,
         value: ''
       },
 
@@ -24279,7 +24355,6 @@ after the list became visible again. e.g.
     },
 
     _onClosed: function() {
-      this._focusedIndex = this.$.overlay.indexOfLabel(this.$.input.bindValue);
 
       if (this._focusedIndex > -1) {
         this.$.overlay._selectItem(this._focusedIndex);
@@ -24315,8 +24390,15 @@ after the list became visible again. e.g.
      */
 
     _inputValueChanged: function(e) {
-      this._filter = this.$.input.bindValue;
-      this._focusedIndex = this.$.overlay.indexOfLabel(this.$.input.bindValue);
+
+      if (this._filter === this.$.input.bindValue) {
+        // Filter and input value might get out of sync, while keyboard navigating for example.
+        // Afterwards, input value might be changed to the same value as used in filtering.
+        // In situation like these, we need to make sure all the filter changes handlers are run.
+        this._filterChanged(this._filter);
+      } else {
+        this._filter = this.$.input.bindValue;
+      }
 
       if (!this.opened) {
         this.open();
@@ -24351,9 +24433,17 @@ after the list became visible again. e.g.
     },
 
     _filterChanged: function(filter) {
-      if (this.items) {
-        this._setItems(this._filterItems(this.items, filter));
-      }
+      this.unlisten(this.$.overlay, '_selected-item-changed', '_selectedItemChanged');
+
+      this._setItems(this._filterItems(this.items, filter));
+      this._focusedIndex = this.$.overlay.indexOfLabel(filter);
+
+      this.listen(this.$.overlay, '_selected-item-changed', '_selectedItemChanged');
+
+      // async needed to reposition correctly after filtering
+      this.async(function() {
+        this.$.overlay.notifyResize();
+      }.bind(this));
     },
 
     _itemsChanged: function(change) {
@@ -24363,6 +24453,10 @@ after the list became visible again. e.g.
     },
 
     _filterItems: function(arr, filter) {
+      if (!arr) {
+        return arr;
+      }
+
       return arr.filter((function(item) {
         filter = filter.toString().toLowerCase() || '';
 
@@ -24373,33 +24467,25 @@ after the list became visible again. e.g.
     },
 
     _setItems: function(items) {
-      this.unlisten(this.$.overlay, '_selected-item-changed', '_selectedItemChanged');
-
       //TODO: There is something wrong with observers and using set function
       // see here: https://github.com/Polymer/polymer/issues/3254
       //As a workaround setting/notifying the observer with the value undefined helps
       this.$.overlay.notifyPath('_items');
       this.$.overlay.set('_items', items);
 
-      if (this.$.overlay._items && this.$.overlay._items.indexOf(this.selectedItem) > -1) {
-        this.$.overlay._selectItem(this.selectedItem);
-        this._focusedIndex = this.items.indexOf(this.selectedItem);
+      var valueIndex = this._indexOfValue(this.value, items);
+      if (valueIndex > -1) {
+        this.$.overlay._selectItem(valueIndex);
       }
 
       this.$.overlay.hidden = (items === undefined || items === null || items.length === 0);
-
-      this.listen(this.$.overlay, '_selected-item-changed', '_selectedItemChanged');
-
-      // async needed to reposition correctly after filtering
-      this.async(function() {
-        this.$.overlay.notifyResize();
-      }.bind(this));
     },
 
-    _indexOfValue: function(value) {
-      if (this.items && value) {
-        for (var i = 0; i < this.items.length; i++) {
-          if (this._getItemValue(this.items[i]) === value) {
+    _indexOfValue: function(value, items) {
+      items = items || this.items;
+      if (items && value) {
+        for (var i = 0; i < items.length; i++) {
+          if (this._getItemValue(items[i]).toString() === value.toString()) {
             return i;
           }
         }
@@ -24413,6 +24499,7 @@ after the list became visible again. e.g.
         this._setSelectedItem(detail.value);
         this.$.input.bindValue = this._getItemLabel(this.selectedItem);
         this.value = this._getItemValue(this.selectedItem);
+        this._focusedIndex = this.$.overlay._items.indexOf(detail.value);
       }
 
       if (this.opened) {
@@ -24432,10 +24519,9 @@ after the list became visible again. e.g.
       } else {
         this.$.input.bindValue = this.allowCustomValue ? value : '';
         this._setSelectedItem(null);
+        this._focusedIndex = -1;
         this.$.overlay.$.selector.clearSelection();
       }
-
-      this._focusedIndex = valueIndex;
 
       this.close();
     },
@@ -24468,6 +24554,14 @@ after the list became visible again. e.g.
    * @event value-changed
    * @param {Object} detail
    *  @param {String} detail.value the combobox value
+   */
+
+  /**
+   * Fired when selected item changes.
+   *
+   * @event selected-item-changed
+   * @param {Object} detail
+   *  @param {Object|String} detail.value the selected item. Type is the same as the type of `items`.
    */
 
   /**
@@ -25558,6 +25652,25 @@ Custom property                               | Description                     
         @apply(--vaadin-upload-file-progress-complete);
       }
 
+      :host.fade-out {
+        animation-name: fade-out;
+        animation-duration: 1s;
+        @apply(--vaadin-upload-file-canceled);
+      }
+
+      @keyframes fade-out {
+        50%  {
+          max-height: 50px;
+          margin: 8px 0;
+          padding: 8px 0 0;
+        }
+        100% {
+          opacity: 0;
+          max-height: 0px;
+          margin: 0;
+          padding: 0;
+        }
+      }
     </style>
 
     <div id="row">
@@ -25597,11 +25710,26 @@ Custom property                               | Description                     
     },
 
     observers: [
-      '_fileChanged(file.*)'
+      '_fileChanged(file.*)',
+      '_fileAborted(file.abort)'
     ],
 
     _fileChanged: function() {
       this.$.progress.updateStyles();
+    },
+
+    _fileAborted: function(abort) {
+      if (abort) {
+        this.toggleClass('fade-out', true);
+        var animationName = window.getComputedStyle(this).animationName;
+        if (!animationName || animationName === 'none') {
+          this.fire('file-remove', {file: this.file});
+        } else {
+          this.addEventListener('animationend', function() {
+            this.fire('file-remove', {file: this.file});
+          }.bind(this));
+        }
+      }
     },
 
     _fireFileEvent: function(e) {
@@ -25649,7 +25777,7 @@ Custom property                               | Description                     
         padding: 16px;
       }
 
-      :host[dragover] {
+      :host[dragover-valid] {
         border-color: var(--primary-color, #00B4F0);
       }
 
@@ -25680,8 +25808,8 @@ Custom property                               | Description                     
         @apply(--vaadin-upload-drop-label);
       }
 
-      :host[dragover] #dropLabel,
-      :host[dragover] ::content .drop-label {
+      :host[dragover-valid] #dropLabel,
+      :host[dragover-valid] ::content .drop-label {
         color: var(--primary-color, #00B4F0);
         @apply(--vaadin-upload-drop-label-dragover);
       }
@@ -25705,31 +25833,48 @@ Custom property                               | Description                     
         @apply(--vaadin-upload-buttons);
       }
 
+      :host[nodrop] #buttons {
+        @apply(--layout-end-justified);
+        @apply(--vaadin-upload-buttons-nodrop);
+      }
+
       paper-button {
         @apply(--paper-font-button);
         color: var(--primary-color, #00B4F0);
         padding: .43em .57em;
         @apply(--vaadin-upload-button);
       }
+
+      #addFiles {
+        margin-right: 0;
+        background: var(--primary-color, #00B4F0);
+        color: var(--primary-font-color, #FFFFFF);
+        @apply(--vaadin-upload-button-add);
+      }
+
+      :host[nodrop] #addFiles {
+        margin-right: auto;
+        @apply(--vaadin-upload-button-add-nodrop);
+      }
     </style>
 
     <div id="dropLabel" hidden$="[[nodrop]]">
       <content select=".drop-label">
         <iron-icon icon="file-upload"></iron-icon>
-        Drop files here...
+        [[_i18nPlural(maxFiles, i18n.dropFiles)]]
       </content>
+    </div>
+    <div id="buttons">
+      <paper-button id="addFiles" on-tap="_onAddFilesClick" disabled="[[_maxFilesAdded(maxFiles, files.length)]]">[[_i18nPlural(maxFiles, i18n.addFiles)]]</paper-button>
+      <paper-button id="cancelAll" on-tap="_onCancelAllClick" hidden$="[[!showCancelAll]]">[[i18n.cancelAll]]</paper-button>
     </div>
     <template id="defaultFileTemplate">
       <vaadin-upload-file file="[[file]]"></vaadin-upload-file>
     </template>
-    <div id="fileList">
+    <div id="fileList" on-file-remove="_onFileRemove">
       <template id="fileListRepeater" is="dom-repeat" items="[[files]]" as="file"></template>
     </div>
     <content></content>
-    <div id="buttons">
-      <paper-button id="addFiles" on-tap="_onAddFilesClick">Add File(s)</paper-button>
-      <paper-button id="cancelAll" on-tap="_onCancelAllClick" hidden$="[[!showCancelAll]]">Cancel all</paper-button>
-    </div>
     <input type="file" id="fileInput" on-change="_onFileInputChange" hidden="" accept="{{accept}}">
     <paper-ripple id="dragRipple" noink=""></paper-ripple>
   </template>
@@ -25791,11 +25936,10 @@ Custom property                               | Description                     
         value: 0
       },
 
-      // TODO: don't expose this property, toggleAttribute instead.
-      dragover: {
+      _dragover: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true
+        observer: '_dragoverChanged'
       },
 
       /**
@@ -25829,7 +25973,7 @@ Custom property                               | Description                     
        */
        maxFiles: {
          type: Number,
-         value: 0
+         value: Infinity
        },
 
       /**
@@ -25847,8 +25991,63 @@ Custom property                               | Description                     
        */
       maxFileSize: {
         type: Number,
-        value: 0
+        value: Infinity
       },
+
+      /**
+       * Specifies if the dragover is validated with maxFiles and
+       * accept properties.
+       */
+      _dragoverValid: {
+        type: Boolean,
+        value: false,
+        observer: '_dragoverValidChanged'
+      },
+
+      /**
+       * The object used to localize this component.
+       */
+      i18n: {
+        type: Object,
+        value: function() {
+          return {
+            dropFiles: {
+              one: 'Drop file here...',
+              many: 'Drop files here...'
+            },
+            addFiles: {
+              one: 'Select File',
+              many: 'Add Files'
+            },
+            cancel: 'Cancel',
+            cancelAll: 'Cancel All',
+            error: {
+              tooManyFiles: 'Too Many Files.',
+              fileIsTooBig: 'File is Too Big.',
+              incorrectFileType: 'Incorrect File Type.'
+            },
+            uploading: {
+              status: {
+                connecting: 'Connecting...',
+                stalled: 'Stalled.',
+                processing: 'Processing File...'
+              },
+              remainingTime: {
+                prefix: 'remaining time: ',
+                unknown: 'unknown remaining time'
+              },
+              error: {
+                serverUnavailable: 'Server Unavailable',
+                unexpectedServerError: 'Unexpected Server Error',
+                forbidden: 'Forbidden'
+              }
+            },
+            units: {
+              size: ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+            }
+          };
+        }
+      }
     },
 
     listeners: {
@@ -25861,6 +26060,62 @@ Custom property                               | Description                     
 
     attached: function() {
       this._templatizeFileList();
+    },
+
+    _formatSize: function(bytes) {
+      if (typeof this.i18n.formatSize === 'function') {
+        return this.i18n.formatSize(bytes);
+      }
+
+      // https://wiki.ubuntu.com/UnitsPolicy
+      var base = this.i18n.units.sizeBase || 1000;
+      var unit = ~~(Math.log(bytes) / Math.log(base));
+      var dec = Math.max(0, Math.min(3, unit - 1));
+      var size = parseFloat((bytes / Math.pow(base, unit)).toFixed(dec));
+      return size + ' ' + this.i18n.units.size[unit];
+    },
+
+    _splitTimeByUnits: function(time) {
+      var unitSizes = [60, 60, 24, Infinity];
+      var timeValues = [0];
+
+      for (var i = 0, unitSize; i < unitSizes.length && time > 0; i++) {
+        timeValues[i] = time % unitSizes[i];
+        time = Math.floor(time / unitSizes[i]);
+      }
+
+      return timeValues;
+    },
+
+    _formatTime: function(seconds, split) {
+      if (typeof this.i18n.formatTime === 'function') {
+        return this.i18n.formatTime(seconds, split);
+      }
+
+      // Fill HH:MM:SS with leading zeros
+      while (split.length < 3) {
+        split.push(0);
+      }
+
+      return split
+          .reverse()
+          .map(function(number) {
+            return (number < 10 ? '0' : '') + number;
+          })
+          .join(':');
+    },
+
+    _formatFileProgress: function(file) {
+      return file.totalStr + ': ' +
+          file.progress + '% (' +
+          (file.loaded > 0 ?
+              this.i18n.uploading.remainingTime.prefix + file.remainingStr :
+              this.i18n.uploading.remainingTime.unknown) +
+          ')';
+    },
+
+    _maxFilesAdded: function() {
+      return this.maxFiles >= 0 && this.files.length >= this.maxFiles;
     },
 
     _dragRippleAction: function(action, event) {
@@ -25911,10 +26166,14 @@ Custom property                               | Description                     
 
     _onDragover: function(event) {
       event.preventDefault();
-      if (!this.dragover) {
-        this._dragRippleAction('down', event);
-        this.dragover = true;
+      if (!this._dragover) {
+        this._dragoverValid = !this._maxFilesAdded();
       }
+      if (this._dragoverValid && !this._dragover && !this.nodrop) {
+        this._dragRippleAction('down', event);
+      }
+      event.dataTransfer.dropEffect = !this._dragoverValid || this.nodrop ? 'none' : 'copy';
+      this._dragover = true;
     },
 
     _onDragleave: function(event) {
@@ -25922,9 +26181,9 @@ Custom property                               | Description                     
       // when quickly dragging over.
       if (Polymer.dom(event).rootTarget === this) {
         event.preventDefault();
-        if (this.dragover) {
+        if (this._dragover && !this.nodrop) {
           this._dragRippleAction('up', event);
-          this.dragover = false;
+          this._dragover = this._dragoverValid = false;
         }
       }
     },
@@ -25933,7 +26192,7 @@ Custom property                               | Description                     
       if (!this.nodrop) {
         event.preventDefault();
         this._dragRippleAction('up', event);
-        this.dragover = false;
+        this._dragover = this._dragoverValid = false;
         this._dragRippleAction('upAction', event);
         this._addFiles(event.dataTransfer.files);
       }
@@ -25960,14 +26219,15 @@ Custom property                               | Description                     
       }
     },
 
-    _setStatus: function(file, total, done, elapsed, progress) {
-      file.remaining = 1 + ~~(elapsed * (100 / progress - 1));
+    _setStatus: function(file, total, loaded, elapsed, progress) {
+      file.elapsed = elapsed;
+      file.elapsedStr = this._formatTime(file.elapsed, this._splitTimeByUnits(file.elapsed));
+      file.remaining = Math.ceil(elapsed * (total / loaded - 1));
+      file.remainingStr = this._formatTime(file.remaining, this._splitTimeByUnits(file.remaining));
       file.speed = ~~(total / elapsed / 1024);
-      file.totalStr = total > (1024 * 1024) ?
-        ((~~(total / 1024 / 1024 * 10) / 10) + ' MB') : (~~(total / 1024) + ' KB');
-      file.doneStr = done > (1024 * 1024) ?
-        ((~~(done / 1024 / 1024 * 10) / 10) + ' MB') : (~~(done / 1024) + ' KB');
-      file.status = file.totalStr + ' (' + file.progress + '%) about ' + file.remaining + ' seconds remaining.';
+      file.totalStr = this._formatSize(total);
+      file.loadedStr = this._formatSize(loaded);
+      file.status = this._formatFileProgress(file);
     },
 
     _uploadFile: function(file) {
@@ -25985,22 +26245,24 @@ Custom property                               | Description                     
 
         last = Date.now();
         var elapsed = (last - ini) / 1000;
-        var done = e.loaded, total = e.total, progress = ~~(done / total * 100);
+        var loaded = e.loaded, total = e.total, progress = ~~(loaded / total * 100);
 
-        file.loaded = done;
+        file.loaded = loaded;
         file.progress = progress;
-        file.indeterminate = done <= 0 || done >= total, true;
+        file.indeterminate = loaded <= 0 || loaded >= total, true;
         if (file.error) {
           file.indeterminate = file.status = undefined;
+        } else if (file.abort) {
+          file.status = 'Upload cancelled.';
         } else if (progress < 100) {
-          this._setStatus(file, total, done, elapsed, progress);
+          this._setStatus(file, total, loaded, elapsed, progress);
           stalledId = setTimeout(function() {
-            file.status = 'Stalled.';
+            file.status = this.i18n.uploading.status.stalled;
             this._notifyFileChanges(file);
           }.bind(this), 2000);
         } else {
-          file.doneStr = file.totalStr;
-          file.status = 'Processing file...';
+          file.loadedStr = file.totalStr;
+          file.status = this.i18n.uploading.status.processing;
           file.uploading = false;
         }
 
@@ -26026,11 +26288,11 @@ Custom property                               | Description                     
             return;
           }
           if (xhr.status === 0) {
-            file.error = 'Server Unavailable';
+            file.error = this.i18n.uploading.error.serverUnavailable;
           } else if (xhr.status > 500) {
-            file.error = 'Unexpected Server Error';
+            file.error = this.i18n.uploading.error.unexpectedServerError;
           } else if (xhr.status > 400) {
-            file.error = 'Forbidden';
+            file.error = this.i18n.uploading.error.forbidden;
           }
 
           file.complete = !file.error;
@@ -26058,7 +26320,7 @@ Custom property                               | Description                     
         return;
       }
 
-      file.status = 'Connecting...';
+      file.status = this.i18n.uploading.status.connecting;
       file.uploading = file.indeterminate = true;
       file.abort = file.error = undefined;
       this.fire('upload-start', {file: file, xhr: xhr});
@@ -26076,11 +26338,10 @@ Custom property                               | Description                     
     _abortFileUpload: function(file) {
        var evt = this.fire('upload-abort', {file: file, xhr: file.xhr}, {cancelable: true});
        if (!evt.defaultPrevented) {
+         file.abort = true;
          if (file.xhr) {
-           file.abort = true;
            file.xhr.abort();
          }
-         this._removeFile(file);
        }
      },
 
@@ -26103,23 +26364,23 @@ Custom property                               | Description                     
      * @param {File} file File being added
      */
     _addFile: function(file) {
-      if (this.maxFiles && this.files.length >= this.maxFiles) {
-        this.fire('file-reject', {file: file, error: 'Too many files.'});
+      if (this._maxFilesAdded()) {
+        this.fire('file-reject', {file: file, error: this.i18n.error.tooManyFiles});
         return;
       }
-      if (this.maxFileSize && file.size > this.maxFileSize) {
-        this.fire('file-reject', {file: file, error: 'File is too big.'});
+      if (this.maxFileSize >= 0 && file.size > this.maxFileSize) {
+        this.fire('file-reject', {file: file, error: this.i18n.error.fileIsTooBig});
         return;
       }
       var mimeType = file.type ? file.type.match(/^[^\/]*\//)[0] : null;
       var fileType = file.name.match(/\.[^\.]*$|$/)[0];
       var re = new RegExp('^(' + this.accept.replace(/[, ]+/g, '|').replace('/*', '/.*') + ')$');
       if (this.accept && !(re.test(mimeType) || re.test(fileType))) {
-        this.fire('file-reject', {file: file, error: 'Incorrect file type.'});
+        this.fire('file-reject', {file: file, error: this.i18n.error.incorrectFileType});
         return;
       }
       file.loaded = 0;
-      this.push('files', file);
+      this.unshift('files', file);
       this.fire('file-add', {file: file});
       this._uploadFile(file);
     },
@@ -26162,10 +26423,27 @@ Custom property                               | Description                     
       this._abortFileUpload(event.detail.file);
     },
 
+    _onFileRemove: function(event) {
+      event.stopPropagation();
+      this._removeFile(event.detail.file);
+    },
+
     _onCancelAllClick: function(event) {
       for (var i = this.files.length; i > 0; --i) {
         this._abortFileUpload(this.files[i - 1]);
       }
+    },
+
+    _dragoverChanged: function(dragover) {
+      this.toggleAttribute('dragover', dragover);
+    },
+
+    _dragoverValidChanged: function(dragoverValid) {
+      this.toggleAttribute('dragover-valid', dragoverValid);
+    },
+
+    _i18nPlural: function(value, plural) {
+      return value == 1 ? plural.one : plural.many;
     }
 
   });
@@ -26455,14 +26733,14 @@ CSS properties               | Action
      * the memoized data.
      */
     resetFit: function() {
-      if (!this._fitInfo || !this._fitInfo.sizedBy.height) {
-        this.sizingTarget.style.maxHeight = '';
-        this.style.top = this._fitInfo ? this._fitInfo.inlineStyle.top : '';
-      }
       if (!this._fitInfo || !this._fitInfo.sizedBy.width) {
         this.sizingTarget.style.maxWidth = '';
-        this.style.left = this._fitInfo ? this._fitInfo.inlineStyle.left : '';
       }
+      if (!this._fitInfo || !this._fitInfo.sizedBy.height) {
+        this.sizingTarget.style.maxHeight = '';
+      }
+      this.style.top = this._fitInfo ? this._fitInfo.inlineStyle.top : '';
+      this.style.left = this._fitInfo ? this._fitInfo.inlineStyle.left : '';
       if (this._fitInfo) {
         this.style.position = this._fitInfo.positionedBy.css;
       }
@@ -26523,18 +26801,30 @@ CSS properties               | Action
      * `position:fixed`.
      */
     center: function() {
-      if (!this._fitInfo.positionedBy.vertically || !this._fitInfo.positionedBy.horizontally) {
-        // need position:fixed to center
-        this.style.position = 'fixed';
+      var positionedBy = this._fitInfo.positionedBy;
+      if (positionedBy.vertically && positionedBy.horizontally) {
+        // Already positioned.
+        return;
       }
-      if (!this._fitInfo.positionedBy.vertically) {
-        var top = (this._fitHeight - this.offsetHeight) / 2 + this._fitTop;
-        top -= this._fitInfo.margin.top;
+      // Need position:fixed to center
+      this.style.position = 'fixed';
+      // Take into account the offset caused by parents that create stacking
+      // contexts (e.g. with transform: translate3d). Translate to 0,0 and
+      // measure the bounding rect.
+      if (!positionedBy.vertically) {
+        this.style.top = '0px';
+      }
+      if (!positionedBy.horizontally) {
+        this.style.left = '0px';
+      }
+      // It will take in consideration margins and transforms
+      var rect = this.getBoundingClientRect();
+      if (!positionedBy.vertically) {
+        var top = this._fitTop - rect.top + (this._fitHeight - rect.height) / 2;
         this.style.top = top + 'px';
       }
-      if (!this._fitInfo.positionedBy.horizontally) {
-        var left = (this._fitWidth - this.offsetWidth) / 2 + this._fitLeft;
-        left -= this._fitInfo.margin.left;
+      if (!positionedBy.horizontally) {
+        var left = this._fitLeft - rect.left + (this._fitWidth - rect.width) / 2;
         this.style.left = left + 'px';
       }
     }
@@ -26547,199 +26837,246 @@ CSS properties               | Action
   /**
    * @struct
    * @constructor
+   * @private
    */
   Polymer.IronOverlayManagerClass = function() {
+    /**
+     * Used to keep track of the opened overlays.
+     * @private {Array<Element>}
+     */
     this._overlays = [];
-    // Used to keep track of the last focused node before an overlay gets opened.
+
+    /**
+     * Used to keep track of the last focused node before an overlay gets opened.
+     * @private {Array<Element>}
+     */
     this._lastFocusedNodes = [];
 
     /**
-     * iframes have a default z-index of 100, so this default should be at least
-     * that.
+     * iframes have a default z-index of 100,
+     * so this default should be at least that.
      * @private {number}
      */
     this._minimumZ = 101;
 
+    /**
+     * Used to keep track of the opened overlays with backdrop.
+     * @private {Array<Element>}
+     */
     this._backdrops = [];
 
+    /**
+     * Memoized backdrop element.
+     * @private {Element|null}
+     */
     this._backdropElement = null;
-    Object.defineProperty(this, 'backdropElement', {
-      get: function() {
-        if (!this._backdropElement) {
-          this._backdropElement = document.createElement('iron-overlay-backdrop');
-        }
-        return this._backdropElement;
-      }.bind(this)
-    });
+  };
+
+  Polymer.IronOverlayManagerClass.prototype = {
+
+    constructor: Polymer.IronOverlayManagerClass,
+
+    /**
+     * The shared backdrop element.
+     * @type {Element} backdropElement
+     */
+    get backdropElement() {
+      if (!this._backdropElement) {
+        this._backdropElement = document.createElement('iron-overlay-backdrop');
+      }
+      return this._backdropElement;
+    },
 
     /**
      * The deepest active element.
-     * returns {?Node} element the active element
+     * @type {Element|undefined} activeElement the active element
      */
-    this.deepActiveElement = null;
-    Object.defineProperty(this, 'deepActiveElement', {
-      get: function() {
-        var active = document.activeElement;
-        // document.activeElement can be null
-        // https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
-        while (active && active.root && Polymer.dom(active.root).activeElement) {
-          active = Polymer.dom(active.root).activeElement;
+    get deepActiveElement() {
+      var active = document.activeElement;
+      // document.activeElement can be null
+      // https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
+      while (active && active.root && Polymer.dom(active.root).activeElement) {
+        active = Polymer.dom(active.root).activeElement;
+      }
+      return active;
+    },
+
+    /**
+     * If a node is contained in an overlay.
+     * @param {Element=} node
+     * @return {boolean}
+     * @private
+     */
+    _isChildOfOverlay: function(node) {
+      while (node && node !== document.body) {
+        // Use logical parentNode, or native ShadowRoot host.
+        node = Polymer.dom(node).parentNode || node.host;
+        // Check if it is an overlay.
+        if (node && node.behaviors && node.behaviors.indexOf(Polymer.IronOverlayBehaviorImpl) !== -1) {
+          return true;
         }
-        return active;
-      }.bind(this)
-    });
-  };
-
-  /**
-   * If a node is contained in an overlay.
-   * @private
-   * @param {Node} node
-   * @returns {Boolean}
-   */
-  Polymer.IronOverlayManagerClass.prototype._isChildOfOverlay = function(node) {
-    while (node && node !== document.body) {
-      // Use logical parentNode, or native ShadowRoot host.
-      node = Polymer.dom(node).parentNode || node.host;
-      // Check if it is an overlay.
-      if (node && node.behaviors && node.behaviors.indexOf(Polymer.IronOverlayBehaviorImpl) !== -1) {
-        return true;
       }
-    }
-    return false;
-  };
+      return false;
+    },
 
-  Polymer.IronOverlayManagerClass.prototype._applyOverlayZ = function(overlay, aboveZ) {
-    this._setZ(overlay, aboveZ + 2);
-  };
+    /**
+     * @param {Element} overlay
+     * @param {number} aboveZ
+     * @private
+     */
+    _applyOverlayZ: function(overlay, aboveZ) {
+      this._setZ(overlay, aboveZ + 2);
+    },
 
-  Polymer.IronOverlayManagerClass.prototype._setZ = function(element, z) {
-    element.style.zIndex = z;
-  };
+    /**
+     * @param {Element} element
+     * @param {number|string} z
+     * @private
+     */
+    _setZ: function(element, z) {
+      element.style.zIndex = z;
+    },
 
-  /**
-   * track overlays for z-index and focus managemant
-   */
-  Polymer.IronOverlayManagerClass.prototype.addOverlay = function(overlay) {
-    var minimumZ = Math.max(this.currentOverlayZ(), this._minimumZ);
-    this._overlays.push(overlay);
-    var newZ = this.currentOverlayZ();
-    if (newZ <= minimumZ) {
-      this._applyOverlayZ(overlay, minimumZ);
-    }
-    var element = this.deepActiveElement;
-    // If already in other overlay, don't reset focus there.
-    if (this._isChildOfOverlay(element)) {
-      element = null;
-    }
-    this._lastFocusedNodes.push(element);
-  };
-
-  Polymer.IronOverlayManagerClass.prototype.removeOverlay = function(overlay) {
-    var i = this._overlays.indexOf(overlay);
-    if (i >= 0) {
-      this._overlays.splice(i, 1);
-      this._setZ(overlay, '');
-
-      var node = this._lastFocusedNodes[i];
-      // Focus only if still contained in document.body
-      if (overlay.restoreFocusOnClose && node && Polymer.dom(document.body).deepContains(node)) {
-        node.focus();
+    /**
+     * Tracks overlays for z-index and focus management.
+     * @param {Element} overlay
+     */
+    addOverlay: function(overlay) {
+      var minimumZ = Math.max(this.currentOverlayZ(), this._minimumZ);
+      this._overlays.push(overlay);
+      var newZ = this.currentOverlayZ();
+      if (newZ <= minimumZ) {
+        this._applyOverlayZ(overlay, minimumZ);
       }
-      this._lastFocusedNodes.splice(i, 1);
-    }
-  };
-
-  Polymer.IronOverlayManagerClass.prototype.currentOverlay = function() {
-    var i = this._overlays.length - 1;
-    while (this._overlays[i] && !this._overlays[i].opened) {
-      --i;
-    }
-    return this._overlays[i];
-  };
-
-  Polymer.IronOverlayManagerClass.prototype.currentOverlayZ = function() {
-    return this._getOverlayZ(this.currentOverlay());
-  };
-
-  /**
-   * Ensures that the minimum z-index of new overlays is at least `minimumZ`.
-   * This does not effect the z-index of any existing overlays.
-   *
-   * @param {number} minimumZ
-   */
-  Polymer.IronOverlayManagerClass.prototype.ensureMinimumZ = function(minimumZ) {
-    this._minimumZ = Math.max(this._minimumZ, minimumZ);
-  };
-
-  Polymer.IronOverlayManagerClass.prototype.focusOverlay = function() {
-    var current = this.currentOverlay();
-    // We have to be careful to focus the next overlay _after_ any current
-    // transitions are complete (due to the state being toggled prior to the
-    // transition). Otherwise, we risk infinite recursion when a transitioning
-    // (closed) overlay becomes the current overlay.
-    //
-    // NOTE: We make the assumption that any overlay that completes a transition
-    // will call into focusOverlay to kick the process back off. Currently:
-    // transitionend -> _applyFocus -> focusOverlay.
-    if (current && !current.transitioning) {
-      current._applyFocus();
-    }
-  };
-
-  Polymer.IronOverlayManagerClass.prototype.trackBackdrop = function(element) {
-    // backdrops contains the overlays with a backdrop that are currently
-    // visible
-    var index = this._backdrops.indexOf(element);
-    if (element.opened && element.withBackdrop) {
-      // no duplicates
-      if (index === -1) {
-        this._backdrops.push(element);
+      var element = this.deepActiveElement;
+      // If already in other overlay, don't reset focus there.
+      if (this._isChildOfOverlay(element)) {
+        element = null;
       }
-    } else if (index >= 0) {
-      this._backdrops.splice(index, 1);
-    }
-  };
+      this._lastFocusedNodes.push(element);
+    },
 
-  Polymer.IronOverlayManagerClass.prototype.getBackdrops = function() {
-    return this._backdrops;
-  };
+    /**
+     * @param {Element} overlay
+     */
+    removeOverlay: function(overlay) {
+      var i = this._overlays.indexOf(overlay);
+      if (i >= 0) {
+        this._overlays.splice(i, 1);
+        this._setZ(overlay, '');
 
-  /**
-   * Returns the z-index for the backdrop.
-   */
-  Polymer.IronOverlayManagerClass.prototype.backdropZ = function() {
-    return this._getOverlayZ(this._overlayWithBackdrop()) - 1;
-  };
-
-  /**
-   * Returns the first opened overlay that has a backdrop.
-   */
-  Polymer.IronOverlayManagerClass.prototype._overlayWithBackdrop = function() {
-    for (var i = 0; i < this._overlays.length; i++) {
-      if (this._overlays[i].opened && this._overlays[i].withBackdrop) {
-        return this._overlays[i];
+        var node = this._lastFocusedNodes[i];
+        // Focus only if still contained in document.body
+        if (overlay.restoreFocusOnClose && node && Polymer.dom(document.body).deepContains(node)) {
+          node.focus();
+        }
+        this._lastFocusedNodes.splice(i, 1);
       }
-    }
-  };
+    },
 
-  /**
-   * Calculates the minimum z-index for the overlay.
-   */
-  Polymer.IronOverlayManagerClass.prototype._getOverlayZ = function(overlay) {
-    var z = this._minimumZ;
-    if (overlay) {
-      var z1 = Number(window.getComputedStyle(overlay).zIndex);
-      // Check if is a number
-      // Number.isNaN not supported in IE 10+
-      if (z1 === z1) {
-        z = z1;
+    /**
+     * @return {Element|undefined} overlay The current overlay.
+     */
+    currentOverlay: function() {
+      var i = this._overlays.length - 1;
+      while (this._overlays[i] && !this._overlays[i].opened) {
+        --i;
       }
+      return this._overlays[i];
+    },
+
+    /**
+     * @return {number} zIndex the current overlay z-index.
+     */
+    currentOverlayZ: function() {
+      return this._getOverlayZ(this.currentOverlay());
+    },
+
+    /**
+     * Ensures that the minimum z-index of new overlays is at least `minimumZ`.
+     * This does not effect the z-index of any existing overlays.
+     * @param {number} minimumZ
+     */
+    ensureMinimumZ: function(minimumZ) {
+      this._minimumZ = Math.max(this._minimumZ, minimumZ);
+    },
+
+    focusOverlay: function() {
+      var current = /** @type {?} */ (this.currentOverlay());
+      // We have to be careful to focus the next overlay _after_ any current
+      // transitions are complete (due to the state being toggled prior to the
+      // transition). Otherwise, we risk infinite recursion when a transitioning
+      // (closed) overlay becomes the current overlay.
+      //
+      // NOTE: We make the assumption that any overlay that completes a transition
+      // will call into focusOverlay to kick the process back off. Currently:
+      // transitionend -> _applyFocus -> focusOverlay.
+      if (current && !current.transitioning) {
+        current._applyFocus();
+      }
+    },
+
+    /**
+     * @param {Element} overlay The overlay that updated its withBackdrop.
+     */
+    trackBackdrop: function(overlay) {
+      var index = this._backdrops.indexOf(overlay);
+      if (overlay.opened && overlay.withBackdrop) {
+        // no duplicates
+        if (index === -1) {
+          this._backdrops.push(overlay);
+        }
+      } else if (index >= 0) {
+        this._backdrops.splice(index, 1);
+      }
+    },
+
+    /**
+     * @return {Array<Element>} backdrops
+     */
+    getBackdrops: function() {
+      return this._backdrops;
+    },
+
+    /**
+     * @return {number} index The z-index for the backdrop.
+     */
+    backdropZ: function() {
+      return this._getOverlayZ(this._overlayWithBackdrop()) - 1;
+    },
+
+    /**
+     * @return {Element|undefined} overlay The first opened overlay that has a backdrop.
+     * @private
+     */
+    _overlayWithBackdrop: function() {
+      for (var i = 0; i < this._overlays.length; i++) {
+        if (this._overlays[i].opened && this._overlays[i].withBackdrop) {
+          return this._overlays[i];
+        }
+      }
+    },
+
+    /**
+     * Calculates the minimum z-index for the overlay.
+     * @param {Element=} overlay
+     * @private
+     */
+    _getOverlayZ: function(overlay) {
+      var z = this._minimumZ;
+      if (overlay) {
+        var z1 = Number(window.getComputedStyle(overlay).zIndex);
+        // Check if is a number
+        // Number.isNaN not supported in IE 10+
+        if (z1 === z1) {
+          z = z1;
+        }
+      }
+      return z;
     }
-    return z;
   };
 
   Polymer.IronOverlayManager = new Polymer.IronOverlayManagerClass();
-
 </script>
 <!--
 `iron-overlay-backdrop` is a backdrop used by `Polymer.IronOverlayBehavior`. It should be a
@@ -27001,6 +27338,11 @@ context. You should place this element as a child of `<body>` whenever possible.
         value: false
       },
 
+      /**
+       * Shortcut to access to the overlay manager.
+       * @private
+       * @type {Polymer.IronOverlayManagerClass}
+       */
       _manager: {
         type: Object,
         value: Polymer.IronOverlayManager
@@ -27041,7 +27383,7 @@ context. You should place this element as a child of `<body>` whenever possible.
 
     /**
      * The backdrop element.
-     * @type {Node}
+     * @type {Element}
      */
     get backdropElement() {
       return this._manager.backdropElement;
@@ -27062,7 +27404,7 @@ context. You should place this element as a child of `<body>` whenever possible.
      *
      * If you know what is your content (specifically the first and last focusable children),
      * you can override this method to return only `[firstFocusable, lastFocusable];`
-     * @type {[Node]}
+     * @type {Array<Node>}
      * @protected
      */
     get _focusableNodes() {
@@ -27108,6 +27450,8 @@ context. You should place this element as a child of `<body>` whenever possible.
     },
 
     ready: function() {
+      // Used to skip calls to notifyResize and refit while the overlay is animating.
+      this.__isAnimating = false;
       // with-backdrop needs tabindex to be set in order to trap the focus.
       // If it is not set, IronOverlayBehavior will set it, and remove it if with-backdrop = false.
       this.__shouldRemoveTabIndex = false;
@@ -27158,7 +27502,7 @@ context. You should place this element as a child of `<body>` whenever possible.
 
     /**
      * Cancels the overlay.
-     * @param {?Event} event The original event
+     * @param {Event=} event The original event
      */
     cancel: function(event) {
       var cancelEvent = this.fire('iron-overlay-canceled', event, {cancelable: true});
@@ -27193,6 +27537,7 @@ context. You should place this element as a child of `<body>` whenever possible.
 
       this._manager.trackBackdrop(this);
 
+      this.__isAnimating = true;
       if (this.opened) {
         this._prepareRenderOpened();
       }
@@ -27275,7 +27620,7 @@ context. You should place this element as a child of `<body>` whenever possible.
       // Needed to calculate the size of the overlay so that transitions on its size
       // will have the correct starting points.
       this._preparePositioning();
-      this.fit();
+      this.refit();
       this._finishPositioning();
 
       if (this.withBackdrop) {
@@ -27306,24 +27651,23 @@ context. You should place this element as a child of `<body>` whenever possible.
     },
 
     _finishRenderOpened: function() {
-      // This ensures the overlay is visible before we set the focus
-      // (by calling _onIronResize -> refit).
-      this.notifyResize();
       // Focus the child node with [autofocus]
       this._applyFocus();
 
+      this.notifyResize();
+      this.__isAnimating = false;
       this.fire('iron-overlay-opened');
     },
 
     _finishRenderClosed: function() {
       // Hide the overlay and remove the backdrop.
-      this.resetFit();
       this.style.display = 'none';
       this._manager.removeOverlay(this);
 
       this._applyFocus();
-      this.notifyResize();
 
+      this.notifyResize();
+      this.__isAnimating = false;
       this.fire('iron-overlay-closed', this.closingReason);
     },
 
@@ -27378,6 +27722,10 @@ context. You should place this element as a child of `<body>` whenever possible.
     },
 
     _onIronResize: function() {
+      if (this.__isAnimating) {
+        return;
+      }
+
       if (this.opened) {
         this.refit();
       }
@@ -27389,7 +27737,7 @@ context. You should place this element as a child of `<body>` whenever possible.
      * Can be overridden in order to avoid multiple observers on the same node.
      */
     _onNodesChange: function() {
-      if (this.opened) {
+      if (this.opened && !this.__isAnimating) {
         this.notifyResize();
       }
       // Store it so we don't query too much.
@@ -28620,62 +28968,6 @@ Example:
   });
 
 </script>
-<script>//! moment.js
-//! version : 2.11.2
-//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
-//! license : MIT
-//! momentjs.com
-!function(a,b){"object"==typeof exports&&"undefined"!=typeof module?module.exports=b():"function"==typeof define&&define.amd?define(b):a.moment=b()}(this,function(){"use strict";function a(){return Uc.apply(null,arguments)}function b(a){Uc=a}function c(a){return"[object Array]"===Object.prototype.toString.call(a)}function d(a){return a instanceof Date||"[object Date]"===Object.prototype.toString.call(a)}function e(a,b){var c,d=[];for(c=0;c<a.length;++c)d.push(b(a[c],c));return d}function f(a,b){return Object.prototype.hasOwnProperty.call(a,b)}function g(a,b){for(var c in b)f(b,c)&&(a[c]=b[c]);return f(b,"toString")&&(a.toString=b.toString),f(b,"valueOf")&&(a.valueOf=b.valueOf),a}function h(a,b,c,d){return Da(a,b,c,d,!0).utc()}function i(){return{empty:!1,unusedTokens:[],unusedInput:[],overflow:-2,charsLeftOver:0,nullInput:!1,invalidMonth:null,invalidFormat:!1,userInvalidated:!1,iso:!1}}function j(a){return null==a._pf&&(a._pf=i()),a._pf}function k(a){if(null==a._isValid){var b=j(a);a._isValid=!(isNaN(a._d.getTime())||!(b.overflow<0)||b.empty||b.invalidMonth||b.invalidWeekday||b.nullInput||b.invalidFormat||b.userInvalidated),a._strict&&(a._isValid=a._isValid&&0===b.charsLeftOver&&0===b.unusedTokens.length&&void 0===b.bigHour)}return a._isValid}function l(a){var b=h(NaN);return null!=a?g(j(b),a):j(b).userInvalidated=!0,b}function m(a){return void 0===a}function n(a,b){var c,d,e;if(m(b._isAMomentObject)||(a._isAMomentObject=b._isAMomentObject),m(b._i)||(a._i=b._i),m(b._f)||(a._f=b._f),m(b._l)||(a._l=b._l),m(b._strict)||(a._strict=b._strict),m(b._tzm)||(a._tzm=b._tzm),m(b._isUTC)||(a._isUTC=b._isUTC),m(b._offset)||(a._offset=b._offset),m(b._pf)||(a._pf=j(b)),m(b._locale)||(a._locale=b._locale),Wc.length>0)for(c in Wc)d=Wc[c],e=b[d],m(e)||(a[d]=e);return a}function o(b){n(this,b),this._d=new Date(null!=b._d?b._d.getTime():NaN),Xc===!1&&(Xc=!0,a.updateOffset(this),Xc=!1)}function p(a){return a instanceof o||null!=a&&null!=a._isAMomentObject}function q(a){return 0>a?Math.ceil(a):Math.floor(a)}function r(a){var b=+a,c=0;return 0!==b&&isFinite(b)&&(c=q(b)),c}function s(a,b,c){var d,e=Math.min(a.length,b.length),f=Math.abs(a.length-b.length),g=0;for(d=0;e>d;d++)(c&&a[d]!==b[d]||!c&&r(a[d])!==r(b[d]))&&g++;return g+f}function t(){}function u(a){return a?a.toLowerCase().replace("_","-"):a}function v(a){for(var b,c,d,e,f=0;f<a.length;){for(e=u(a[f]).split("-"),b=e.length,c=u(a[f+1]),c=c?c.split("-"):null;b>0;){if(d=w(e.slice(0,b).join("-")))return d;if(c&&c.length>=b&&s(e,c,!0)>=b-1)break;b--}f++}return null}function w(a){var b=null;if(!Yc[a]&&"undefined"!=typeof module&&module&&module.exports)try{b=Vc._abbr,require("./locale/"+a),x(b)}catch(c){}return Yc[a]}function x(a,b){var c;return a&&(c=m(b)?z(a):y(a,b),c&&(Vc=c)),Vc._abbr}function y(a,b){return null!==b?(b.abbr=a,Yc[a]=Yc[a]||new t,Yc[a].set(b),x(a),Yc[a]):(delete Yc[a],null)}function z(a){var b;if(a&&a._locale&&a._locale._abbr&&(a=a._locale._abbr),!a)return Vc;if(!c(a)){if(b=w(a))return b;a=[a]}return v(a)}function A(a,b){var c=a.toLowerCase();Zc[c]=Zc[c+"s"]=Zc[b]=a}function B(a){return"string"==typeof a?Zc[a]||Zc[a.toLowerCase()]:void 0}function C(a){var b,c,d={};for(c in a)f(a,c)&&(b=B(c),b&&(d[b]=a[c]));return d}function D(a){return a instanceof Function||"[object Function]"===Object.prototype.toString.call(a)}function E(b,c){return function(d){return null!=d?(G(this,b,d),a.updateOffset(this,c),this):F(this,b)}}function F(a,b){return a.isValid()?a._d["get"+(a._isUTC?"UTC":"")+b]():NaN}function G(a,b,c){a.isValid()&&a._d["set"+(a._isUTC?"UTC":"")+b](c)}function H(a,b){var c;if("object"==typeof a)for(c in a)this.set(c,a[c]);else if(a=B(a),D(this[a]))return this[a](b);return this}function I(a,b,c){var d=""+Math.abs(a),e=b-d.length,f=a>=0;return(f?c?"+":"":"-")+Math.pow(10,Math.max(0,e)).toString().substr(1)+d}function J(a,b,c,d){var e=d;"string"==typeof d&&(e=function(){return this[d]()}),a&&(bd[a]=e),b&&(bd[b[0]]=function(){return I(e.apply(this,arguments),b[1],b[2])}),c&&(bd[c]=function(){return this.localeData().ordinal(e.apply(this,arguments),a)})}function K(a){return a.match(/\[[\s\S]/)?a.replace(/^\[|\]$/g,""):a.replace(/\\/g,"")}function L(a){var b,c,d=a.match($c);for(b=0,c=d.length;c>b;b++)bd[d[b]]?d[b]=bd[d[b]]:d[b]=K(d[b]);return function(e){var f="";for(b=0;c>b;b++)f+=d[b]instanceof Function?d[b].call(e,a):d[b];return f}}function M(a,b){return a.isValid()?(b=N(b,a.localeData()),ad[b]=ad[b]||L(b),ad[b](a)):a.localeData().invalidDate()}function N(a,b){function c(a){return b.longDateFormat(a)||a}var d=5;for(_c.lastIndex=0;d>=0&&_c.test(a);)a=a.replace(_c,c),_c.lastIndex=0,d-=1;return a}function O(a,b,c){td[a]=D(b)?b:function(a,d){return a&&c?c:b}}function P(a,b){return f(td,a)?td[a](b._strict,b._locale):new RegExp(Q(a))}function Q(a){return R(a.replace("\\","").replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g,function(a,b,c,d,e){return b||c||d||e}))}function R(a){return a.replace(/[-\/\\^$*+?.()|[\]{}]/g,"\\$&")}function S(a,b){var c,d=b;for("string"==typeof a&&(a=[a]),"number"==typeof b&&(d=function(a,c){c[b]=r(a)}),c=0;c<a.length;c++)ud[a[c]]=d}function T(a,b){S(a,function(a,c,d,e){d._w=d._w||{},b(a,d._w,d,e)})}function U(a,b,c){null!=b&&f(ud,a)&&ud[a](b,c._a,c,a)}function V(a,b){return new Date(Date.UTC(a,b+1,0)).getUTCDate()}function W(a,b){return c(this._months)?this._months[a.month()]:this._months[Ed.test(b)?"format":"standalone"][a.month()]}function X(a,b){return c(this._monthsShort)?this._monthsShort[a.month()]:this._monthsShort[Ed.test(b)?"format":"standalone"][a.month()]}function Y(a,b,c){var d,e,f;for(this._monthsParse||(this._monthsParse=[],this._longMonthsParse=[],this._shortMonthsParse=[]),d=0;12>d;d++){if(e=h([2e3,d]),c&&!this._longMonthsParse[d]&&(this._longMonthsParse[d]=new RegExp("^"+this.months(e,"").replace(".","")+"$","i"),this._shortMonthsParse[d]=new RegExp("^"+this.monthsShort(e,"").replace(".","")+"$","i")),c||this._monthsParse[d]||(f="^"+this.months(e,"")+"|^"+this.monthsShort(e,""),this._monthsParse[d]=new RegExp(f.replace(".",""),"i")),c&&"MMMM"===b&&this._longMonthsParse[d].test(a))return d;if(c&&"MMM"===b&&this._shortMonthsParse[d].test(a))return d;if(!c&&this._monthsParse[d].test(a))return d}}function Z(a,b){var c;return a.isValid()?"string"==typeof b&&(b=a.localeData().monthsParse(b),"number"!=typeof b)?a:(c=Math.min(a.date(),V(a.year(),b)),a._d["set"+(a._isUTC?"UTC":"")+"Month"](b,c),a):a}function $(b){return null!=b?(Z(this,b),a.updateOffset(this,!0),this):F(this,"Month")}function _(){return V(this.year(),this.month())}function aa(a){return this._monthsParseExact?(f(this,"_monthsRegex")||ca.call(this),a?this._monthsShortStrictRegex:this._monthsShortRegex):this._monthsShortStrictRegex&&a?this._monthsShortStrictRegex:this._monthsShortRegex}function ba(a){return this._monthsParseExact?(f(this,"_monthsRegex")||ca.call(this),a?this._monthsStrictRegex:this._monthsRegex):this._monthsStrictRegex&&a?this._monthsStrictRegex:this._monthsRegex}function ca(){function a(a,b){return b.length-a.length}var b,c,d=[],e=[],f=[];for(b=0;12>b;b++)c=h([2e3,b]),d.push(this.monthsShort(c,"")),e.push(this.months(c,"")),f.push(this.months(c,"")),f.push(this.monthsShort(c,""));for(d.sort(a),e.sort(a),f.sort(a),b=0;12>b;b++)d[b]=R(d[b]),e[b]=R(e[b]),f[b]=R(f[b]);this._monthsRegex=new RegExp("^("+f.join("|")+")","i"),this._monthsShortRegex=this._monthsRegex,this._monthsStrictRegex=new RegExp("^("+e.join("|")+")$","i"),this._monthsShortStrictRegex=new RegExp("^("+d.join("|")+")$","i")}function da(a){var b,c=a._a;return c&&-2===j(a).overflow&&(b=c[wd]<0||c[wd]>11?wd:c[xd]<1||c[xd]>V(c[vd],c[wd])?xd:c[yd]<0||c[yd]>24||24===c[yd]&&(0!==c[zd]||0!==c[Ad]||0!==c[Bd])?yd:c[zd]<0||c[zd]>59?zd:c[Ad]<0||c[Ad]>59?Ad:c[Bd]<0||c[Bd]>999?Bd:-1,j(a)._overflowDayOfYear&&(vd>b||b>xd)&&(b=xd),j(a)._overflowWeeks&&-1===b&&(b=Cd),j(a)._overflowWeekday&&-1===b&&(b=Dd),j(a).overflow=b),a}function ea(b){a.suppressDeprecationWarnings===!1&&"undefined"!=typeof console&&console.warn&&console.warn("Deprecation warning: "+b)}function fa(a,b){var c=!0;return g(function(){return c&&(ea(a+"\nArguments: "+Array.prototype.slice.call(arguments).join(", ")+"\n"+(new Error).stack),c=!1),b.apply(this,arguments)},b)}function ga(a,b){Jd[a]||(ea(b),Jd[a]=!0)}function ha(a){var b,c,d,e,f,g,h=a._i,i=Kd.exec(h)||Ld.exec(h);if(i){for(j(a).iso=!0,b=0,c=Nd.length;c>b;b++)if(Nd[b][1].exec(i[1])){e=Nd[b][0],d=Nd[b][2]!==!1;break}if(null==e)return void(a._isValid=!1);if(i[3]){for(b=0,c=Od.length;c>b;b++)if(Od[b][1].exec(i[3])){f=(i[2]||" ")+Od[b][0];break}if(null==f)return void(a._isValid=!1)}if(!d&&null!=f)return void(a._isValid=!1);if(i[4]){if(!Md.exec(i[4]))return void(a._isValid=!1);g="Z"}a._f=e+(f||"")+(g||""),wa(a)}else a._isValid=!1}function ia(b){var c=Pd.exec(b._i);return null!==c?void(b._d=new Date(+c[1])):(ha(b),void(b._isValid===!1&&(delete b._isValid,a.createFromInputFallback(b))))}function ja(a,b,c,d,e,f,g){var h=new Date(a,b,c,d,e,f,g);return 100>a&&a>=0&&isFinite(h.getFullYear())&&h.setFullYear(a),h}function ka(a){var b=new Date(Date.UTC.apply(null,arguments));return 100>a&&a>=0&&isFinite(b.getUTCFullYear())&&b.setUTCFullYear(a),b}function la(a){return ma(a)?366:365}function ma(a){return a%4===0&&a%100!==0||a%400===0}function na(){return ma(this.year())}function oa(a,b,c){var d=7+b-c,e=(7+ka(a,0,d).getUTCDay()-b)%7;return-e+d-1}function pa(a,b,c,d,e){var f,g,h=(7+c-d)%7,i=oa(a,d,e),j=1+7*(b-1)+h+i;return 0>=j?(f=a-1,g=la(f)+j):j>la(a)?(f=a+1,g=j-la(a)):(f=a,g=j),{year:f,dayOfYear:g}}function qa(a,b,c){var d,e,f=oa(a.year(),b,c),g=Math.floor((a.dayOfYear()-f-1)/7)+1;return 1>g?(e=a.year()-1,d=g+ra(e,b,c)):g>ra(a.year(),b,c)?(d=g-ra(a.year(),b,c),e=a.year()+1):(e=a.year(),d=g),{week:d,year:e}}function ra(a,b,c){var d=oa(a,b,c),e=oa(a+1,b,c);return(la(a)-d+e)/7}function sa(a,b,c){return null!=a?a:null!=b?b:c}function ta(b){var c=new Date(a.now());return b._useUTC?[c.getUTCFullYear(),c.getUTCMonth(),c.getUTCDate()]:[c.getFullYear(),c.getMonth(),c.getDate()]}function ua(a){var b,c,d,e,f=[];if(!a._d){for(d=ta(a),a._w&&null==a._a[xd]&&null==a._a[wd]&&va(a),a._dayOfYear&&(e=sa(a._a[vd],d[vd]),a._dayOfYear>la(e)&&(j(a)._overflowDayOfYear=!0),c=ka(e,0,a._dayOfYear),a._a[wd]=c.getUTCMonth(),a._a[xd]=c.getUTCDate()),b=0;3>b&&null==a._a[b];++b)a._a[b]=f[b]=d[b];for(;7>b;b++)a._a[b]=f[b]=null==a._a[b]?2===b?1:0:a._a[b];24===a._a[yd]&&0===a._a[zd]&&0===a._a[Ad]&&0===a._a[Bd]&&(a._nextDay=!0,a._a[yd]=0),a._d=(a._useUTC?ka:ja).apply(null,f),null!=a._tzm&&a._d.setUTCMinutes(a._d.getUTCMinutes()-a._tzm),a._nextDay&&(a._a[yd]=24)}}function va(a){var b,c,d,e,f,g,h,i;b=a._w,null!=b.GG||null!=b.W||null!=b.E?(f=1,g=4,c=sa(b.GG,a._a[vd],qa(Ea(),1,4).year),d=sa(b.W,1),e=sa(b.E,1),(1>e||e>7)&&(i=!0)):(f=a._locale._week.dow,g=a._locale._week.doy,c=sa(b.gg,a._a[vd],qa(Ea(),f,g).year),d=sa(b.w,1),null!=b.d?(e=b.d,(0>e||e>6)&&(i=!0)):null!=b.e?(e=b.e+f,(b.e<0||b.e>6)&&(i=!0)):e=f),1>d||d>ra(c,f,g)?j(a)._overflowWeeks=!0:null!=i?j(a)._overflowWeekday=!0:(h=pa(c,d,e,f,g),a._a[vd]=h.year,a._dayOfYear=h.dayOfYear)}function wa(b){if(b._f===a.ISO_8601)return void ha(b);b._a=[],j(b).empty=!0;var c,d,e,f,g,h=""+b._i,i=h.length,k=0;for(e=N(b._f,b._locale).match($c)||[],c=0;c<e.length;c++)f=e[c],d=(h.match(P(f,b))||[])[0],d&&(g=h.substr(0,h.indexOf(d)),g.length>0&&j(b).unusedInput.push(g),h=h.slice(h.indexOf(d)+d.length),k+=d.length),bd[f]?(d?j(b).empty=!1:j(b).unusedTokens.push(f),U(f,d,b)):b._strict&&!d&&j(b).unusedTokens.push(f);j(b).charsLeftOver=i-k,h.length>0&&j(b).unusedInput.push(h),j(b).bigHour===!0&&b._a[yd]<=12&&b._a[yd]>0&&(j(b).bigHour=void 0),b._a[yd]=xa(b._locale,b._a[yd],b._meridiem),ua(b),da(b)}function xa(a,b,c){var d;return null==c?b:null!=a.meridiemHour?a.meridiemHour(b,c):null!=a.isPM?(d=a.isPM(c),d&&12>b&&(b+=12),d||12!==b||(b=0),b):b}function ya(a){var b,c,d,e,f;if(0===a._f.length)return j(a).invalidFormat=!0,void(a._d=new Date(NaN));for(e=0;e<a._f.length;e++)f=0,b=n({},a),null!=a._useUTC&&(b._useUTC=a._useUTC),b._f=a._f[e],wa(b),k(b)&&(f+=j(b).charsLeftOver,f+=10*j(b).unusedTokens.length,j(b).score=f,(null==d||d>f)&&(d=f,c=b));g(a,c||b)}function za(a){if(!a._d){var b=C(a._i);a._a=e([b.year,b.month,b.day||b.date,b.hour,b.minute,b.second,b.millisecond],function(a){return a&&parseInt(a,10)}),ua(a)}}function Aa(a){var b=new o(da(Ba(a)));return b._nextDay&&(b.add(1,"d"),b._nextDay=void 0),b}function Ba(a){var b=a._i,e=a._f;return a._locale=a._locale||z(a._l),null===b||void 0===e&&""===b?l({nullInput:!0}):("string"==typeof b&&(a._i=b=a._locale.preparse(b)),p(b)?new o(da(b)):(c(e)?ya(a):e?wa(a):d(b)?a._d=b:Ca(a),k(a)||(a._d=null),a))}function Ca(b){var f=b._i;void 0===f?b._d=new Date(a.now()):d(f)?b._d=new Date(+f):"string"==typeof f?ia(b):c(f)?(b._a=e(f.slice(0),function(a){return parseInt(a,10)}),ua(b)):"object"==typeof f?za(b):"number"==typeof f?b._d=new Date(f):a.createFromInputFallback(b)}function Da(a,b,c,d,e){var f={};return"boolean"==typeof c&&(d=c,c=void 0),f._isAMomentObject=!0,f._useUTC=f._isUTC=e,f._l=c,f._i=a,f._f=b,f._strict=d,Aa(f)}function Ea(a,b,c,d){return Da(a,b,c,d,!1)}function Fa(a,b){var d,e;if(1===b.length&&c(b[0])&&(b=b[0]),!b.length)return Ea();for(d=b[0],e=1;e<b.length;++e)(!b[e].isValid()||b[e][a](d))&&(d=b[e]);return d}function Ga(){var a=[].slice.call(arguments,0);return Fa("isBefore",a)}function Ha(){var a=[].slice.call(arguments,0);return Fa("isAfter",a)}function Ia(a){var b=C(a),c=b.year||0,d=b.quarter||0,e=b.month||0,f=b.week||0,g=b.day||0,h=b.hour||0,i=b.minute||0,j=b.second||0,k=b.millisecond||0;this._milliseconds=+k+1e3*j+6e4*i+36e5*h,this._days=+g+7*f,this._months=+e+3*d+12*c,this._data={},this._locale=z(),this._bubble()}function Ja(a){return a instanceof Ia}function Ka(a,b){J(a,0,0,function(){var a=this.utcOffset(),c="+";return 0>a&&(a=-a,c="-"),c+I(~~(a/60),2)+b+I(~~a%60,2)})}function La(a,b){var c=(b||"").match(a)||[],d=c[c.length-1]||[],e=(d+"").match(Ud)||["-",0,0],f=+(60*e[1])+r(e[2]);return"+"===e[0]?f:-f}function Ma(b,c){var e,f;return c._isUTC?(e=c.clone(),f=(p(b)||d(b)?+b:+Ea(b))-+e,e._d.setTime(+e._d+f),a.updateOffset(e,!1),e):Ea(b).local()}function Na(a){return 15*-Math.round(a._d.getTimezoneOffset()/15)}function Oa(b,c){var d,e=this._offset||0;return this.isValid()?null!=b?("string"==typeof b?b=La(qd,b):Math.abs(b)<16&&(b=60*b),!this._isUTC&&c&&(d=Na(this)),this._offset=b,this._isUTC=!0,null!=d&&this.add(d,"m"),e!==b&&(!c||this._changeInProgress?cb(this,Za(b-e,"m"),1,!1):this._changeInProgress||(this._changeInProgress=!0,a.updateOffset(this,!0),this._changeInProgress=null)),this):this._isUTC?e:Na(this):null!=b?this:NaN}function Pa(a,b){return null!=a?("string"!=typeof a&&(a=-a),this.utcOffset(a,b),this):-this.utcOffset()}function Qa(a){return this.utcOffset(0,a)}function Ra(a){return this._isUTC&&(this.utcOffset(0,a),this._isUTC=!1,a&&this.subtract(Na(this),"m")),this}function Sa(){return this._tzm?this.utcOffset(this._tzm):"string"==typeof this._i&&this.utcOffset(La(pd,this._i)),this}function Ta(a){return this.isValid()?(a=a?Ea(a).utcOffset():0,(this.utcOffset()-a)%60===0):!1}function Ua(){return this.utcOffset()>this.clone().month(0).utcOffset()||this.utcOffset()>this.clone().month(5).utcOffset()}function Va(){if(!m(this._isDSTShifted))return this._isDSTShifted;var a={};if(n(a,this),a=Ba(a),a._a){var b=a._isUTC?h(a._a):Ea(a._a);this._isDSTShifted=this.isValid()&&s(a._a,b.toArray())>0}else this._isDSTShifted=!1;return this._isDSTShifted}function Wa(){return this.isValid()?!this._isUTC:!1}function Xa(){return this.isValid()?this._isUTC:!1}function Ya(){return this.isValid()?this._isUTC&&0===this._offset:!1}function Za(a,b){var c,d,e,g=a,h=null;return Ja(a)?g={ms:a._milliseconds,d:a._days,M:a._months}:"number"==typeof a?(g={},b?g[b]=a:g.milliseconds=a):(h=Vd.exec(a))?(c="-"===h[1]?-1:1,g={y:0,d:r(h[xd])*c,h:r(h[yd])*c,m:r(h[zd])*c,s:r(h[Ad])*c,ms:r(h[Bd])*c}):(h=Wd.exec(a))?(c="-"===h[1]?-1:1,g={y:$a(h[2],c),M:$a(h[3],c),d:$a(h[4],c),h:$a(h[5],c),m:$a(h[6],c),s:$a(h[7],c),w:$a(h[8],c)}):null==g?g={}:"object"==typeof g&&("from"in g||"to"in g)&&(e=ab(Ea(g.from),Ea(g.to)),g={},g.ms=e.milliseconds,g.M=e.months),d=new Ia(g),Ja(a)&&f(a,"_locale")&&(d._locale=a._locale),d}function $a(a,b){var c=a&&parseFloat(a.replace(",","."));return(isNaN(c)?0:c)*b}function _a(a,b){var c={milliseconds:0,months:0};return c.months=b.month()-a.month()+12*(b.year()-a.year()),a.clone().add(c.months,"M").isAfter(b)&&--c.months,c.milliseconds=+b-+a.clone().add(c.months,"M"),c}function ab(a,b){var c;return a.isValid()&&b.isValid()?(b=Ma(b,a),a.isBefore(b)?c=_a(a,b):(c=_a(b,a),c.milliseconds=-c.milliseconds,c.months=-c.months),c):{milliseconds:0,months:0}}function bb(a,b){return function(c,d){var e,f;return null===d||isNaN(+d)||(ga(b,"moment()."+b+"(period, number) is deprecated. Please use moment()."+b+"(number, period)."),f=c,c=d,d=f),c="string"==typeof c?+c:c,e=Za(c,d),cb(this,e,a),this}}function cb(b,c,d,e){var f=c._milliseconds,g=c._days,h=c._months;b.isValid()&&(e=null==e?!0:e,f&&b._d.setTime(+b._d+f*d),g&&G(b,"Date",F(b,"Date")+g*d),h&&Z(b,F(b,"Month")+h*d),e&&a.updateOffset(b,g||h))}function db(a,b){var c=a||Ea(),d=Ma(c,this).startOf("day"),e=this.diff(d,"days",!0),f=-6>e?"sameElse":-1>e?"lastWeek":0>e?"lastDay":1>e?"sameDay":2>e?"nextDay":7>e?"nextWeek":"sameElse",g=b&&(D(b[f])?b[f]():b[f]);return this.format(g||this.localeData().calendar(f,this,Ea(c)))}function eb(){return new o(this)}function fb(a,b){var c=p(a)?a:Ea(a);return this.isValid()&&c.isValid()?(b=B(m(b)?"millisecond":b),"millisecond"===b?+this>+c:+c<+this.clone().startOf(b)):!1}function gb(a,b){var c=p(a)?a:Ea(a);return this.isValid()&&c.isValid()?(b=B(m(b)?"millisecond":b),"millisecond"===b?+c>+this:+this.clone().endOf(b)<+c):!1}function hb(a,b,c){return this.isAfter(a,c)&&this.isBefore(b,c)}function ib(a,b){var c,d=p(a)?a:Ea(a);return this.isValid()&&d.isValid()?(b=B(b||"millisecond"),"millisecond"===b?+this===+d:(c=+d,+this.clone().startOf(b)<=c&&c<=+this.clone().endOf(b))):!1}function jb(a,b){return this.isSame(a,b)||this.isAfter(a,b)}function kb(a,b){return this.isSame(a,b)||this.isBefore(a,b)}function lb(a,b,c){var d,e,f,g;return this.isValid()?(d=Ma(a,this),d.isValid()?(e=6e4*(d.utcOffset()-this.utcOffset()),b=B(b),"year"===b||"month"===b||"quarter"===b?(g=mb(this,d),"quarter"===b?g/=3:"year"===b&&(g/=12)):(f=this-d,g="second"===b?f/1e3:"minute"===b?f/6e4:"hour"===b?f/36e5:"day"===b?(f-e)/864e5:"week"===b?(f-e)/6048e5:f),c?g:q(g)):NaN):NaN}function mb(a,b){var c,d,e=12*(b.year()-a.year())+(b.month()-a.month()),f=a.clone().add(e,"months");return 0>b-f?(c=a.clone().add(e-1,"months"),d=(b-f)/(f-c)):(c=a.clone().add(e+1,"months"),d=(b-f)/(c-f)),-(e+d)}function nb(){return this.clone().locale("en").format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ")}function ob(){var a=this.clone().utc();return 0<a.year()&&a.year()<=9999?D(Date.prototype.toISOString)?this.toDate().toISOString():M(a,"YYYY-MM-DD[T]HH:mm:ss.SSS[Z]"):M(a,"YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]")}function pb(b){var c=M(this,b||a.defaultFormat);return this.localeData().postformat(c)}function qb(a,b){return this.isValid()&&(p(a)&&a.isValid()||Ea(a).isValid())?Za({to:this,from:a}).locale(this.locale()).humanize(!b):this.localeData().invalidDate()}function rb(a){return this.from(Ea(),a)}function sb(a,b){return this.isValid()&&(p(a)&&a.isValid()||Ea(a).isValid())?Za({from:this,to:a}).locale(this.locale()).humanize(!b):this.localeData().invalidDate()}function tb(a){return this.to(Ea(),a)}function ub(a){var b;return void 0===a?this._locale._abbr:(b=z(a),null!=b&&(this._locale=b),this)}function vb(){return this._locale}function wb(a){switch(a=B(a)){case"year":this.month(0);case"quarter":case"month":this.date(1);case"week":case"isoWeek":case"day":this.hours(0);case"hour":this.minutes(0);case"minute":this.seconds(0);case"second":this.milliseconds(0)}return"week"===a&&this.weekday(0),"isoWeek"===a&&this.isoWeekday(1),"quarter"===a&&this.month(3*Math.floor(this.month()/3)),this}function xb(a){return a=B(a),void 0===a||"millisecond"===a?this:this.startOf(a).add(1,"isoWeek"===a?"week":a).subtract(1,"ms")}function yb(){return+this._d-6e4*(this._offset||0)}function zb(){return Math.floor(+this/1e3)}function Ab(){return this._offset?new Date(+this):this._d}function Bb(){var a=this;return[a.year(),a.month(),a.date(),a.hour(),a.minute(),a.second(),a.millisecond()]}function Cb(){var a=this;return{years:a.year(),months:a.month(),date:a.date(),hours:a.hours(),minutes:a.minutes(),seconds:a.seconds(),milliseconds:a.milliseconds()}}function Db(){return this.isValid()?this.toISOString():"null"}function Eb(){return k(this)}function Fb(){return g({},j(this))}function Gb(){return j(this).overflow}function Hb(){return{input:this._i,format:this._f,locale:this._locale,isUTC:this._isUTC,strict:this._strict}}function Ib(a,b){J(0,[a,a.length],0,b)}function Jb(a){return Nb.call(this,a,this.week(),this.weekday(),this.localeData()._week.dow,this.localeData()._week.doy)}function Kb(a){return Nb.call(this,a,this.isoWeek(),this.isoWeekday(),1,4)}function Lb(){return ra(this.year(),1,4)}function Mb(){var a=this.localeData()._week;return ra(this.year(),a.dow,a.doy)}function Nb(a,b,c,d,e){var f;return null==a?qa(this,d,e).year:(f=ra(a,d,e),b>f&&(b=f),Ob.call(this,a,b,c,d,e))}function Ob(a,b,c,d,e){var f=pa(a,b,c,d,e),g=ka(f.year,0,f.dayOfYear);return this.year(g.getUTCFullYear()),this.month(g.getUTCMonth()),this.date(g.getUTCDate()),this}function Pb(a){return null==a?Math.ceil((this.month()+1)/3):this.month(3*(a-1)+this.month()%3)}function Qb(a){return qa(a,this._week.dow,this._week.doy).week}function Rb(){return this._week.dow}function Sb(){return this._week.doy}function Tb(a){var b=this.localeData().week(this);return null==a?b:this.add(7*(a-b),"d")}function Ub(a){var b=qa(this,1,4).week;return null==a?b:this.add(7*(a-b),"d")}function Vb(a,b){return"string"!=typeof a?a:isNaN(a)?(a=b.weekdaysParse(a),"number"==typeof a?a:null):parseInt(a,10)}function Wb(a,b){return c(this._weekdays)?this._weekdays[a.day()]:this._weekdays[this._weekdays.isFormat.test(b)?"format":"standalone"][a.day()]}function Xb(a){return this._weekdaysShort[a.day()]}function Yb(a){return this._weekdaysMin[a.day()]}function Zb(a,b,c){var d,e,f;for(this._weekdaysParse||(this._weekdaysParse=[],this._minWeekdaysParse=[],this._shortWeekdaysParse=[],this._fullWeekdaysParse=[]),d=0;7>d;d++){if(e=Ea([2e3,1]).day(d),c&&!this._fullWeekdaysParse[d]&&(this._fullWeekdaysParse[d]=new RegExp("^"+this.weekdays(e,"").replace(".",".?")+"$","i"),this._shortWeekdaysParse[d]=new RegExp("^"+this.weekdaysShort(e,"").replace(".",".?")+"$","i"),this._minWeekdaysParse[d]=new RegExp("^"+this.weekdaysMin(e,"").replace(".",".?")+"$","i")),this._weekdaysParse[d]||(f="^"+this.weekdays(e,"")+"|^"+this.weekdaysShort(e,"")+"|^"+this.weekdaysMin(e,""),this._weekdaysParse[d]=new RegExp(f.replace(".",""),"i")),c&&"dddd"===b&&this._fullWeekdaysParse[d].test(a))return d;if(c&&"ddd"===b&&this._shortWeekdaysParse[d].test(a))return d;if(c&&"dd"===b&&this._minWeekdaysParse[d].test(a))return d;if(!c&&this._weekdaysParse[d].test(a))return d}}function $b(a){if(!this.isValid())return null!=a?this:NaN;var b=this._isUTC?this._d.getUTCDay():this._d.getDay();return null!=a?(a=Vb(a,this.localeData()),this.add(a-b,"d")):b}function _b(a){if(!this.isValid())return null!=a?this:NaN;var b=(this.day()+7-this.localeData()._week.dow)%7;return null==a?b:this.add(a-b,"d")}function ac(a){return this.isValid()?null==a?this.day()||7:this.day(this.day()%7?a:a-7):null!=a?this:NaN}function bc(a){var b=Math.round((this.clone().startOf("day")-this.clone().startOf("year"))/864e5)+1;return null==a?b:this.add(a-b,"d")}function cc(){return this.hours()%12||12}function dc(a,b){J(a,0,0,function(){return this.localeData().meridiem(this.hours(),this.minutes(),b)})}function ec(a,b){return b._meridiemParse}function fc(a){return"p"===(a+"").toLowerCase().charAt(0)}function gc(a,b,c){return a>11?c?"pm":"PM":c?"am":"AM"}function hc(a,b){b[Bd]=r(1e3*("0."+a))}function ic(){return this._isUTC?"UTC":""}function jc(){return this._isUTC?"Coordinated Universal Time":""}function kc(a){return Ea(1e3*a)}function lc(){return Ea.apply(null,arguments).parseZone()}function mc(a,b,c){var d=this._calendar[a];return D(d)?d.call(b,c):d}function nc(a){var b=this._longDateFormat[a],c=this._longDateFormat[a.toUpperCase()];return b||!c?b:(this._longDateFormat[a]=c.replace(/MMMM|MM|DD|dddd/g,function(a){return a.slice(1)}),this._longDateFormat[a])}function oc(){return this._invalidDate}function pc(a){return this._ordinal.replace("%d",a)}function qc(a){return a}function rc(a,b,c,d){var e=this._relativeTime[c];return D(e)?e(a,b,c,d):e.replace(/%d/i,a)}function sc(a,b){var c=this._relativeTime[a>0?"future":"past"];return D(c)?c(b):c.replace(/%s/i,b)}function tc(a){var b,c;for(c in a)b=a[c],D(b)?this[c]=b:this["_"+c]=b;this._ordinalParseLenient=new RegExp(this._ordinalParse.source+"|"+/\d{1,2}/.source)}function uc(a,b,c,d){var e=z(),f=h().set(d,b);return e[c](f,a)}function vc(a,b,c,d,e){if("number"==typeof a&&(b=a,a=void 0),a=a||"",null!=b)return uc(a,b,c,e);var f,g=[];for(f=0;d>f;f++)g[f]=uc(a,f,c,e);return g}function wc(a,b){return vc(a,b,"months",12,"month")}function xc(a,b){return vc(a,b,"monthsShort",12,"month")}function yc(a,b){return vc(a,b,"weekdays",7,"day")}function zc(a,b){return vc(a,b,"weekdaysShort",7,"day")}function Ac(a,b){return vc(a,b,"weekdaysMin",7,"day")}function Bc(){var a=this._data;return this._milliseconds=se(this._milliseconds),this._days=se(this._days),this._months=se(this._months),a.milliseconds=se(a.milliseconds),a.seconds=se(a.seconds),a.minutes=se(a.minutes),a.hours=se(a.hours),a.months=se(a.months),a.years=se(a.years),this}function Cc(a,b,c,d){var e=Za(b,c);return a._milliseconds+=d*e._milliseconds,a._days+=d*e._days,a._months+=d*e._months,a._bubble()}function Dc(a,b){return Cc(this,a,b,1)}function Ec(a,b){return Cc(this,a,b,-1)}function Fc(a){return 0>a?Math.floor(a):Math.ceil(a)}function Gc(){var a,b,c,d,e,f=this._milliseconds,g=this._days,h=this._months,i=this._data;return f>=0&&g>=0&&h>=0||0>=f&&0>=g&&0>=h||(f+=864e5*Fc(Ic(h)+g),g=0,h=0),i.milliseconds=f%1e3,a=q(f/1e3),i.seconds=a%60,b=q(a/60),i.minutes=b%60,c=q(b/60),i.hours=c%24,g+=q(c/24),e=q(Hc(g)),h+=e,g-=Fc(Ic(e)),d=q(h/12),h%=12,i.days=g,i.months=h,i.years=d,this}function Hc(a){return 4800*a/146097}function Ic(a){return 146097*a/4800}function Jc(a){var b,c,d=this._milliseconds;if(a=B(a),"month"===a||"year"===a)return b=this._days+d/864e5,c=this._months+Hc(b),"month"===a?c:c/12;switch(b=this._days+Math.round(Ic(this._months)),a){case"week":return b/7+d/6048e5;case"day":return b+d/864e5;case"hour":return 24*b+d/36e5;case"minute":return 1440*b+d/6e4;case"second":return 86400*b+d/1e3;case"millisecond":return Math.floor(864e5*b)+d;default:throw new Error("Unknown unit "+a)}}function Kc(){return this._milliseconds+864e5*this._days+this._months%12*2592e6+31536e6*r(this._months/12)}function Lc(a){return function(){return this.as(a)}}function Mc(a){return a=B(a),this[a+"s"]()}function Nc(a){return function(){return this._data[a]}}function Oc(){return q(this.days()/7)}function Pc(a,b,c,d,e){return e.relativeTime(b||1,!!c,a,d)}function Qc(a,b,c){var d=Za(a).abs(),e=Ie(d.as("s")),f=Ie(d.as("m")),g=Ie(d.as("h")),h=Ie(d.as("d")),i=Ie(d.as("M")),j=Ie(d.as("y")),k=e<Je.s&&["s",e]||1>=f&&["m"]||f<Je.m&&["mm",f]||1>=g&&["h"]||g<Je.h&&["hh",g]||1>=h&&["d"]||h<Je.d&&["dd",h]||1>=i&&["M"]||i<Je.M&&["MM",i]||1>=j&&["y"]||["yy",j];return k[2]=b,k[3]=+a>0,k[4]=c,Pc.apply(null,k)}function Rc(a,b){return void 0===Je[a]?!1:void 0===b?Je[a]:(Je[a]=b,!0)}function Sc(a){var b=this.localeData(),c=Qc(this,!a,b);return a&&(c=b.pastFuture(+this,c)),b.postformat(c)}function Tc(){var a,b,c,d=Ke(this._milliseconds)/1e3,e=Ke(this._days),f=Ke(this._months);a=q(d/60),b=q(a/60),d%=60,a%=60,c=q(f/12),f%=12;var g=c,h=f,i=e,j=b,k=a,l=d,m=this.asSeconds();return m?(0>m?"-":"")+"P"+(g?g+"Y":"")+(h?h+"M":"")+(i?i+"D":"")+(j||k||l?"T":"")+(j?j+"H":"")+(k?k+"M":"")+(l?l+"S":""):"P0D"}var Uc,Vc,Wc=a.momentProperties=[],Xc=!1,Yc={},Zc={},$c=/(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,_c=/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,ad={},bd={},cd=/\d/,dd=/\d\d/,ed=/\d{3}/,fd=/\d{4}/,gd=/[+-]?\d{6}/,hd=/\d\d?/,id=/\d\d\d\d?/,jd=/\d\d\d\d\d\d?/,kd=/\d{1,3}/,ld=/\d{1,4}/,md=/[+-]?\d{1,6}/,nd=/\d+/,od=/[+-]?\d+/,pd=/Z|[+-]\d\d:?\d\d/gi,qd=/Z|[+-]\d\d(?::?\d\d)?/gi,rd=/[+-]?\d+(\.\d{1,3})?/,sd=/[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i,td={},ud={},vd=0,wd=1,xd=2,yd=3,zd=4,Ad=5,Bd=6,Cd=7,Dd=8;J("M",["MM",2],"Mo",function(){return this.month()+1}),J("MMM",0,0,function(a){return this.localeData().monthsShort(this,a)}),J("MMMM",0,0,function(a){return this.localeData().months(this,a)}),A("month","M"),O("M",hd),O("MM",hd,dd),O("MMM",function(a,b){return b.monthsShortRegex(a)}),O("MMMM",function(a,b){return b.monthsRegex(a)}),S(["M","MM"],function(a,b){b[wd]=r(a)-1}),S(["MMM","MMMM"],function(a,b,c,d){var e=c._locale.monthsParse(a,d,c._strict);null!=e?b[wd]=e:j(c).invalidMonth=a});var Ed=/D[oD]?(\[[^\[\]]*\]|\s+)+MMMM?/,Fd="January_February_March_April_May_June_July_August_September_October_November_December".split("_"),Gd="Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),Hd=sd,Id=sd,Jd={};a.suppressDeprecationWarnings=!1;var Kd=/^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?/,Ld=/^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?/,Md=/Z|[+-]\d\d(?::?\d\d)?/,Nd=[["YYYYYY-MM-DD",/[+-]\d{6}-\d\d-\d\d/],["YYYY-MM-DD",/\d{4}-\d\d-\d\d/],["GGGG-[W]WW-E",/\d{4}-W\d\d-\d/],["GGGG-[W]WW",/\d{4}-W\d\d/,!1],["YYYY-DDD",/\d{4}-\d{3}/],["YYYY-MM",/\d{4}-\d\d/,!1],["YYYYYYMMDD",/[+-]\d{10}/],["YYYYMMDD",/\d{8}/],["GGGG[W]WWE",/\d{4}W\d{3}/],["GGGG[W]WW",/\d{4}W\d{2}/,!1],["YYYYDDD",/\d{7}/]],Od=[["HH:mm:ss.SSSS",/\d\d:\d\d:\d\d\.\d+/],["HH:mm:ss,SSSS",/\d\d:\d\d:\d\d,\d+/],["HH:mm:ss",/\d\d:\d\d:\d\d/],["HH:mm",/\d\d:\d\d/],["HHmmss.SSSS",/\d\d\d\d\d\d\.\d+/],["HHmmss,SSSS",/\d\d\d\d\d\d,\d+/],["HHmmss",/\d\d\d\d\d\d/],["HHmm",/\d\d\d\d/],["HH",/\d\d/]],Pd=/^\/?Date\((\-?\d+)/i;a.createFromInputFallback=fa("moment construction falls back to js Date. This is discouraged and will be removed in upcoming major release. Please refer to https://github.com/moment/moment/issues/1407 for more info.",function(a){a._d=new Date(a._i+(a._useUTC?" UTC":""))}),J("Y",0,0,function(){var a=this.year();return 9999>=a?""+a:"+"+a}),J(0,["YY",2],0,function(){return this.year()%100}),J(0,["YYYY",4],0,"year"),J(0,["YYYYY",5],0,"year"),J(0,["YYYYYY",6,!0],0,"year"),A("year","y"),O("Y",od),O("YY",hd,dd),O("YYYY",ld,fd),O("YYYYY",md,gd),O("YYYYYY",md,gd),S(["YYYYY","YYYYYY"],vd),S("YYYY",function(b,c){c[vd]=2===b.length?a.parseTwoDigitYear(b):r(b)}),S("YY",function(b,c){c[vd]=a.parseTwoDigitYear(b)}),S("Y",function(a,b){b[vd]=parseInt(a,10)}),a.parseTwoDigitYear=function(a){return r(a)+(r(a)>68?1900:2e3)};var Qd=E("FullYear",!1);a.ISO_8601=function(){};var Rd=fa("moment().min is deprecated, use moment.min instead. https://github.com/moment/moment/issues/1548",function(){var a=Ea.apply(null,arguments);return this.isValid()&&a.isValid()?this>a?this:a:l()}),Sd=fa("moment().max is deprecated, use moment.max instead. https://github.com/moment/moment/issues/1548",function(){var a=Ea.apply(null,arguments);return this.isValid()&&a.isValid()?a>this?this:a:l()}),Td=function(){return Date.now?Date.now():+new Date};Ka("Z",":"),Ka("ZZ",""),O("Z",qd),O("ZZ",qd),S(["Z","ZZ"],function(a,b,c){c._useUTC=!0,c._tzm=La(qd,a)});var Ud=/([\+\-]|\d\d)/gi;a.updateOffset=function(){};var Vd=/^(\-)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?\d*)?$/,Wd=/^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/;
-Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY-MM-DDTHH:mm:ssZ";var Zd=fa("moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.",function(a){return void 0===a?this.localeData():this.locale(a)});J(0,["gg",2],0,function(){return this.weekYear()%100}),J(0,["GG",2],0,function(){return this.isoWeekYear()%100}),Ib("gggg","weekYear"),Ib("ggggg","weekYear"),Ib("GGGG","isoWeekYear"),Ib("GGGGG","isoWeekYear"),A("weekYear","gg"),A("isoWeekYear","GG"),O("G",od),O("g",od),O("GG",hd,dd),O("gg",hd,dd),O("GGGG",ld,fd),O("gggg",ld,fd),O("GGGGG",md,gd),O("ggggg",md,gd),T(["gggg","ggggg","GGGG","GGGGG"],function(a,b,c,d){b[d.substr(0,2)]=r(a)}),T(["gg","GG"],function(b,c,d,e){c[e]=a.parseTwoDigitYear(b)}),J("Q",0,"Qo","quarter"),A("quarter","Q"),O("Q",cd),S("Q",function(a,b){b[wd]=3*(r(a)-1)}),J("w",["ww",2],"wo","week"),J("W",["WW",2],"Wo","isoWeek"),A("week","w"),A("isoWeek","W"),O("w",hd),O("ww",hd,dd),O("W",hd),O("WW",hd,dd),T(["w","ww","W","WW"],function(a,b,c,d){b[d.substr(0,1)]=r(a)});var $d={dow:0,doy:6};J("D",["DD",2],"Do","date"),A("date","D"),O("D",hd),O("DD",hd,dd),O("Do",function(a,b){return a?b._ordinalParse:b._ordinalParseLenient}),S(["D","DD"],xd),S("Do",function(a,b){b[xd]=r(a.match(hd)[0],10)});var _d=E("Date",!0);J("d",0,"do","day"),J("dd",0,0,function(a){return this.localeData().weekdaysMin(this,a)}),J("ddd",0,0,function(a){return this.localeData().weekdaysShort(this,a)}),J("dddd",0,0,function(a){return this.localeData().weekdays(this,a)}),J("e",0,0,"weekday"),J("E",0,0,"isoWeekday"),A("day","d"),A("weekday","e"),A("isoWeekday","E"),O("d",hd),O("e",hd),O("E",hd),O("dd",sd),O("ddd",sd),O("dddd",sd),T(["dd","ddd","dddd"],function(a,b,c,d){var e=c._locale.weekdaysParse(a,d,c._strict);null!=e?b.d=e:j(c).invalidWeekday=a}),T(["d","e","E"],function(a,b,c,d){b[d]=r(a)});var ae="Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),be="Sun_Mon_Tue_Wed_Thu_Fri_Sat".split("_"),ce="Su_Mo_Tu_We_Th_Fr_Sa".split("_");J("DDD",["DDDD",3],"DDDo","dayOfYear"),A("dayOfYear","DDD"),O("DDD",kd),O("DDDD",ed),S(["DDD","DDDD"],function(a,b,c){c._dayOfYear=r(a)}),J("H",["HH",2],0,"hour"),J("h",["hh",2],0,cc),J("hmm",0,0,function(){return""+cc.apply(this)+I(this.minutes(),2)}),J("hmmss",0,0,function(){return""+cc.apply(this)+I(this.minutes(),2)+I(this.seconds(),2)}),J("Hmm",0,0,function(){return""+this.hours()+I(this.minutes(),2)}),J("Hmmss",0,0,function(){return""+this.hours()+I(this.minutes(),2)+I(this.seconds(),2)}),dc("a",!0),dc("A",!1),A("hour","h"),O("a",ec),O("A",ec),O("H",hd),O("h",hd),O("HH",hd,dd),O("hh",hd,dd),O("hmm",id),O("hmmss",jd),O("Hmm",id),O("Hmmss",jd),S(["H","HH"],yd),S(["a","A"],function(a,b,c){c._isPm=c._locale.isPM(a),c._meridiem=a}),S(["h","hh"],function(a,b,c){b[yd]=r(a),j(c).bigHour=!0}),S("hmm",function(a,b,c){var d=a.length-2;b[yd]=r(a.substr(0,d)),b[zd]=r(a.substr(d)),j(c).bigHour=!0}),S("hmmss",function(a,b,c){var d=a.length-4,e=a.length-2;b[yd]=r(a.substr(0,d)),b[zd]=r(a.substr(d,2)),b[Ad]=r(a.substr(e)),j(c).bigHour=!0}),S("Hmm",function(a,b,c){var d=a.length-2;b[yd]=r(a.substr(0,d)),b[zd]=r(a.substr(d))}),S("Hmmss",function(a,b,c){var d=a.length-4,e=a.length-2;b[yd]=r(a.substr(0,d)),b[zd]=r(a.substr(d,2)),b[Ad]=r(a.substr(e))});var de=/[ap]\.?m?\.?/i,ee=E("Hours",!0);J("m",["mm",2],0,"minute"),A("minute","m"),O("m",hd),O("mm",hd,dd),S(["m","mm"],zd);var fe=E("Minutes",!1);J("s",["ss",2],0,"second"),A("second","s"),O("s",hd),O("ss",hd,dd),S(["s","ss"],Ad);var ge=E("Seconds",!1);J("S",0,0,function(){return~~(this.millisecond()/100)}),J(0,["SS",2],0,function(){return~~(this.millisecond()/10)}),J(0,["SSS",3],0,"millisecond"),J(0,["SSSS",4],0,function(){return 10*this.millisecond()}),J(0,["SSSSS",5],0,function(){return 100*this.millisecond()}),J(0,["SSSSSS",6],0,function(){return 1e3*this.millisecond()}),J(0,["SSSSSSS",7],0,function(){return 1e4*this.millisecond()}),J(0,["SSSSSSSS",8],0,function(){return 1e5*this.millisecond()}),J(0,["SSSSSSSSS",9],0,function(){return 1e6*this.millisecond()}),A("millisecond","ms"),O("S",kd,cd),O("SS",kd,dd),O("SSS",kd,ed);var he;for(he="SSSS";he.length<=9;he+="S")O(he,nd);for(he="S";he.length<=9;he+="S")S(he,hc);var ie=E("Milliseconds",!1);J("z",0,0,"zoneAbbr"),J("zz",0,0,"zoneName");var je=o.prototype;je.add=Xd,je.calendar=db,je.clone=eb,je.diff=lb,je.endOf=xb,je.format=pb,je.from=qb,je.fromNow=rb,je.to=sb,je.toNow=tb,je.get=H,je.invalidAt=Gb,je.isAfter=fb,je.isBefore=gb,je.isBetween=hb,je.isSame=ib,je.isSameOrAfter=jb,je.isSameOrBefore=kb,je.isValid=Eb,je.lang=Zd,je.locale=ub,je.localeData=vb,je.max=Sd,je.min=Rd,je.parsingFlags=Fb,je.set=H,je.startOf=wb,je.subtract=Yd,je.toArray=Bb,je.toObject=Cb,je.toDate=Ab,je.toISOString=ob,je.toJSON=Db,je.toString=nb,je.unix=zb,je.valueOf=yb,je.creationData=Hb,je.year=Qd,je.isLeapYear=na,je.weekYear=Jb,je.isoWeekYear=Kb,je.quarter=je.quarters=Pb,je.month=$,je.daysInMonth=_,je.week=je.weeks=Tb,je.isoWeek=je.isoWeeks=Ub,je.weeksInYear=Mb,je.isoWeeksInYear=Lb,je.date=_d,je.day=je.days=$b,je.weekday=_b,je.isoWeekday=ac,je.dayOfYear=bc,je.hour=je.hours=ee,je.minute=je.minutes=fe,je.second=je.seconds=ge,je.millisecond=je.milliseconds=ie,je.utcOffset=Oa,je.utc=Qa,je.local=Ra,je.parseZone=Sa,je.hasAlignedHourOffset=Ta,je.isDST=Ua,je.isDSTShifted=Va,je.isLocal=Wa,je.isUtcOffset=Xa,je.isUtc=Ya,je.isUTC=Ya,je.zoneAbbr=ic,je.zoneName=jc,je.dates=fa("dates accessor is deprecated. Use date instead.",_d),je.months=fa("months accessor is deprecated. Use month instead",$),je.years=fa("years accessor is deprecated. Use year instead",Qd),je.zone=fa("moment().zone is deprecated, use moment().utcOffset instead. https://github.com/moment/moment/issues/1779",Pa);var ke=je,le={sameDay:"[Today at] LT",nextDay:"[Tomorrow at] LT",nextWeek:"dddd [at] LT",lastDay:"[Yesterday at] LT",lastWeek:"[Last] dddd [at] LT",sameElse:"L"},me={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"},ne="Invalid date",oe="%d",pe=/\d{1,2}/,qe={future:"in %s",past:"%s ago",s:"a few seconds",m:"a minute",mm:"%d minutes",h:"an hour",hh:"%d hours",d:"a day",dd:"%d days",M:"a month",MM:"%d months",y:"a year",yy:"%d years"},re=t.prototype;re._calendar=le,re.calendar=mc,re._longDateFormat=me,re.longDateFormat=nc,re._invalidDate=ne,re.invalidDate=oc,re._ordinal=oe,re.ordinal=pc,re._ordinalParse=pe,re.preparse=qc,re.postformat=qc,re._relativeTime=qe,re.relativeTime=rc,re.pastFuture=sc,re.set=tc,re.months=W,re._months=Fd,re.monthsShort=X,re._monthsShort=Gd,re.monthsParse=Y,re._monthsRegex=Id,re.monthsRegex=ba,re._monthsShortRegex=Hd,re.monthsShortRegex=aa,re.week=Qb,re._week=$d,re.firstDayOfYear=Sb,re.firstDayOfWeek=Rb,re.weekdays=Wb,re._weekdays=ae,re.weekdaysMin=Yb,re._weekdaysMin=ce,re.weekdaysShort=Xb,re._weekdaysShort=be,re.weekdaysParse=Zb,re.isPM=fc,re._meridiemParse=de,re.meridiem=gc,x("en",{ordinalParse:/\d{1,2}(th|st|nd|rd)/,ordinal:function(a){var b=a%10,c=1===r(a%100/10)?"th":1===b?"st":2===b?"nd":3===b?"rd":"th";return a+c}}),a.lang=fa("moment.lang is deprecated. Use moment.locale instead.",x),a.langData=fa("moment.langData is deprecated. Use moment.localeData instead.",z);var se=Math.abs,te=Lc("ms"),ue=Lc("s"),ve=Lc("m"),we=Lc("h"),xe=Lc("d"),ye=Lc("w"),ze=Lc("M"),Ae=Lc("y"),Be=Nc("milliseconds"),Ce=Nc("seconds"),De=Nc("minutes"),Ee=Nc("hours"),Fe=Nc("days"),Ge=Nc("months"),He=Nc("years"),Ie=Math.round,Je={s:45,m:45,h:22,d:26,M:11},Ke=Math.abs,Le=Ia.prototype;Le.abs=Bc,Le.add=Dc,Le.subtract=Ec,Le.as=Jc,Le.asMilliseconds=te,Le.asSeconds=ue,Le.asMinutes=ve,Le.asHours=we,Le.asDays=xe,Le.asWeeks=ye,Le.asMonths=ze,Le.asYears=Ae,Le.valueOf=Kc,Le._bubble=Gc,Le.get=Mc,Le.milliseconds=Be,Le.seconds=Ce,Le.minutes=De,Le.hours=Ee,Le.days=Fe,Le.weeks=Oc,Le.months=Ge,Le.years=He,Le.humanize=Sc,Le.toISOString=Tc,Le.toString=Tc,Le.toJSON=Tc,Le.locale=ub,Le.localeData=vb,Le.toIsoString=fa("toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)",Tc),Le.lang=Zd,J("X",0,0,"unix"),J("x",0,0,"valueOf"),O("x",od),O("X",rd),S("X",function(a,b,c){c._d=new Date(1e3*parseFloat(a,10))}),S("x",function(a,b,c){c._d=new Date(r(a))}),a.version="2.11.2",b(Ea),a.fn=ke,a.min=Ga,a.max=Ha,a.now=Td,a.utc=h,a.unix=kc,a.months=wc,a.isDate=d,a.locale=x,a.invalid=l,a.duration=Za,a.isMoment=p,a.weekdays=yc,a.parseZone=lc,a.localeData=z,a.isDuration=Ja,a.monthsShort=xc,a.weekdaysMin=Ac,a.defineLocale=y,a.weekdaysShort=zc,a.normalizeUnits=B,a.relativeTimeThreshold=Rc,a.prototype=ke;var Me=a;return Me});</script>
-<script>
-  window.vaadin = window.vaadin || {};
-  vaadin.elements = vaadin.elements || {};
-  vaadin.elements.datepicker = vaadin.elements.datepicker || {};
-
-  /** @polymerBehavior */
-  vaadin.elements.datepicker.LocaleAwareBehavior = {
-    properties: {
-      /**
-       * Locale of this element used for formatting and naming of months and days.
-       * Must be a locale supported by [Moment.js](http://momentjs.com/),
-       * for example `en-gb`, `fi`, `es`, etc.
-       */
-      locale: {
-        type: String,
-        value: 'en',
-        observer: '_localeChanged'
-      }
-    },
-
-    _localeChanged: function(locale) {
-      var done = function() {
-        this.fire('locale-ready', {
-          locale: locale
-        }, {
-          bubbles: false
-        });
-      }.bind(this);
-
-      if (!moment.localeData(locale)) {
-        // Load additional locales as needed.
-        var scriptElem = document.createElement('script');
-        scriptElem.src = this.resolveUrl('../moment/locale/' + locale + '.js');
-        scriptElem.addEventListener('load', done);
-
-        document.head.appendChild(scriptElem);
-      } else {
-        // Already ready for use.
-        done();
-      }
-    },
-
-    _formatValue: function(value, locale) {
-      if (value) {
-        return moment(value).format(moment.localeData(locale).longDateFormat('L'));
-      }
-    }
-  };
-</script>
 <dom-module id="vaadin-month-calendar" assetpath="bower_components/vaadin-date-picker/">
   <template>
     <style>
@@ -28687,18 +28979,15 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         user-select: none;
         font: inherit;
         @apply(--paper-font-common-base);
+        @apply(--vaadin-date-picker-calendar);
       }
 
       #title {
+        color: var(--vaadin-date-picker-calendar-title-color, --primary-text-color);
         text-align: center;
-        padding: 0.4em 1em;
+        padding: 6px 0;
         @apply(--paper-font-subhead);
-      }
-
-      #title span {
-        position: absolute;
-        left: 1em;
-        color: #999;
+        @apply(--vaadin-date-picker-calendar-title);
       }
 
       #monthGrid {
@@ -28710,46 +28999,56 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         text-align: center;
         width: 14.285714286%;
         box-sizing: border-box;
-        padding: 0.4em 0;
+        padding: 6px 0;
         @apply(--paper-font-body1);
+        @apply(--vaadin-date-picker-calendar-cell);
       }
 
       #monthGrid div:not(:empty) {
         cursor: pointer;
+        color: var(--vaadin-date-picker-calendar-date-cell-color, --primary-text-color);
+        @apply(--vaadin-date-picker-calendar-date-cell);
       }
 
       #monthGrid div.weekday {
         text-transform: uppercase;
-        color: #999;
+        color: var(--vaadin-date-picker-weekday-cell-color, --secondary-text-color);
         cursor: default;
-        padding: 0.7em 0;
+        padding: 8px 0;
         @apply(--paper-font-caption);
+        @apply(--vaadin-date-picker-calendar-weekday-cell);
       }
 
       #monthGrid div[today] {
         position: relative;
-        color: #03a9f4;
+        color: var(--vaadin-date-picker-today-color, --accent-color);
       }
 
-      #monthGrid div[today][selected]:before {
-        border-color: #fff;
+      #monthGrid div[today][selected] {
+        color: var(--vaadin-date-picker-today-selected-color, --light-accent-color);
+      }
+
+      #monthGrid div[focused] {
+        background: var(--vaadin-date-picker-focused-background, --light-primary-color);
+        box-sizing: border-box;
+        border-radius: 2px;
       }
 
       #monthGrid div[selected] {
-        color: #fff;
-        background: #03a9f4;
+        color: var(--vaadin-date-picker-selected-color, --light-primary-color);
+        background: var(--vaadin-date-picker-selected-background, --default-primary-color);
         box-sizing: border-box;
         border-radius: 2px;
       }
     </style>
 
-    <div id="title">[[_getTitle(month, _monthNames)]]</div>
+    <div id="title">[[_getTitle(month, i18n.monthNames)]]</div>
     <div id="monthGrid" on-tap="_handleTap">
-      <template is="dom-repeat" items="[[_getWeekDayNames(_weekDayNames, _firstDayOfWeek)]]">
+      <template is="dom-repeat" items="[[_getWeekDayNames(i18n.weekdaysShort, i18n.firstDayOfWeek)]]">
         <div class="weekday">[[item]]</div>
       </template>
-      <template is="dom-repeat" items="[[_getDays(month, _firstDayOfWeek)]]">
-        <div today$="[[_isToday(item)]]" selected$="[[_isSelected(item, selectedDate)]]" date="[[item]]">[[_getDate(item)]]</div>
+      <template is="dom-repeat" items="[[_getDays(month, i18n.firstDayOfWeek)]]">
+        <div today$="[[_isToday(item)]]" selected$="[[_dateEquals(item, selectedDate)]]" focused$="[[_dateEquals(item, focusedDate)]]" date="[[item]]">[[_getDate(item)]]</div>
       </template>
     </div>
   </template>
@@ -28757,16 +29056,7 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
     Polymer({
       is: 'vaadin-month-calendar',
 
-      behaviors: [
-        vaadin.elements.datepicker.LocaleAwareBehavior
-      ],
-
-      listeners: {
-        'locale-ready': '_localeReady'
-      },
-
       properties: {
-
         /**
          * A `Date` object defining the month to be displayed. Only year and
          * month properties are actually used.
@@ -28784,18 +29074,14 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
           notify: true
         },
 
-        _monthNames: Array,
+        /**
+         * A `Date` object for the currently focused date.
+         */
+        focusedDate: Date,
 
-        _weekDayNames: Array,
-
-        _firstDayOfWeek: Number
-      },
-
-      _localeReady: function(e) {
-        var locale = e.detail.locale;
-        this._weekDayNames = moment.localeData(locale)._weekdaysShort;
-        this._monthNames = moment.localeData(locale)._months;
-        this._firstDayOfWeek = moment.localeData(locale)._week.dow;
+        i18n: {
+          type: Object
+        }
       },
 
       _getTitle: function(month, monthNames) {
@@ -28824,20 +29110,19 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         return date ? date.getDate() : '';
       },
 
-      _isSelected: function(date, selectedDate) {
-        return this._dateEquals(selectedDate, date);
-      },
-
       _isToday: function(date) {
         return this._dateEquals(new Date(), date);
       },
 
       _getDays: function() {
-        // First day of the month (at noon).
-        var date = new Date(this.month.getFullYear(), this.month.getMonth(), 1, 12, 0, 0);
+        // First day of the month (at midnight).
+        var date = new Date(0, 0);
+        date.setFullYear(this.month.getFullYear());
+        date.setMonth(this.month.getMonth());
+        date.setDate(1);
 
         // Rewind to first day of the week.
-        while (date.getDay() !== this._firstDayOfWeek) {
+        while (date.getDay() !== this.i18n.firstDayOfWeek) {
           this._dateAdd(date, -1);
         }
 
@@ -28845,7 +29130,7 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         var startMonth = date.getMonth();
         var targetMonth = this.month.getMonth();
         while (date.getMonth() === targetMonth || date.getMonth() === startMonth) {
-          days.push(date.getMonth() === targetMonth ? new Date(date) : null);
+          days.push(date.getMonth() === targetMonth ? new Date(date.getTime()) : null);
 
           // Advance to next day.
           this._dateAdd(date, 1);
@@ -28878,6 +29163,10 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
       margin-right: -40px;
       -webkit-overflow-scrolling: touch;
       -ms-overflow-style: none;
+    }
+
+    #scroller.notouchscroll {
+      -webkit-overflow-scrolling: auto;
     }
 
     #scroller::-webkit-scrollbar {
@@ -28951,7 +29240,9 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
 
       _preventScrollEvent: Boolean,
 
-      _bufferHeight: Number
+      _bufferHeight: Number,
+
+      _mayHaveMomentum: Boolean
     },
 
     ready: function() {
@@ -28987,8 +29278,9 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
       }
 
       // Check if we scrolled enough to translate the buffer positions.
-      var upperThresholdReached = scrollTop > this._buffers[1].translateY + this._bufferHeight / 2;
-      var lowerThresholdReached = scrollTop < this._buffers[0].translateY + this._bufferHeight / 2;
+      var bufferOffset = this.$$('.buffer').offsetTop;
+      var upperThresholdReached = scrollTop > this._buffers[1].translateY + this.itemHeight + bufferOffset;
+      var lowerThresholdReached = scrollTop < this._buffers[0].translateY + this.itemHeight + bufferOffset;
 
       if (upperThresholdReached || lowerThresholdReached) {
         this._translateBuffer(lowerThresholdReached);
@@ -28997,6 +29289,7 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
 
       if (!this._preventScrollEvent) {
         this.fire('scroll');
+        this._mayHaveMomentum = true;
       }
       this._preventScrollEvent = false;
     },
@@ -29017,6 +29310,18 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         this.$.scroller.scrollTop += index % 1 * this.itemHeight;
         this.listen(this.$.scroller, 'scroll', '_scroll');
       }
+
+      if (this._mayHaveMomentum) {
+        // Stop the possible iOS Safari momentum with -webkit-overflow-scrolling: auto;
+        this.$.scroller.classList.add('notouchscroll');
+        this._mayHaveMomentum = false;
+
+        this.async(function() {
+          // Restore -webkit-overflow-scrolling: touch; after a small delay.
+          this.$.scroller.classList.remove('notouchscroll');
+        }, 10);
+      }
+
     },
 
     /**
@@ -29094,7 +29399,23 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
           });
         });
       }
+    },
+
+    /**
+     * Implements extension point from Templatizer
+     * Called as side-effect of a host path change, responsible for
+     * notifying parent.<path> path change on each row.
+     */
+    _forwardParentPath: function(prop, value) {
+      if (prop !== 'index') {
+        this._buffers.forEach(function(buffer) {
+          [].forEach.call(buffer.children, function(itemWrapper) {
+            itemWrapper.instance.notifyPath(prop, value, true);
+          });
+        });
+      }
     }
+
   });
 </script>
 <dom-module id="vaadin-date-picker-overlay" assetpath="bower_components/vaadin-date-picker/">
@@ -29105,30 +29426,37 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         flex-direction: column;
         height: 100%;
         width: 100%;
-        background: #fff;
+        background: var(--vaadin-date-picker-background, --primary-background-color);
         font: inherit;
+        outline: none;
         @apply(--paper-font-common-base);
         @apply(--shadow-elevation-2dp);
       }
 
       #toolbar {
-        cursor: pointer;
-        padding: 1em;
-        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        padding: 14px;
+        background: var(--vaadin-date-picker-background, --primary-background-color);
         z-index: 2;
         @apply(--paper-font-button);
         @apply(--shadow-elevation-2dp);
+        flex-shrink: 0;
+        color: var(--vaadin-date-picker-toolbar-color, --default-primary-color);
+        @apply(--vaadin-date-picker-toolbar);
       }
 
       #toolbar:not([desktop]) {
-        color: #03a9f4;
+        cursor: pointer;
+      }
+
+      #toolbar[desktop] iron-icon {
+        visibility: hidden;
       }
 
       #toolbar iron-icon {
-        fill: #03a9f4;
+        fill: var(--vaadin-date-picker-toolbar-color, --default-primary-color);
         padding: 0px;
-        position: absolute;
-        right: 1em;
         transition: transform 200ms;
         --iron-icon-width: 20px;
         --iron-icon-height: 20px;
@@ -29154,12 +29482,13 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
       #scrollers #fade {
         pointer-events: none;
         display: block;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+        background: linear-gradient(90deg, var(--vaadin-date-picker-background, --primary-background-color), rgba(255, 255, 255, 0));
         width: 50px;
         position: absolute;
         height: 100%;
         z-index: 1;
         transform: translateX(-100%);
+        @apply(--vaadin-date-picker-scrollers-fade);
       }
 
       #scrollers[desktop] #fade {
@@ -29188,8 +29517,8 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
       #yearScroller {
         text-align: center;
         width: 50px;
-        background: #444;
-        color: #d2d2d2;
+        background: var(--vaadin-date-picker-yearscroller-background, --dark-theme-background-color);
+        color: var(--vaadin-date-picker-yearscroller-color, --dark-theme-secondary-color);
         cursor: pointer;
         position: absolute;
         right: 0;
@@ -29210,19 +29539,11 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         transform: none !important;
       }
 
-      #scroller {
-        /* Center the month scroller position. */
-        --vaadin-infinite-scroller-buffer: {
-          top: 50%;
-          margin-top: -125px;
-        }
-      }
-
       #yearScroller {
         /* Center the year scroller position. */
         --vaadin-infinite-scroller-buffer: {
           top: 50%;
-          margin-top: -1.6em;
+          margin-top: -37px;
         }
       }
 
@@ -29239,18 +29560,19 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         border-width: 6px;
         border-style: solid;
         border-color: transparent;
-        border-left-color: #fff;
+        border-left-color: var(--vaadin-date-picker-background, --primary-background-color);;
       }
 
       #yearScroller div:after {
         content: "• • • • • ";
         display: block;
         font-size: 18px;
-        line-height: 1.3em;
-        width: 0.5em;
-        margin: 0.3em auto;
+        line-height: 23px;
+        width: 9px;
+        margin: 6px auto;
         opacity: 0.3;
         white-space: normal;
+        @apply(--vaadin-date-picker-yearscroller-item);
       }
 
       :host(.animate) vaadin-infinite-scroller {
@@ -29261,15 +29583,22 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         display: none;
       }
 
+      :host([fullscreen]) #toolbar[desktop] {
+        display: none;
+      }
+
       #header {
-        background: #03a9f4;
+        background: var(--vaadin-date-picker-header-background, --default-primary-color);
         padding: 0 1em;
         flex-shrink: 0;
+        @apply(--paper-font-subhead);
+        @apply(--shadow-elevation-2dp);
+        @apply(--vaadin-date-picker-header);
       }
 
       #header label,
       #header input {
-        color: #fff;
+        color: var(--dark-theme-text-color);
       }
 
       #header paper-input-container {
@@ -29282,7 +29611,7 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
       }
 
       #clear {
-        color: #fff;
+        color: var(--dark-theme-text-color);
         cursor: pointer;
         display: none;
       }
@@ -29294,45 +29623,47 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
       #footer {
         display: flex;
         justify-content: space-between;
-        padding: 0.3em;
-        font-size: 90%;
-        font-weight: bold;
-        background: #fff;
+        padding: 4px;
+        @apply(--paper-font-body2);
+        background: var(--vaadin-date-picker-background, --primary-background-color);;
         z-index: 2;
-        box-shadow: 0 -3px 4px 0 rgba(0, 0, 0, 0.14);
-        color: #03a9f4;
+        box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.50);
+        color: var(--vaadin-date-picker-footer-color, --default-primary-color);
+        flex-shrink: 0;
+        @apply(--vaadin-date-picker-footer);
       }
 
       #footer paper-button {
-        padding-bottom: 1.1em;
+        display: flex;
+        align-items: center;
       }
 
-      #cancelButton {
-        padding-top: 0.9em;
+      #todayButton iron-icon {
+        padding-right: 5px;
       }
     </style>
 
     <div id="header" on-touchend="_preventDefault">
       <paper-input-container>
         <label>[[label]]</label>
-        <input id="input" readonly="" is="iron-input" autocomplete="off" bind-value="[[_formatValue(selectedDate, locale)]]">
+        <input id="input" readonly="" is="iron-input" autocomplete="off" bind-value="[[_formatDisplayed(selectedDate, i18n.formatDate)]]">
         <iron-icon id="clear" suffix="" on-tap="_clear" icon="clear" showclear$="[[_showClear(selectedDate)]]"></iron-icon>
       </paper-input-container>
     </div>
 
     <div id="toolbar" desktop$="[[_desktopMode]]" on-tap="_toggleYearScroller">
       [[_yearAfterXMonths(_visibleMonthIndex)]]
-      <iron-icon hidden$="[[_desktopMode]]" rotate$="[[_isYearScrollerVisible(_translateX)]]" icon="chevron-right"></iron-icon>
+      <iron-icon rotate$="[[_isYearScrollerVisible(_translateX)]]" icon="chevron-right"></iron-icon>
     </div>
 
     <div id="scrollers" desktop$="[[_desktopMode]]">
       <div id="fade"></div>
-      <vaadin-infinite-scroller id="scroller" on-scroll="_onMonthScroll" on-track="_track" item-height="250" buffer-size="6">
+      <vaadin-infinite-scroller id="scroller" on-scroll="_onMonthScroll" on-touchstart="_onMonthScroll" on-track="_track" item-height="250" buffer-size="6">
         <template>
-          <vaadin-month-calendar locale="[[locale]]" month="[[_dateAfterXMonths(index)]]" selected-date="{{selectedDate}}"></vaadin-month-calendar>
+          <vaadin-month-calendar i18n="[[i18n]]" month="[[_dateAfterXMonths(index)]]" selected-date="{{selectedDate}}" focused-date="[[focusedDate]]"></vaadin-month-calendar>
         </template>
       </vaadin-infinite-scroller>
-      <vaadin-infinite-scroller id="yearScroller" on-tap="_onYearTap" on-scroll="_onYearScroll" item-height="150" buffer-size="50">
+      <vaadin-infinite-scroller id="yearScroller" on-tap="_onYearTap" on-scroll="_onYearScroll" on-touchstart="_onYearScroll" item-height="150" buffer-size="10">
         <template>
           <div>[[_yearAfterXYears(index)]]</div>
         </template>
@@ -29342,10 +29673,10 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
     <div id="footer" on-touchend="_preventDefault">
       <paper-button id="todayButton" on-tap="_scrollToCurrentMonth">
         <iron-icon icon="today"></iron-icon>
-        Today
+        [[i18n.today]]
       </paper-button>
-      <paper-button id="cancelButton" on-tap="_cancel">
-        Cancel
+      <paper-button id="cancelButton" on-tap="_close">
+        [[i18n.cancel]]
       </paper-button>
     </div>
 
@@ -29355,9 +29686,9 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
     Polymer({
       is: 'vaadin-date-picker-overlay',
 
-      behaviors: [
-        vaadin.elements.datepicker.LocaleAwareBehavior
-      ],
+      listeners: {
+        'keydown': '_onKeydown'
+      },
 
       properties: {
         /**
@@ -29369,12 +29700,19 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         },
 
         /**
-         * Locale of this element used for formatting and naming of months and days.
-         * Must be a locale supported by [Moment.js](http://momentjs.com/),
-         * for example `en-gb`, `fi`, `es`, etc.
+         * Date value which is focused using keyboard.
          */
-        locale: {
-          type: String
+        focusedDate: {
+          type: Date,
+          observer: '_focusedDateChanged'
+        },
+
+        /**
+         * Date which should be visible when there is no value selected.
+         */
+        initialPosition: {
+          type: Date,
+          observer: '_initialPositionChanged'
         },
 
         _originDate: {
@@ -29391,9 +29729,19 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
 
         _yearScrollerWidth: {
           value: 50
-        }
+        },
 
+        i18n: {
+          type: Object
+        }
       },
+
+      /**
+       * Fired when the scroller reaches the target scrolling position.
+       * @event scroll-animation-finished
+       * @param {Number} detail.position new position
+       * @param {Number} detail.oldPosition old position
+       */
 
       attached: function() {
         this._translateX = this._yearScrollerWidth;
@@ -29404,31 +29752,78 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
       /**
        * Scrolls the list to the given Date.
        */
-      scrollToDate: function(date) {
-        this.$.scroller.position = this._differenceInMonths(date, this._originDate);
-        this.async(this._onMonthScroll, 1);
+      scrollToDate: function(date, animate) {
+        this._scrollToPosition(this._differenceInMonths(date, this._originDate), animate);
       },
 
-      _onMonthScroll: function() {
+      _focusedDateChanged: function(focusedDate, oldFocusedDate) {
+        if (focusedDate) {
+          var diff = this._differenceInMonths(focusedDate, this._originDate);
+          var scrolledAboveViewport = this.$.scroller.position > diff;
+
+          var visibleItems = this.$.scroller.clientHeight / this.$.scroller.itemHeight;
+          var scrolledBelowViewport = this.$.scroller.position + visibleItems - 1 < diff;
+
+          if (scrolledAboveViewport) {
+            this._scrollToPosition(diff, true);
+          } else if (scrolledBelowViewport) {
+            this._scrollToPosition(diff - visibleItems + 1, true);
+          }
+        }
+      },
+
+      _initialPositionChanged: function(initialPosition) {
+        this.scrollToDate(initialPosition);
+      },
+
+      _onMonthScroll: function(e) {
         this._visibleMonthIndex = Math.floor(this.$.scroller.position);
         this.$.yearScroller.position = this.$.scroller.position / 12;
+        if (e) {
+          e.stopPropagation();
+        }
       },
 
-      _onYearScroll: function() {
+      _onYearScroll: function(e) {
         this.$.scroller.position = this.$.yearScroller.position * 12;
-
         this._visibleMonthIndex = Math.floor(this.$.scroller.position);
+        if (e) {
+          e.stopPropagation();
+        }
+      },
+
+      _formatDisplayed: function(date, formatDate) {
+        if (date) {
+          return formatDate(date);
+        }
       },
 
       _scrollToCurrentMonth: function() {
-        this.scrollToDate(new Date());
+        this.focusedDate = new Date();
+        this.scrollToDate(new Date(), true);
+
+        // focus for keyboard navigation.
+        this.focus();
       },
 
       _showClear: function(selectedDate) {
-        return selectedDate !== '';
+        return selectedDate !== null;
       },
 
       _onYearTap: function(e) {
+        var scrollDelta = e.detail.y - (this.$.yearScroller.getBoundingClientRect().top + this.$.yearScroller.clientHeight / 2);
+        var yearDelta = scrollDelta / this.$.yearScroller.itemHeight;
+        this._scrollToPosition(this.$.scroller.position + yearDelta * 12, true);
+      },
+
+      _scrollToPosition: function(targetPosition, animate) {
+        if (this._targetPosition !== undefined) {
+          this._targetPosition = targetPosition;
+          return;
+        }
+
+        this._targetPosition = targetPosition;
+
         // http://gizma.com/easing/
         var easingFunction = function(t, b, c, d) {
           t /= d / 2;
@@ -29439,20 +29834,25 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
           return -c / 2 * (t * (t - 2) - 1) + b;
         };
 
-        var scrollDelta = e.detail.y - (this.$.yearScroller.getBoundingClientRect().top + this.$.yearScroller.clientHeight / 2);
+        var duration = animate ? 300 : 0;
         var start = 0;
-        var duration = 300;
-        var initialScrollTop = this.$.yearScroller.$.scroller.scrollTop;
-        var smoothScroll = function(timestamp) {
-          start = start ||  timestamp;
+        var initialPosition = this.$.scroller.position;
 
+        var smoothScroll = function(timestamp) {
+          start = start || timestamp;
           var currentTime = timestamp - start;
-          var currentPos = easingFunction(currentTime, initialScrollTop, scrollDelta, duration);
-          this.$.yearScroller.$.scroller.scrollTop = currentPos;
 
           if (currentTime < duration) {
+            var currentPos = easingFunction(currentTime, initialPosition, this._targetPosition - initialPosition, duration);
+            this.$.scroller.position = currentPos;
             window.requestAnimationFrame(smoothScroll);
+          } else {
+            this.fire('scroll-animation-finished', {position: this._targetPosition, oldPosition: initialPosition});
+            this.$.scroller.position = this._targetPosition;
+            this._targetPosition = undefined;
           }
+
+          this.async(this._onMonthScroll, 1);
         }.bind(this);
 
         // Start the animation.
@@ -29541,15 +29941,101 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
 
       _clear: function() {
         this.selectedDate = '';
-        this._cancel();
+        this._close();
       },
 
-      _cancel: function() {
-        this.fire('cancel');
+      _close: function() {
+        this.fire('close');
       },
 
       _preventDefault: function(e) {
         e.preventDefault();
+      },
+
+      /**
+       * Keyboard Navigation
+       */
+      _eventKey: function(e) {
+        var keys = ['down', 'up', 'right', 'left', 'enter', 'space', 'home', 'end', 'pageup', 'pagedown'];
+
+        for (var i = 0; i < keys.length; i++) {
+          var k = keys[i];
+          if (Polymer.IronA11yKeysBehavior.keyboardEventMatchesKeys(e, k)) {
+            return k;
+          }
+        }
+      },
+
+      _onKeydown: function(e) {
+        var focus = this._currentlyFocusedDate();
+
+        e.preventDefault();
+
+        switch (this._eventKey(e)) {
+          case 'down':
+            this._moveFocusByDays(7);
+            break;
+          case 'up':
+            this._moveFocusByDays(-7);
+            break;
+          case 'right':
+            this._moveFocusByDays(1);
+            break;
+          case 'left':
+            this._moveFocusByDays(-1);
+            break;
+          case 'enter':
+            if (this.focusedDate) {
+              this.selectedDate = this.focusedDate;
+            }
+            this._close();
+            break;
+          case 'space':
+            if (this._dateEquals(this.focusedDate, this.selectedDate)) {
+              this.selectedDate = '';
+            } else {
+              this.selectedDate = this.focusedDate;
+            }
+            break;
+          case 'home':
+            this.focusedDate = new Date(focus.getFullYear(), focus.getMonth(), 1);
+            break;
+          case 'end':
+            this.focusedDate = new Date(focus.getFullYear(), focus.getMonth() + 1, 0);
+            break;
+          case 'pagedown':
+            this._moveFocusByMonths(e.shiftKey ? 12 : 1);
+            break;
+          case 'pageup':
+            this._moveFocusByMonths(e.shiftKey ? -12 : -1);
+            break;
+        }
+      },
+
+      _dateEquals: function(date1, date2) {
+        if (date1 && date2) {
+          return date1.getFullYear() === date2.getFullYear() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getDate() === date2.getDate();
+        } else {
+          return false;
+        }
+      },
+
+      _currentlyFocusedDate: function() {
+        return this.focusedDate || this.selectedDate || this.initialPosition || new Date();
+      },
+
+      _moveFocusByDays: function(days) {
+        var focus = this._currentlyFocusedDate();
+
+        this.focusedDate = new Date(focus.getFullYear(), focus.getMonth(), focus.getDate() + days);
+      },
+
+      _moveFocusByMonths: function(months) {
+        var focus = this._currentlyFocusedDate();
+
+        this.focusedDate = new Date(focus.getFullYear(), focus.getMonth() + months, focus.getDate());
       }
     });
   </script>
@@ -29561,14 +30047,22 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         display: block;
       }
 
+      #dropdown:not([fullscreen]) {
+        margin: 10px 0;
+      }
+
       #overlay {
         height: 100vh;
         width: 420px;
       }
 
       #inputcontainer,
-      #inputcontainer input  {
+      #inputcontainer input {
         cursor: pointer;
+      }
+
+      #inputcontainer:focus {
+        outline: none;
       }
 
       #inputcontainer:not([hideclear]) #input {
@@ -29576,31 +30070,52 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
         display: block;
       }
 
+      #input {
+        pointer-events: none
+      }
+
       #clear,
       #calendar {
+        position: relative;
+      }
+
+      #clear iron-icon,
+      #calendar iron-icon {
         width: 24px;
-        fill: var(--secondary-text-color, #222);
+        height: 20px;
+        fill: var(--secondary-text-color);
+      }
+
+      #clear iron-icon {
+        @apply(--vaadin-date-picker-clear-icon);
+      }
+
+      #calendar iron-icon {
+        @apply(--vaadin-date-picker-calendar-icon);
       }
 
       [hideclear] #clear {
         display: none;
       }
-
-      #calendar[open] {
-        /* Prevent immediate re-opening when the overlay is already open. */
-        pointer-events: none;
-      }
     </style>
 
-    <paper-input-container id="inputcontainer" hideclear$="[[_hideClearIcon(value, _opened, _fullscreen)]]" on-touchend="_preventDefault">
-      <label id="label" on-tap="_open">[[label]]</label>
-      <input id="input" readonly="" is="iron-input" autocomplete="off" bind-value="[[_formatValue(value, _readyLocale)]]" type="text" on-tap="_open">
-      <iron-icon id="clear" suffix="" on-tap="_clear" icon="clear"></iron-icon>
-      <iron-icon id="calendar" suffix="" on-tap="_open" icon="event" open$="{{_opened}}"></iron-icon>
+    <paper-input-container id="inputcontainer" hideclear$="[[_hideClearIcon(_selectedDate, _opened, _fullscreen)]]" tabindex="0" on-touchend="_preventDefault" on-tap="open" on-keydown="_onKeydown">
+      <label id="label">[[label]]</label>
+      <input id="input" is="iron-input" autocomplete="off" bind-value="[[_formatDisplayed(_selectedDate, i18n.formatDate)]]" type="text" invalid="[[invalid]]" name$="[[name]]" required$="[[required]]" tabindex="-1" on-focus="_focusInputContainer">
+
+      <div suffix="" id="clear" on-tap="_clear" hidden$="[[_hideClearIcon(value, opened)]]">
+        <iron-icon icon="clear"></iron-icon>
+        <paper-ripple class="circle" center=""></paper-ripple>
+      </div>
+
+      <div suffix="" id="calendar" on-tap="_toggle">
+        <iron-icon icon="event"></iron-icon>
+        <paper-ripple class="circle" center=""></paper-ripple>
+      </div>
     </paper-input-container>
 
-    <iron-dropdown id="dropdown" allow-outside-scroll="" on-iron-overlay-opened="_onOverlayOpened" opened="{{_opened}}">
-      <vaadin-date-picker-overlay id="overlay" fullscreen$="[[_fullscreen]]" label="[[label]]" locale="[[_readyLocale]]" on-date-tap="_close" selected-date="{{value}}" class="dropdown-content" on-cancel="_close"></vaadin-date-picker-overlay>
+    <iron-dropdown id="dropdown" fullscreen$="[[_fullscreen]]" allow-outside-scroll="" on-iron-overlay-opened="_onOverlayOpened" on-iron-overlay-closed="_onOverlayClosed" on-iron-overlay-canceled="_preventCancelOnInputContainerTap" opened="{{_opened}}">
+      <vaadin-date-picker-overlay id="overlay" i18n="[[i18n]]" fullscreen$="[[_fullscreen]]" label="[[label]]" on-date-tap="close" selected-date="{{_selectedDate}}" class="dropdown-content" on-close="close" focused-date="[[focusedDate]]" tabindex="-1"></vaadin-date-picker-overlay>
     </iron-dropdown>
 
     <iron-media-query query="[[_fullscreenMediaQuery]]" query-matches="{{_fullscreen}}"></iron-media-query>
@@ -29610,103 +30125,316 @@ Za.fn=Ia.prototype;var Xd=bb(1,"add"),Yd=bb(-1,"subtract");a.defaultFormat="YYYY
       is: 'vaadin-date-picker',
 
       behaviors: [
-        vaadin.elements.datepicker.LocaleAwareBehavior
+        Polymer.IronFormElementBehavior,
+        Polymer.IronValidatableBehavior
       ],
-
-      listeners: {
-        'locale-ready': '_localeReady'
-      },
 
       properties: {
 
         /**
-         * The value for this element.
+         * The current selected date.
          */
-        value: {
+        _selectedDate: {
           type: Date,
           notify: true,
-          value: ''
+          observer: '_selectedDateChanged'
+        },
+
+        /**
+         * The value for this element.
+         *
+         * Supported date formats:
+         * - ISO 8601 `"YYYY-MM-DD"` (default)
+         * - 6-digit extended ISO 8601 `"+YYYYYY-MM-DD"`, `"-YYYYYY-MM-DD"`
+         *
+         * @type {String}
+         */
+        value: {
+          type: String,
+          value: '',
+          observer: '_valueChanged'
         },
 
         /**
          * Date which should be visible when there is no value selected.
+         *
+         * The same date formats as for the `value` property are supported.
          */
-        initialPosition: {
-          type: Date,
-          value: function() {
-            return new Date();
-          }
-        },
+        initialPosition: String,
 
         /**
          * The label for this element.
          */
         label: String,
 
-        // Property used for data-binding a locale that is ready to be used.
-        _readyLocale: String,
-
         _opened: Boolean,
 
         _fullscreen: {
           value: false,
-          observer: '_updateAlignmentAndPosition'
+          observer: '_fullscreenChanged'
         },
 
         _fullscreenMediaQuery: {
-          value: '(max-width: 420px), (orientation: landscape) and (max-width: 800px)'
+          value: '(max-width: 420px), (max-height: 420px)'
+        },
+
+        // An array of ancestor elements whose -webkit-overflow-scrolling is forced from value
+        // 'touch' to value 'auto' in order to prevent them from clipping the dropdown. iOS only.
+        _touchPrevented: Array,
+
+        /**
+         * The object used to localize this component.
+         *
+         * `i18n.monthNames`
+         *
+         *  An array with the full names of months starting with January.
+         *
+         * `i18n.weekdaysShort`
+         *
+         *  An array with the short names of days starting with Sunday.
+         *
+         * `i18n.firstDayOfWeek`
+         *
+         *  An integer indicating the first day of the week (0 = Sunday, 1 = Monday, etc.).
+         *
+         * `i18n.today`
+         *
+         *  Translation of the Today shortcut button text.
+         *
+         * `i18n.cancel`
+         *
+         *  Translation of the Cancel button text.
+         *
+         * `i18n.formatDate`
+         *
+         *  A function to format given `Date` object as `String`.
+         */
+        i18n: {
+          type: Object,
+          value: function() {
+            return {
+              monthNames: [
+                'January', 'February', 'March', 'April', 'May',
+                'June', 'July', 'August', 'September', 'October', 'November', 'December'
+              ],
+              weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+              firstDayOfWeek: 0,
+              today: 'today',
+              cancel: 'cancel',
+              formatDate: function(d) {
+                return (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
+              }
+            };
+          }
         }
       },
 
-      _localeReady: function(e) {
-        this._readyLocale = e.detail.locale;
+      /**
+       * Opens the dropdown.
+       */
+      open: function(e) {
+        this._updateAlignmentAndPosition();
+        this.$.dropdown.open();
       },
 
-      _open: function() {
-        this.$.dropdown.open();
-        this._updateAlignmentAndPosition();
+      /**
+       * Closes the dropdown.
+       */
+      close: function() {
+        this.$.dropdown.close();
+      },
+
+      _parseDate: function(str) {
+        // Parsing with RegExp to ensure correct format
+        var parts = /^(\d{4}|[-+]\d{6})-(\d{2})-(\d{2})$/.exec(str);
+        if (!parts) {
+          return;
+        }
+
+        var date = new Date(0, 0); // Wrong date (1900-01-01), but with midnight in local time
+        date.setFullYear(parseInt(parts[1], 10));
+        date.setMonth(parseInt(parts[2], 10) - 1);
+        date.setDate(parseInt(parts[3], 10));
+        return date;
+      },
+
+      _formatISO: function(date) {
+        return date instanceof Date ?
+          (new Date(date.getTime() - date.getTimezoneOffset() * 60000)).toISOString().split('T')[0] :
+          '';
+      },
+
+      _formatDisplayed: function(date, formatDate) {
+        if (date) {
+          return formatDate(date);
+        }
+      },
+
+      _selectedDateChanged: function(selectedDate) {
+        this.value = this._formatISO(selectedDate);
+      },
+
+      _valueChanged: function(value, oldValue) {
+        if (!value) {
+          this._selectedDate = null;
+          return;
+        }
+
+        var date = this._parseDate(value);
+        if (!date) {
+          this.value = oldValue;
+          return;
+        }
+        if (!(this._selectedDate instanceof Date) ||
+          date.getFullYear() !== this._selectedDate.getFullYear() ||
+          date.getMonth() !== this._selectedDate.getMonth() ||
+          date.getDate() !== this._selectedDate.getDate()) {
+          this._selectedDate = date;
+        }
       },
 
       _updateAlignmentAndPosition: function() {
+        var viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        this.$.dropdown.verticalOffset = this._fullscreen ? 0 : this.clientHeight - 10;
+        this.$.dropdown.positionTarget = this._fullscreen ? document.documentElement : this;
+
+        var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var bottomAlign = this.getBoundingClientRect().top > viewportHeight / 2;
+        var rightAlign = this.getBoundingClientRect().left + this.clientWidth / 2 > viewportWidth / 2;
+        this.$.dropdown.verticalAlign = bottomAlign ? 'bottom' : 'top';
+        this.$.dropdown.horizontalAlign = rightAlign ? 'right' : 'left';
+
+        this.$.dropdown.refit();
+      },
+
+      _fullscreenChanged: function() {
         if (this.$.dropdown.opened) {
-          var viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-          this.$.dropdown.verticalOffset = this._fullscreen ? 0 : this.clientHeight;
-          this.$.dropdown.positionTarget = this._fullscreen ? document.documentElement : this;
-
-          var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-          var bottomAlign = this.getBoundingClientRect().top > viewportHeight / 2;
-          var rightAlign = this.getBoundingClientRect().left + this.clientWidth / 2 > viewportWidth / 2;
-          this.$.dropdown.verticalAlign = bottomAlign ? 'bottom' : 'top';
-          this.$.dropdown.horizontalAlign = rightAlign ? 'right' : 'left';
-
-          this.$.dropdown.refit();
+          this._updateAlignmentAndPosition();
         }
       },
 
       _onOverlayOpened: function() {
-        if (this.value) {
-          this.$.overlay.scrollToDate(this.value);
-        } else {
-          this.$.overlay.scrollToDate(this.initialPosition);
+        this.$.overlay.initialPosition = this._selectedDate ||
+          this.$.overlay.initialPosition || this._parseDate(this.initialPosition) || new Date();
+        this.$.overlay.scrollToDate(this.$.overlay.focusedDate || this.$.overlay.initialPosition);
+
+        this.listen(window, 'scroll', '_onWindowScroll');
+
+        // Checking if the browser supports webkitOverflowScrolling
+        if (document.createElement('div').style.webkitOverflowScrolling === '') {
+          this._touchPrevented = this._preventWebkitOverflowScrollingTouch(this.parentElement);
+        }
+
+        // focus to enable keyboard navigation
+        this.$.overlay.focus();
+      },
+
+      // A hack needed for iOS to prevent dropdown from being clipped in an
+      // ancestor container with -webkit-overflow-scrolling: touch;
+      _preventWebkitOverflowScrollingTouch: function(element) {
+        var result = [];
+        while (element) {
+          if (window.getComputedStyle(element).webkitOverflowScrolling === 'touch') {
+            var oldInlineValue = element.style.webkitOverflowScrolling;
+            element.style.webkitOverflowScrolling = 'auto';
+            result.push({
+              element: element,
+              oldInlineValue: oldInlineValue
+            });
+          }
+          element = element.parentElement;
+        }
+        return result;
+      },
+
+      _onOverlayClosed: function() {
+        this.unlisten(window, 'scroll', '_onWindowScroll');
+        this.$.inputcontainer.focus();
+
+        if (this._touchPrevented) {
+          this._touchPrevented.forEach(function(prevented) {
+            prevented.element.style.webkitOverflowScrolling = prevented.oldInlineValue;
+          });
+          this._touchPrevented = [];
         }
       },
 
-      _close: function() {
-        this.$.dropdown.close();
+      detached: function() {
+        this._onOverlayClosed();
       },
 
-      _hideClearIcon: function(value, opened, fullscreen) {
-        return !value || !opened || fullscreen;
+      _onWindowScroll: function() {
+        this.$.dropdown.style.bottom = 'auto';
+        this.$.dropdown.resetFit();
+        this._updateAlignmentAndPosition();
+        this.$.dropdown.fire('iron-resize');
       },
 
-      _clear: function() {
+      _toggle: function(e) {
+        e.stopPropagation();
+        this[this.$.dropdown.opened ? 'close' : 'open']();
+      },
+
+      _preventCancelOnInputContainerTap: function(e) {
+        if (e.detail.type === 'tap' && e.detail.path && e.detail.path.indexOf(this.$.inputcontainer) > -1) {
+          e.preventDefault();
+        }
+      },
+
+      _hideClearIcon: function(selectedDate, opened, fullscreen) {
+        return !selectedDate || !opened || fullscreen;
+      },
+
+      _clear: function(e) {
+        e.stopPropagation();
         this.value = '';
+        this.close();
+      },
+
+      /**
+       * Validates the input element and sets an error style if needed.
+       *
+       * @return {boolean}
+       */
+      _getValidity: function() {
+        return this.disabled || !this.required || Boolean(this.value);
+      },
+
+      _focusInputContainer: function() {
+        this.$.inputcontainer.focus();
       },
 
       _preventDefault: function(e) {
         e.preventDefault();
-      }
+      },
 
+      /**
+       * Keyboard Navigation
+       */
+      _eventKey: function(e) {
+        var keys = ['down', 'up'];
+
+        for (var i = 0; i < keys.length; i++) {
+          var k = keys[i];
+          if (Polymer.IronA11yKeysBehavior.keyboardEventMatchesKeys(e, k)) {
+            return k;
+          }
+        }
+      },
+
+      _onKeydown: function(e) {
+        switch (this._eventKey(e)) {
+          case 'down':
+          case 'up':
+            // prevent scrolling the page with arrows
+            e.preventDefault();
+
+            if (!this._opened) {
+              this.open();
+            }
+            break;
+        }
+      }
     });
   </script>
 </dom-module>
@@ -32224,7 +32952,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 this._initLocalDom();
                 this._initConfiguration();
                 Polymer.dom(this).querySelectorAll("data-series").forEach(function (ds) {
-                    ds.initialize();
+                    if(ds.initialize) {
+                        ds.initialize();
+                    }
                 });
                 if (this._loadTheme) {
                     this._loadTheme();
@@ -32368,7 +33098,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
 </script>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32398,7 +33128,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32432,7 +33162,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32460,7 +33190,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32494,7 +33224,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32522,7 +33252,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32554,7 +33284,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32588,7 +33318,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32616,7 +33346,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32647,7 +33377,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32683,7 +33413,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32717,7 +33447,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32752,7 +33482,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32794,7 +33524,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32822,7 +33552,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32857,7 +33587,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32889,7 +33619,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32923,7 +33653,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -32951,7 +33681,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -33046,7 +33776,7 @@ Example:
 
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -33084,7 +33814,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 
@@ -33129,7 +33859,7 @@ Example:
     </script>
 </dom-module>
 <!--
-An element that provides a WebComponent interface for <a href="http://www.highcharts.com/">HighCharts</a>
+An element that provides a WebComponent interface for <a href="http://vaadin.com/charts“>Vaadin Charts</a>
 
 Example:
 

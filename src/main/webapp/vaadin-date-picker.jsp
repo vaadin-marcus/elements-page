@@ -1,4 +1,7 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.vaadin.elements.GitHubRelease" %>
+<%@ page import="com.vaadin.elements.Releases" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -21,7 +24,7 @@
     <div class="span3 hidden-phone"><a href="https://www.polymer-project.org" class="polymer-tag">Built
       with Polymer</a></div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-date-picker&gt; <span>1.0.0-alpha2</span></h1>
+  <h1 class="helvetica-light">&lt;vaadin-date-picker&gt; <span><<%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha3")%></span></h1>
 </div>
 
 <!-- Hero section end -->
@@ -51,7 +54,7 @@
 </div>
 
 
-<!-- Intro section start -->
+
 
 <!-- Info section start -->
 <div class="elements-section">
@@ -101,6 +104,24 @@
 </div>
 
 <!-- Info section end -->
+
+<!-- Info section end -->
+<% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-date-picker");
+  if (latestReleases != null && !latestReleases.isEmpty()) {
+%>
+<div class="elements-section">
+  <h4>Latest releases</h4>
+  <%--A small part of me died for writing this--%>
+  <% for (GitHubRelease release : latestReleases) {%>
+  <div class="row-fluid">
+    <span class="span9"><a href="<%=release.htmlUrl%>"><%=release.name%>
+    </a></span>
+    <time is="relative-time" datetime="<%=release.publishedAt%>" class="span3"></time>
+  </div>
+  <%}%>
+</div>
+<%}%>
+<!-- Demo section start -->
 
 <!-- Demo section start -->
 <div class="elements-section">
