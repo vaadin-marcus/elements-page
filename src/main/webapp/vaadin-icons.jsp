@@ -43,7 +43,7 @@
         <h4>Install</h4>
         <code>bower install --save vaadin-icons</code>
       </div>
-      <a href="https://github.com/vaadin/vaadin-icons" class="w-arrow-button blue small">Show
+      <a href="https://vaadin.com/docs/-/part/elements/vaadin-icons/vaadin-icons-overview.html" class="w-arrow-button blue small">Show
         documentation</a>
       <a href="https://github.com/vaadin/vaadin-icons" class="w-arrow-button github small">View on
         GitHub</a>

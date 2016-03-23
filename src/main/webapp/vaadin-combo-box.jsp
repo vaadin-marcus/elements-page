@@ -46,7 +46,7 @@
         <h4>Install</h4>
         <code>bower install --save vaadin-combo-box</code>
       </div>
-      <a href="https://cdn.vaadin.com/vaadin-elements/master/vaadin-combo-box/"
+      <a href="https://vaadin.com/docs/-/part/elements/vaadin-combo-box/vaadin-combo-box-overview.html"
          class="w-arrow-button blue small">Show
         documentation</a>
       <a href="https://github.com/vaadin/vaadin-combo-box" class="w-arrow-button github small">View

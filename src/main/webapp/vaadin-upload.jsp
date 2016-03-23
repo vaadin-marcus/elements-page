@@ -43,7 +43,7 @@
         <h4>Install</h4>
         <code>bower install --save vaadin-upload</code>
       </div>
-      <a href="https://cdn.vaadin.com/vaadin-elements/master/vaadin-upload/"
+      <a href="https://vaadin.com/docs/-/part/elements/vaadin-upload/vaadin-upload-overview.html"
          class="w-arrow-button blue small">Show
         documentation</a>
       <a href="https://github.com/vaadin/vaadin-upload" class="w-arrow-button github small">View on
