@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <h1 class="helvetica-light">&lt;vaadin-candlestick-chart&gt;
+  <h1 class="helvetica-light">&lt;vaadin-ohlc-chart&gt;
   </h1>
 </div>
 
@@ -37,8 +37,7 @@
 
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">A candlestick chart is a financial chart that combines a line
-        chart and a bar chart. Each day is shown as a &quot;candlestick&quot; that shows the open,
+      <p class="lead helvetica-light">An open-high-low-close (OHLC) chart is a financial chart that that shows the open,
         close, high and low values for a financial instrument for that day.</p>
     </div>
 
@@ -65,15 +64,15 @@
 <div class="elements-section">
 
   <h4>Examples</h4>
-  <view-source externals="<%=request.getContextPath()%>/candlestick-example.html" editable="no">
+  <view-source externals="<%=request.getContextPath()%>/ohlc-example.html" editable="no">
     <div class="head">
       <!--
-      <%request.setAttribute("chart", "vaadin-candlestick-chart.html");%>
+      <%request.setAttribute("chart", "vaadin-ohlc-chart.html");%>
       <jsp:include page="charts-imports.jsp"/>
       -->
     </div>
-    <link rel="import" href="<%=request.getContextPath()%>/candlestick-example.html">
-    <candlestick-example></candlestick-example>
+    <link rel="import" href="<%=request.getContextPath()%>/ohlc-example.html">
+    <ohlc-example></ohlc-example>
   </view-source>
 </div>
 <!-- Demo section end -->
