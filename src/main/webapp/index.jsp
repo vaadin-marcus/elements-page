@@ -123,7 +123,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-upload</div>
-        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-alpha2")%></span></div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-alpha3")%></span></div>
       </div>
     </a>
   </div>
@@ -141,7 +141,7 @@
       </div>
       <div class="tile-title row-fluid">
         <div class="span8">vaadin-date-picker</div>
-        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha3")%></span></div>
+        <div class="span4"><span><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha5")%></span></div>
       </div>
     </a>
   </div>

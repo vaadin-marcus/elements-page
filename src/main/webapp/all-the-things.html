@@ -25603,8 +25603,8 @@ Custom property                               | Description                     
     <style>
       :host {
         @apply(--layout-vertical);
-        margin: 8px 0;
-        padding: 8px 0 0;
+        margin: 4px 0 0;
+        padding: 6px 0 4px;
         @apply(--vaadin-upload-file);
       }
 
@@ -25615,16 +25615,55 @@ Custom property                               | Description                     
         @apply(--vaadin-upload-file-row);
       }
 
+      iron-icon {
+        width: 24px;
+        height: 24px;
+        padding: 8px;
+        color: var(--primary-text-color, #000);
+        opacity: 0;
+        margin-right: -40px;
+        transition: margin-right 0.3s 0.1s, opacity 0.3s;
+        @apply(--vaadin-upload-file-status-icon);
+      }
+
+      iron-icon[icon="warning"] {
+        color: var(--error-color, #f40303);
+      }
+
+      iron-icon[complete],
+      iron-icon[error] {
+        margin-right: 0;
+        opacity: 1;
+        transition: margin-right 0.3s, opacity 0.3s 0.1s;
+      }
+
+      iron-icon[complete] {
+        @apply(--vaadin-upload-file-status-icon-complete);
+      }
+
+      iron-icon[error] {
+        @apply(--vaadin-upload-file-status-icon-error);
+      }
+
       #meta {
         @apply(--layout-vertical);
         @apply(--layout-flex);
+        height: 32px;
+        transition: height 0.1s;
         width: 1px;
         color: var(--disabled-text-color, gray);
         @apply(--vaadin-upload-file-meta);
       }
 
       #meta[complete] {
+        height: 16px;
         color: var(--primary-text-color, #000);
+        @apply(--vaadin-upload-file-meta-complete);
+      }
+
+      #meta[error] {
+        color: var(--error-color, #f40303);
+        @apply(--vaadin-upload-file-meta-error);
       }
 
       #name,
@@ -25654,24 +25693,17 @@ Custom property                               | Description                     
       }
 
       #commands {
-        margin-right: -4px;
-        @apply(--vaadin-upload-file-commands);
         @apply(--layout-horizontal);
+        @apply(--vaadin-upload-file-commands);
       }
 
       #commands [icon] {
-        margin-left: -4px;
-        margin-right: -4px;
         color: var(--primary-text-color, #000);
       }
 
       #commands [icon="refresh"],
       #commands [icon="clear"] {
         color: var(--primary-color, #00B4F0);
-      }
-
-      #commands [icon="warning"] {
-        color: var(--error-color, #f40303);
       }
 
       paper-progress {
@@ -25703,40 +25735,48 @@ Custom property                               | Description                     
         @apply(--vaadin-upload-file-progress-complete);
       }
 
-      :host.fade-out {
+      :host(.fade-out) {
         animation-name: fade-out;
-        animation-duration: 1s;
+        animation-duration: 0.6s;
         @apply(--vaadin-upload-file-canceled);
       }
 
       @keyframes fade-out {
-        50%  {
-          max-height: 50px;
-          margin: 8px 0;
-          padding: 8px 0 0;
+        0% {
+          max-height: 38px;
+        }
+        33%  {
+          max-height: 38px;
+          margin: 4px 0 0;
+          padding: 6px 0 4px;
+          opacity: 0.25;
+        }
+        67% {
+          opacity: 0;
         }
         100% {
-          opacity: 0;
           max-height: 0px;
           margin: 0;
           padding: 0;
+          opacity: 0;
         }
       }
     </style>
 
     <div id="row">
 
-      <div id="meta" complete$="[[file.complete]]">
+      <iron-icon icon="done" complete$="[[file.complete]]"></iron-icon>
+      <iron-icon icon="warning" error$="[[file.error]]"></iron-icon>
+
+      <div id="meta" complete$="[[file.complete]]" error$="[[file.error]]">
         <div id="name">[[file.name]]</div>
         <div id="status" hidden$="[[!file.status]]">[[file.status]]</div>
         <div id="error" hidden$="[[!file.error]]">[[file.error]]</div>
       </div>
 
       <div id="commands">
-        <paper-icon-button disabled="" icon="done" title="Complete" hidden$="[[!file.complete]]"></paper-icon-button>
-        <paper-icon-button disabled="" icon="warning" title="Error" hidden$="[[!file.error]]"></paper-icon-button>
-        <paper-icon-button icon="refresh" title="Retry Upload" file-event="file-retry" on-tap="_fireFileEvent" hidden$="[[!file.error]]"></paper-icon-button>
-        <paper-icon-button icon="clear" title="Abort Upload" file-event="file-abort" on-tap="_fireFileEvent"></paper-icon-button>
+        <paper-icon-button icon="refresh" file-event="file-retry" on-tap="_fireFileEvent" hidden$="[[!file.error]]"></paper-icon-button>
+        <paper-icon-button icon="clear" file-event="file-abort" on-tap="_fireFileEvent"></paper-icon-button>
       </div>
 
     </div>
@@ -25789,23 +25829,33 @@ Custom property                               | Description                     
       return this.fire(button.getAttribute('file-event'), {file: this.file});
     }
 
-    /**
-     * Fired when retry button pressed. Listened by `vaadin-upload`. Fire this
-     * event if you want to perform retry upload.
-     *
-     * @event file-retry
-     * @param {Object} detail
-     *  @param {Object} detail.file file to retry upload of
-     */
+   /**
+    * Fired when the retry button is pressed. It is listened by `vaadin-upload`
+    * which will start a new upload process of this file.
+    *
+    * @event file-retry
+    * @param {Object} detail
+    *  @param {Object} detail.file file to retry upload of
+    */
 
     /**
-     * Fired when abort button pressed. Listened by `vaadin-upload`. Fire this
-     * event if you want to abort the file upload and remove the file from the
-     * upload file list.
+     * Fired when abort button is pressed. It is listened by `vaadin-upload` which
+     * will abort the upload in progress, but will not remove the file from the list
+     * to allow the animation to hide the element to be run.
      *
      * @event file-abort
      * @param {Object} detail
      *  @param {Object} detail.file file to abort upload of
+     */
+
+    /**
+     * Fired after the animation to hide the element has finished. It is listened
+     * by `vaadin-upload` which will actually remove the file from the upload
+     * file list.
+     *
+     * @event file-remove
+     * @param {Object} detail
+     *  @param {Object} detail.file file to remove from the  upload of
      */
   });
 
@@ -25817,18 +25867,18 @@ Custom property                               | Description                     
         @apply(--layout-vertical);
         display: block;
         position: relative;
-        text-align: center;
-        overflow: hidden;
+        text-align: left;
       }
 
-      :host:not([nodrop]) {
+      :host(:not([nodrop])) {
         border: 1px dashed;
         border-color: var(--divider-color,  #666);
         border-radius: 3px;
+        overflow: hidden;
         padding: 16px;
       }
 
-      :host[dragover-valid] {
+      :host([dragover-valid]) {
         border-color: var(--primary-color, #00B4F0);
       }
 
@@ -25842,7 +25892,7 @@ Custom property                               | Description                     
         display: none;
         z-index: 10;
       }
-      :host[dragover]::before {
+      :host([dragover])::before {
         display: block;
       }
 
@@ -25852,15 +25902,17 @@ Custom property                               | Description                     
       }
 
       #dropLabel {
+        @apply(--layout-flex);
         @apply(--paper-font-body2);
         position: relative;
-        margin-top: 8px;
+        padding: .43em .57em;
+        margin: 0 .29em;
         color: var(--disabled-text-color, #b3b3b3);
         @apply(--vaadin-upload-drop-label);
       }
 
-      :host[dragover-valid] #dropLabel,
-      :host[dragover-valid] ::content .drop-label {
+      :host([dragover-valid]) #dropLabel,
+      :host([dragover-valid]) ::content .drop-label {
         color: var(--primary-color, #00B4F0);
         @apply(--vaadin-upload-drop-label-dragover);
       }
@@ -25872,61 +25924,58 @@ Custom property                               | Description                     
 
       #fileList {
         position: relative;
-        text-align: left;
         @apply(--vaadin-upload-file-list);
       }
 
       #buttons {
         @apply(--layout-horizontal);
-        @apply(--layout-center-justified);
         position: relative;
-        margin: 8px 0 0;
         @apply(--vaadin-upload-buttons);
       }
 
-      :host[nodrop] #buttons {
-        @apply(--layout-end-justified);
-        @apply(--vaadin-upload-buttons-nodrop);
-      }
-
-      paper-button {
-        @apply(--paper-font-button);
-        color: var(--primary-color, #00B4F0);
-        padding: .43em .57em;
-        @apply(--vaadin-upload-button);
+      #buttonsPrimary {
+        @apply(--layout-horizontal);
+        @apply(--layout-flex);
+        @apply(--layout-start);
+        margin-left: -.29em;
+        @apply(--vaadin-upload-buttons-primary);
       }
 
       #addFiles {
-        margin-right: 0;
+        @apply(--paper-font-button);
+        padding: .43em .57em;
         background: var(--primary-color, #00B4F0);
         color: var(--primary-font-color, #FFFFFF);
         @apply(--vaadin-upload-button-add);
       }
 
-      :host[nodrop] #addFiles {
-        margin-right: auto;
-        @apply(--vaadin-upload-button-add-nodrop);
+      #addFiles[disabled] {
+        background: var(--divider-color, #e0e0e0);
+        color: var(--disabled-text-color, gray);
+        @apply(--vaadin-upload-button-add-disabled);
       }
     </style>
 
-    <div id="dropLabel" hidden$="[[nodrop]]">
-      <content select=".drop-label">
-        <iron-icon icon="file-upload"></iron-icon>
-        [[_i18nPlural(maxFiles, i18n.dropFiles)]]
-      </content>
-    </div>
     <div id="buttons">
-      <paper-button id="addFiles" on-tap="_onAddFilesClick" disabled="[[_maxFilesAdded(maxFiles, files.length)]]">[[_i18nPlural(maxFiles, i18n.addFiles)]]</paper-button>
-      <paper-button id="cancelAll" on-tap="_onCancelAllClick" hidden$="[[!showCancelAll]]">[[i18n.cancelAll]]</paper-button>
+      <div id="buttonsPrimary">
+        <paper-button id="addFiles" on-tap="_onAddFilesClick" disabled="[[_maxFilesAdded(maxFiles, files.length)]]">[[_i18nPlural(maxFiles, i18n.addFiles, i18n.addFiles.*)]]</paper-button>
+        <div id="dropLabel" hidden$="[[nodrop]]">
+          <content select=".drop-label">
+            <iron-icon icon="file-upload"></iron-icon>
+            [[_i18nPlural(maxFiles, i18n.dropFiles, i18n.dropFiles.*)]]
+          </content>
+        </div>
+      </div>
     </div>
-    <template id="defaultFileTemplate">
-      <vaadin-upload-file file="[[file]]"></vaadin-upload-file>
-    </template>
-    <div id="fileList" on-file-remove="_onFileRemove">
-      <template id="fileListRepeater" is="dom-repeat" items="[[files]]" as="file"></template>
-    </div>
+    <content select=".file-list">
+      <div id="fileList">
+        <template is="dom-repeat" items="[[files]]" as="file">
+          <vaadin-upload-file file="[[file]]"></vaadin-upload-file>
+        </template>
+      </div>
+    </content>
     <content></content>
-    <input type="file" id="fileInput" on-change="_onFileInputChange" hidden="" accept="{{accept}}">
+    <input type="file" id="fileInput" on-change="_onFileInputChange" hidden="" accept$="{{accept}}" multiple$="[[_isMultiple(maxFiles)]]">
     <paper-ripple id="dragRipple" noink=""></paper-ripple>
   </template>
 </dom-module>
@@ -25939,9 +25988,13 @@ Custom property                               | Description                     
 
     properties: {
       /**
-       * Define whether the element supports drop files on it for uploading.
+       * Define whether the element supports dropping files on it for uploading.
        * By default it's enabled in desktop and disabled in touch devices
-       * because almost mobile devices do not support drag events.
+       * because mobile devices do not support drag events in general. Setting
+       * it false means that drop is enabled even in touch-devices, and true
+       * disables drop in all devices.
+       *
+       * @default true in touch-devices, false otherwise.
        */
       nodrop: {
         type: Boolean,
@@ -25956,7 +26009,8 @@ Custom property                               | Description                     
       },
 
       /**
-       * Server URL.
+       * The server URL. The default value is an empty string, which means that
+       * _window.location_ will be used.
        */
       target: {
         type: String,
@@ -25964,7 +26018,7 @@ Custom property                               | Description                     
       },
 
       /**
-       * HTTP Method used to send the files.
+       * HTTP Method used to send the files. Only POST and PUT are allowed.
        */
       method: {
         type: String,
@@ -25972,7 +26026,11 @@ Custom property                               | Description                     
       },
 
       /**
-       * Key-Value map to send to the server.
+       * Key-Value map to send to the server. If you set this property as an
+       * attribute, use a valid JSON string, for example:
+       * ```
+       * <vaadin-upload headers='{"X-Foo": "Bar"}'></vaadin-upload>
+       * ```
        */
       headers: {
         type: Object,
@@ -25980,7 +26038,9 @@ Custom property                               | Description                     
       },
 
       /**
-       * Max time for the upload process, if exceeded XHR will be aborted.
+       * Max time in milliseconds for the entire upload process, if exceeded the
+       * request will be aborted. Zero means that there is no timeout.
+       *
        */
       timeout: {
         type: Number,
@@ -25994,33 +26054,38 @@ Custom property                               | Description                     
       },
 
       /**
-       * Specifies if the cancel-all button is visible.
+       * The array of files being processed, or already uploaded.
+       *
+       * Each element is a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File)
+       * object with a number of extra properties  to track the upload process:
+       * - `uploadTarget`: The target URL used to upload this file.
+       * - `elapsed`: Elapsed time since the upload started.
+       * - `elapsedStr`: Human-readable elapsed time.
+       * - `remaining`: Number of seconds remaining for the upload to finish.
+       * - `remainingStr`: Human-readable remaining time for the upload to finish.
+       * - `progress`: Percentage of the file already uploaded.
+       * - `speed`: Upload speed in kB/s.
+       * - `size`: File size in bytes.
+       * - `totalStr`: Human-readable total size of the file.
+       * - `loaded`: Bytes transferred so far.
+       * - `loadedStr`: Human-readable uploaded size at the moment.
+       * - `status`: Status of the upload process.
+       * - `error`: Error message in case the upload failed.
+       * - `abort`: True if the file was canceled by the user.
+       * - `complete`: True when the file was transferred to the server.
+       * - `uploading`: True while trasferring data to the server.
        */
-      showCancelAll: {
-        type: Boolean,
-        value: false
-      },
-
-      // TODO: make this private in a separate PR, we dont want users modifying the array.
       files: {
         type: Array,
+        notify: true,
         value: function() {
           return [];
         }
       },
 
       /**
-       * Specifies whether the file selection popup is configured to select
-       * multiple files.
-       */
-       nomultiple: {
-         type: Boolean,
-         value: false
-       },
-
-      /**
        * Limit of files to upload, by default it is unlimited. If the value is
-       * one, nomultiple is true.
+       * set to one, native file browser will prevent selecting multiple files.
        */
        maxFiles: {
          type: Number,
@@ -26037,8 +26102,10 @@ Custom property                               | Description                     
       },
 
       /**
-       * Specifies the maximum file size allowed to upload. Default is
-       * unlimited.
+       * Specifies the maximum file size in bytes allowed to upload.
+       * Notice that it is a client-side constraint, which will be checked before
+       * sending the request. Obviously you need to do the same validation in
+       * the server-side and be sure that they are aligned.
        */
       maxFileSize: {
         type: Number,
@@ -26057,6 +26124,55 @@ Custom property                               | Description                     
 
       /**
        * The object used to localize this component.
+       * For changing the default localization, change the entire
+       * _i18n_ object or just the property you want to modify.
+       *
+       * The object has the following JSON structure and default values:
+
+    {
+      dropFiles: {
+       one: 'Drop file here...',
+       many: 'Drop files here...'
+      },
+      addFiles: {
+       one: 'Select File',
+       many: 'Upload Files'
+      },
+      cancel: 'Cancel',
+      error: {
+       tooManyFiles: 'Too Many Files.',
+       fileIsTooBig: 'File is Too Big.',
+       incorrectFileType: 'Incorrect File Type.'
+      },
+      uploading: {
+       status: {
+         connecting: 'Connecting...',
+         stalled: 'Stalled.',
+         processing: 'Processing File...'
+       },
+       remainingTime: {
+         prefix: 'remaining time: ',
+         unknown: 'unknown remaining time'
+       },
+       error: {
+         serverUnavailable: 'Server Unavailable',
+         unexpectedServerError: 'Unexpected Server Error',
+         forbidden: 'Forbidden'
+       }
+      },
+      units: {
+       size: ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+      },
+      formatSize: function(bytes) {
+       // returns the size followed by the best suitable unit
+      },
+      formatTime: function(seconds, [secs, mins, hours]) {
+       // returns a 'HH:MM:SS' string
+      }
+    }
+
+       *
+       * @default {English}
        */
       i18n: {
         type: Object,
@@ -26068,10 +26184,9 @@ Custom property                               | Description                     
             },
             addFiles: {
               one: 'Select File',
-              many: 'Add Files'
+              many: 'Upload Files'
             },
             cancel: 'Cancel',
-            cancelAll: 'Cancel All',
             error: {
               tooManyFiles: 'Too Many Files.',
               fileIsTooBig: 'File is Too Big.',
@@ -26106,11 +26221,8 @@ Custom property                               | Description                     
       dragleave: '_onDragleave',
       drop: '_onDrop',
       'file-retry': '_onFileRetry',
-      'file-abort': '_onFileAbort'
-    },
-
-    attached: function() {
-      this._templatizeFileList();
+      'file-abort': '_onFileAbort',
+      'file-remove': '_onFileRemove',
     },
 
     _formatSize: function(bytes) {
@@ -26303,18 +26415,18 @@ Custom property                               | Description                     
         file.indeterminate = loaded <= 0 || loaded >= total, true;
         if (file.error) {
           file.indeterminate = file.status = undefined;
-        } else if (file.abort) {
-          file.status = 'Upload cancelled.';
-        } else if (progress < 100) {
-          this._setStatus(file, total, loaded, elapsed, progress);
-          stalledId = setTimeout(function() {
-            file.status = this.i18n.uploading.status.stalled;
-            this._notifyFileChanges(file);
-          }.bind(this), 2000);
-        } else {
-          file.loadedStr = file.totalStr;
-          file.status = this.i18n.uploading.status.processing;
-          file.uploading = false;
+        } else if (!file.abort) {
+          if (progress < 100) {
+            this._setStatus(file, total, loaded, elapsed, progress);
+            stalledId = setTimeout(function() {
+              file.status = this.i18n.uploading.status.stalled;
+              this._notifyFileChanges(file);
+            }.bind(this), 2000);
+          } else {
+            file.loadedStr = file.totalStr;
+            file.status = this.i18n.uploading.status.processing;
+            file.uploading = false;
+          }
         }
 
         this._notifyFileChanges(file);
@@ -26326,12 +26438,11 @@ Custom property                               | Description                     
         if (xhr.readyState == 4) {
           clearTimeout(stalledId);
           file.indeterminate = file.uploading = false;
-          file.status = '';
           if (file.abort) {
-            file.error = file.complete = file.progress = file.status = false;
             this._notifyFileChanges(file);
             return;
           }
+          file.status = '';
           // Custom listener can modify the default behavior either
           // preventing default, changing the xhr, or setting the file error
           var evt = this.fire('upload-response', {file: file, xhr: xhr}, {cancelable: true});
@@ -26373,7 +26484,7 @@ Custom property                               | Description                     
 
       file.status = this.i18n.uploading.status.connecting;
       file.uploading = file.indeterminate = true;
-      file.abort = file.error = undefined;
+      file.complete = file.abort = file.error = false;
       this.fire('upload-start', {file: file, xhr: xhr});
       this._notifyFileChanges(file);
       xhr.send(formData);
@@ -26393,6 +26504,7 @@ Custom property                               | Description                     
          if (file.xhr) {
            file.xhr.abort();
          }
+         this._notifyFileChanges(file);
        }
      },
 
@@ -26432,7 +26544,6 @@ Custom property                               | Description                     
       }
       file.loaded = 0;
       this.unshift('files', file);
-      this.fire('file-add', {file: file});
       this._uploadFile(file);
     },
 
@@ -26441,15 +26552,11 @@ Custom property                               | Description                     
      * @param {File} file File to remove
      */
     _removeFile: function(file) {
-      var evt = this.fire('file-remove', {file: file}, {cancelable: true});
-      if (!evt.defaultPrevented) {
-        this.splice('files', this.files.indexOf(file), 1);
-      }
+      this.splice('files', this.files.indexOf(file), 1);
     },
 
     _onAddFilesClick: function(event) {
       if (document.createEvent) {
-        this.$.fileInput.multiple = !this.nomultiple && this.maxFiles != 1;
         this.$.fileInput.value = '';
         this.$.fileInput.click();
       }
@@ -26457,13 +26564,6 @@ Custom property                               | Description                     
 
     _onFileInputChange: function(event) {
       this._addFiles(event.target.files);
-    },
-
-    _templatizeFileList: function() {
-      var template = Polymer.dom(this).querySelector('.file') || this.$.defaultFileTemplate;
-      this.$.fileListRepeater.templatize(template);
-      Polymer.Bind.prepareModel(this.$.fileListRepeater);
-      Polymer.Base.prepareModelNotifyPath(this.$.fileListRepeater);
     },
 
     _onFileRetry: function(event) {
@@ -26479,12 +26579,6 @@ Custom property                               | Description                     
       this._removeFile(event.detail.file);
     },
 
-    _onCancelAllClick: function(event) {
-      for (var i = this.files.length; i > 0; --i) {
-        this._abortFileUpload(this.files[i - 1]);
-      }
-    },
-
     _dragoverChanged: function(dragover) {
       this.toggleAttribute('dragover', dragover);
     },
@@ -26495,8 +26589,11 @@ Custom property                               | Description                     
 
     _i18nPlural: function(value, plural) {
       return value == 1 ? plural.one : plural.many;
-    }
+    },
 
+    _isMultiple: function() {
+      return this.maxFiles != 1;
+    }
   });
 
   /**
@@ -26507,24 +26604,6 @@ Custom property                               | Description                     
    * @param {Object} detail
    *  @param {Object} detail.file the file added
    *  @param {Object} detail.error the cause
-   */
-
-  /**
-   * Fired when a file is added for uploading.
-   *
-   * @event file-add
-   * @param {Object} detail
-   *  @param {Object} detail.file the file added
-   */
-
-  /**
-   * Fired when a file is removed from the file list, e. g. when the file
-   * upload is aborted. If the default is prevented, then the file would not be
-   * removed from the list.
-   *
-   * @event file-remove
-   * @param {Object} detail
-   *  @param {Object} detail.file the file to be removed
    */
 
   /**
@@ -26950,10 +27029,55 @@ CSS properties               | Action
     },
 
     /**
+     * Brings the overlay at the specified index to the front.
+     * @param {number} i
+     * @private
+     */
+    _bringOverlayAtIndexToFront: function(i) {
+      var overlay = this._overlays[i];
+      var lastI = this._overlays.length - 1;
+      // If already the top element, return.
+      if (!overlay || i === lastI) {
+        return;
+      }
+      // Update z-index to be on top.
+      var minimumZ = Math.max(this.currentOverlayZ(), this._minimumZ);
+      if (this._getZ(overlay) <= minimumZ) {
+        this._applyOverlayZ(overlay, minimumZ);
+      }
+
+      // Shift other overlays behind the new on top.
+      while (i < lastI) {
+        this._overlays[i] = this._overlays[i + 1];
+        i++;
+      }
+      this._overlays[lastI] = overlay;
+    },
+
+    /**
+     * Adds the overlay and updates its z-index if it's opened, or removes it if it's closed.
+     * Also updates the backdrop z-index.
+     * @param {Element} overlay
+     */
+    addOrRemoveOverlay: function(overlay) {
+      if (overlay.opened) {
+        this.addOverlay(overlay);
+      } else {
+        this.removeOverlay(overlay);
+      }
+      this.trackBackdrop();
+    },
+
+    /**
      * Tracks overlays for z-index and focus management.
      * @param {Element} overlay
      */
     addOverlay: function(overlay) {
+      var i = this._overlays.indexOf(overlay);
+      if (i >= 0) {
+        this._bringOverlayAtIndexToFront(i);
+        return;
+      }
       var minimumZ = Math.max(this.currentOverlayZ(), this._minimumZ);
       this._overlays.push(overlay);
       var newZ = this.currentOverlayZ();
@@ -26969,16 +27093,17 @@ CSS properties               | Action
      */
     removeOverlay: function(overlay) {
       var i = this._overlays.indexOf(overlay);
-      if (i >= 0) {
-        this._overlays.splice(i, 1);
-        this._setZ(overlay, '');
+      if (i === -1) {
+        return;
+      }
+      this._overlays.splice(i, 1);
+      this._setZ(overlay, '');
 
-        var node = overlay.restoreFocusOnClose ? overlay.restoreFocusNode : null;
-        overlay.restoreFocusNode = null;
-        // Focus back only if still contained in document.body
-        if (node && Polymer.dom(document.body).deepContains(node)) {
-          node.focus();
-        }
+      var node = overlay.restoreFocusOnClose ? overlay.restoreFocusNode : null;
+      overlay.restoreFocusNode = null;
+      // Focus back only if still contained in document.body
+      if (node && Polymer.dom(document.body).deepContains(node)) {
+        node.focus();
       }
     },
 
@@ -27024,9 +27149,9 @@ CSS properties               | Action
     },
 
     /**
-     * @param {Element} overlay The overlay that updated its withBackdrop.
+     * Updates the backdrop z-index.
      */
-    trackBackdrop: function(overlay) {
+    trackBackdrop: function() {
       this.backdropElement.style.zIndex = this.backdropZ();
     },
 
@@ -27592,16 +27717,13 @@ context. You should place this element as a child of `<body>` whenever possible.
         return;
       }
 
+      this._manager.addOrRemoveOverlay(this);
+
       this.__isAnimating = true;
 
       if (this.opened) {
         this._prepareRenderOpened();
-      } else {
-        this._manager.removeOverlay(this);
       }
-
-      this._manager.trackBackdrop(this);
-
       if (this._openChangedAsync) {
         this.cancelAsync(this._openChangedAsync);
       }
@@ -27636,7 +27758,7 @@ context. You should place this element as a child of `<body>` whenever possible.
         this.__shouldRemoveTabIndex = false;
       }
       if (this.opened) {
-        this._manager.trackBackdrop(this);
+        this._manager.trackBackdrop();
         if (this.withBackdrop) {
           this.backdropElement.prepare();
           // Give time to be added to document.
@@ -27654,8 +27776,6 @@ context. You should place this element as a child of `<body>` whenever possible.
      * @protected
      */
     _prepareRenderOpened: function() {
-
-      this._manager.addOverlay(this);
 
       // Needed to calculate the size of the overlay so that transitions on its size
       // will have the correct starting points.
