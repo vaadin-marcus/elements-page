@@ -5,7 +5,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?1"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?3.1"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -14,24 +14,26 @@
 
 <div class="w-wallpaper-container elements-hero">
   <div class="w-wallpaper"></div>
-  <div class="elements-hero-title row-fluid">
-    <div class="span9"><h1 class="helvetica-light">Vaadin Elements</h1></div>
-    <div class="span3 hidden-phone"><a href="https://www.polymer-project.org" class="polymer-tag">Built
-      with Polymer</a></div>
+  <div class="elements-hero-title">
+    <h1>Vaadin Elements</h1>
+    <a href="https://www.polymer-project.org"
+       class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
   </div>
-  <p class="lead helvetica-light">Vaadin Elements is a set of custom HTML elements tailored for
+  <p class="lead">Vaadin Elements is a set of custom HTML elements tailored for
     business applications. It extends the Google Polymer library with elements like data grid,
     charts and combo box so you can build the app your business needs. The elements are actively
     maintained and tested to ensure compatibility with the latest Polymer releases.</p>
-  <div class="elements-hero-buttons">
-    <div class="row-fluid">
-      <div class="span3"><a class="button" id="demos-button" href="#demos">Demos</a></div>
-      <div class="span3"><a class="button" href="https://vaadin.com/elements/videos">Videos</a>
-      </div>
-      <div class="span3 offset3"><a class="button primary"
-                                    href="https://vaadin.com/docs/-/part/elements/elements-getting-started.html">Get
-        Started</a></div>
+</div>
+
+<div class="w-wallpaper-container elements-hero-buttons">
+  <div class="w-wallpaper"></div>
+  <div class="row-fluid">
+    <div class="span3"><a class="button" id="demos-button" href="#demos">Demos</a></div>
+    <div class="span3"><a class="button" href="https://vaadin.com/elements/videos">Videos</a>
     </div>
+    <div class="span3 offset3">
+      <a href="https://vaadin.com/docs/-/part/elements/elements-getting-started.html"
+         class="button primary">Get Started</a></div>
   </div>
 </div>
 
