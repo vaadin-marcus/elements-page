@@ -150,22 +150,6 @@
 
 </div>
 
-<div class="row-fluid elements-category-tiles signup-form">
-  <h3>
-    Want to get notified of updates to Vaadin Elements?
-  </h3>
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
-  <script>
-    hbspt.forms.create({
-      css: '',
-      portalId: '1840687',
-      formId: '6126c3de-cf18-49b0-9534-cefa45d6f500'
-    });
-  </script>
-
-</div>
-
-
 <div class="elements-category row-fluid">
   <div class="span9">
     <h5>Charts <span><%=Releases.getLatestVersionNumber("vaadin-charts", "3.0.0-rc1")%></span></h5>
@@ -625,6 +609,21 @@
       </div>
     </a>
   </div>
+
+</div>
+
+<div class="row-fluid elements-category-tiles signup-form">
+  <h3>
+    Want to get notified of updates to Vaadin Elements?
+  </h3>
+  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+  <script>
+    hbspt.forms.create({
+      css: '',
+      portalId: '1840687',
+      formId: '6126c3de-cf18-49b0-9534-cefa45d6f500'
+    });
+  </script>
 
 </div>
 
