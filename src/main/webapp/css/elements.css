@@ -14,6 +14,10 @@
     margin-top: 0px;
 }
 
+.zebra .w-wallpaper {
+    background-color: #f3f3f3;
+}
+
 /* EO General Fixes */
 
 /* Index Hero */
@@ -155,9 +159,12 @@
 /* Index Listing */
 
 .elements-category {
+    padding: 3.3rem 0 20px;
+}
+
+.elements-category .row-fluid {
     border: 2px solid #e1e1e1;
     border-width: 2px 0;
-    margin: 60px 0 20px;
 }
 
 .elements-category .span9 {
@@ -181,6 +188,10 @@
     padding: 20px;
 }
 
+.elements-category.zebra .span3 {
+    background-color: #f9f9f9;
+}
+
 .elements-category .span3 span {
     font-weight: bold;
     font-size: 20px;
@@ -193,97 +204,74 @@
     margin-top: 35px;
 }
 
+.elements-category-tiles .row-fluid .span6:nth-child(odd) {
+    margin-left: 0;
+}
+
+.elements-category-tiles .row-fluid .span4:nth-child(3n+1) {
+    margin-left: 0;
+}
+
 .elements-category-tiles .tile {
-    padding: 20px;
-    background-color: #efefef;
     margin-bottom: 20px;
-}
-
-.elements-category-tiles .tile-title {
-    background-color: #041a25;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.elements-category-tiles .tile-title div {
-    min-height: 10px !important;
-}
-
-.elements-category-tiles .tile-title div span {
-    color: #648a9d;
-    text-align: right;
-    display: block;
+    border: 1px solid #e1e1e1;
 }
 
 .elements-category-tiles .tile-details {
-    position: relative;
-    overflow: hidden;
-}
-
-/*.elements-category-tiles .tile-details div {*/
-    /*position: absolute;*/
-    /*background-color: #073045;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
-    /*padding: 40px;*/
-    /*color: #fff;*/
-    /*height: 101%;*/
-    /*box-sizing: border-box;*/
-    /*transform: translate(1000px, 1000px);*/
-    /*transition: all 0.3s;*/
-    /*text-align: center;*/
-    /*font-size: 16px;*/
-    /*line-height: 28px;*/
-/*}*/
-
-.elements-category-tiles .tile-details div span {
-    display: block;
-    margin-top: 20px;
-    color: #00b4f0;
-    font-weight: bold;
-}
-
-
-
-.elements-category-tiles .tile-details div {
-    background-color: #073045;
-    position: relative;
-    padding: 20px;
-    color: #fff;
-    height: 160px;
-    box-sizing: border-box;
-    transform: translate(0px, 0px);
-    transition: all 0.3s;
     text-align: center;
-    font-size: 16px;
-    line-height: 28px;
+    background-color: #eaeaea;
+    color: #464440;
+    padding: 1rem;
+    transition: all .25s;
 }
 
+.elements-category-core-tiles .tile-details {
+    height: 12.5rem;
+}
+
+.elements-category-charts-tiles .tile-details {
+    height: 10.5rem;
+}
+
+.elements-category-tiles a:hover .tile-details {
+    background-color: #323232;
+    color: #fff;
+}
+
+.elements-category-tiles .tile-version {
+    margin-bottom: .8em;
+}
+
+.elements-category-tiles .tile-title {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+}
+
+.elements-category-tiles .tile-title:first-child {
+    margin-top: .5em;
+}
+
+.elements-category-tiles .tile-description {
+    line-height: 1.2;
+}
 
 .elements-category-tiles.signup-form {
-    background: #F4F4F4;
-    margin-top: 50px;
-    padding: 20px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
+    margin-top: 3em;
     text-align: center;
+}
+
+.elements-category-tiles.signup-form h3 {
+    font-size: 1.45rem;
 }
 
 .elements-category-tiles.signup-form .hbspt-form {
     padding: 0;
 }
 
-@media(max-width: 1024px) {
-    .elements-category-tiles .title-details div {
-        font-size: 14px;
-        line-height: 20px;
-    }
-}
+/*@media(max-width: 1024px) {
+
+}*/
 
 /* EO Index Listing */
 
@@ -363,7 +351,7 @@
 }
 
 .elements-intro .w-wallpaper {
-    background-color: #f4f4f4;
+    background-color: #f3f3f3;
 }
 
 .elements-intro p.lead {
@@ -564,7 +552,7 @@
     display: block;
     list-style-type: none;
     padding: 5px;
-    background-color: #f4f4f4;
+    background-color: #f3f3f3;
     box-sizing: border-box;
     border-radius: 4px;
     margin: 5px 0 10px;
@@ -577,9 +565,7 @@
 }
 
 .hbspt-form .actions {
-    padding: 10px;
-    background-color: #F4F4F4;
-    margin-top: 30px;
+    margin-top: 2.143rem;
 }
 
 .hbspt-form input[type="submit"] {
