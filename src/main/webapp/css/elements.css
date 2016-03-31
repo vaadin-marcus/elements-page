@@ -220,6 +220,27 @@
 .elements-category-tiles .tile {
     margin-bottom: 20px;
     border: 1px solid #e1e1e1;
+    position: relative;
+}
+
+/* box-shadow animated on hover by transition of opacity on ":after" pseudo-element */
+.elements-category-tiles .tile:after {
+    content: "";
+    position: absolute;
+    z-index: -1; /* make tile's inner link hoverable/clickable */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-box-shadow: 0 0 24px -2px rgba(0, 0, 0, .36);
+    -moz-box-shadow: 0 0 24px -2px rgba(0, 0, 0, .36);
+    box-shadow: 0 0 24px -2px rgba(0, 0, 0, .36);
+    opacity: 0;
+    transition: all .25s;
+}
+
+.elements-category-tiles .tile:hover:after {
+    opacity: 1;
 }
 
 .elements-category-tiles .tile-details {
