@@ -259,7 +259,8 @@
     height: 10.5rem;
 }
 
-.elements-category-tiles a:hover .tile-details {
+.elements-category-tiles a:hover .tile-details,
+.elements-category-tiles a:focus .tile-details {
     background-color: #323232;
     color: #fff;
 }
