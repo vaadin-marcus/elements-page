@@ -70,7 +70,7 @@
              srcset="<%=request.getContextPath()%>/img/preview/grid@2x.png 2x"
              alt="Polymer data table element for javascript">
         <div class="tile-details">
-          <div class="tile-version">vaadin-grid <%=Releases.getLatestVersionNumber("vaadin-grid", "1.0.0")%></div>
+          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-grid", "1.0.0")%></div>
           <div class="tile-title">Grid</div>
           <div class="tile-description">
             Vaadin Grid is a fully featured datagrid for showing table data.
@@ -86,7 +86,7 @@
              srcset="<%=request.getContextPath()%>/img/preview/combobox@2x.png 2x"
              alt="Filtering select for polymer and javacript">
         <div class="tile-details">
-          <div class="tile-version">vaadin-combo-box <%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-beta1")%></div>
+          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-beta1")%></div>
           <div class="tile-title">Combo Box</div>
           <div class="tile-description">
             Vaadin ComboBox is a filterable select element for situations where you have more than a few dozen items to select from.
@@ -101,7 +101,7 @@
              srcset="<%=request.getContextPath()%>/img/preview/icons@2x.png 2x"
              alt="Free font icons for web applications">
         <div class="tile-details">
-          <div class="tile-version">vaadin-icons <%=Releases.getLatestVersionNumber("vaadin-icons", "1.0.0-alpha2")%></div>
+          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-icons", "1.0.0-alpha2")%></div>
           <div class="tile-title">Icons</div>
           <div class="tile-description">
             Vaadin Icons is a set of 530 unique icons designed for web applications.
@@ -116,7 +116,7 @@
              srcset="<%=request.getContextPath()%>/img/preview/upload@2x.png 2x"
              alt="Upload component for Polymer and javascript">
         <div class="tile-details">
-          <div class="tile-version">vaadin-upload <%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-alpha3")%></div>
+          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-alpha3")%></div>
           <div class="tile-title">Upload</div>
           <div class="tile-description">
             Vaadin upload allows you to upload multiple files with progress indication.
@@ -132,7 +132,7 @@
              srcset="<%=request.getContextPath()%>/img/preview/date-picker@2x.png 2x"
              alt="Polymer date picker">
         <div class="tile-details">
-          <div class="tile-version">vaadin-date-picker <%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha5")%></div>
+          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha5")%></div>
           <div class="tile-title">Date Picker</div>
           <div class="tile-description">
             Vaadin DatePicker allows you to select a date from a dropdown calendar.
@@ -172,7 +172,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/area@2x.png 2x"
              alt="Polymer area chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-area-chart</div>
           <div class="tile-title">Area Chart</div>
           <div class="tile-description">
             Area chart highlights the area between a line chart and the axis.
@@ -188,7 +187,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/arearange@2x.png 2x"
              alt="Polymer area range chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-arearange-chart</div>
           <div class="tile-title">Area Range Chart</div>
           <div class="tile-description">
             An area range chart highlights the area between two line charts.
@@ -203,7 +201,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/areaspline@2x.png 2x"
              alt="Polymer area spline chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-areaspline-chart</div>
           <div class="tile-title">Area Spline Chart</div>
           <div class="tile-description">
             An area spline chart highlights the area between the axis and a curved line chart.
@@ -218,7 +215,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/areasplinerange@2x.png 2x"
              alt="Polymer area spline range chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-areasplinerange-chart</div>
           <div class="tile-title">Area Spline Range Chart</div>
           <div class="tile-description">
             An area spline range chart highlights the area between two spline charts.
@@ -233,7 +229,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/bar@2x.png 2x"
              alt="Polymer bar chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-bar-chart</div>
           <div class="tile-title">Bar Chart</div>
           <div class="tile-description">
             Display data with horizontal bars proportional to values.
@@ -249,7 +244,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/boxplot@2x.png 2x"
              alt="Polymer box plot chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-boxplot-chart</div>
           <div class="tile-title">Box Plot Chart</div>
           <div class="tile-description">
             Box plot charts are used to indicate variability outside upper and lower quartiles.
@@ -264,7 +258,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/bubble@2x.png 2x"
              alt="Polymer bubble chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-bubble-chart</div>
           <div class="tile-title">Bubble Chart</div>
           <div class="tile-description">
             A bubble chart can be used to display three dimensions of data with disks proportional to a value at a given x, y point.
@@ -279,7 +272,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/candlestick@2x.png 2x"
              alt="Polymer candlestick chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-candlestick-chart</div>
           <div class="tile-title">Candlestick Chart</div>
           <div class="tile-description">
             A candlestick chart is a financial chart that combines a line chart and a bar chart.
@@ -294,7 +286,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/column@2x.png 2x"
              alt="Polymer column chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-column-chart</div>
           <div class="tile-title">Column Chart</div>
           <div class="tile-description">
             Display data with vertical bars proportional to values.
@@ -310,7 +301,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/columnrange@2x.png 2x"
              alt="Polymer column range chart">
         <div class="tile-details">
-          <div class="tile-version">vaadin-columnrange-chart</div>
           <div class="tile-title">Column Range Chart</div>
           <div class="tile-description">
             Displays two values per data point, highlighting the range between them.
@@ -325,7 +315,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/errorbar@2x.png 2x"
              alt="Polymer error bar chart">
         <div class="tile-details">
-          <div class="tile-version">vaadin-errorbar-chart</div>
           <div class="tile-title">Error Bar Chart</div>
           <div class="tile-description">
             Error bars can be used to indicate error or uncertainty in measurements.
@@ -340,7 +329,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/flags@2x.png 2x"
              alt="Polymer flag chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-flags-chart</div>
           <div class="tile-title">Flag Chart</div>
           <div class="tile-description">
             A flag chart allows you to flag points on the timeline and axis.
@@ -355,7 +343,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/funnel@2x.png 2x"
              alt="Polymer funnel chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-funnel-chart</div>
           <div class="tile-title">Funnel Chart</div>
           <div class="tile-description">
             Funnel charts are most often used to visualize the different stages in a company's sales process.
@@ -370,7 +357,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/gauge@2x.png 2x"
              alt="Polymer gauge chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-gauge-chart</div>
           <div class="tile-title">Gauge Chart</div>
           <div class="tile-description">
             Displays a gauge where the angle corresponds to the value.
@@ -386,7 +372,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/heatmap@2x.png 2x"
              alt="Polymer heat map element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-heatmap-chart</div>
           <div class="tile-title">Heat Map Chart</div>
           <div class="tile-description">
             Highlight areas in a matrix with a gradient to easily compare large amounts of data.
@@ -401,7 +386,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/line@2x.png 2x"
              alt="Polymer line chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-line-chart</div>
           <div class="tile-title">Line Chart</div>
           <div class="tile-description">
             Displays a series of data connected with straight lines.
@@ -416,7 +400,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/ohlc@2x.png 2x"
              alt="Polymer open-high-low-close chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-ohlc-chart</div>
           <div class="tile-title">OHLC Chart</div>
           <div class="tile-description">
             An open-high-low-close (OHLC) chart is a financial chart that shows the open, close, high and low values for a financial instrument for that day.
@@ -431,7 +414,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/pie@2x.png 2x"
              alt="Polymer pie chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-pie-chart</div>
           <div class="tile-title">Pie Chart</div>
           <div class="tile-description">
             Display proportions of values clearly with a pie chart.
@@ -446,7 +428,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/polygon@2x.png 2x"
              alt="Polymer polygon chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-polygon-chart</div>
           <div class="tile-title">Polygon Chart</div>
           <div class="tile-description">
             Highlights an area defined by data points making up a polygon.
@@ -461,7 +442,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/pyramid@2x.png 2x"
              alt="Polymer pyramid chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-pyramid-chart</div>
           <div class="tile-title">Pyramid Chart</div>
           <div class="tile-description">
             Used to show hierarchically structured data in a pyramid shaped chart divided into vertical slices.
@@ -476,7 +456,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/scatter@2x.png 2x"
              alt="Polymer scatter plot chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-scatter-chart</div>
           <div class="tile-title">Scatter Chart</div>
           <div class="tile-description">
             A scatter chart or scatter plot is a set of points from a two dimensional data set.
@@ -491,7 +470,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/solidgauge@2x.png 2x"
              alt="Polymer solid gauge chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-solidgauge-chart</div>
           <div class="tile-title">Solid Gauge Chart</div>
           <div class="tile-description">
             A solid gauge chart shows a value as a colored angle of an arc.
@@ -506,7 +484,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/sparkline@2x.png 2x"
              alt="Poylmer spark line chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-sparkline</div>
           <div class="tile-title">Sparkline</div>
           <div class="tile-description">
             Sparklines are small line charts that are displayed without axes or coordinates and are typically used to show time series data inline.
@@ -521,7 +498,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/spline@2x.png 2x"
              alt="Polymer spline chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-spline-chart</div>
           <div class="tile-title">Spline Chart</div>
           <div class="tile-description">
             Displays a set of data points connected by a curved line.
@@ -536,7 +512,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/treemap@2x.png 2x"
              alt="Polymer tree map chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-treemap-chart</div>
           <div class="tile-title">Tree Map Chart</div>
           <div class="tile-description">
             Displays a set of hierarchical data in nested rectangles.
@@ -551,7 +526,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/waterfall@2x.png 2x"
              alt="Polymer waterfall chart element">
         <div class="tile-details">
-          <div class="tile-version">vaadin-waterfall-chart</div>
           <div class="tile-title">Waterfall Chart</div>
           <div class="tile-description">
             A waterfall chart shows the cumulative effects of a step of sequentially applied positive or negative values.
