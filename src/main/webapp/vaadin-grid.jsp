@@ -35,7 +35,7 @@
 
 <div class="w-wallpaper-container elements-intro">
   <div class="w-wallpaper"></div>
-  
+
   <div class="row-fluid">
     <div class="span7">
       <p class="lead helvetica-light">Vaadin Grid is a fully featured datagrid for showing table
@@ -66,32 +66,32 @@
   <div class="row-fluid">
     <div class="span6">
       <ul>
-        <li>Lazy loading &ndash; Lazy loading of data from any data source</li>
-        <li>Big data &ndash; Easily present and scroll through 100k lines of data in a single UI
+        <li><strong>Lazy loading</strong> &ndash; Lazy loading of data from any data source</li>
+        <li><strong>Big data</strong> &ndash; Easily present and scroll through 100k lines of data in a single UI
           component
         </li>
-        <li>Custom headers &ndash; Combine multiple rows and display components in your grid
+        <li><strong>Custom headers</strong> &ndash; Combine multiple rows and display components in your grid
           headers
         </li>
-        <li>Smooth scrolling &ndash; Lightning fast and smooth hardware accelerated scrolling by
+        <li><strong>Smooth scrolling</strong> &ndash; Lightning fast and smooth hardware accelerated scrolling by
           reusing DOM elements
         </li>
-        <li>Super efficient &ndash; Super efficient custom renderers for presenting custom data any
+        <li><strong>Super efficient</strong> &ndash; Super efficient custom renderers for presenting custom data any
           way you need to
         </li>
-        <li>Expanding row details</li>
+        <li><strong>Expanding row details</strong></li>
       </ul>
     </div>
     <div class="span6">
       <ul>
-        <li>Touch event and mobile support, and keyboard navigation</li>
-        <li>Can be used with any JavaScript library or framework that supports Web Components, like
+        <li><strong>Touch and keyboard</strong> &ndash; Touch event and mobile support, and keyboard navigation</li>
+        <li><strong>Various web technology support</strong> &ndash; Can be used with any JavaScript library or framework that supports Web Components, like
           Angular 2, React, Ember 2, jQuery
         </li>
-        <li>Built on top of Google Polymer</li>
-        <li>Material Design inspired styles to fit in with Paper Elements</li>
-        <li>Customize the theme of the data grid to match the rest of your application</li>
-        <li>Free to use under Apache License 2.0</li>
+        <li><strong>Built on top of Google Polymer</strong></li>
+        <li><strong>Material Design inspired</strong> &ndash; Styles to fit in with Paper Elements</li>
+        <li><strong>Customize the theme</strong> &ndash; Style the data grid to match the rest of your application</li>
+        <li><strong>Free to use under Apache License 2.0</strong></li>
       </ul>
     </div>
   </div>

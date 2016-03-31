@@ -340,7 +340,7 @@
 }
 
 .elements-hero-mini {
-    padding: 60px 0 30px 0;
+    padding: 5.6rem 0 2.2rem 0;
     color: #fff;
 }
 
@@ -501,15 +501,11 @@
 }
 
 .elements-section ul li {
-    margin-bottom: 10px;
-    padding-left: 1em;
-    text-indent: -.7em;
-}
+    margin-bottom: 1em;
+    padding-left: 22px;
 
-.elements-section li:before {
-    content: "• ";
-    color: #648a9d;
-    font-size: 16px;
+    background: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cpath%20fill%3D%22%2300b4f0%22%20d%3D%22M29.2%2056.8L.8%2036l6.8-9.6%2019.2%2014%2026.4-34%209.2%207.2z%22%2F%3E%3C%2Fsvg%3E') no-repeat 0 3px;
+    background-size: 14px;
 }
 
 .elements-section h5 {
