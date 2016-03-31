@@ -243,6 +243,10 @@
     opacity: 1;
 }
 
+.elements-category-tiles .tile img {
+    width: 100%;
+}
+
 .elements-category-tiles .tile-details {
     text-align: center;
     background-color: #eaeaea;
