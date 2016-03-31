@@ -5,7 +5,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?4.1"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?4.4"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -62,9 +62,9 @@
 
 <div class="w-wallpaper-container zebra elements-category-tiles elements-category-core-tiles">
   <div class="w-wallpaper"></div>
-  <div class="row-fluid">
+  <div class="tile-container">
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-grid.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/grid.png"
              srcset="<%=request.getContextPath()%>/img/preview/grid@2x.png 2x"
@@ -80,7 +80,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-combo-box.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/combobox.png"
              srcset="<%=request.getContextPath()%>/img/preview/combobox@2x.png 2x"
@@ -95,7 +95,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-icons.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/icons.png"
              srcset="<%=request.getContextPath()%>/img/preview/icons@2x.png 2x"
@@ -110,7 +110,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-upload.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/upload.png"
              srcset="<%=request.getContextPath()%>/img/preview/upload@2x.png 2x"
@@ -126,7 +126,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-date-picker.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/date-picker.png"
              srcset="<%=request.getContextPath()%>/img/preview/date-picker@2x.png 2x"
@@ -164,9 +164,9 @@
 
 <div class="w-wallpaper-container zebra elements-category-tiles elements-category-charts-tiles">
   <div class="w-wallpaper"></div>
-  <div class="row-fluid">
+  <div class="tile-container">
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-area-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/area.png"
              srcset="<%=request.getContextPath()%>/img/preview/area@2x.png 2x"
@@ -181,7 +181,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-arearange-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/arearange.png"
              srcset="<%=request.getContextPath()%>/img/preview/arearange@2x.png 2x"
@@ -195,7 +195,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areaspline-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/areaspline.png"
              srcset="<%=request.getContextPath()%>/img/preview/areaspline@2x.png 2x"
@@ -209,7 +209,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-areasplinerange-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/areasplinerange.png"
              srcset="<%=request.getContextPath()%>/img/preview/areasplinerange@2x.png 2x"
@@ -223,7 +223,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bar-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/bar.png"
              srcset="<%=request.getContextPath()%>/img/preview/bar@2x.png 2x"
@@ -238,7 +238,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-boxplot-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/boxplot.png"
              srcset="<%=request.getContextPath()%>/img/preview/boxplot@2x.png 2x"
@@ -252,7 +252,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-bubble-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/bubble.png"
              srcset="<%=request.getContextPath()%>/img/preview/bubble@2x.png 2x"
@@ -266,7 +266,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-candlestick-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/candlestick.png"
              srcset="<%=request.getContextPath()%>/img/preview/candlestick@2x.png 2x"
@@ -280,7 +280,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-column-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/column.png"
              srcset="<%=request.getContextPath()%>/img/preview/column@2x.png 2x"
@@ -295,7 +295,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-columnrange-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/columnrange.png"
              srcset="<%=request.getContextPath()%>/img/preview/columnrange@2x.png 2x"
@@ -309,7 +309,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-errorbar-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/errorbar.png"
              srcset="<%=request.getContextPath()%>/img/preview/errorbar@2x.png 2x"
@@ -323,7 +323,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-flags-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/flags.png"
              srcset="<%=request.getContextPath()%>/img/preview/flags@2x.png 2x"
@@ -337,7 +337,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-funnel-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/funnel.png"
              srcset="<%=request.getContextPath()%>/img/preview/funnel@2x.png 2x"
@@ -351,7 +351,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-gauge-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/gauge.png"
              srcset="<%=request.getContextPath()%>/img/preview/gauge@2x.png 2x"
@@ -366,7 +366,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-heatmap-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/heatmap.png"
              srcset="<%=request.getContextPath()%>/img/preview/heatmap@2x.png 2x"
@@ -380,7 +380,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-line-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/line.png"
              srcset="<%=request.getContextPath()%>/img/preview/line@2x.png 2x"
@@ -394,7 +394,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-ohlc-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/ohlc.png"
              srcset="<%=request.getContextPath()%>/img/preview/ohlc@2x.png 2x"
@@ -408,7 +408,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pie-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/pie.png"
              srcset="<%=request.getContextPath()%>/img/preview/pie@2x.png 2x"
@@ -422,7 +422,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-polygon-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/polygon.png"
              srcset="<%=request.getContextPath()%>/img/preview/polygon@2x.png 2x"
@@ -436,7 +436,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-pyramid-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/pyramid.png"
              srcset="<%=request.getContextPath()%>/img/preview/pyramid@2x.png 2x"
@@ -450,7 +450,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-scatter-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/scatter.png"
              srcset="<%=request.getContextPath()%>/img/preview/scatter@2x.png 2x"
@@ -464,7 +464,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-solidgauge-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/solidgauge.png"
              srcset="<%=request.getContextPath()%>/img/preview/solidgauge@2x.png 2x"
@@ -478,7 +478,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-sparkline.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/sparkline.png"
              srcset="<%=request.getContextPath()%>/img/preview/sparkline@2x.png 2x"
@@ -492,7 +492,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-spline-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/spline.png"
              srcset="<%=request.getContextPath()%>/img/preview/spline@2x.png 2x"
@@ -506,7 +506,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-treemap-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/treemap.png"
              srcset="<%=request.getContextPath()%>/img/preview/treemap@2x.png 2x"
@@ -520,7 +520,7 @@
       </a>
     </div>
 
-    <div class="span4 tile">
+    <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-waterfall-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/waterfall.png"
              srcset="<%=request.getContextPath()%>/img/preview/waterfall@2x.png 2x"
