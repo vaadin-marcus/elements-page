@@ -115,7 +115,7 @@
     text-decoration: none;
 }
 
-.elements-hero-title .polymer-tag {
+.elements-hero .elements-hero-title .polymer-tag {
     margin: 1.5rem 0;
 }
 
@@ -335,17 +335,21 @@
 /* Template Hero */
 
 .elements-hero-mini .w-wallpaper {
-    background: #041a25 url('../img/hero-bg-mini.png') center center no-repeat;
+    background: #1eb5ed url('../img/hero-bg.png') center top no-repeat;
     background-size: cover;
 }
 
 .elements-hero-mini {
-    padding: 60px 0 60px 0;
+    padding: 60px 0 30px 0;
     color: #fff;
 }
 
+.elements-hero-mini .polymer-tag {
+    float: right;
+}
+
 .elements-hero-mini .elements-hero-title {
-    border-bottom: 2px solid #3a5360;
+    border-bottom: 2px solid #b6edff;
 }
 
 .elements-hero-mini .elements-hero-title h5 {
@@ -367,7 +371,7 @@
     font-family: "Helvetica Neue", "Helvetica", "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun", "STXihei", sans-serif;
     font-weight: bold;
     font-size: 14px;
-    color: #648a9d;
+    color: #b6edff;
     margin-left: 10px;
     opacity: 0;
     transition: 0.3s all;
@@ -379,7 +383,7 @@
 }
 
 .elements-hero-mini h1 {
-    margin: 10px 0 0;
+    margin: 10px 0 3rem 0;
     color: #fff;
 }
 
@@ -387,8 +391,16 @@
     font-family: "Helvetica Neue", "Helvetica", "Arial", "Microsoft YaHei New", "Microsoft Yahei", "SimSun", "STXihei", sans-serif;
     font-weight: bold;
     font-size: 20px;
-    color: #648a9d;
     letter-spacing: normal;
+}
+
+.elements-hero-mini a {
+    color: #b6edff;
+}
+
+.elements-hero-mini a.back-link {
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 @media (max-width: 767px) {
@@ -404,36 +416,68 @@
 /* Template Intro */
 
 .elements-intro {
-    padding: 60px 0;
+    padding: 3.8rem 0;
+    color: #a9a9a9;
 }
 
 .elements-intro .w-wallpaper {
-    background-color: #f3f3f3;
+    background-color: #323232;
 }
 
 .elements-intro p.lead {
     font-size: 20px;
+    margin-right: 1.5em;
+}
+
+.elements-intro h4 {
+    margin-top: .4rem;
+    color: #fff;
 }
 
 .elements-install {
     padding: 20px;
-    background-color: #e5e5e5;
+    background-color: #404040;
+    color: #fff;
     border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-.elements-install h4 {
-    margin: 0;
+    margin-bottom: 2rem;
 }
 
 .elements-install code {
     white-space: normal;
+    font-weight: bold;
 }
 
-.elements-intro a.w-arrow-button.github {
-    margin-top: 10px;
-    background: #648A9D;
+.vaadin-theme a.w-button {
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: inline-block;
+    background: #fff;
+    color: #0091c2;
+    padding: .8em 2.2em;
+    line-height: 1.2em;
+    text-align: center;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    transition: all .3s;
+}
+
+.vaadin-theme a.w-button.blue {
+    background: #00b4f0;
     color: #fff;
+}
+
+.vaadin-theme a.w-button.blue:hover,
+.vaadin-theme a.w-button.blue:focus {
+    background: #0fc3ff;
+}
+
+.elements-intro a.w-button {
+    float: left;
+}
+
+.elements-intro a.w-button.github {
+    float: right;
 }
 
 /* EO Template Intro */

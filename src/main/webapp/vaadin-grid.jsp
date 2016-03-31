@@ -19,11 +19,14 @@
   <div class="elements-hero-title row-fluid">
     <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5>
     </div>
-    <div class="span3 hidden-phone"><a href="https://www.polymer-project.org" class="polymer-tag">Built
-      with Polymer</a></div>
+    <div class="span3 hidden-phone">
+      <a href="https://www.polymer-project.org"
+         class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
+    </div>
   </div>
   <h1 class="helvetica-light">&lt;vaadin-grid&gt;
     <span><%=Releases.getLatestVersionNumber("vaadin-grid", "1.0.0")%></span></h1>
+  <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
 <!-- Hero section end -->
@@ -32,6 +35,7 @@
 
 <div class="w-wallpaper-container elements-intro">
   <div class="w-wallpaper"></div>
+  
   <div class="row-fluid">
     <div class="span7">
       <p class="lead helvetica-light">Vaadin Grid is a fully featured datagrid for showing table
@@ -40,14 +44,14 @@
         each cell gets rendered.</p>
     </div>
     <div class="span5">
+      <h4>Install</h4>
       <div class="elements-install">
-        <h4>Install</h4>
         <code>bower install --save vaadin-grid</code>
       </div>
       <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/overview.html"
-         class="w-arrow-button blue small">Show documentation</a>
-      <a href="https://github.com/vaadin/vaadin-grid" class="w-arrow-button github small">View on
-        GitHub</a>
+         class="w-button blue">Documentation</a>
+      <a href="https://github.com/vaadin/vaadin-grid"
+         class="w-button blue github">View on GitHub</a>
     </div>
   </div>
 </div>
