@@ -5,7 +5,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?4"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?4.1"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -274,6 +274,21 @@
     </div>
 
     <div class="span4 tile">
+      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-candlestick-chart.jsp" /></portlet:renderURL>">
+        <img src="<%=request.getContextPath()%>/img/preview/candlestick.png"
+             srcset="<%=request.getContextPath()%>/img/preview/candlestick@2x.png 2x"
+             alt="Polymer candlestick chart element">
+        <div class="tile-details">
+          <div class="tile-version">vaadin-candlestick-chart</div>
+          <div class="tile-title">Candlestick Chart</div>
+          <div class="tile-description">
+            A candlestick chart is a financial chart that combines a line chart and a bar chart.
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="span4 tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-column-chart.jsp" /></portlet:renderURL>">
         <img src="<%=request.getContextPath()%>/img/preview/column.png"
              srcset="<%=request.getContextPath()%>/img/preview/column@2x.png 2x"
@@ -314,6 +329,21 @@
           <div class="tile-title">Error Bar Chart</div>
           <div class="tile-description">
             Error bars can be used to indicate error or uncertainty in measurements.
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="span4 tile">
+      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-flags-chart.jsp" /></portlet:renderURL>">
+        <img src="<%=request.getContextPath()%>/img/preview/flags.png"
+             srcset="<%=request.getContextPath()%>/img/preview/flags@2x.png 2x"
+             alt="Polymer flag chart element">
+        <div class="tile-details">
+          <div class="tile-version">vaadin-flags-chart</div>
+          <div class="tile-title">Flag Chart</div>
+          <div class="tile-description">
+            A flag chart allows you to flag points on the timeline and axis.
           </div>
         </div>
       </a>
@@ -375,6 +405,21 @@
           <div class="tile-title">Line Chart</div>
           <div class="tile-description">
             Displays a series of data connected with straight lines.
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="span4 tile">
+      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-ohlc-chart.jsp" /></portlet:renderURL>">
+        <img src="<%=request.getContextPath()%>/img/preview/ohlc.png"
+             srcset="<%=request.getContextPath()%>/img/preview/ohlc@2x.png 2x"
+             alt="Polymer open-high-low-close chart element">
+        <div class="tile-details">
+          <div class="tile-version">vaadin-ohlc-chart</div>
+          <div class="tile-title">OHLC Chart</div>
+          <div class="tile-description">
+            An open-high-low-close (OHLC) chart is a financial chart that shows the open, close, high and low values for a financial instrument for that day.
           </div>
         </div>
       </a>
