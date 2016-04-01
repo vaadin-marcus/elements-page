@@ -27,6 +27,7 @@
     </div>
   </div>
   <h1 class="helvetica-light">&lt;vaadin-date-picker&gt; <span><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha3")%></span></h1>
+  <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
 <!-- Hero section end -->

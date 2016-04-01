@@ -27,6 +27,7 @@
 
   <h1 class="helvetica-light">&lt;vaadin-pyramid-chart&gt;
   </h1>
+  <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
 <!-- Hero section end -->

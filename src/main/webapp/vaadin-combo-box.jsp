@@ -26,6 +26,7 @@
   </div>
   <h1 class="helvetica-light">&lt;vaadin-combo-box&gt;
     <span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-beta1")%></span></h1>
+  <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
 <!-- Hero section end -->
