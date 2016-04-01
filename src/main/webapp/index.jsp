@@ -112,8 +112,8 @@
 
     <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-upload.jsp" /></portlet:renderURL>">
-        <img src="<%=request.getContextPath()%>/img/preview/upload.png?2"
-             srcset="<%=request.getContextPath()%>/img/preview/upload@2x.png 2x"
+        <img src="<%=request.getContextPath()%>/img/preview/upload.png?3"
+             srcset="<%=request.getContextPath()%>/img/preview/upload@2x.png?2 2x"
              alt="Upload component for Polymer and javascript">
         <div class="tile-details">
           <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-alpha3")%></div>
