@@ -552,6 +552,34 @@
     margin-bottom: 12px;
 }
 
+.icons-site-hero {
+    background: #00b4f0;
+    color: #fff;
+    text-align: center;
+    padding: 2.8rem 0;
+}
+
+.icons-site-hero p {
+    max-width: 16em;
+    line-height: 1.8;
+    margin: 0 auto .5em auto;
+    font-size: 1.5rem;
+}
+
+.vaadin-theme a.w-button.icons-site-button {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: .8em 3em;
+    font-size: 1.2rem;
+}
+
+.vaadin-theme a.w-button.icons-site-button:hover,
+.vaadin-theme a.w-button.icons-site-button:focus {
+    background: #25c9ff;
+}
+
 /* EO Template Section */
 
 /* Demo Footer */

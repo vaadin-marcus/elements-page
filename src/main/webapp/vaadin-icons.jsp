@@ -38,8 +38,11 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Vaadin-icons contains 530 unique icons designed for web
-        applications.</p>
+      <p class="lead helvetica-light">
+        Vaadin-icons contains 530 unique icons designed for web applications.
+        Icon design is simple and favors sharp corners.
+        Vaadin Icons are free to use from commercial apps to personal websites.
+      </p>
     </div>
     <div class="span5">
       <h4>Install</h4>
@@ -59,6 +62,7 @@
 
 
 <!-- Info section end -->
+<%--
 <% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-icons");
   if (latestReleases != null && !latestReleases.isEmpty()) {
 %>
@@ -67,7 +71,6 @@
 
   <div class="elements-section">
     <h4>Latest releases</h4>
-    <%--A small part of me died for writing this--%>
     <% for (GitHubRelease release : latestReleases) {%>
     <div class="row-fluid">
       <span class="span9"><a href="<%=release.htmlUrl%>"><%=release.name%>
@@ -78,7 +81,18 @@
   </div>
 </div>
 <%}%>
-<!-- Demo section start -->
+--%>
+
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <div class="elements-section">
+    <div class="icons-site-hero">
+      <p>You can find full icon list and learn more about Vaadin Icons from</p>
+      <a href="https://vaadin.com/icons" class="w-button icons-site-button">Vaadin Icons site</a>
+    </div>
+  </div>
+</div>
 
 <!-- Demo section start -->
 <div class="elements-section">
@@ -123,104 +137,7 @@
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
 
-  <div class="elements-section">
-    <h5>All icons</h5>
-    Below you can find the names of all the icons included in vaadin-icons.
-
-    <view-source editable="no">
-      <div class="head">
-        <!--
-        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import" href="https://cdn.vaadin.com/vaadin-icons/master/vaadin-icons.html">
-        -->
-      </div>
-      <template is="dom-bind" id="demo">
-        <paper-input label="Filter" value="{{query}}" class="icons-filter"></paper-input>
-        <!-- Icon sets are registered globally when imported -->
-        <iron-meta type="iconset" list="{{iconsets}}"></iron-meta>
-        <div class="vaadin-icons-container">
-
-          <template is="dom-repeat" items="{{getIconNames(iconsets)}}"
-                    filter="{{filterByName(query)}}">
-            <div class="icon">
-              <iron-icon icon="[[item]]"></iron-icon>
-              <span>{{item}}</span>
-            </div>
-          </template>
-        </div>
-      </template>
-      <style>
-        .icon {
-          display: inline-block;
-          vertical-align: top;
-          margin: 24px 8px;
-          text-align: center;
-          width: 130px;
-          cursor: default;
-        }
-
-        .icon span {
-          font-family: sans-serif;
-          font-size: 10px;
-          display: block;
-          color: #616161;
-          -webkit-transition: all 600ms;
-          transition: all 600ms;
-        }
-
-        .icon:hover span {
-          color: #00b4f0;
-        }
-
-        iron-icon {
-          fill: #616161;
-          -webkit-transition: all 200ms;
-          transition: all 200ms;
-        }
-
-        .icon:hover iron-icon {
-          fill: #00b4f0;
-        }
-
-        .vaadin-icons-container {
-          height: 380px;
-          overflow: scroll;
-        }
-
-        .icons-filter {
-          width: 300px;
-          margin: 20px auto;
-        }
-      </style>
-
-      <script>
-        var demo = document.querySelector('#demo');
-        demo.getIconNames = function(iconsets) {
-          for(var i = 0; i < iconsets.length; i++){
-            if(iconsets[i].name === 'vaadin-icons'){
-              return iconsets[i].getIconNames();
-            }
-          }
-          return [];
-        };
-
-        demo.filterByName = function(query) {
-          return function(iconName) {
-            if (!query) {
-              return true;
-            }
-            if (demo) {
-              return iconName.indexOf(query) > 0;
-            } else {
-              return true;
-            }
-          };
-        };
-      </script>
-    </view-source>
-  </div>
+  <jsp:include page="suggestion-box.jsp"/>
 </div>
-
-<jsp:include page="suggestion-box.jsp"/>
 
 <jsp:include page="bottom-actions.jsp"/>
