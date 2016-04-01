@@ -18,9 +18,9 @@
     <div class="span9">
       <h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5>
     </div>
-
     <div class="span3 hidden-phone">
-      <a href="https://www.polymer-project.org" class="polymer-tag">Built with Polymer</a>
+      <a href="https://www.polymer-project.org"
+         class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
     </div>
   </div>
 
