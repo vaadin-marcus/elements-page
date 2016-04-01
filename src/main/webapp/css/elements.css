@@ -23,8 +23,12 @@
     margin-top: 0;
 }
 
-.zebra .w-wallpaper {
+.w-wallpaper-container.zebra .w-wallpaper {
     background-color: #f3f3f3;
+}
+
+.w-wallpaper-container.dark .w-wallpaper {
+    background-color: #323232;
 }
 
 /* EO General Fixes */
@@ -601,7 +605,7 @@
 
 /* EO Demo Footer */
 
-/*Hubspot form */
+/* Hubspot form */
 
 .hbspt-form {
     max-width: 480px;
@@ -732,3 +736,28 @@
 .hs-form fieldset.form-columns-1 .hs-input {
     width: 100%;
 }
+/* EO Hubspot form */
+
+/* Bottom Actions */
+.bottom-action-container {
+    padding: 1.4rem 0;
+    text-align: center;
+}
+
+.vaadin-theme a.w-button.dark {
+    background: #323232;
+    color: #fff;
+    border: 2px solid #565656;
+}
+
+.vaadin-theme a.w-button.dark:hover,
+.vaadin-theme a.w-button.dark:focus {
+    background: #404040;
+    border-color: #5c5c5c;
+}
+
+.vaadin-theme .bottom-action-container a.w-button {
+    display: inline-block;
+    padding: .6em 2.7em;
+}
+/* EO Bottom Actions */

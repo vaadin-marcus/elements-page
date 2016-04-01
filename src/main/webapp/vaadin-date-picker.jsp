@@ -151,3 +151,5 @@
 </div>
 
 <jsp:include page="suggestion-box.jsp"/>
+
+<jsp:include page="bottom-actions.jsp"/>

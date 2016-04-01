@@ -186,3 +186,5 @@
   <jsp:include page="charts-links.jsp"/>
   <jsp:include page="suggestion-box.jsp"/>
 </div>
+
+<jsp:include page="bottom-actions.jsp"/>

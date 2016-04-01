@@ -519,6 +519,8 @@
     </view-source>
   </div>
 </div>
+<!-- Demo section end -->
 
 <jsp:include page="suggestion-box.jsp"/>
-<!-- Demo section end -->
+
+<jsp:include page="bottom-actions.jsp"/>

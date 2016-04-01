@@ -192,3 +192,5 @@
 
   <jsp:include page="suggestion-box.jsp"/>
 </div>
+
+<jsp:include page="bottom-actions.jsp"/>
