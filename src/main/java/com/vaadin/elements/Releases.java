@@ -14,8 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Releases {
 
-    public static final int CACHE_MINUTES = 60;
-
     private static LoadingCache<String, List<GitHubRelease>> cache;
 
     private static LoadingCache<String, List<GitHubRelease>> getCache() {
@@ -28,7 +26,7 @@ public class Releases {
     private static void init() {
         cache = CacheBuilder
                 .newBuilder()
-                .expireAfterWrite(CACHE_MINUTES, TimeUnit.MINUTES)
+                .expireAfterWrite(12, TimeUnit.HOURS)
                 .build(new CacheLoader<String, List<GitHubRelease>>() {
                     @Override
                     public List<GitHubRelease> load(String repo) throws Exception {

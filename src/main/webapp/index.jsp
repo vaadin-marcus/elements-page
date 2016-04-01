@@ -101,7 +101,7 @@
              srcset="<%=request.getContextPath()%>/img/preview/icons@2x.png 2x"
              alt="Free font icons for web applications">
         <div class="tile-details">
-          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-icons", "1.0.0-alpha2")%></div>
+          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-icons", "1.0.0-beta1")%></div>
           <div class="tile-title">Icons</div>
           <div class="tile-description">
             Vaadin Icons is a set of 530 unique icons designed for web applications.
@@ -116,7 +116,7 @@
              srcset="<%=request.getContextPath()%>/img/preview/upload@2x.png?2 2x"
              alt="Upload component for Polymer and javascript">
         <div class="tile-details">
-          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-alpha3")%></div>
+          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-beta1")%></div>
           <div class="tile-title">Upload</div>
           <div class="tile-description">
             Vaadin upload allows you to upload multiple files with progress indication.
@@ -132,7 +132,7 @@
              srcset="<%=request.getContextPath()%>/img/preview/date-picker@2x.png?2 2x"
              alt="Polymer date picker">
         <div class="tile-details">
-          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha5")%></div>
+          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-beta1")%></div>
           <div class="tile-title">Date Picker</div>
           <div class="tile-description">
             Vaadin DatePicker allows you to select a date from a dropdown calendar.
