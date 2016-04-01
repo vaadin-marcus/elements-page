@@ -82,8 +82,8 @@
 
     <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-combo-box.jsp" /></portlet:renderURL>">
-        <img src="<%=request.getContextPath()%>/img/preview/combobox.png?2"
-             srcset="<%=request.getContextPath()%>/img/preview/combobox@2x.png 2x"
+        <img src="<%=request.getContextPath()%>/img/preview/combobox.png?3"
+             srcset="<%=request.getContextPath()%>/img/preview/combobox@2x.png?2 2x"
              alt="Filtering select for polymer and javacript">
         <div class="tile-details">
           <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-beta1")%></div>
@@ -128,8 +128,8 @@
 
     <div class="tile">
       <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-date-picker.jsp" /></portlet:renderURL>">
-        <img src="<%=request.getContextPath()%>/img/preview/date-picker.png?2"
-             srcset="<%=request.getContextPath()%>/img/preview/date-picker@2x.png 2x"
+        <img src="<%=request.getContextPath()%>/img/preview/date-picker.png?3"
+             srcset="<%=request.getContextPath()%>/img/preview/date-picker@2x.png?2 2x"
              alt="Polymer date picker">
         <div class="tile-details">
           <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-alpha5")%></div>
