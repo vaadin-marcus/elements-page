@@ -94,32 +94,37 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
-  <h4>Examples</h4>
-    <view-source externals="<%=request.getContextPath()%>/temp-variation.json">
-      <div class="head">
-        <!--
-         <%request.setAttribute("chart", "vaadin-areasplinerange-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-        -->
-      </div>
-      <template is="dom-bind">
-        <iron-ajax auto url="<%=request.getContextPath()%>/temp-variation.json" handle-as="json" last-response="{{temperatureData}}"></iron-ajax>
-        <vaadin-areasplinerange-chart id="area-range">
-          <chart zoom-type="x"></chart>
-          <title>Temperature variation by day</title>
-          <x-axis type="datetime"></x-axis>
-          <y-axis>
-            <title text="null"></title>
-          </y-axis>
-          <tooltip crosshairs="true" shared="true" value-suffix="C"></tooltip>
-          <legend enabled="false"></legend>
-          <data-series data="[[temperatureData]]"></data-series>
-        </vaadin-areasplinerange-chart>
-      </template>
-    </view-source>
+  <div class="elements-section">
+
+    <h4>Examples</h4>
+      <view-source externals="<%=request.getContextPath()%>/temp-variation.json">
+        <div class="head">
+          <!--
+           <%request.setAttribute("chart", "vaadin-areasplinerange-chart.html");%>
+        <jsp:include page="charts-imports.jsp"/>
+          -->
+        </div>
+        <template is="dom-bind">
+          <iron-ajax auto url="<%=request.getContextPath()%>/temp-variation.json" handle-as="json" last-response="{{temperatureData}}"></iron-ajax>
+          <vaadin-areasplinerange-chart id="area-range">
+            <chart zoom-type="x"></chart>
+            <title>Temperature variation by day</title>
+            <x-axis type="datetime"></x-axis>
+            <y-axis>
+              <title text="null"></title>
+            </y-axis>
+            <tooltip crosshairs="true" shared="true" value-suffix="C"></tooltip>
+            <legend enabled="false"></legend>
+            <data-series data="[[temperatureData]]"></data-series>
+          </vaadin-areasplinerange-chart>
+        </template>
+      </view-source>
+  </div>
 </div>
 <!-- Demo section end -->
+
 <jsp:include page="charts-links.jsp"/>
 <jsp:include page="suggestion-box.jsp"/>

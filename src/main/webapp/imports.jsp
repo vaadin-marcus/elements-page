@@ -2,7 +2,7 @@
 
 <portlet:defineObjects />
 <script src="<%=request.getContextPath()%>/script/webcomponents-lite.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?10" media="screen" charset="utf-8">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?11" media="screen" charset="utf-8">
 <link rel="import" href="<%=request.getContextPath()%>/all-the-things.html?11">
 <style is="custom-style">
   :root {

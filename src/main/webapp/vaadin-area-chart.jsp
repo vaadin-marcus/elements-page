@@ -92,59 +92,65 @@
 <!-- Info section end -->
 
 <%request.setAttribute("chart", "vaadin-area-chart.html");%>
-<div class="elements-section">
-  <h4>Examples</h4>
-  <h5>Basic area chart</h5>
-  <view-source>
-    <div class="head">
-      <!--
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-area-chart id="basic-area">
-      <title>US and USSR nuclear stockpiles</title>
-      <subtitle>Source: thebulletin.metapress.com</subtitle>
-      <x-axis allow-decimals="false">
-        <labels formatter="function () { return this.value; }"></labels>
-      </x-axis>
-      <y-axis min="0">
-        <title>Nuclear weapon states</title>
-        <labels formatter="function () { return this.value / 1000 + 'k'; }"></labels>
-      </y-axis>
-      <tooltip
-          point-format="{series.name} produced <b>{point.y}</b><br/>warheads in {point.x}"></tooltip>
-      <plot-options>
-        <area-chart point-start="1940">
-          <marker enabled="false" symbol="circle" radius="2">
-            <states>
-              <hover enabled="true"></hover>
-            </states>
-          </marker>
-        </area-chart>
-      </plot-options>
-      <data-series name="USA">
-        <data>null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640, 1005, 1436, 2063,
-          3057, 4618, 6444, 9822, 15468, 20434, 24126, 27387, 29459, 31056, 31982, 32040,
-          31233, 29224, 27342, 26662, 26956, 27912, 28999, 28965, 27826, 25579, 25722,
-          24826,
-          24605, 24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586, 22380,
-          21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950, 10871, 10824, 10577,
-          10527, 10475, 10421, 10358, 10295, 10104
-        </data>
-      </data-series>
-      <data-series name="USSR/Russia">
-        <data>null, null, null, null, null, null, null, null, null, null, 5, 25, 50, 120,
-          150, 200, 426, 660, 869, 1060, 1605, 2471, 3322, 4238, 5221, 6129, 7089, 8339,
-          9399, 10538, 11643, 13092, 14478, 15915, 17385, 19055, 21205, 23044, 25393,
-          27935, 30062,
-          32049, 33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000, 35000,
-          33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000, 21000, 20000, 19000,
-          18000, 18000, 17000, 16000
-        </data>
-      </data-series>
-    </vaadin-area-chart>
-  </view-source>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
+  <div class="elements-section">
+    <h4>Examples</h4>
+    <h5>Basic area chart</h5>
+    <view-source>
+      <div class="head">
+        <!--
+        <jsp:include page="charts-imports.jsp"/>
+        -->
+      </div>
+      <vaadin-area-chart id="basic-area">
+        <title>US and USSR nuclear stockpiles</title>
+        <subtitle>Source: thebulletin.metapress.com</subtitle>
+        <x-axis allow-decimals="false">
+          <labels formatter="function () { return this.value; }"></labels>
+        </x-axis>
+        <y-axis min="0">
+          <title>Nuclear weapon states</title>
+          <labels formatter="function () { return this.value / 1000 + 'k'; }"></labels>
+        </y-axis>
+        <tooltip
+            point-format="{series.name} produced <b>{point.y}</b><br/>warheads in {point.x}"></tooltip>
+        <plot-options>
+          <area-chart point-start="1940">
+            <marker enabled="false" symbol="circle" radius="2">
+              <states>
+                <hover enabled="true"></hover>
+              </states>
+            </marker>
+          </area-chart>
+        </plot-options>
+        <data-series name="USA">
+          <data>null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640, 1005, 1436, 2063,
+            3057, 4618, 6444, 9822, 15468, 20434, 24126, 27387, 29459, 31056, 31982, 32040,
+            31233, 29224, 27342, 26662, 26956, 27912, 28999, 28965, 27826, 25579, 25722,
+            24826,
+            24605, 24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586, 22380,
+            21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950, 10871, 10824, 10577,
+            10527, 10475, 10421, 10358, 10295, 10104
+          </data>
+        </data-series>
+        <data-series name="USSR/Russia">
+          <data>null, null, null, null, null, null, null, null, null, null, 5, 25, 50, 120,
+            150, 200, 426, 660, 869, 1060, 1605, 2471, 3322, 4238, 5221, 6129, 7089, 8339,
+            9399, 10538, 11643, 13092, 14478, 15915, 17385, 19055, 21205, 23044, 25393,
+            27935, 30062,
+            32049, 33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000, 35000,
+            33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000, 21000, 20000, 19000,
+            18000, 18000, 17000, 16000
+          </data>
+        </data-series>
+      </vaadin-area-chart>
+    </view-source>
+  </div>
+</div>
+
+<div class="elements-section">
   <h5>Area chart with negative values</h5>
   <view-source>
     <div class="head">
@@ -173,37 +179,45 @@
       </data-series>
     </vaadin-area-chart>
   </view-source>
+</div>
 
-  <h5>Area chart with missing points</h5>
-  <view-source>
-    <div class="head">
-      <!--
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-area-chart id="area-with-missing-points">
-      <title>Fruit consumption *</title>
-      <subtitle floating="true" y="10" align="right" vertical-align="bottom">* Jane's banana
-        consumption is unknown
-      </subtitle>
-      <x-axis>
-        <categories>Apples, Pears, Oranges, Bananas, Grapes, Plums, Strawberries,
-          Raspberries
-        </categories>
-      </x-axis>
-      <legend layout="vertical" align="left" floating="true" vertical-align="top" x="150"
-              y="100" border-width="1" background-color="#ffffff"></legend>
-      <tooltip enabled="true" shared="true">
-      </tooltip>
-      <data-series name="John">
-        <data>0, 1, 4, 4, 5, 2, 3, 7</data>
-      </data-series>
-      <data-series name="Jane">
-        <data>1, 0, 3, null, 3, 1, 2, 1</data>
-      </data-series>
-    </vaadin-area-chart>
-  </view-source>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
+  <div class="elements-section">
+    <h5>Area chart with missing points</h5>
+    <view-source>
+      <div class="head">
+        <!--
+        <jsp:include page="charts-imports.jsp"/>
+        -->
+      </div>
+      <vaadin-area-chart id="area-with-missing-points">
+        <title>Fruit consumption *</title>
+        <subtitle floating="true" y="10" align="right" vertical-align="bottom">* Jane's banana
+          consumption is unknown
+        </subtitle>
+        <x-axis>
+          <categories>Apples, Pears, Oranges, Bananas, Grapes, Plums, Strawberries,
+            Raspberries
+          </categories>
+        </x-axis>
+        <legend layout="vertical" align="left" floating="true" vertical-align="top" x="150"
+                y="100" border-width="1" background-color="#ffffff"></legend>
+        <tooltip enabled="true" shared="true">
+        </tooltip>
+        <data-series name="John">
+          <data>0, 1, 4, 4, 5, 2, 3, 7</data>
+        </data-series>
+        <data-series name="Jane">
+          <data>1, 0, 3, null, 3, 1, 2, 1</data>
+        </data-series>
+      </vaadin-area-chart>
+    </view-source>
+  </div>
+</div>
+
+<div class="elements-section">
   <h5>Area chart with inverted axis</h5>
   <view-source>
     <div class="head">
@@ -239,51 +253,59 @@
       </data-series>
     </vaadin-area-chart>
   </view-source>
+</div>
 
-  <h5>Percentage area chart</h5>
-  <view-source>
-    <div class="head">
-      <!--
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-area-chart id="percentage-area">
-      <title>Historic World Population by Region</title>
-      <subtitle>Source: Wikipedia.org</subtitle>
-      <x-axis tickmark-placement="on">
-        <categories>1750, 1800, 1850, 1900, 1950, 1999, 2050</categories>
-        <title enabled="false"></title>
-      </x-axis>
-      <y-axis min="0">
-        <title>Percent</title>
-      </y-axis>
-      <tooltip shared="true"
-               point-format='<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:.0f} millions)<br/>'></tooltip>
-      <plot-options>
-        <series stacking="percent" line-width="1">
-        </series>
-      </plot-options>
-      <legend layout="vertical" align="right" vertical-align="top" x="-40" y="80"
-              floating="true" border-width="1" background-color="#FFFFFF"
-              shadow="true"></legend>
-      <data-series name="Asia">
-        <data>502, 635, 809, 947, 1402, 3634, 5268</data>
-      </data-series>
-      <data-series name="Africa">
-        <data>106, 107, 111, 133, 221, 767, 1766</data>
-      </data-series>
-      <data-series name="Europe">
-        <data>163, 203, 276, 408, 547, 729, 628</data>
-      </data-series>
-      <data-series name="America">
-        <data>18, 31, 54, 156, 339, 818, 1201</data>
-      </data-series>
-      <data-series name="Oceania">
-        <data>2, 2, 2, 6, 13, 30, 46</data>
-      </data-series>
-    </vaadin-area-chart>
-  </view-source>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
+  <div class="elements-section">
+    <h5>Percentage area chart</h5>
+    <view-source>
+      <div class="head">
+        <!--
+        <jsp:include page="charts-imports.jsp"/>
+        -->
+      </div>
+      <vaadin-area-chart id="percentage-area">
+        <title>Historic World Population by Region</title>
+        <subtitle>Source: Wikipedia.org</subtitle>
+        <x-axis tickmark-placement="on">
+          <categories>1750, 1800, 1850, 1900, 1950, 1999, 2050</categories>
+          <title enabled="false"></title>
+        </x-axis>
+        <y-axis min="0">
+          <title>Percent</title>
+        </y-axis>
+        <tooltip shared="true"
+                 point-format='<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:.0f} millions)<br/>'></tooltip>
+        <plot-options>
+          <series stacking="percent" line-width="1">
+          </series>
+        </plot-options>
+        <legend layout="vertical" align="right" vertical-align="top" x="-40" y="80"
+                floating="true" border-width="1" background-color="#FFFFFF"
+                shadow="true"></legend>
+        <data-series name="Asia">
+          <data>502, 635, 809, 947, 1402, 3634, 5268</data>
+        </data-series>
+        <data-series name="Africa">
+          <data>106, 107, 111, 133, 221, 767, 1766</data>
+        </data-series>
+        <data-series name="Europe">
+          <data>163, 203, 276, 408, 547, 729, 628</data>
+        </data-series>
+        <data-series name="America">
+          <data>18, 31, 54, 156, 339, 818, 1201</data>
+        </data-series>
+        <data-series name="Oceania">
+          <data>2, 2, 2, 6, 13, 30, 46</data>
+        </data-series>
+      </vaadin-area-chart>
+    </view-source>
+  </div>
+</div>
+
+<div class="elements-section">
   <h5>Stacked area chart</h5>
   <view-source>
     <div class="head">
@@ -328,5 +350,9 @@
 
 </div>
 
-<jsp:include page="charts-links.jsp"/>
-<jsp:include page="suggestion-box.jsp"/>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <jsp:include page="charts-links.jsp"/>
+  <jsp:include page="suggestion-box.jsp"/>
+</div>

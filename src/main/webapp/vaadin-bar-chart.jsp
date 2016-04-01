@@ -82,42 +82,49 @@
 
 <!-- Demo section start -->
 <%request.setAttribute("chart", "vaadin-bar-chart.html");%>
+
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <div class="elements-section demo">
+
+    <h4>Examples</h4>
+    <h5>Basic bar chart</h5>
+    <view-source>
+      <div class="head">
+        <!--
+        <jsp:include page="charts-imports.jsp"/>
+        -->
+      </div>
+      <vaadin-bar-chart id="basic-bar">
+        <title>Stacked bar chart</title>
+        <x-axis>
+          <categories>Apples, Oranges, Pears, Grapes, Bananas</categories>
+        </x-axis>
+        <y-axis min="0">
+          <title>Total fruit consumption</title>
+        </y-axis>
+        <legend reversed="true"></legend>
+        <tooltip point-format="{series.name}: {point.y}. Total: {point.stackTotal}"></tooltip>
+        <plot-options>
+          <series stacking="normal">
+          </series>
+        </plot-options>
+        <data-series name="John">
+          <data>5, 3, 4, 7, 2</data>
+        </data-series>
+        <data-series name="Jane">
+          <data>2, 2, 3, 2, 1</data>
+        </data-series>
+        <data-series name="Joe">
+          <data>3, 4, 4, 2, 5</data>
+        </data-series>
+      </vaadin-bar-chart>
+    </view-source>
+  </div>
+</div>
+
 <div class="elements-section demo">
-
-  <h4>Examples</h4>
-  <h5>Basic bar chart</h5>
-  <view-source>
-    <div class="head">
-      <!--
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-bar-chart id="basic-bar">
-      <title>Stacked bar chart</title>
-      <x-axis>
-        <categories>Apples, Oranges, Pears, Grapes, Bananas</categories>
-      </x-axis>
-      <y-axis min="0">
-        <title>Total fruit consumption</title>
-      </y-axis>
-      <legend reversed="true"></legend>
-      <tooltip point-format="{series.name}: {point.y}. Total: {point.stackTotal}"></tooltip>
-      <plot-options>
-        <series stacking="normal">
-        </series>
-      </plot-options>
-      <data-series name="John">
-        <data>5, 3, 4, 7, 2</data>
-      </data-series>
-      <data-series name="Jane">
-        <data>2, 2, 3, 2, 1</data>
-      </data-series>
-      <data-series name="Joe">
-        <data>3, 4, 4, 2, 5</data>
-      </data-series>
-    </vaadin-bar-chart>
-  </view-source>
-
   <h5>Bar chart with negative stack</h5>
   <view-source>
     <div class="head">
@@ -162,40 +169,47 @@
       </data-series>
     </vaadin-bar-chart>
   </view-source>
+</div>
 
-  <h5>Stacked bar chart</h5>
-  <view-source>
-    <div class="head">
-      <!--
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-bar-chart id="stacked-bar">
-      <title>Stacked bar chart</title>
-      <x-axis>
-        <categories>Apples, Oranges, Pears, Grapes, Bananas</categories>
-      </x-axis>
-      <y-axis min="0">
-        <title>Total fruit consumption</title>
-      </y-axis>
-      <legend reversed="true"></legend>
-      <tooltip point-format="{series.name}: {point.y}. Total: {point.stackTotal}"></tooltip>
-      <plot-options>
-        <series stacking="normal">
-        </series>
-      </plot-options>
-      <data-series name="John">
-        <data>5, 3, 4, 7, 2</data>
-      </data-series>
-      <data-series name="Jane">
-        <data>2, 2, 3, 2, 1</data>
-      </data-series>
-      <data-series name="Joe">
-        <data>3, 4, 4, 2, 5</data>
-      </data-series>
-    </vaadin-bar-chart>
-  </view-source>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <div class="elements-section demo">
+    <h5>Stacked bar chart</h5>
+    <view-source>
+      <div class="head">
+        <!--
+        <jsp:include page="charts-imports.jsp"/>
+        -->
+      </div>
+      <vaadin-bar-chart id="stacked-bar">
+        <title>Stacked bar chart</title>
+        <x-axis>
+          <categories>Apples, Oranges, Pears, Grapes, Bananas</categories>
+        </x-axis>
+        <y-axis min="0">
+          <title>Total fruit consumption</title>
+        </y-axis>
+        <legend reversed="true"></legend>
+        <tooltip point-format="{series.name}: {point.y}. Total: {point.stackTotal}"></tooltip>
+        <plot-options>
+          <series stacking="normal">
+          </series>
+        </plot-options>
+        <data-series name="John">
+          <data>5, 3, 4, 7, 2</data>
+        </data-series>
+        <data-series name="Jane">
+          <data>2, 2, 3, 2, 1</data>
+        </data-series>
+        <data-series name="Joe">
+          <data>3, 4, 4, 2, 5</data>
+        </data-series>
+      </vaadin-bar-chart>
+    </view-source>
+  </div>
 </div>
 <!-- Demo section end -->
+
 <jsp:include page="charts-links.jsp"/>
 <jsp:include page="suggestion-box.jsp"/>

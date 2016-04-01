@@ -91,6 +91,10 @@
     </vaadin-pyramid-chart>
   </view-source>
 </div>
-<jsp:include page="charts-links.jsp"/>
 
-<jsp:include page="suggestion-box.jsp"/>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <jsp:include page="charts-links.jsp"/>
+  <jsp:include page="suggestion-box.jsp"/>
+</div>

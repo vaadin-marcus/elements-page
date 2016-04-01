@@ -92,19 +92,24 @@
 
 
 <!-- Demo section start -->
-<div class="elements-section">
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
-  <h4>Examples</h4>
-  <view-source externals="<%=request.getContextPath()%>/spline-demo.html" editable="no">
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-spline-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <link rel="import" href="<%=request.getContextPath()%>/spline-demo.html">
-    <spline-demo></spline-demo>
-  </view-source>
+  <div class="elements-section">
+
+    <h4>Examples</h4>
+    <view-source externals="<%=request.getContextPath()%>/spline-demo.html" editable="no">
+      <div class="head">
+        <!--
+        <%request.setAttribute("chart", "vaadin-spline-chart.html");%>
+        <jsp:include page="charts-imports.jsp"/>
+        -->
+      </div>
+      <link rel="import" href="<%=request.getContextPath()%>/spline-demo.html">
+      <spline-demo></spline-demo>
+    </view-source>
+  </div>
 </div>
+
 <jsp:include page="charts-links.jsp"/>
 <jsp:include page="suggestion-box.jsp"/>

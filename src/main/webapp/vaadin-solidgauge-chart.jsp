@@ -73,41 +73,44 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
-  <h4>Examples</h4>
-  <view-source>
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-solidgauge-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-solidgauge-chart id="solid-gauge">
-      <title text=""></title>
-      <pane start-angle="-90" end-angle="90">
-        <background background-color="#EEE" inner-radius="60%" outer-radius="100%"
-                    shape="arc"></background>
-      </pane>
-      <tooltip enabled="false"></tooltip>
-      <y-axis min="0" max="200" line-width="0" minor-tick-width="0" tick-width="0">
-        <stops>0.1, #55BF3B</stops>
-        <stops>0.5, #DDDF0D</stops>
-        <stops>0.9, #DF5353</stops>
-        <title y="-100">Speed</title>
-        <labels enabled="false"></labels>
-      </y-axis>
-      <plot-options>
-        <solidgauge>
-          <data-labels y="5" border-width="0"></data-labels>
-        </solidgauge>
-      </plot-options>
-      <data-series name="Speed">
-        <data>80</data>
-      </data-series>
-    </vaadin-solidgauge-chart>
-  </view-source>
-</div>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
+  <div class="elements-section">
+    <h4>Examples</h4>
+    <view-source>
+      <div class="head">
+        <!--
+        <%request.setAttribute("chart", "vaadin-solidgauge-chart.html");%>
+        <jsp:include page="charts-imports.jsp"/>
+        -->
+      </div>
+      <vaadin-solidgauge-chart id="solid-gauge">
+        <title text=""></title>
+        <pane start-angle="-90" end-angle="90">
+          <background background-color="#EEE" inner-radius="60%" outer-radius="100%"
+                      shape="arc"></background>
+        </pane>
+        <tooltip enabled="false"></tooltip>
+        <y-axis min="0" max="200" line-width="0" minor-tick-width="0" tick-width="0">
+          <stops>0.1, #55BF3B</stops>
+          <stops>0.5, #DDDF0D</stops>
+          <stops>0.9, #DF5353</stops>
+          <title y="-100">Speed</title>
+          <labels enabled="false"></labels>
+        </y-axis>
+        <plot-options>
+          <solidgauge>
+            <data-labels y="5" border-width="0"></data-labels>
+          </solidgauge>
+        </plot-options>
+        <data-series name="Speed">
+          <data>80</data>
+        </data-series>
+      </vaadin-solidgauge-chart>
+    </view-source>
+  </div>
+</div>
 
 <jsp:include page="charts-links.jsp"/>
 <jsp:include page="suggestion-box.jsp"/>

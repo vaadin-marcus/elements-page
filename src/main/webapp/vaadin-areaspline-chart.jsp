@@ -93,47 +93,52 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
-  <h4>Examples</h4>
-  <view-source>
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-areaspline-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-areaspline-chart id="area-spline">
-      <title>Average fruit consumption during one week</title>
+  <div class="elements-section">
 
-      <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true">
-      </legend>
+    <h4>Examples</h4>
+    <view-source>
+      <div class="head">
+        <!--
+        <%request.setAttribute("chart", "vaadin-areaspline-chart.html");%>
+        <jsp:include page="charts-imports.jsp"/>
+        -->
+      </div>
+      <vaadin-areaspline-chart id="area-spline">
+        <title>Average fruit consumption during one week</title>
 
-      <x-axis>
-        <categories>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday</categories>
-        <plot-bands from="4.5" to="6.5" color="rgba(68, 170, 213, .2)">
-        </plot-bands>
-      </x-axis>
-      <y-axis>
-        <title>Fruit units</title>
-      </y-axis>
+        <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true">
+        </legend>
 
-      <tooltip shared="true" value-suffix="units">
-      </tooltip>
-      <plot-options>
-        <areaspline fill-opacity="0.5">
-        </areaspline>
-      </plot-options>
+        <x-axis>
+          <categories>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday</categories>
+          <plot-bands from="4.5" to="6.5" color="rgba(68, 170, 213, .2)">
+          </plot-bands>
+        </x-axis>
+        <y-axis>
+          <title>Fruit units</title>
+        </y-axis>
 
-      <data-series name="John">
-        <data>3, 4, 3, 5, 4, 10, 12</data>
-      </data-series>
-      <data-series name="Jane">
-        <data>1, 3, 4, 3, 3, 5, 4</data>
-      </data-series>
-    </vaadin-areaspline-chart>
-  </view-source>
+        <tooltip shared="true" value-suffix="units">
+        </tooltip>
+        <plot-options>
+          <areaspline fill-opacity="0.5">
+          </areaspline>
+        </plot-options>
+
+        <data-series name="John">
+          <data>3, 4, 3, 5, 4, 10, 12</data>
+        </data-series>
+        <data-series name="Jane">
+          <data>1, 3, 4, 3, 3, 5, 4</data>
+        </data-series>
+      </vaadin-areaspline-chart>
+    </view-source>
+  </div>
 </div>
 <!-- Demo section end -->
+
 <jsp:include page="charts-links.jsp"/>
 <jsp:include page="suggestion-box.jsp"/>

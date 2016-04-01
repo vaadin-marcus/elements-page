@@ -77,60 +77,66 @@
 
 <!-- Demo section start -->
 <%request.setAttribute("chart", "vaadin-gauge-chart.html");%>
-<div class="elements-section">
-  <h4>Examples</h4>
-  <h5>Angular gauge chart</h5>
-  <view-source>
-    <div class="head">
-      <!--
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-gauge-chart id="angular-gauge">
-      <chart plot-background-color="null" plot-background-image="null" plot-border-width="0"
-             plot-shadow="false"></chart>
-      <title>Speedometer</title>
-      <pane start-angle="-150" end-angle="150">
-        <background border-width="0" border-radius="109%">
-          <background-color>
-            <linear-gradient x1="0" y1="0" x2="0" y2="1">
-            </linear-gradient>
-            <stops>0, #ffffff</stops>
-            <stops>1, #333333</stops>
-          </background-color>
-        </background>
-        <background border-width="1" border-radius="107%">
-          <background-color>
-            <linear-gradient x1="0" y1="0" x2="0" y2="1">
-            </linear-gradient>
-            <stops>0, #ffffff</stops>
-            <stops>1, #333333</stops>
-          </background-color>
-        </background>
-        <background>
-        </background>
-        <background background-color="#DDD" border-width="0" outer-radius="105%"
-                    inner-radius="103%">
-        </background>
-      </pane>
-      <y-axis min="0" max="200" minor-tick-interval="auto" minor-tick-width="1"
-              minor-tick-lenght="10" minor-tick-position="inside" tick-pixel-interval="30"
-              tick-width="2" tick-position="inside" tick-length="10" tick-color="#666"
-              grid-line-width="0">
-        <labels step="2" rotation="auto"></labels>
-        <title>km/h</title>
-        <plot-bands from="0" to="120" color="#55BF3B"></plot-bands>
-        <plot-bands from="120" to="160" color="#DDDF0D"></plot-bands>
-        <plot-bands from="160" to="200" color="#DF5353"></plot-bands>
-      </y-axis>
-      <data-series name="Speed">
-        <data>
-          80
-        </data>
-      </data-series>
-    </vaadin-gauge-chart>
-  </view-source>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
+  <div class="elements-section">
+    <h4>Examples</h4>
+    <h5>Angular gauge chart</h5>
+    <view-source>
+      <div class="head">
+        <!--
+        <jsp:include page="charts-imports.jsp"/>
+        -->
+      </div>
+      <vaadin-gauge-chart id="angular-gauge">
+        <chart plot-background-color="null" plot-background-image="null" plot-border-width="0"
+               plot-shadow="false"></chart>
+        <title>Speedometer</title>
+        <pane start-angle="-150" end-angle="150">
+          <background border-width="0" border-radius="109%">
+            <background-color>
+              <linear-gradient x1="0" y1="0" x2="0" y2="1">
+              </linear-gradient>
+              <stops>0, #ffffff</stops>
+              <stops>1, #333333</stops>
+            </background-color>
+          </background>
+          <background border-width="1" border-radius="107%">
+            <background-color>
+              <linear-gradient x1="0" y1="0" x2="0" y2="1">
+              </linear-gradient>
+              <stops>0, #ffffff</stops>
+              <stops>1, #333333</stops>
+            </background-color>
+          </background>
+          <background>
+          </background>
+          <background background-color="#DDD" border-width="0" outer-radius="105%"
+                      inner-radius="103%">
+          </background>
+        </pane>
+        <y-axis min="0" max="200" minor-tick-interval="auto" minor-tick-width="1"
+                minor-tick-lenght="10" minor-tick-position="inside" tick-pixel-interval="30"
+                tick-width="2" tick-position="inside" tick-length="10" tick-color="#666"
+                grid-line-width="0">
+          <labels step="2" rotation="auto"></labels>
+          <title>km/h</title>
+          <plot-bands from="0" to="120" color="#55BF3B"></plot-bands>
+          <plot-bands from="120" to="160" color="#DDDF0D"></plot-bands>
+          <plot-bands from="160" to="200" color="#DF5353"></plot-bands>
+        </y-axis>
+        <data-series name="Speed">
+          <data>
+            80
+          </data>
+        </data-series>
+      </vaadin-gauge-chart>
+    </view-source>
+  </div>
+</div>
+
+<div class="elements-section">
   <h5>Dual axis gauge chart</h5>
   <view-source>
     <div class="head">
@@ -174,4 +180,9 @@
   </view-source>
 </div>
 
-<jsp:include page="suggestion-box.jsp"/>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <jsp:include page="charts-links.jsp"/>
+  <jsp:include page="suggestion-box.jsp"/>
+</div>

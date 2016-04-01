@@ -121,6 +121,9 @@
   </view-source>
 </div>
 
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
-<jsp:include page="charts-links.jsp"/>
-<jsp:include page="suggestion-box.jsp"/>
+  <jsp:include page="charts-links.jsp"/>
+  <jsp:include page="suggestion-box.jsp"/>
+</div>
