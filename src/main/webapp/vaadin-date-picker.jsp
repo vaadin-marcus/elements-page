@@ -55,51 +55,53 @@
 </div>
 
 
-
-
 <!-- Info section start -->
-<div class="elements-section">
-  <style>
-    vaadin-date-picker {
-      max-width: 300px;
-    }
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
-    vaadin-date-picker input[readonly] {
-      background: transparent !important;
-    }
+  <div class="elements-section">
+    <style>
+      vaadin-date-picker {
+        max-width: 300px;
+      }
 
-    /* Hacks needed for Liferay*/
-    vaadin-date-picker input[type='text'],
-    vaadin-date-picker input[type='text']:focus,
-    vaadin-date-picker input[type='text']:active {
-      border: none !important;
-      box-shadow: none !important;
-      background-color: transparent !important;
-      padding: 0;
-    }
+      vaadin-date-picker input[readonly] {
+        background: transparent !important;
+      }
 
-    vaadin-date-picker input[readonly] {
-      cursor: inherit !important;
-    }
-  </style>
-  <h4>Features</h4>
-  <div class="row-fluid">
-    <div class="span6">
-      <ul>
-        <li>Scrollable calendar view</li>
-        <li>Desktop and mobile support</li>
+      /* Hacks needed for Liferay*/
+      vaadin-date-picker input[type='text'],
+      vaadin-date-picker input[type='text']:focus,
+      vaadin-date-picker input[type='text']:active {
+        border: none !important;
+        box-shadow: none !important;
+        background-color: transparent !important;
+        padding: 0;
+      }
 
-      </ul>
-    </div>
-    <div class="span6">
-      <ul>
-        <li>Two way data binding</li>
-        <li>
-          Material Design inspired styles to fit in with <a
-            href="https://elements.polymer-project.org/browse?package=paper-elements">Paper
-          Elements</a>
-        </li>
-      </ul>
+      vaadin-date-picker input[readonly] {
+        cursor: inherit !important;
+      }
+    </style>
+    <h4>Features</h4>
+    <div class="row-fluid">
+      <div class="span6">
+        <ul>
+          <li>Scrollable calendar view</li>
+          <li>Desktop and mobile support</li>
+
+        </ul>
+      </div>
+      <div class="span6">
+        <ul>
+          <li>Two way data binding</li>
+          <li>
+            Material Design inspired styles to fit in with <a
+              href="https://elements.polymer-project.org/browse?package=paper-elements">Paper
+            Elements</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -125,22 +127,27 @@
 <!-- Demo section start -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
-  <h4>Examples</h4>
+  <div class="elements-section">
 
-  <h5>Simple usage</h5>
-  <view-source>
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn-origin.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/vaadin-date-picker.html">
-      -->
-    </div>
-    <vaadin-date-picker label="Pick a date"></vaadin-date-picker>
-    <vaadin-date-picker label="Birthday" value="2000-01-01"></vaadin-date-picker>
-  </view-source>
+    <h4>Examples</h4>
+
+    <h5>Simple usage</h5>
+    <view-source>
+      <div class="head">
+        <!--
+        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+        <link rel="import" href="https://cdn-origin.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/vaadin-date-picker.html">
+        -->
+      </div>
+      <vaadin-date-picker label="Pick a date"></vaadin-date-picker>
+      <vaadin-date-picker label="Birthday" value="2000-01-01"></vaadin-date-picker>
+    </view-source>
 
 
+  </div>
 </div>
+
 <jsp:include page="suggestion-box.jsp"/>

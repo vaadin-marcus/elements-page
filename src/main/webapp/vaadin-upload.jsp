@@ -58,25 +58,29 @@
 <!-- Intro section start -->
 
 <!-- Info section start -->
-<div class="elements-section">
-  <h4>Features</h4>
-  <div class="row-fluid">
-    <div class="span6">
-      <ul>
-        <li>Multiple file upload</li>
-        <li>Drag and drop support</li>
-        <li>Upload process indication</li>
-      </ul>
-    </div>
-    <div class="span6">
-      <ul>
-        <li>Fully customizable upload request</li>
-        <li>
-          Material Design inspired styles to fit in with <a
-            href="https://elements.polymer-project.org/browse?package=paper-elements">Paper
-          Elements</a>
-        </li>
-      </ul>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <div class="elements-section">
+    <h4>Features</h4>
+    <div class="row-fluid">
+      <div class="span6">
+        <ul>
+          <li>Multiple file upload</li>
+          <li>Drag and drop support</li>
+          <li>Upload process indication</li>
+        </ul>
+      </div>
+      <div class="span6">
+        <ul>
+          <li>Fully customizable upload request</li>
+          <li>
+            Material Design inspired styles to fit in with <a
+              href="https://elements.polymer-project.org/browse?package=paper-elements">Paper
+            Elements</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -102,57 +106,63 @@
 <!-- Demo section start -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
-  <script>
-    // Use MockHttpRequest in demos
-    function mockXhrGenerator(file) {
-      var xhr = new MockHttpRequest();
-      xhr.upload = {};
-      xhr.onsend = function() {
-        var total = file && file.size || 1024, done = 0;
+  <div class="elements-section">
 
-        function start() {
-          setTimeout(progress, 1000);
-        }
+    <script>
+      // Use MockHttpRequest in demos
+      function mockXhrGenerator(file) {
+        var xhr = new MockHttpRequest();
+        xhr.upload = {};
+        xhr.onsend = function() {
+          var total = file && file.size || 1024, done = 0;
 
-        function progress() {
-          xhr.upload.onprogress({total: total, loaded: done});
-          if (done < total) {
-            setTimeout(progress, 200);
-            done = Math.min(total, done + 254000);
-          } else {
-            setTimeout(finish, 1000);
+          function start() {
+            setTimeout(progress, 1000);
           }
-        }
 
-        function finish() {
-          xhr.receive(200, '{"message":"OK"}');
-        }
+          function progress() {
+            xhr.upload.onprogress({total: total, loaded: done});
+            if (done < total) {
+              setTimeout(progress, 200);
+              done = Math.min(total, done + 254000);
+            } else {
+              setTimeout(finish, 1000);
+            }
+          }
 
-        start();
-      };
-      return xhr;
-    }
-    window.addEventListener('WebComponentsReady', function() {
-      // Monkey-patch vaadin-upload prototype to use MockHttpRequest
-      Object.getPrototypeOf(document.createElement('vaadin-upload'))._createXhr = mockXhrGenerator;
-    });
-  </script>
+          function finish() {
+            xhr.receive(200, '{"message":"OK"}');
+          }
 
-  <h4>Examples</h4>
+          start();
+        };
+        return xhr;
+      }
+      window.addEventListener('WebComponentsReady', function() {
+        // Monkey-patch vaadin-upload prototype to use MockHttpRequest
+        Object.getPrototypeOf(document.createElement('vaadin-upload'))._createXhr = mockXhrGenerator;
+      });
+    </script>
 
-  <h5>Simple usage</h5>
-  <view-source editable="no">
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-upload/master/vaadin-upload.html">
-      -->
-    </div>
-    <vaadin-upload></vaadin-upload>
-  </view-source>
+    <h4>Examples</h4>
 
+    <h5>Simple usage</h5>
+    <view-source editable="no">
+      <div class="head">
+        <!--
+        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+        <link rel="import" href="https://cdn.vaadin.com/vaadin-upload/master/vaadin-upload.html">
+        -->
+      </div>
+      <vaadin-upload></vaadin-upload>
+    </view-source>
+  </div>
+</div>
+
+<div class="elements-section">
   <h5>File type, count and size limits</h5>
   <view-source editable="no">
     <div class="head">
@@ -174,4 +184,11 @@
        href="https://cdn.vaadin.com/vaadin-elements/master/vaadin-upload/">More Vaadin Upload demos</a>
   </div>
 
+</div>
+
+<!-- Demo section end -->
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <jsp:include page="suggestion-box.jsp"/>
 </div>
