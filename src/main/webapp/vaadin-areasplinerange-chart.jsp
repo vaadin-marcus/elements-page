@@ -44,8 +44,8 @@
     </div>
 
     <div class="span5">
+      <h4>Install</h4>
       <div class="elements-install">
-        <h4>Install</h4>
         <code>bower install --save vaadin-charts</code>
       </div>
       <a class="w-arrow-button blue small" href="https://vaadin.com/docs/-/part/charts/webcomponents-api/charts-getting-started.html">Show documentation</a></div>

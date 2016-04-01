@@ -42,8 +42,8 @@
         progress indication. Supports drag and drop and manual file selection.</p>
     </div>
     <div class="span5">
+      <h4>Install</h4>
       <div class="elements-install">
-        <h4>Install</h4>
         <code>bower install --save vaadin-upload</code>
       </div>
       <a href="https://vaadin.com/docs/-/part/elements/vaadin-upload/vaadin-upload-overview.html"

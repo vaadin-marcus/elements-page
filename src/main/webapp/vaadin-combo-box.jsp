@@ -45,8 +45,8 @@
       </p>
     </div>
     <div class="span5">
+      <h4>Install</h4>
       <div class="elements-install">
-        <h4>Install</h4>
         <code>bower install --save vaadin-combo-box</code>
       </div>
       <a href="https://vaadin.com/docs/-/part/elements/vaadin-combo-box/vaadin-combo-box-overview.html"
