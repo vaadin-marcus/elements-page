@@ -450,10 +450,11 @@
 .vaadin-theme a.w-button {
     font-weight: bold;
     font-size: 1.1rem;
-    display: inline-block;
+    display: block;
     background: #fff;
     color: #0091c2;
     padding: .8em 2.2em;
+    margin: .6rem 0;
     line-height: 1.2em;
     text-align: center;
     -webkit-border-radius: 4px;
@@ -472,12 +473,14 @@
     background: #0fc3ff;
 }
 
-.elements-intro a.w-button {
-    float: left;
-}
+@media (min-width: 420px) and (max-width: 767px), (min-width: 970px) {
+    .elements-intro a.w-button {
+        float: left;
+    }
 
-.elements-intro a.w-button.github {
-    float: right;
+    .elements-intro a.w-button.github {
+        float: right;
+    }
 }
 
 /* EO Template Intro */
@@ -485,7 +488,7 @@
 /* Template Section */
 
 .elements-section {
-    margin: 60px 0 0;
+    padding: 3.7rem 0 3rem 0;
 }
 
 .elements-section h4 {
@@ -509,7 +512,7 @@
 }
 
 .elements-section h5 {
-    margin-top: 80px;
+    margin-top: 0;
     font-size: 18px;
 }
 
@@ -583,6 +586,7 @@
 
 .suggest-box {
     text-align: center;
+    padding: 1.8rem 0 2.6rem 0;
 }
 
 @media (max-width: 767px) {
@@ -599,6 +603,10 @@
     max-width: 480px;
     margin: 0 auto;
     padding: 30px 0;
+}
+
+.suggest-box .hbspt-form {
+    padding: 0 0 2.5rem 0;
 }
 
 .hbspt-form input[type="text"],
