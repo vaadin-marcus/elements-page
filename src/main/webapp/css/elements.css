@@ -19,6 +19,10 @@
     margin-top: 0px;
 }
 
+#footer-wrapper {
+    margin-top: 0;
+}
+
 .zebra .w-wallpaper {
     background-color: #f3f3f3;
 }
