@@ -752,8 +752,7 @@
 
 .vaadin-theme a.w-button.dark:hover,
 .vaadin-theme a.w-button.dark:focus {
-    background: #404040;
-    border-color: #5c5c5c;
+    background: #000;
 }
 
 .vaadin-theme .bottom-action-container a.w-button {
