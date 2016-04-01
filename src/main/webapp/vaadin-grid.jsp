@@ -60,39 +60,43 @@
 <!-- Intro section start -->
 
 <!-- Info section start -->
-<a name="features"></a>
-<div class="elements-section">
-  <h4>Features</h4>
-  <div class="row-fluid">
-    <div class="span6">
-      <ul>
-        <li><strong>Lazy loading</strong> &ndash; Lazy loading of data from any data source</li>
-        <li><strong>Big data</strong> &ndash; Easily present and scroll through 100k lines of data in a single UI
-          component
-        </li>
-        <li><strong>Custom headers</strong> &ndash; Combine multiple rows and display components in your grid
-          headers
-        </li>
-        <li><strong>Smooth scrolling</strong> &ndash; Lightning fast and smooth hardware accelerated scrolling by
-          reusing DOM elements
-        </li>
-        <li><strong>Super efficient</strong> &ndash; Super efficient custom renderers for presenting custom data any
-          way you need to
-        </li>
-        <li><strong>Expanding row details</strong></li>
-      </ul>
-    </div>
-    <div class="span6">
-      <ul>
-        <li><strong>Touch and keyboard</strong> &ndash; Touch event and mobile support, and keyboard navigation</li>
-        <li><strong>Various web technology support</strong> &ndash; Can be used with any JavaScript library or framework that supports Web Components, like
-          Angular 2, React, Ember 2, jQuery
-        </li>
-        <li><strong>Built on top of Google Polymer</strong></li>
-        <li><strong>Material Design inspired</strong> &ndash; Styles to fit in with Paper Elements</li>
-        <li><strong>Customize the theme</strong> &ndash; Style the data grid to match the rest of your application</li>
-        <li><strong>Free to use under Apache License 2.0</strong></li>
-      </ul>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <a name="features"></a>
+  <div class="elements-section">
+    <h4>Features</h4>
+    <div class="row-fluid">
+      <div class="span6">
+        <ul>
+          <li><strong>Lazy loading</strong> &ndash; Lazy loading of data from any data source</li>
+          <li><strong>Big data</strong> &ndash; Easily present and scroll through 100k lines of data in a single UI
+            component
+          </li>
+          <li><strong>Custom headers</strong> &ndash; Combine multiple rows and display components in your grid
+            headers
+          </li>
+          <li><strong>Smooth scrolling</strong> &ndash; Lightning fast and smooth hardware accelerated scrolling by
+            reusing DOM elements
+          </li>
+          <li><strong>Super efficient</strong> &ndash; Super efficient custom renderers for presenting custom data any
+            way you need to
+          </li>
+          <li><strong>Expanding row details</strong></li>
+        </ul>
+      </div>
+      <div class="span6">
+        <ul>
+          <li><strong>Touch and keyboard</strong> &ndash; Touch event and mobile support, and keyboard navigation</li>
+          <li><strong>Various web technology support</strong> &ndash; Can be used with any JavaScript library or framework that supports Web Components, like
+            Angular 2, React, Ember 2, jQuery
+          </li>
+          <li><strong>Built on top of Google Polymer</strong></li>
+          <li><strong>Material Design inspired</strong> &ndash; Styles to fit in with Paper Elements</li>
+          <li><strong>Customize the theme</strong> &ndash; Style the data grid to match the rest of your application</li>
+          <li><strong>Free to use under Apache License 2.0</strong></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -115,68 +119,74 @@
 <%}%>
 <!-- Demo section start -->
 
-<div class="elements-section">
-  <h4>Examples</h4>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <div class="elements-section">
+    <h4>Examples</h4>
 
 
-  <h5>Simple use with an array data source</h5>
-  <p>
-    Simple use case where the grid is populated with data from an array. The array data is fetched
-    from a JSON file with an Ajax request and mapped to columns with <code>&lt;col
-    name="json.property.path"&gt;</code>.
-  </p>
-  <p>
-    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Other data
-      sources are documented here.</a>
-  </p>
-  <view-source>
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import"
-            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-      -->
-    </div>
-    <style>
-      #simple {
-        height: 300px;
-      }
-    </style>
-    <vaadin-grid id="simple">
-      <table>
-        <colgroup>
-          <col name="firstName"/>
-          <col name="lastName"/>
-          <col name="email"/>
-        </colgroup>
-      </table>
-    </vaadin-grid>
-
-    <script>
-      (function() {
-        HTMLImports.whenReady(function() {
-          var grid = document.querySelector('#simple');
-
-          getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
-            grid.items = json.result;
-          });
-        });
-
-        function getJSON(url, callback) {
-          var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-              callback(JSON.parse(xhr.responseText));
-            }
-          };
-          xhr.open('GET', url, true);
-          xhr.send();
+    <h5>Simple use with an array data source</h5>
+    <p>
+      Simple use case where the grid is populated with data from an array. The array data is fetched
+      from a JSON file with an Ajax request and mapped to columns with <code>&lt;col
+      name="json.property.path"&gt;</code>.
+    </p>
+    <p>
+      <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Other data
+        sources are documented here.</a>
+    </p>
+    <view-source>
+      <div class="head">
+        <!--
+        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+        <link rel="import"
+              href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+        -->
+      </div>
+      <style>
+        #simple {
+          height: 300px;
         }
-      })();
+      </style>
+      <vaadin-grid id="simple">
+        <table>
+          <colgroup>
+            <col name="firstName"/>
+            <col name="lastName"/>
+            <col name="email"/>
+          </colgroup>
+        </table>
+      </vaadin-grid>
 
-    </script>
-  </view-source>
+      <script>
+        (function() {
+          HTMLImports.whenReady(function() {
+            var grid = document.querySelector('#simple');
 
+            getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+              grid.items = json.result;
+            });
+          });
+
+          function getJSON(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                callback(JSON.parse(xhr.responseText));
+              }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+          }
+        })();
+
+      </script>
+    </view-source>
+  </div>
+</div>
+
+<div class="elements-section">
   <h5>Lazy loading a large data set</h5>
   <p>
     When you have more than a few items, it makes sense to only fetch a smaller subset up front and
@@ -249,106 +259,114 @@
       })();
     </script>
   </view-source>
+</div>
 
-  <h5>Sorting, filtering and selection</h5>
-  <p>
-    Vaadin Grid supports sorting and filtering data. Here we have added simple sorting on all
-    columns
-    and filtering on the first name column. <a
-      href="https://vaadin.com/docs/-/part/elements/vaadin-grid/sort.html">Read more about the
-    available sorting options.</a>
-  </p>
-  <p>
-    This demo also shows multiple selection with keyboard navigation support. For more info on
-    selection modes, check out the <a
-      href="https://vaadin.com/docs/-/part/elements/vaadin-grid/selection.html">documentation</a>.
-  </p>
-  <view-source>
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import"
-            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-      -->
-    </div>
-    <style>
-      #sort {
-        height: 300px;
-      }
-    </style>
-    <paper-input id="filter" label="Filter by first name"></paper-input>
-    <vaadin-grid id="sort" selection-mode="multi">
-      <table>
-        <colgroup>
-          <col name="firstName" sortable/>
-          <col name="lastName" sortable/>
-          <col name="email" sortable/>
-        </colgroup>
-      </table>
-    </vaadin-grid>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
 
-    <script>
-      (function() {
-        HTMLImports.whenReady(function() {
-          var grid = document.querySelector('#sort');
-          var users = [];
-
-          getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
-            users = json.result;
-            grid.items = users;
-          });
-
-          grid.addEventListener('sort-order-changed', function() {
-            var sortOrder = grid.sortOrder[0];
-            var sortProperty = grid.columns[sortOrder.column].name;
-            var sortDirection = sortOrder.direction;
-            grid.items.sort(function(a, b) {
-              var res;
-              var path = sortProperty.split('.');
-              for (var i = 0; i < path.length; i++) {
-                a = a[path[i]];
-                b = b[path[i]];
-              }
-              if (!isNaN(a)) {
-                res = parseInt(a, 10) - parseInt(b, 10);
-              } else {
-                res = a.localeCompare(b);
-              }
-
-              if ('desc' === sortDirection) {
-                res *= -1;
-              }
-              return res;
-            });
-          });
-
-          var filterInput = document.querySelector('#filter');
-          filterInput.addEventListener('value-changed', function() {
-            var filterText = filterInput.value.toLowerCase();
-            grid.items = users.filter(function(val) {
-              if (filterText) {
-                return (val.firstName.toLowerCase()).indexOf(filterText) > -1;
-              } else {
-                return true;
-              }
-            });
-          });
-        });
-
-        function getJSON(url, callback) {
-          var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-              callback(JSON.parse(xhr.responseText));
-            }
-          };
-          xhr.open('GET', url, true);
-          xhr.send();
+  <div class="elements-section">
+    <h5>Sorting, filtering and selection</h5>
+    <p>
+      Vaadin Grid supports sorting and filtering data. Here we have added simple sorting on all
+      columns
+      and filtering on the first name column. <a
+        href="https://vaadin.com/docs/-/part/elements/vaadin-grid/sort.html">Read more about the
+      available sorting options.</a>
+    </p>
+    <p>
+      This demo also shows multiple selection with keyboard navigation support. For more info on
+      selection modes, check out the <a
+        href="https://vaadin.com/docs/-/part/elements/vaadin-grid/selection.html">documentation</a>.
+    </p>
+    <view-source>
+      <div class="head">
+        <!--
+        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+        <link rel="import"
+              href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+        -->
+      </div>
+      <style>
+        #sort {
+          height: 300px;
         }
-      })();
-    </script>
-  </view-source>
+      </style>
+      <paper-input id="filter" label="Filter by first name"></paper-input>
+      <vaadin-grid id="sort" selection-mode="multi">
+        <table>
+          <colgroup>
+            <col name="firstName" sortable/>
+            <col name="lastName" sortable/>
+            <col name="email" sortable/>
+          </colgroup>
+        </table>
+      </vaadin-grid>
 
+      <script>
+        (function() {
+          HTMLImports.whenReady(function() {
+            var grid = document.querySelector('#sort');
+            var users = [];
+
+            getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+              users = json.result;
+              grid.items = users;
+            });
+
+            grid.addEventListener('sort-order-changed', function() {
+              var sortOrder = grid.sortOrder[0];
+              var sortProperty = grid.columns[sortOrder.column].name;
+              var sortDirection = sortOrder.direction;
+              grid.items.sort(function(a, b) {
+                var res;
+                var path = sortProperty.split('.');
+                for (var i = 0; i < path.length; i++) {
+                  a = a[path[i]];
+                  b = b[path[i]];
+                }
+                if (!isNaN(a)) {
+                  res = parseInt(a, 10) - parseInt(b, 10);
+                } else {
+                  res = a.localeCompare(b);
+                }
+
+                if ('desc' === sortDirection) {
+                  res *= -1;
+                }
+                return res;
+              });
+            });
+
+            var filterInput = document.querySelector('#filter');
+            filterInput.addEventListener('value-changed', function() {
+              var filterText = filterInput.value.toLowerCase();
+              grid.items = users.filter(function(val) {
+                if (filterText) {
+                  return (val.firstName.toLowerCase()).indexOf(filterText) > -1;
+                } else {
+                  return true;
+                }
+              });
+            });
+          });
+
+          function getJSON(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                callback(JSON.parse(xhr.responseText));
+              }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+          }
+        })();
+      </script>
+    </view-source>
+  </div>
+</div>
+
+<div class="elements-section">
   <h5>Frozen and hidable columns</h5>
   <p>
     If you have a lot of columns, you may want to freeze some of the columns to make the table
@@ -413,8 +431,10 @@
       })();
     </script>
   </view-source>
+</div>
 
   <%--
+  <div class="elements-section">
     <h5>Details row</h5>
     <p>
       Sometimes you need to show more information than you can fit on a single row. In those cases,
@@ -492,7 +512,12 @@
       </script>
 
     </view-source>
+  </div>
 --%>
-</div>
+
 <!-- Demo section end -->
-<jsp:include page="suggestion-box.jsp"/>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <jsp:include page="suggestion-box.jsp"/>
+</div>
