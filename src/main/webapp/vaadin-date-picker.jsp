@@ -47,11 +47,9 @@
         <code>bower install --save vaadin-date-picker</code>
       </div>
       <a href="https://vaadin.com/docs/-/part/elements/vaadin-date-picker/vaadin-date-picker-overview.html"
-         class="w-arrow-button blue small">Show
-        documentation</a>
-      <a href="https://github.com/vaadin/vaadin-date-picker" class="w-arrow-button github small">View
-        on
-        GitHub</a>
+         class="w-button blue">Documentation</a>
+      <a href="https://github.com/vaadin/vaadin-date-picker"
+         class="w-button blue github">View on GitHub</a>
     </div>
   </div>
 </div>

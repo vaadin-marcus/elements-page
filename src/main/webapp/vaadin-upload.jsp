@@ -47,10 +47,9 @@
         <code>bower install --save vaadin-upload</code>
       </div>
       <a href="https://vaadin.com/docs/-/part/elements/vaadin-upload/vaadin-upload-overview.html"
-         class="w-arrow-button blue small">Show
-        documentation</a>
-      <a href="https://github.com/vaadin/vaadin-upload" class="w-arrow-button github small">View on
-        GitHub</a>
+         class="w-button blue">Documentation</a>
+      <a href="https://github.com/vaadin/vaadin-upload"
+         class="w-button blue github">View on GitHub</a>
     </div>
   </div>
 </div>
