@@ -46,7 +46,7 @@
 }
 
 .elements-hero .w-wallpaper {
-    background: #1eb5ed url('../img/hero-bg.png') center top no-repeat;
+    background: #1eb5ed url('../img/hero-bg.png?2') center top no-repeat;
 }
 
 .elements-hero-buttons .w-wallpaper {
@@ -339,7 +339,7 @@
 /* Template Hero */
 
 .elements-hero-mini .w-wallpaper {
-    background: #1eb5ed url('../img/hero-bg.png') center top no-repeat;
+    background: #1eb5ed url('../img/hero-bg.png?2') center top no-repeat;
     background-size: cover;
 }
 
