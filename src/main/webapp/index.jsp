@@ -154,9 +154,9 @@
         interact with data. All charts support declarative and dynamic data binding.</p>
     </div>
     <div class="span3">
-      <span>$ 795.00</span>
+      <span>$ 790.00</span>
       Commercial license
-      <a href="https://vaadin.com/charts" class="w-arrow-button blue small">Buy license</a>
+      <a href="https://sites.fastspring.com/vaadin/instant/vaadincharts3?member=new" class="w-arrow-button blue small">Buy license</a>
     </div>
 
   </div>
