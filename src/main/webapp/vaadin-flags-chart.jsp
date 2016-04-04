@@ -75,8 +75,9 @@
     <vaadin-flags-chart id="flags-placement" timeline>
       <chart-title>USD to EUR exchange rate</chart-title>
 
-      <range-selector selected="1">
-      </range-selector>
+      <range-selector selected="1"></range-selector>
+      <navigator base-series="2"></navigator>
+
 
       <y-axis><chart-title>Exchange rate</chart-title></y-axis>
 
