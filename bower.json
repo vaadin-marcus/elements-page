@@ -32,7 +32,7 @@
     "vaadin-date-picker": "^1.0.0-beta1",
     "vaadin-upload": "^1.0.0-beta1",
     "vaadin-icons": "vaadin/vaadin-icons#^1.0.0-beta1",
-    "vaadin-combo-box": "^1.0.0-beta1",
+    "vaadin-combo-box": "^1.0.0-rc1",
     "mock-http-request": "philikon/MockHttpRequest#master"
   }
 }

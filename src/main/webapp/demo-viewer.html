@@ -10,13 +10,13 @@
                 --paper-tabs-selection-bar-color: #00b4f0;
             }
 
+
             .source-code > .markdown-html {
                 background: #fdfdfd;
                 border: 1px solid rgba(0, 0, 0, 0.1);
                 padding: .4em .8em;
                 overflow: scroll;
                 -webkit-overflow-scrolling: touch;
-                /*min-height: 500px;*/
             }
 
             pre,
@@ -62,23 +62,25 @@
                 }
             }
         </style>
+        <iron-localstorage name="vaadin-elements-preferred" value="{{selected}}" on-iron-localstorage-load-empty="_initSelected"></iron-localstorage>
+
         <div class="demo">
             <content></content>
         </div>
         <div class="sources">
             <div class="top-row">
-                <paper-tabs selected="{{selected}}" noink id="demo-selector">
-                    <template is="dom-repeat" items="[[sources]]">
-                        <paper-tab>[[item.name]]</paper-tab>
+                <paper-tabs selected="{{selected}}" noink id="demo-selector" attr-for-selected="data-example">
+                    <template is="dom-repeat" items="[[examples]]">
+                        <paper-tab data-example="[[item.name]]">[[item.name]]</paper-tab>
                     </template>
                 </paper-tabs>
                 <template is="dom-if" if="{{_isEditable(editable)}}">
                     <paper-button on-tap="_postToCodepen" raised class="edit-button">Edit</paper-button>
                 </template>
             </div>
-            <iron-pages selected="{{selected}}">
+            <iron-pages selected="{{selected}}" attr-for-selected="data-example">
                 <template is="dom-repeat" items="[[sources]]">
-                    <marked-element class="source-code" markdown="[[_getMarkdownFor(item)]]">
+                    <marked-element class="source-code" data-example="[[item.name]]" markdown="[[_getMarkdownFor(item)]]">
                         <div class="markdown-html"></div>
                     </marked-element>
                 </template>
@@ -93,8 +95,8 @@
 
         properties: {
             selected: {
-                type: Number,
-                value: 0
+                type: String,
+                notify: true
             },
 
             examples: Array,
@@ -107,10 +109,10 @@
             }
         },
 
-        _isEditable: function() {
-            return this.editable === 'yes';
-        },
 
+        _initSelected: function() {
+            this.selected = 'Polymer';
+        },
 
         created: function() {
 
@@ -123,6 +125,8 @@
         },
 
         attached: function() {
+            this.examples = Polymer.dom(this).querySelectorAll('demo-source');
+
             this._fetchExamples();
         },
 
@@ -131,10 +135,9 @@
         },
 
         _fetchExamples: function() {
-            var examples = Polymer.dom(this).querySelectorAll('demo-source');
-            if (examples && examples.length > 0) {
+            if (this.examples && this.examples.length > 0) {
                 var self = this;
-                Promise.all(examples.map(function(external) {
+                Promise.all(this.examples.map(function(external) {
                     return self._fetchExample(external);
                 }));
             }

@@ -135,16 +135,15 @@
     <h4>Examples</h4>
 
     <h5>Simple usage</h5>
-    <view-source>
-      <div class="head">
-        <!--
-        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import" href="https://cdn-origin.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/vaadin-date-picker.html">
-        -->
-      </div>
+    <demo-viewer>
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/core/date-picker/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/core/date-picker/angular2.ts"></demo-source>
+
       <vaadin-date-picker label="Pick a date"></vaadin-date-picker>
       <vaadin-date-picker label="Birthday" value="2000-01-01"></vaadin-date-picker>
-    </view-source>
+    </demo-viewer>
 
 
   </div>

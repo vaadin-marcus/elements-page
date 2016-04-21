@@ -79,7 +79,7 @@
   <h4>Examples</h4>
 
   <h5>Simple usage</h5>
-  <demo-viewer >
+  <demo-viewer>
     <demo-source name="Polymer" url="<%=request.getContextPath()%>/examples/core/icons/polymer.html"></demo-source>
     <demo-source name="Angular 2" url="<%=request.getContextPath()%>/examples/core/icons/angular2.ts"></demo-source>
 

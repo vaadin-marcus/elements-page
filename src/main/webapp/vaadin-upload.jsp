@@ -26,7 +26,8 @@
          class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
     </div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-upload&gt; <span><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-beta1")%></span></h1>
+  <h1 class="helvetica-light">&lt;vaadin-upload&gt;
+    <span><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-beta1")%></span></h1>
   <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
@@ -106,86 +107,85 @@
 <!-- Demo section start -->
 
 <!-- Demo section start -->
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+<template is="dom-bind">
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
+
+    <div class="elements-section">
+
+      <script>
+        // Use MockHttpRequest in demos
+        function mockXhrGenerator(file) {
+          var xhr = new MockHttpRequest();
+          xhr.upload = {};
+          xhr.onsend = function() {
+            var total = file && file.size || 1024, done = 0;
+
+            function start() {
+              setTimeout(progress, 1000);
+            }
+
+            function progress() {
+              xhr.upload.onprogress({total: total, loaded: done});
+              if (done < total) {
+                setTimeout(progress, 200);
+                done = Math.min(total, done + 254000);
+              } else {
+                setTimeout(finish, 1000);
+              }
+            }
+
+            function finish() {
+              xhr.receive(200, '{"message":"OK"}');
+            }
+
+            start();
+          };
+          return xhr;
+        }
+        window.addEventListener('WebComponentsReady', function() {
+          // Monkey-patch vaadin-upload prototype to use MockHttpRequest
+          Object.getPrototypeOf(document.createElement('vaadin-upload'))._createXhr = mockXhrGenerator;
+        });
+      </script>
+
+      <h4>Examples</h4>
+
+      <h5>Simple usage</h5>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/core/upload/simple-polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/core/upload/simple-angular2.ts"></demo-source>
+        <vaadin-upload></vaadin-upload>
+      </demo-viewer>
+    </div>
+  </div>
 
   <div class="elements-section">
+    <h5>File type, count and size limits</h5>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/core/upload/advanced-polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/core/upload/advanced-angular2.ts"></demo-source>
 
-    <script>
-      // Use MockHttpRequest in demos
-      function mockXhrGenerator(file) {
-        var xhr = new MockHttpRequest();
-        xhr.upload = {};
-        xhr.onsend = function() {
-          var total = file && file.size || 1024, done = 0;
+      <vaadin-upload id="rejectEventDemo" max-files="3" accept=".pdf" max-file-size="1000000">
+        <div class="drop-label">
+          <iron-icon icon="file-upload"></iron-icon>
+          Accepts up to 3 PDF files, up to 1MB each
+        </div>
+      </vaadin-upload>
+    </demo-viewer>
 
-          function start() {
-            setTimeout(progress, 1000);
-          }
-
-          function progress() {
-            xhr.upload.onprogress({total: total, loaded: done});
-            if (done < total) {
-              setTimeout(progress, 200);
-              done = Math.min(total, done + 254000);
-            } else {
-              setTimeout(finish, 1000);
-            }
-          }
-
-          function finish() {
-            xhr.receive(200, '{"message":"OK"}');
-          }
-
-          start();
-        };
-        return xhr;
-      }
-      window.addEventListener('WebComponentsReady', function() {
-        // Monkey-patch vaadin-upload prototype to use MockHttpRequest
-        Object.getPrototypeOf(document.createElement('vaadin-upload'))._createXhr = mockXhrGenerator;
-      });
-    </script>
-
-    <h4>Examples</h4>
-
-    <h5>Simple usage</h5>
-    <view-source editable="no">
-      <div class="head">
-        <!--
-        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import" href="https://cdn.vaadin.com/vaadin-upload/master/vaadin-upload.html">
-        -->
-      </div>
-      <vaadin-upload></vaadin-upload>
-    </view-source>
-  </div>
-</div>
-
-<div class="elements-section">
-  <h5>File type, count and size limits</h5>
-  <view-source editable="no">
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-upload/master/vaadin-upload.html">
-      -->
+    <div class="links row-fluid" style="margin-top: 20px;">
+      <a class="w-arrow-button blue span6"
+         href="https://cdn.vaadin.com/vaadin-elements/master/vaadin-upload/demo/">More Vaadin Upload
+        demos</a>
     </div>
-    <vaadin-upload id="rejectEventDemo" max-files="3" accept=".pdf" max-file-size="1000000">
-      <div class="drop-label">
-        <iron-icon icon="file-upload"></iron-icon>
-        Accepts up to 3 PDF files, up to 1MB each
-      </div>
-    </vaadin-upload>
-  </view-source>
 
-  <div class="links row-fluid" style="margin-top: 20px;">
-    <a class="w-arrow-button blue span6"
-       href="https://cdn.vaadin.com/vaadin-elements/master/vaadin-upload/demo/">More Vaadin Upload demos</a>
   </div>
-
-</div>
-
+</template>
 <!-- Demo section end -->
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
