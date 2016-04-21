@@ -1,0 +1,177 @@
+<dom-module id="demo-viewer">
+    <template>
+        <style>
+            :host {
+                display: block;
+                position: relative;
+            }
+
+            #demo-selector {
+                --paper-tabs-selection-bar-color: #00b4f0;
+            }
+
+            .source-code > .markdown-html {
+                background: #fdfdfd;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                padding: .4em .8em;
+                overflow: scroll;
+                -webkit-overflow-scrolling: touch;
+                /*min-height: 500px;*/
+            }
+
+            pre,
+            pre code {
+                /* Override stupid Liferay AUI "enhancements" */
+                border: none !important;
+                background: transparent !important;
+                white-space: pre !important;
+                word-break: normal !important;
+                word-wrap: normal !important;
+            }
+
+            .top-row {
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                flex-direction: row;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                margin-top: 50px;
+            }
+
+            #demo-selector {
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+            }
+
+            .edit-button {
+                height: 30px;
+                margin-left: 20px;
+                background: #00b4f0;
+                color: #fff;
+                padding: 0.4em 0.57em;
+            }
+
+            @media (max-width: 600px) {
+                .edit-button {
+                    display: none;
+                }
+            }
+        </style>
+        <div class="demo">
+            <content></content>
+        </div>
+        <div class="sources">
+            <div class="top-row">
+                <paper-tabs selected="{{selected}}" noink id="demo-selector">
+                    <template is="dom-repeat" items="[[sources]]">
+                        <paper-tab>[[item.name]]</paper-tab>
+                    </template>
+                </paper-tabs>
+                <template is="dom-if" if="{{_isEditable(editable)}}">
+                    <paper-button on-tap="_postToCodepen" raised class="edit-button">Edit</paper-button>
+                </template>
+            </div>
+            <iron-pages selected="{{selected}}">
+                <template is="dom-repeat" items="[[sources]]">
+                    <marked-element class="source-code" markdown="[[_getMarkdownFor(item)]]">
+                        <div class="markdown-html"></div>
+                    </marked-element>
+                </template>
+            </iron-pages>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'demo-viewer',
+
+        properties: {
+            selected: {
+                type: Number,
+                value: 0
+            },
+
+            examples: Array,
+
+            sources: {
+                type: Array,
+                value: function() {
+                    return [];
+                }
+            }
+        },
+
+        _isEditable: function() {
+            return this.editable === 'yes';
+        },
+
+
+        created: function() {
+
+            // Add only one Prism highlighter on the page
+            if (!window._viewSource) {
+                window._viewSource = {};
+                window._viewSource.prism = document.createElement('prism-highlighter');
+                this.ownerDocument.body.appendChild(window._viewSource.prism);
+            }
+        },
+
+        attached: function() {
+            this._fetchExamples();
+        },
+
+        _getMarkdownFor: function(sourceItem) {
+            return '\`\`\`' + sourceItem.type + '\n' + sourceItem.source + '\n\`\`\`';
+        },
+
+        _fetchExamples: function() {
+            var examples = Polymer.dom(this).querySelectorAll('demo-source');
+            if (examples && examples.length > 0) {
+                var self = this;
+                Promise.all(examples.map(function(external) {
+                    return self._fetchExample(external);
+                }));
+            }
+        },
+
+        _fetchExample: function(external) {
+            var self = this;
+
+            var filename = external.url.substr(external.url.lastIndexOf('/') + 1);
+            var name = external.name || filename;
+            var type = 'html';
+            if (filename.indexOf('.css') > 0) {
+                type = 'css';
+            } else if (filename.indexOf('.js') > 0 || filename.indexOf('.json') > 0) {
+                type = 'js';
+            } else if (filename.indexOf('.ts') > 0) {
+                type = 'ts';
+            }
+
+            return new Promise(function(resolve) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+
+                            self.push('sources', {
+                                name: name,
+                                source: xhr.responseText,
+                                type: type
+                            });
+                            resolve();
+                        }
+                    }
+                };
+                xhr.open('GET', external.url, true);
+                xhr.send();
+            });
+        }
+    });
+</script>

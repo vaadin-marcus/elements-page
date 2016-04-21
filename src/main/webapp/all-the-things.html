@@ -35957,9 +35957,8 @@ Example:
         type: Number,
         value: 0
       },
-      // Any external files that should be displayed in the sources
-      // web-component.html,data.json
-      externals: {
+      // Paths to examples separated by commas
+      examples: {
         type: String,
         value: ''
       },
@@ -35969,11 +35968,6 @@ Example:
         value: function() {
           return [];
         }
-      },
-
-      editable: {
-        type: Boolean,
-        value: 'yes'
       }
     },
 
@@ -35981,10 +35975,6 @@ Example:
       return this.editable === 'yes';
     },
 
-    _htmlText: '',
-    _scriptText: '',
-    _styleText: '',
-    _importsText: '',
 
     created: function() {
 
@@ -35994,76 +35984,10 @@ Example:
         window._viewSource.prism = document.createElement('prism-highlighter');
         this.ownerDocument.body.appendChild(window._viewSource.prism);
       }
-
-      // We need to read the HTML source before any elements are upgraded and
-      // rendered, in order to not get the full rendered DOM, just the authored
-      // source.
-      for (var i = 0; i < this.childNodes.length; i++) {
-        var el = this.childNodes[i];
-        if (el.nodeName === 'STYLE') {
-          this._styleText += el.textContent;
-        } else if (el.nodeName !== 'SCRIPT' && (!el.classList || !el.classList.contains('head'))) {
-          this._htmlText += (el.nodeType === 1 ? el.outerHTML : el.textContent);
-        }
-      }
-
-      // Strip empty attribute values (="" or ='')
-      this._htmlText = this._htmlText.replace(/=["']{2}/g, '');
-
-      // We need to have the imports as a comment as templates are not working properly in Edge.
-      var headTemplate = Polymer.dom(this).querySelector('.head');
-      if (headTemplate) {
-        this._importsText = headTemplate.innerHTML.replace(/<!--/g, '').replace(/-->/g, '');
-      }
-
     },
 
     attached: function() {
-      // Script tags need to be collected deferred, as they block the rendering of
-      // any subsequence elements on the page, so we would not be able to get to
-      // those. At this phase they have been evaluated already.
-      var scripts = this.getElementsByTagName('script');
-      for (var i = 0; i < scripts.length; i++) {
-        var script = scripts[i];
-        // Scripts that are a part of a dom module are already shown in the HTML tab
-        if (script.parentNode.nodeName !== 'DOM-MODULE') {
-          this._scriptText += script.textContent;
-        }
-      }
-
-      this._addSources();
-      this._fetchExternals();
-    },
-
-    _addSources: function() {
-      if (this._htmlText) {
-        this.push('sources', {
-          name: 'HTML',
-          source: this._htmlText,
-          type: 'html'
-        });
-      }
-      if (this._scriptText) {
-        this.push('sources', {
-          name: 'JS',
-          source: this._scriptText,
-          type: 'js'
-        });
-      }
-      if (this._styleText) {
-        this.push('sources', {
-          name: 'CSS',
-          source: this._styleText,
-          type: 'css'
-        });
-      }
-      if (this._importsText) {
-        this.push('sources', {
-          name: 'Imports',
-          source: this._importsText,
-          type: 'html'
-        });
-      }
+      this._fetchExamples();
     },
 
     _getMarkdownFor: function(sourceItem) {
@@ -36107,37 +36031,16 @@ Example:
       return source.trim();
     },
 
-    _postToCodepen: function() {
-      var data = {
-        html: this._htmlText,
-        css: this._styleText + '\n\nbody {\nfont-family: sans-serif;\n}\n',
-        js: this._scriptText,
-        head: this._importsText
-      };
-
-      // Quotes will screw up the JSON
-      var JSONstring = JSON.stringify(data).replace(/"/g, '&​quot;').replace(/'/g, '&apos;');
-
-      var form =
-              '<form action="http://codepen.io/pen/define" method="POST" target="_blank">' +
-              '<input type="hidden" name="data" value=\'' + JSONstring + '\'>' +
-              '</form>';
-
-      var formEl = document.createElement('div');
-      formEl.innerHTML = form;
-      formEl.firstChild.submit();
-    },
-
-    _fetchExternals: function() {
-      if (this.externals) {
+    _fetchExamples: function() {
+      if (this.examples) {
         var _this = this;
-        Promise.all(this.externals.replace(/\s+/g, '').split(',').map(function(external) {
-          return _this._fetchExternal(external);
+        Promise.all(this.examples.replace(/\s+/g, '').split(',').map(function(external) {
+          return _this._fetchExample(external);
         }));
       }
     },
 
-    _fetchExternal: function(external) {
+    _fetchExample: function(external) {
       var _this = this;
 
       var name = external.substr(external.lastIndexOf('/') + 1);
@@ -36146,6 +36049,8 @@ Example:
         type = 'css';
       } else if (name.indexOf('.js') > 0 || name.indexOf('.json') > 0) {
         type = 'js';
+      } else if(name.indexOf('.ts') > 0){
+        type = 'ts';
       }
 
       return new Promise(function(resolve) {
@@ -36168,4 +36073,200 @@ Example:
       });
     }
   });
-</script></div></body></html>
+</script><dom-module id="demo-viewer" assetpath="/">
+    <template>
+        <style>
+            :host {
+                display: block;
+                position: relative;
+            }
+
+            #demo-selector {
+                --paper-tabs-selection-bar-color: #00b4f0;
+            }
+
+            .source-code > .markdown-html {
+                background: #fdfdfd;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                padding: .4em .8em;
+                overflow: scroll;
+                -webkit-overflow-scrolling: touch;
+                /*min-height: 500px;*/
+            }
+
+            pre,
+            pre code {
+                /* Override stupid Liferay AUI "enhancements" */
+                border: none !important;
+                background: transparent !important;
+                white-space: pre !important;
+                word-break: normal !important;
+                word-wrap: normal !important;
+            }
+
+            .top-row {
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                flex-direction: row;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                margin-top: 50px;
+            }
+
+            #demo-selector {
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+            }
+
+            .edit-button {
+                height: 30px;
+                margin-left: 20px;
+                background: #00b4f0;
+                color: #fff;
+                padding: 0.4em 0.57em;
+            }
+
+            @media (max-width: 600px) {
+                .edit-button {
+                    display: none;
+                }
+            }
+        </style>
+        <div class="demo">
+            <content></content>
+        </div>
+        <div class="sources">
+            <div class="top-row">
+                <paper-tabs selected="{{selected}}" noink="" id="demo-selector">
+                    <template is="dom-repeat" items="[[sources]]">
+                        <paper-tab>[[item.name]]</paper-tab>
+                    </template>
+                </paper-tabs>
+                <template is="dom-if" if="{{_isEditable(editable)}}">
+                    <paper-button on-tap="_postToCodepen" raised="" class="edit-button">Edit</paper-button>
+                </template>
+            </div>
+            <iron-pages selected="{{selected}}">
+                <template is="dom-repeat" items="[[sources]]">
+                    <marked-element class="source-code" markdown="[[_getMarkdownFor(item)]]">
+                        <div class="markdown-html"></div>
+                    </marked-element>
+                </template>
+            </iron-pages>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'demo-viewer',
+
+        properties: {
+            selected: {
+                type: Number,
+                value: 0
+            },
+
+            examples: Array,
+
+            sources: {
+                type: Array,
+                value: function() {
+                    return [];
+                }
+            }
+        },
+
+        _isEditable: function() {
+            return this.editable === 'yes';
+        },
+
+
+        created: function() {
+
+            // Add only one Prism highlighter on the page
+            if (!window._viewSource) {
+                window._viewSource = {};
+                window._viewSource.prism = document.createElement('prism-highlighter');
+                this.ownerDocument.body.appendChild(window._viewSource.prism);
+            }
+        },
+
+        attached: function() {
+            this._fetchExamples();
+        },
+
+        _getMarkdownFor: function(sourceItem) {
+            return '\`\`\`' + sourceItem.type + '\n' + sourceItem.source + '\n\`\`\`';
+        },
+
+        _fetchExamples: function() {
+            var examples = Polymer.dom(this).querySelectorAll('demo-source');
+            if (examples && examples.length > 0) {
+                var self = this;
+                Promise.all(examples.map(function(external) {
+                    return self._fetchExample(external);
+                }));
+            }
+        },
+
+        _fetchExample: function(external) {
+            var self = this;
+
+            var filename = external.url.substr(external.url.lastIndexOf('/') + 1);
+            var name = external.name || filename;
+            var type = 'html';
+            if (filename.indexOf('.css') > 0) {
+                type = 'css';
+            } else if (filename.indexOf('.js') > 0 || filename.indexOf('.json') > 0) {
+                type = 'js';
+            } else if (filename.indexOf('.ts') > 0) {
+                type = 'ts';
+            }
+
+            return new Promise(function(resolve) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+
+                            self.push('sources', {
+                                name: name,
+                                source: xhr.responseText,
+                                type: type
+                            });
+                            resolve();
+                        }
+                    }
+                };
+                xhr.open('GET', external.url, true);
+                xhr.send();
+            });
+        }
+    });
+</script>
+<dom-module id="demo-source" assetpath="/">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'demo-source',
+            properties: {
+                name: String,
+                url: String
+            }
+        });
+    </script>
+</dom-module>
+</div></body></html>
