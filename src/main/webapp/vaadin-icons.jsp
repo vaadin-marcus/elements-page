@@ -61,27 +61,6 @@
 <!-- Intro section start -->
 
 
-<!-- Info section end -->
-<%--
-<% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-icons");
-  if (latestReleases != null && !latestReleases.isEmpty()) {
-%>
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
-
-  <div class="elements-section">
-    <h4>Latest releases</h4>
-    <% for (GitHubRelease release : latestReleases) {%>
-    <div class="row-fluid">
-      <span class="span9"><a href="<%=release.htmlUrl%>"><%=release.name%>
-      </a></span>
-      <time is="relative-time" datetime="<%=release.publishedAt%>" class="span3"></time>
-    </div>
-    <%}%>
-  </div>
-</div>
-<%}%>
---%>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
@@ -97,21 +76,13 @@
 <!-- Demo section start -->
 <div class="elements-section">
 
-  <style>
-    .aui .vaadin-theme .vaadin-icons-container input:focus {
-      border: none !important;
-    }
-  </style>
   <h4>Examples</h4>
 
   <h5>Simple usage</h5>
-  <view-source editable="no">
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-icons/master/vaadin-icons.html">
-      -->
-    </div>
+  <demo-viewer >
+    <demo-source name="Polymer" url="<%=request.getContextPath()%>/examples/core/icons/polymer.html"></demo-source>
+    <demo-source name="Angular 2" url="<%=request.getContextPath()%>/examples/core/icons/angular2.ts"></demo-source>
+
     <style>
       .example {
         background: #fdfdfd;
@@ -131,12 +102,11 @@
         </paper-button>
       </p>
     </div>
-  </view-source>
+  </demo-viewer>
 </div>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
-
   <jsp:include page="suggestion-box.jsp"/>
 </div>
 
