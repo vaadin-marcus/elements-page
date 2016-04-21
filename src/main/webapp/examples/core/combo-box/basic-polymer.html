@@ -1,0 +1,37 @@
+<script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/vaadin-combo-box.html">
+
+<template is="dom-bind" id="demo">
+  <vaadin-combo-box label="Language" class="languages" items="[[languages]]"></vaadin-combo-box>
+  <vaadin-combo-box label="Skill level" class="skillLevels" items="[[skillLevels]]"></vaadin-combo-box>
+</template>
+
+<style>
+  vaadin-combo-box {
+    max-width: 300px;
+  }
+</style>
+
+<script>
+  var demo = document.querySelector('#demo');
+  demo.addEventListener('dom-change', function() {
+
+    demo.languages = [
+      'Afrikaans', 'Albanian', 'Amharic', 'Arabic', 'Armenian', 'Basque', 'Bengali',
+      'Byelorussian', 'Burmese', 'Bulgarian', 'Catalan', 'Czech', 'Chinese', 'Croatian',
+      'Danish', 'Dari', 'Dzongkha', 'Dutch', 'English', 'Esperanto', 'Estonian', 'Faroese',
+      'Farsi', 'Finnish', 'French', 'Gaelic', 'Galician', 'German', 'Greek', 'Hebrew',
+      'Hindi', 'Hungarian', 'Icelandic', 'Indonesian', 'Inuktitut (Eskimo)', 'Italian',
+      'Japanese', 'Khmer', 'Korean', 'Kurdish', 'Laotian', 'Latvian', 'Lappish', 'Lithuanian',
+      'Macedonian', 'Malay', 'Maltese', 'Nepali', 'Norwegian', 'Pashto', 'Polish',
+      'Portuguese', 'Romanian', 'Russian', 'Scots', 'Serbian', 'Slovak', 'Slovenian',
+      'Somali', 'Spanish', 'Swedish', 'Swahili', 'Tagalog-Filipino', 'Tajik', 'Tamil', 'Thai',
+      'Tibetan', 'Tigrinya', 'Tongan', 'Turkish', 'Turkmen', 'Ucrainian', 'Urdu', 'Uzbek',
+      'Vietnamese', 'Welsh'
+    ];
+
+    demo.skillLevels = [
+      'Beginner', 'Intermediate', 'Advanced', 'Professional', 'Native'
+    ];
+  });
+</script>
