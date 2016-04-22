@@ -19,10 +19,8 @@
     <a href="https://www.polymer-project.org"
        class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
   </div>
-  <p class="lead">Vaadin Elements is a set of custom HTML elements tailored for
-    business applications. It extends the Google Polymer library with elements like data grid,
-    charts and combo box so you can build the app your business needs. The elements are actively
-    maintained and tested to ensure compatibility with the latest Polymer releases.</p>
+  <p class="lead">Vaadin Elements is a set of UI components tailored for
+    business applications. The components are fully Polymer and Angular 2 compatible and can also be used standalone.  </p>
 </div>
 
 <div class="w-wallpaper-container elements-hero-buttons">
