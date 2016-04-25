@@ -20516,6 +20516,240 @@ event and do your own custom submission:
   });
 
 </script>
+<!--
+Element access to Web Storage API (window.localStorage).
+
+Keeps `value` property in sync with localStorage.
+
+Value is saved as json by default.
+
+### Usage:
+
+`ls-sample` will automatically save changes to its value.
+
+    <dom-module id="ls-sample">
+      <iron-localstorage name="my-app-storage"
+        value="{{cartoon}}"
+        on-iron-localstorage-load-empty="initializeDefaultCartoon"
+      ></iron-localstorage>
+    </dom-module>
+
+    <script>
+      Polymer({
+        is: 'ls-sample',
+        properties: {
+          cartoon: {
+            type: Object
+          }
+        },
+        // initializes default if nothing has been stored
+        initializeDefaultCartoon: function() {
+          this.cartoon = {
+            name: "Mickey",
+            hasEars: true
+          }
+        },
+        // use path set api to propagate changes to localstorage
+        makeModifications: function() {
+          this.set('cartoon.name', "Minions");
+          this.set('cartoon.hasEars', false);
+        }
+      });
+    </script>
+
+### Tech notes:
+
+* * `value.*` is observed, and saved on modifications. You must use
+    path change notifification methods such as `set()` to modify value
+    for changes to be observed.
+
+* * Set `auto-save-disabled` to prevent automatic saving.
+
+* * Value is saved as JSON by default.
+
+* * To delete a key, set value to null
+
+* Element listens to StorageAPI `storage` event, and will reload upon receiving it.
+
+* **Warning**: do not bind value to sub-properties until Polymer
+[bug 1550](https://github.com/Polymer/polymer/issues/1550)
+is resolved. Local storage will be blown away.
+`<iron-localstorage value="{{foo.bar}}"` will cause **data loss**.
+
+@demo demo/index.html
+@hero hero.svg
+-->
+<dom-module id="iron-localstorage" assetpath="bower_components/iron-localstorage/"></dom-module>
+<script>
+
+  Polymer({
+    is: 'iron-localstorage',
+
+    properties: {
+      /**
+       * localStorage item key
+       */
+      name: {
+        type: String,
+        value: ''
+      },
+      /**
+       * The data associated with this storage.
+       * If set to null item will be deleted.
+       * @type {*}
+       */
+      value: {
+        type: Object,
+        notify: true
+      },
+
+      /**
+       * If true: do not convert value to JSON on save/load
+       */
+      useRaw: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Value will not be saved automatically if true. You'll have to do it manually with `save()`
+       */
+      autoSaveDisabled: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * Last error encountered while saving/loading items
+       */
+      errorMessage: {
+        type: String,
+        notify: true
+      },
+
+      /** True if value has been loaded */
+      _loaded: {
+        type: Boolean,
+        value: false
+      }
+    },
+
+    observers: [
+      '_debounceReload(name,useRaw)',
+      '_trySaveValue(autoSaveDisabled)',
+      '_trySaveValue(value.*)'
+    ],
+
+    ready: function() {
+      this._boundHandleStorage = this._handleStorage.bind(this);
+    },
+
+    attached: function() {
+      window.addEventListener('storage', this._boundHandleStorage);
+    },
+
+    detached: function() {
+      window.removeEventListener('storage', this._boundHandleStorage);
+    },
+
+    _handleStorage: function(ev) {
+      if (ev.key == this.name) {
+        this._load(true);
+      }
+    },
+
+    _trySaveValue: function() {
+      if (this._doNotSave) {
+        return;
+      }
+      if (this._loaded && !this.autoSaveDisabled) {
+        this.debounce('save', this.save);
+      }
+    },
+
+    _debounceReload: function() {
+      this.debounce('reload', this.reload);
+    },
+
+    /**
+     * Loads the value again. Use if you modify
+     * localStorage using DOM calls, and want to
+     * keep this element in sync.
+     */
+    reload: function() {
+      this._loaded = false;
+      this._load();
+    },
+
+    /**
+     * loads value from local storage
+     * @param {boolean=} externalChange true if loading changes from a different window
+     */
+    _load: function(externalChange) {
+      var v = window.localStorage.getItem(this.name);
+
+      if (v === null) {
+        this._loaded = true;
+        this._doNotSave = true;  // guard for save watchers
+        this.value = null;
+        this._doNotSave = false;
+        this.fire('iron-localstorage-load-empty', { externalChange: externalChange});
+      } else {
+        if (!this.useRaw) {
+          try { // parse value as JSON
+            v = JSON.parse(v);
+          } catch(x) {
+            this.errorMessage = "Could not parse local storage value";
+            console.error("could not parse local storage value", v);
+            v = null;
+          }
+        }
+        this._loaded = true;
+        this._doNotSave = true;
+        this.value = v;
+        this._doNotSave = false;
+        this.fire('iron-localstorage-load', { externalChange: externalChange});
+      }
+    },
+
+    /**
+     * Saves the value to localStorage. Call to save if autoSaveDisabled is set.
+     * If `value` is null or undefined, deletes localStorage.
+     */
+    save: function() {
+      var v = this.useRaw ? this.value : JSON.stringify(this.value);
+      try {
+        if (this.value === null || this.value === undefined) {
+          window.localStorage.removeItem(this.name);
+        } else {
+          window.localStorage.setItem(this.name, /** @type {string} */ (v));
+        }
+      }
+      catch(ex) {
+        // Happens in Safari incognito mode,
+        this.errorMessage = ex.message;
+        console.error("localStorage could not be saved. Safari incoginito mode?", ex);
+      }
+    }
+
+    /**
+     * Fired when value loads from localStorage.
+     *
+     * @event iron-localstorage-load
+     * @param {{externalChange:boolean}} detail -
+     *     externalChange: true if change occured in different window.
+     */
+
+    /**
+     * Fired when loaded value does not exist.
+     * Event handler can be used to initialize default value.
+     *
+     * @event iron-localstorage-load-empty
+     * @param {{externalChange:boolean}} detail -
+     *     externalChange: true if change occured in different window.
+     */
+  });
+
+</script>
 <script>function VaadinGridImport(){var Pb='',Qb=0,Rb='gwt.codesvr=',Sb='gwt.hosted=',Tb='gwt.hybrid',Ub='VaadinGridImport',Vb='meta',Wb='name',Xb='gwt:property',Yb='content',Zb='=',$b=1,_b='gwt:onPropertyErrorFn',ac='Bad handler "',bc='" for "gwt:onPropertyErrorFn"',cc='gwt:onLoadErrorFn',dc='" for "gwt:onLoadErrorFn"',ec='modernie',fc='MSIE',gc='Trident',hc='yes',ic='none',jc='observeCapability',kc='observe',lc='native',mc='js',nc='selectorCapability',oc='function',pc='user.agent',qc='webkit',rc='safari',sc='msie',tc=10,uc=11,vc='ie10',wc=9,xc='ie9',yc=8,zc='ie8',Ac='gecko',Bc='gecko1_8',Cc=2,Dc=3,Ec=4,Fc='Single-script hosted mode not yet implemented. See issue ',Gc='http://code.google.com/p/google-web-toolkit/issues/detail?id=2079',Hc='E144F75B4E3ABB0A433072D72B32E4C8',Ic=':1',Jc=':10',Kc=':11',Lc=':2',Mc=':3',Nc=':4',Oc=':5',Pc=':6',Qc=':7',Rc=':8',Sc=':9',Tc=':',Uc='DOMContentLoaded',Vc=50;var j=Pb,k=Qb,l=Rb,m=Sb,n=Tb,o=Ub,p=Vb,q=Wb,r=Xb,s=Yb,t=Zb,u=$b,v=_b,w=ac,A=bc,B=cc,C=dc,D=ec,F=fc,G=gc,H=hc,I=ic,J=jc,K=kc,L=lc,M=mc,N=nc,O=oc,P=pc,Q=qc,R=rc,S=sc,T=tc,U=uc,V=vc,W=wc,X=xc,Y=yc,Z=zc,$=Ac,_=Bc,ab=Cc,bb=Dc,cb=Ec,db=Fc,eb=Gc,fb=Hc,gb=Ic,hb=Jc,ib=Kc,jb=Lc,kb=Mc,lb=Nc,mb=Oc,nb=Pc,ob=Qc,pb=Rc,qb=Sc,rb=Tc,sb=Uc,tb=Vc;var ub=window,vb=document,wb,xb,yb=j,zb={},Ab=[],Bb=[],Cb=[],Db=k,Eb,Fb;if(!ub.__gwt_stylesLoaded){ub.__gwt_stylesLoaded={}}if(!ub.__gwt_scriptsLoaded){ub.__gwt_scriptsLoaded={}}function Gb(){var b=false;try{var c=ub.location.search;return (c.indexOf(l)!=-1||(c.indexOf(m)!=-1||ub.external&&ub.external.gwtOnLoad))&&c.indexOf(n)==-1}catch(a){}Gb=function(){return b};return b}
 function Hb(){if(wb&&xb){wb(Eb,o,yb,Db)}}
 function Ib(){var b=document.getElementsByTagName(p);for(var c=k,d=b.length;c<d;++c){var e=b[c],f=e.getAttribute(q),g;if(f){if(f==r){g=e.getAttribute(s);if(g){var h,i=g.indexOf(t);if(i>=k){f=g.substring(k,i);h=g.substring(i+u)}else{f=g;h=j}zb[f]=h}}else if(f==v){g=e.getAttribute(s);if(g){try{Fb=eval(g)}catch(a){alert(w+g+A)}}}else if(f==B){g=e.getAttribute(s);if(g){try{Eb=eval(g)}catch(a){alert(w+g+C)}}}}}}
@@ -32226,240 +32460,6 @@ Example:
      */
   </script>
 </dom-module>
-<!--
-Element access to Web Storage API (window.localStorage).
-
-Keeps `value` property in sync with localStorage.
-
-Value is saved as json by default.
-
-### Usage:
-
-`ls-sample` will automatically save changes to its value.
-
-    <dom-module id="ls-sample">
-      <iron-localstorage name="my-app-storage"
-        value="{{cartoon}}"
-        on-iron-localstorage-load-empty="initializeDefaultCartoon"
-      ></iron-localstorage>
-    </dom-module>
-
-    <script>
-      Polymer({
-        is: 'ls-sample',
-        properties: {
-          cartoon: {
-            type: Object
-          }
-        },
-        // initializes default if nothing has been stored
-        initializeDefaultCartoon: function() {
-          this.cartoon = {
-            name: "Mickey",
-            hasEars: true
-          }
-        },
-        // use path set api to propagate changes to localstorage
-        makeModifications: function() {
-          this.set('cartoon.name', "Minions");
-          this.set('cartoon.hasEars', false);
-        }
-      });
-    </script>
-
-### Tech notes:
-
-* * `value.*` is observed, and saved on modifications. You must use
-    path change notifification methods such as `set()` to modify value
-    for changes to be observed.
-
-* * Set `auto-save-disabled` to prevent automatic saving.
-
-* * Value is saved as JSON by default.
-
-* * To delete a key, set value to null
-
-* Element listens to StorageAPI `storage` event, and will reload upon receiving it.
-
-* **Warning**: do not bind value to sub-properties until Polymer
-[bug 1550](https://github.com/Polymer/polymer/issues/1550)
-is resolved. Local storage will be blown away.
-`<iron-localstorage value="{{foo.bar}}"` will cause **data loss**.
-
-@demo demo/index.html
-@hero hero.svg
--->
-<dom-module id="iron-localstorage" assetpath="bower_components/iron-localstorage/"></dom-module>
-<script>
-
-  Polymer({
-    is: 'iron-localstorage',
-
-    properties: {
-      /**
-       * localStorage item key
-       */
-      name: {
-        type: String,
-        value: ''
-      },
-      /**
-       * The data associated with this storage.
-       * If set to null item will be deleted.
-       * @type {*}
-       */
-      value: {
-        type: Object,
-        notify: true
-      },
-
-      /**
-       * If true: do not convert value to JSON on save/load
-       */
-      useRaw: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Value will not be saved automatically if true. You'll have to do it manually with `save()`
-       */
-      autoSaveDisabled: {
-        type: Boolean,
-        value: false
-      },
-      /**
-       * Last error encountered while saving/loading items
-       */
-      errorMessage: {
-        type: String,
-        notify: true
-      },
-
-      /** True if value has been loaded */
-      _loaded: {
-        type: Boolean,
-        value: false
-      }
-    },
-
-    observers: [
-      '_debounceReload(name,useRaw)',
-      '_trySaveValue(autoSaveDisabled)',
-      '_trySaveValue(value.*)'
-    ],
-
-    ready: function() {
-      this._boundHandleStorage = this._handleStorage.bind(this);
-    },
-
-    attached: function() {
-      window.addEventListener('storage', this._boundHandleStorage);
-    },
-
-    detached: function() {
-      window.removeEventListener('storage', this._boundHandleStorage);
-    },
-
-    _handleStorage: function(ev) {
-      if (ev.key == this.name) {
-        this._load(true);
-      }
-    },
-
-    _trySaveValue: function() {
-      if (this._doNotSave) {
-        return;
-      }
-      if (this._loaded && !this.autoSaveDisabled) {
-        this.debounce('save', this.save);
-      }
-    },
-
-    _debounceReload: function() {
-      this.debounce('reload', this.reload);
-    },
-
-    /**
-     * Loads the value again. Use if you modify
-     * localStorage using DOM calls, and want to
-     * keep this element in sync.
-     */
-    reload: function() {
-      this._loaded = false;
-      this._load();
-    },
-
-    /**
-     * loads value from local storage
-     * @param {boolean=} externalChange true if loading changes from a different window
-     */
-    _load: function(externalChange) {
-      var v = window.localStorage.getItem(this.name);
-
-      if (v === null) {
-        this._loaded = true;
-        this._doNotSave = true;  // guard for save watchers
-        this.value = null;
-        this._doNotSave = false;
-        this.fire('iron-localstorage-load-empty', { externalChange: externalChange});
-      } else {
-        if (!this.useRaw) {
-          try { // parse value as JSON
-            v = JSON.parse(v);
-          } catch(x) {
-            this.errorMessage = "Could not parse local storage value";
-            console.error("could not parse local storage value", v);
-            v = null;
-          }
-        }
-        this._loaded = true;
-        this._doNotSave = true;
-        this.value = v;
-        this._doNotSave = false;
-        this.fire('iron-localstorage-load', { externalChange: externalChange});
-      }
-    },
-
-    /**
-     * Saves the value to localStorage. Call to save if autoSaveDisabled is set.
-     * If `value` is null or undefined, deletes localStorage.
-     */
-    save: function() {
-      var v = this.useRaw ? this.value : JSON.stringify(this.value);
-      try {
-        if (this.value === null || this.value === undefined) {
-          window.localStorage.removeItem(this.name);
-        } else {
-          window.localStorage.setItem(this.name, /** @type {string} */ (v));
-        }
-      }
-      catch(ex) {
-        // Happens in Safari incognito mode,
-        this.errorMessage = ex.message;
-        console.error("localStorage could not be saved. Safari incoginito mode?", ex);
-      }
-    }
-
-    /**
-     * Fired when value loads from localStorage.
-     *
-     * @event iron-localstorage-load
-     * @param {{externalChange:boolean}} detail -
-     *     externalChange: true if change occured in different window.
-     */
-
-    /**
-     * Fired when loaded value does not exist.
-     * Event handler can be used to initialize default value.
-     *
-     * @event iron-localstorage-load-empty
-     * @param {{externalChange:boolean}} detail -
-     *     externalChange: true if change occured in different window.
-     */
-  });
-
-</script>
 <dom-module id="vaadin-license-box" assetpath="bower_components/vaadin-license-checker/">
     <style>
         :host {
@@ -35957,8 +35957,9 @@ Example:
         type: Number,
         value: 0
       },
-      // Paths to examples separated by commas
-      examples: {
+      // Any external files that should be displayed in the sources
+      // web-component.html,data.json
+      externals: {
         type: String,
         value: ''
       },
@@ -35968,6 +35969,11 @@ Example:
         value: function() {
           return [];
         }
+      },
+
+      editable: {
+        type: Boolean,
+        value: 'yes'
       }
     },
 
@@ -35975,6 +35981,10 @@ Example:
       return this.editable === 'yes';
     },
 
+    _htmlText: '',
+    _scriptText: '',
+    _styleText: '',
+    _importsText: '',
 
     created: function() {
 
@@ -35984,10 +35994,76 @@ Example:
         window._viewSource.prism = document.createElement('prism-highlighter');
         this.ownerDocument.body.appendChild(window._viewSource.prism);
       }
+
+      // We need to read the HTML source before any elements are upgraded and
+      // rendered, in order to not get the full rendered DOM, just the authored
+      // source.
+      for (var i = 0; i < this.childNodes.length; i++) {
+        var el = this.childNodes[i];
+        if (el.nodeName === 'STYLE') {
+          this._styleText += el.textContent;
+        } else if (el.nodeName !== 'SCRIPT' && (!el.classList || !el.classList.contains('head'))) {
+          this._htmlText += (el.nodeType === 1 ? el.outerHTML : el.textContent);
+        }
+      }
+
+      // Strip empty attribute values (="" or ='')
+      this._htmlText = this._htmlText.replace(/=["']{2}/g, '');
+
+      // We need to have the imports as a comment as templates are not working properly in Edge.
+      var headTemplate = Polymer.dom(this).querySelector('.head');
+      if (headTemplate) {
+        this._importsText = headTemplate.innerHTML.replace(/<!--/g, '').replace(/-->/g, '');
+      }
+
     },
 
     attached: function() {
-      this._fetchExamples();
+      // Script tags need to be collected deferred, as they block the rendering of
+      // any subsequence elements on the page, so we would not be able to get to
+      // those. At this phase they have been evaluated already.
+      var scripts = this.getElementsByTagName('script');
+      for (var i = 0; i < scripts.length; i++) {
+        var script = scripts[i];
+        // Scripts that are a part of a dom module are already shown in the HTML tab
+        if (script.parentNode.nodeName !== 'DOM-MODULE') {
+          this._scriptText += script.textContent;
+        }
+      }
+
+      this._addSources();
+      this._fetchExternals();
+    },
+
+    _addSources: function() {
+      if (this._htmlText) {
+        this.push('sources', {
+          name: 'HTML',
+          source: this._htmlText,
+          type: 'html'
+        });
+      }
+      if (this._scriptText) {
+        this.push('sources', {
+          name: 'JS',
+          source: this._scriptText,
+          type: 'js'
+        });
+      }
+      if (this._styleText) {
+        this.push('sources', {
+          name: 'CSS',
+          source: this._styleText,
+          type: 'css'
+        });
+      }
+      if (this._importsText) {
+        this.push('sources', {
+          name: 'Imports',
+          source: this._importsText,
+          type: 'html'
+        });
+      }
     },
 
     _getMarkdownFor: function(sourceItem) {
@@ -36031,16 +36107,37 @@ Example:
       return source.trim();
     },
 
-    _fetchExamples: function() {
-      if (this.examples) {
+    _postToCodepen: function() {
+      var data = {
+        html: this._htmlText,
+        css: this._styleText + '\n\nbody {\nfont-family: sans-serif;\n}\n',
+        js: this._scriptText,
+        head: this._importsText
+      };
+
+      // Quotes will screw up the JSON
+      var JSONstring = JSON.stringify(data).replace(/"/g, '&​quot;').replace(/'/g, '&apos;');
+
+      var form =
+              '<form action="http://codepen.io/pen/define" method="POST" target="_blank">' +
+              '<input type="hidden" name="data" value=\'' + JSONstring + '\'>' +
+              '</form>';
+
+      var formEl = document.createElement('div');
+      formEl.innerHTML = form;
+      formEl.firstChild.submit();
+    },
+
+    _fetchExternals: function() {
+      if (this.externals) {
         var _this = this;
-        Promise.all(this.examples.replace(/\s+/g, '').split(',').map(function(external) {
-          return _this._fetchExample(external);
+        Promise.all(this.externals.replace(/\s+/g, '').split(',').map(function(external) {
+          return _this._fetchExternal(external);
         }));
       }
     },
 
-    _fetchExample: function(external) {
+    _fetchExternal: function(external) {
       var _this = this;
 
       var name = external.substr(external.lastIndexOf('/') + 1);
@@ -36049,8 +36146,6 @@ Example:
         type = 'css';
       } else if (name.indexOf('.js') > 0 || name.indexOf('.json') > 0) {
         type = 'js';
-      } else if(name.indexOf('.ts') > 0){
-        type = 'ts';
       }
 
       return new Promise(function(resolve) {
@@ -36085,13 +36180,13 @@ Example:
                 --paper-tabs-selection-bar-color: #00b4f0;
             }
 
+
             .source-code > .markdown-html {
                 background: #fdfdfd;
                 border: 1px solid rgba(0, 0, 0, 0.1);
                 padding: .4em .8em;
                 overflow: scroll;
                 -webkit-overflow-scrolling: touch;
-                /*min-height: 500px;*/
             }
 
             pre,
@@ -36137,23 +36232,25 @@ Example:
                 }
             }
         </style>
+        <iron-localstorage name="vaadin-elements-preferred" value="{{selected}}" on-iron-localstorage-load-empty="_initSelected"></iron-localstorage>
+
         <div class="demo">
             <content></content>
         </div>
         <div class="sources">
             <div class="top-row">
-                <paper-tabs selected="{{selected}}" noink="" id="demo-selector">
-                    <template is="dom-repeat" items="[[sources]]">
-                        <paper-tab>[[item.name]]</paper-tab>
+                <paper-tabs selected="{{selected}}" noink="" id="demo-selector" attr-for-selected="data-example">
+                    <template is="dom-repeat" items="[[examples]]">
+                        <paper-tab data-example="[[item.name]]">[[item.name]]</paper-tab>
                     </template>
                 </paper-tabs>
                 <template is="dom-if" if="{{_isEditable(editable)}}">
                     <paper-button on-tap="_postToCodepen" raised="" class="edit-button">Edit</paper-button>
                 </template>
             </div>
-            <iron-pages selected="{{selected}}">
+            <iron-pages selected="{{selected}}" attr-for-selected="data-example">
                 <template is="dom-repeat" items="[[sources]]">
-                    <marked-element class="source-code" markdown="[[_getMarkdownFor(item)]]">
+                    <marked-element class="source-code" data-example="[[item.name]]" markdown="[[_getMarkdownFor(item)]]">
                         <div class="markdown-html"></div>
                     </marked-element>
                 </template>
@@ -36168,8 +36265,8 @@ Example:
 
         properties: {
             selected: {
-                type: Number,
-                value: 0
+                type: String,
+                notify: true
             },
 
             examples: Array,
@@ -36182,10 +36279,10 @@ Example:
             }
         },
 
-        _isEditable: function() {
-            return this.editable === 'yes';
-        },
 
+        _initSelected: function() {
+            this.selected = 'Polymer';
+        },
 
         created: function() {
 
@@ -36198,6 +36295,8 @@ Example:
         },
 
         attached: function() {
+            this.examples = Polymer.dom(this).querySelectorAll('demo-source');
+
             this._fetchExamples();
         },
 
@@ -36206,10 +36305,9 @@ Example:
         },
 
         _fetchExamples: function() {
-            var examples = Polymer.dom(this).querySelectorAll('demo-source');
-            if (examples && examples.length > 0) {
+            if (this.examples && this.examples.length > 0) {
                 var self = this;
-                Promise.all(examples.map(function(external) {
+                Promise.all(this.examples.map(function(external) {
                     return self._fetchExample(external);
                 }));
             }
