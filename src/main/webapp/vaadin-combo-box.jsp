@@ -25,7 +25,7 @@
     </div>
   </div>
   <h1 class="helvetica-light">&lt;vaadin-combo-box&gt;
-    <span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-beta1")%></span></h1>
+    <span><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-rc1")%></span></h1>
   <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
@@ -358,9 +358,9 @@
   <div class="w-wallpaper">&nbsp;</div>
 
   <div class="elements-section">
-    <h5>Custom Properties for Item Label and Value</h5>
+    <h5>Using Objects as items</h5>
     <p>
-      You can override the default property paths by defining <code>item-label-path</code> and <code>item-value-path</code>
+      Arrays of objects can also be used to provide the data for a vaadin-combo-box. Override the default property paths by defining <code>item-label-path</code> and <code>item-value-path</code>
       properties.
     </p>
     <view-source>

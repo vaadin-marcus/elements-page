@@ -26,7 +26,7 @@
          class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
     </div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-upload&gt; <span><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-beta1")%></span></h1>
+  <h1 class="helvetica-light">&lt;vaadin-upload&gt; <span><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-rc1")%></span></h1>
   <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
@@ -171,7 +171,7 @@
       <link rel="import" href="https://cdn.vaadin.com/vaadin-upload/master/vaadin-upload.html">
       -->
     </div>
-    <vaadin-upload id="rejectEventDemo" max-files="3" accept=".pdf" max-file-size="1000000">
+    <vaadin-upload max-files="3" accept="application/pdf" max-file-size="1000000">
       <div class="drop-label">
         <iron-icon icon="file-upload"></iron-icon>
         Accepts up to 3 PDF files, up to 1MB each
