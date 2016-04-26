@@ -170,7 +170,7 @@
       <demo-source name="Angular 2"
                    url="<%=request.getContextPath()%>/examples/core/upload/advanced-angular2.ts"></demo-source>
 
-      <vaadin-upload max-files="3" accept=".pdf" max-file-size="1000000">
+      <vaadin-upload max-files="3" accept="application/pdf" max-file-size="1000000">
         <div class="drop-label">
           <iron-icon icon="file-upload"></iron-icon>
           Accepts up to 3 PDF files, up to 1MB each
