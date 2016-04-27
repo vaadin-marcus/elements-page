@@ -58,7 +58,7 @@
 }
 
 .elements-hero {
-    padding: 100px 0 2.5rem 0;
+    padding: 9.15rem 0 2.5rem 0;
     color: #fff;
     text-align: center;
 }
@@ -66,13 +66,29 @@
 .elements-hero .elements-hero-title h1 {
     margin: 0px 0px 5px;
     color: #fff;
+    font-size: 3.9rem;
+}
+
+.elements-hero p,
+.elements-hero p.lead {
+    font-size: 1.54rem;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+.elements-hero p a {
+    color: rgba(0, 0, 0, 0.68);
+}
+
+.elements-hero p a:hover,
+.elements-hero p a:active {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.68);
 }
 
 .elements-hero p.lead {
-    font-size: 1.7rem;
-    line-height: 1.5;
-    margin: 1.5em auto;
-    max-width: 30em;
+    font-size: 2.7rem;
+    margin: 1.5em auto 2.1em auto;
+    max-width: 24em;
 }
 
 .elements-hero-buttons .button {

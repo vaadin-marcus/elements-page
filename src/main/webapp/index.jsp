@@ -7,7 +7,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?13"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?15"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -18,12 +18,16 @@
   <div class="w-wallpaper"></div>
   <div class="elements-hero-title">
     <h1>Vaadin Elements</h1>
-    <a href="https://www.polymer-project.org"
-       class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
   </div>
-  <p class="lead">Vaadin Elements is a set of UI components tailored for
-    business applications. The components are fully Polymer and Angular 2 compatible and can also be
-    used standalone. </p>
+  <p class="lead">
+    Material design inspired UI components for building great web apps.
+    For mobile and desktop.
+  </p>
+  <p>
+    Works on any HTML5 based stack.<br />
+    Supports <a href="https://www.polymer-project.org">Polymer</a>
+    and <a href="https://angular.io">Angular 2</a> data binding.
+  </p>
 </div>
 
 <div class="w-wallpaper-container elements-hero-buttons">
