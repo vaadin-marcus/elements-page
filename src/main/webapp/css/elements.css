@@ -107,15 +107,6 @@ a.button-dark:hover {
     background-image: url('../img/github-circled-logo.png');
 }
 
-.elements-demos-demo .w-arrow-button.blue {
-    margin-bottom: 1.8rem;
-}
-
-.elements-demos-demo .append-logo-git {
-    display: block;
-    margin: .6em 0;
-}
-
 /* EO General Element Styles */
 
 /* Index Hero */
@@ -728,6 +719,12 @@ a.button-dark:hover {
 
 .elements-demos-demo .w-arrow-button {
     margin: 10px 0;
+    margin-bottom: 1.8rem;
+}
+
+.elements-demos-demo .append-logo-git {
+    display: block;
+    margin: .6em 0;
 }
 
 .suggest-box {
