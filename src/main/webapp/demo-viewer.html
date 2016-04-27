@@ -96,7 +96,8 @@
         properties: {
             selected: {
                 type: String,
-                notify: true
+                notify: true,
+                observer: '_selectedChanged'
             },
 
             examples: Array,
@@ -112,6 +113,10 @@
 
         _initSelected: function() {
             this.selected = 'Polymer';
+        },
+
+        _selectedChanged: function(){
+            // TODO: Trigger HubSpot CTA. Access selected value with this.selected
         },
 
         created: function() {

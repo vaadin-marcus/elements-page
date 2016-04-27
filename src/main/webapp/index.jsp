@@ -1,4 +1,6 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.vaadin.elements.PolymerElement" %>
+<%@ page import="com.vaadin.elements.PolymerElements" %>
 <%@ page import="com.vaadin.elements.Releases" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
@@ -20,7 +22,8 @@
        class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
   </div>
   <p class="lead">Vaadin Elements is a set of UI components tailored for
-    business applications. The components are fully Polymer and Angular 2 compatible and can also be used standalone.  </p>
+    business applications. The components are fully Polymer and Angular 2 compatible and can also be
+    used standalone. </p>
 </div>
 
 <div class="w-wallpaper-container elements-hero-buttons">
@@ -68,7 +71,8 @@
              srcset="<%=request.getContextPath()%>/img/preview/grid@2x.png 2x"
              alt="Polymer data table element for javascript">
         <div class="tile-details">
-          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-grid", "1.0.0")%></div>
+          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-grid", "1.0.0")%>
+          </div>
           <div class="tile-title">Grid</div>
           <div class="tile-description">
             Vaadin Grid is a fully featured datagrid for showing table data.
@@ -84,10 +88,13 @@
              srcset="<%=request.getContextPath()%>/img/preview/combobox@2x.png?2 2x"
              alt="Filtering select for polymer and javacript">
         <div class="tile-details">
-          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-rc1")%></div>
+          <div
+              class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-rc1")%>
+          </div>
           <div class="tile-title">Combo Box</div>
           <div class="tile-description">
-            Vaadin ComboBox is a filterable select element for situations where you have more than a few dozen items to select from.
+            Vaadin ComboBox is a filterable select element for situations where you have more than a
+            few dozen items to select from.
           </div>
         </div>
       </a>
@@ -99,7 +106,9 @@
              srcset="<%=request.getContextPath()%>/img/preview/icons@2x.png 2x"
              alt="Free font icons for web applications">
         <div class="tile-details">
-          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-icons", "1.0.0-rc1")%></div>
+          <div
+              class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-icons", "1.0.0-rc1")%>
+          </div>
           <div class="tile-title">Icons</div>
           <div class="tile-description">
             Vaadin Icons is a set of 530 unique icons designed for web applications.
@@ -114,7 +123,9 @@
              srcset="<%=request.getContextPath()%>/img/preview/upload@2x.png?2 2x"
              alt="Upload component for Polymer and javascript">
         <div class="tile-details">
-          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-rc1")%></div>
+          <div
+              class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-rc1")%>
+          </div>
           <div class="tile-title">Upload</div>
           <div class="tile-description">
             Vaadin upload allows you to upload multiple files with progress indication.
@@ -130,7 +141,9 @@
              srcset="<%=request.getContextPath()%>/img/preview/date-picker@2x.png?2 2x"
              alt="Polymer date picker">
         <div class="tile-details">
-          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-rc1")%></div>
+          <div
+              class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-rc1")%>
+          </div>
           <div class="tile-title">Date Picker</div>
           <div class="tile-description">
             Vaadin DatePicker allows you to select a date from a dropdown calendar.
@@ -154,7 +167,8 @@
     <div class="span3">
       <span>$ 790.00</span>
       Commercial license
-      <a href="https://sites.fastspring.com/vaadin/instant/vaadincharts3?member=new" class="w-arrow-button blue small">Buy license</a>
+      <a href="https://sites.fastspring.com/vaadin/instant/vaadincharts3?member=new"
+         class="w-arrow-button blue small">Buy license</a>
     </div>
 
   </div>
@@ -258,7 +272,8 @@
         <div class="tile-details">
           <div class="tile-title">Bubble Chart</div>
           <div class="tile-description">
-            A bubble chart can be used to display three dimensions of data with disks proportional to a value at a given x, y point.
+            A bubble chart can be used to display three dimensions of data with disks proportional
+            to a value at a given x, y point.
           </div>
         </div>
       </a>
@@ -343,7 +358,8 @@
         <div class="tile-details">
           <div class="tile-title">Funnel Chart</div>
           <div class="tile-description">
-            Funnel charts are most often used to visualize the different stages in a company's sales process.
+            Funnel charts are most often used to visualize the different stages in a company's sales
+            process.
           </div>
         </div>
       </a>
@@ -400,7 +416,8 @@
         <div class="tile-details">
           <div class="tile-title">OHLC Chart</div>
           <div class="tile-description">
-            An open-high-low-close (OHLC) chart is a financial chart that shows the open, close, high and low values for a financial instrument for that day.
+            An open-high-low-close (OHLC) chart is a financial chart that shows the open, close,
+            high and low values for a financial instrument for that day.
           </div>
         </div>
       </a>
@@ -442,7 +459,8 @@
         <div class="tile-details">
           <div class="tile-title">Pyramid Chart</div>
           <div class="tile-description">
-            Used to show hierarchically structured data in a pyramid shaped chart divided into vertical slices.
+            Used to show hierarchically structured data in a pyramid shaped chart divided into
+            vertical slices.
           </div>
         </div>
       </a>
@@ -484,7 +502,8 @@
         <div class="tile-details">
           <div class="tile-title">Sparkline</div>
           <div class="tile-description">
-            Sparklines are small line charts that are displayed without axes or coordinates and are typically used to show time series data inline.
+            Sparklines are small line charts that are displayed without axes or coordinates and are
+            typically used to show time series data inline.
           </div>
         </div>
       </a>
@@ -526,11 +545,53 @@
         <div class="tile-details">
           <div class="tile-title">Waterfall Chart</div>
           <div class="tile-description">
-            A waterfall chart shows the cumulative effects of a step of sequentially applied positive or negative values.
+            A waterfall chart shows the cumulative effects of a step of sequentially applied
+            positive or negative values.
           </div>
         </div>
       </a>
     </div>
+
+  </div>
+</div>
+
+<div class="w-wallpaper-container zebra elements-category">
+  <div class="w-wallpaper"></div>
+  <div class="row-fluid">
+
+    <div class="span9">
+      <h5>Google Elements</h5>
+      <p>
+        Vaadin Elements are designed to work seamlessly together with all the elements in <a
+          href="https://www.polymer-project.org">Polymer</a>.
+        Polymer includes an extensive set of Material Design components and components for
+        integrating with Google products like Maps.
+      </p>
+    </div>
+    <div class="span3">
+      <a href="https://www.polymer-project.org" class="w-arrow-button blue small">Visit Polymer site</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="w-wallpaper-container zebra elements-category-tiles elements-category-charts-tiles">
+  <div class="w-wallpaper"></div>
+  <div class="tile-container">
+
+    <%for (PolymerElement el : PolymerElements.getAll()) {%>
+    <div class="tile">
+      <a href="<%=el.getURL()%>">
+        <div class="tile-details">
+          <div class="tile-title"><%=el.getName()%>
+          </div>
+          <div class="tile-description">
+            <%=el.getDescription()%>
+          </div>
+        </div>
+      </a>
+    </div>
+    <%}%>
 
   </div>
 </div>

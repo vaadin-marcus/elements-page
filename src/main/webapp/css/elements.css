@@ -277,6 +277,10 @@
     margin-bottom: 1em;
 }
 
+.elements-category-tiles .tile-title.polymer {
+    text-transform: none;
+}
+
 .elements-category-tiles .tile-title:first-child {
     margin-top: .5em;
 }
