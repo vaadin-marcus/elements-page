@@ -1,0 +1,80 @@
+<script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import"
+      href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+
+<style>
+  #sort {
+    height: 300px;
+  }
+</style>
+<paper-input id="filter" label="Filter by first name"></paper-input>
+<vaadin-grid id="sort" selection-mode="multi">
+  <table>
+    <colgroup>
+      <col name="firstName" sortable/>
+      <col name="lastName" sortable/>
+      <col name="email" sortable/>
+    </colgroup>
+  </table>
+</vaadin-grid>
+
+<script>
+  (function() {
+    HTMLImports.whenReady(function() {
+      var grid = document.querySelector('#sort');
+      var users = [];
+
+      getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+        users = json.result;
+        grid.items = users;
+      });
+
+      grid.addEventListener('sort-order-changed', function() {
+        var sortOrder = grid.sortOrder[0];
+        var sortProperty = grid.columns[sortOrder.column].name;
+        var sortDirection = sortOrder.direction;
+        grid.items.sort(function(a, b) {
+          var res;
+          var path = sortProperty.split('.');
+          for (var i = 0; i < path.length; i++) {
+            a = a[path[i]];
+            b = b[path[i]];
+          }
+          if (!isNaN(a)) {
+            res = parseInt(a, 10) - parseInt(b, 10);
+          } else {
+            res = a.localeCompare(b);
+          }
+
+          if ('desc' === sortDirection) {
+            res *= -1;
+          }
+          return res;
+        });
+      });
+
+      var filterInput = document.querySelector('#filter');
+      filterInput.addEventListener('value-changed', function() {
+        var filterText = filterInput.value.toLowerCase();
+        grid.items = users.filter(function(val) {
+          if (filterText) {
+            return (val.firstName.toLowerCase()).indexOf(filterText) > -1;
+          } else {
+            return true;
+          }
+        });
+      });
+    });
+
+    function getJSON(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          callback(JSON.parse(xhr.responseText));
+        }
+      };
+      xhr.open('GET', url, true);
+      xhr.send();
+    }
+  })();
+</script>

@@ -1,0 +1,42 @@
+<script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import"
+      href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+
+<style>
+  #simple {
+    height: 300px;
+  }
+</style>
+<vaadin-grid id="simple">
+  <table>
+    <colgroup>
+      <col name="firstName"/>
+      <col name="lastName"/>
+      <col name="email"/>
+    </colgroup>
+  </table>
+</vaadin-grid>
+
+<script>
+  (function() {
+    HTMLImports.whenReady(function() {
+      var grid = document.querySelector('#simple');
+
+      getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+        grid.items = json.result;
+      });
+    });
+
+    function getJSON(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          callback(JSON.parse(xhr.responseText));
+        }
+      };
+      xhr.open('GET', url, true);
+      xhr.send();
+    }
+  })();
+
+</script>

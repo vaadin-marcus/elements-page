@@ -1,0 +1,50 @@
+<script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import"
+      href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+
+<style>
+
+  #frozen {
+    height: 300px;
+  }
+
+</style>
+<vaadin-grid id="frozen" frozen-columns="2">
+  <table>
+    <colgroup>
+      <col name="firstName"/>
+      <col name="lastName"/>
+      <col name="email" width="250"/>
+      <col name="address.phone" hidable/>
+      <col name="address.street" hidable/>
+      <col name="address.city" hidable/>
+      <col name="address.state" hidable/>
+      <col name="address.zip" hidable/>
+      <col name="address.country" hidable hidden/>
+    </colgroup>
+  </table>
+</vaadin-grid>
+
+<script>
+  (function() {
+    HTMLImports.whenReady(function() {
+      var grid = document.querySelector('#frozen');
+
+      getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+        grid.items = json.result;
+      });
+
+    });
+
+    function getJSON(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          callback(JSON.parse(xhr.responseText));
+        }
+      };
+      xhr.open('GET', url, true);
+      xhr.send();
+    }
+  })();
+</script>

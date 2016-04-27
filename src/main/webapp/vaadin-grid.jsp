@@ -119,54 +119,296 @@
 <%}%>
 <!-- Demo section start -->
 
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+<template is="dom-bind">
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
+
+    <div class="elements-section">
+      <h4>Examples</h4>
+
+
+      <h5>Simple use with an array data source</h5>
+      <p>
+        Simple use case where the grid is populated with data from an array. The array data is fetched
+        from a JSON file with an Ajax request and mapped to columns with <code>&lt;col
+        name="json.property.path"&gt;</code>.
+      </p>
+      <p>
+        <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Other data
+          sources are documented here.</a>
+      </p>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/core/grid/simple-polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/core/grid/simple-angular2.ts"></demo-source>
+
+        <style>
+          #simple {
+            height: 300px;
+          }
+        </style>
+        <vaadin-grid id="simple">
+          <table>
+            <colgroup>
+              <col name="firstName"/>
+              <col name="lastName"/>
+              <col name="email"/>
+            </colgroup>
+          </table>
+        </vaadin-grid>
+
+        <script>
+          (function() {
+            HTMLImports.whenReady(function() {
+              var grid = document.querySelector('#simple');
+
+              getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+                grid.items = json.result;
+              });
+            });
+
+            function getJSON(url, callback) {
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                  callback(JSON.parse(xhr.responseText));
+                }
+              };
+              xhr.open('GET', url, true);
+              xhr.send();
+            }
+          })();
+
+        </script>
+      </demo-viewer>
+    </div>
+  </div>
 
   <div class="elements-section">
-    <h4>Examples</h4>
-
-
-    <h5>Simple use with an array data source</h5>
+    <h5>Lazy loading a large data set</h5>
     <p>
-      Simple use case where the grid is populated with data from an array. The array data is fetched
-      from a JSON file with an Ajax request and mapped to columns with <code>&lt;col
-      name="json.property.path"&gt;</code>.
+      When you have more than a few items, it makes sense to only fetch a smaller subset up front and
+      then load the rest of rows as (and if) you need them. With Vaadin Grid you can do this easily by
+      defining a function data source. We also customized the header texts with a <code>
+      &lt;thead&gt;</code>.
     </p>
     <p>
-      <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Other data
-        sources are documented here.</a>
+      <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Read more about
+        vaadin-grid data sources.</a>
     </p>
-    <view-source>
-      <div class="head">
-        <!--
-        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import"
-              href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-        -->
-      </div>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/core/grid/lazy-polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/core/grid/lazy-angular2.ts"></demo-source>
+
       <style>
-        #simple {
+        #lazy {
           height: 300px;
         }
       </style>
-      <vaadin-grid id="simple">
+      <vaadin-grid id="lazy">
         <table>
           <colgroup>
+            <col name="number" width="80"/>
             <col name="firstName"/>
             <col name="lastName"/>
             <col name="email"/>
           </colgroup>
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+          </tr>
+          </thead>
         </table>
       </vaadin-grid>
 
       <script>
         (function() {
           HTMLImports.whenReady(function() {
-            var grid = document.querySelector('#simple');
+            var grid = document.querySelector('#lazy');
+
+            grid.columns[0].renderer = function(cell) {
+              cell.element.textContent = cell.row.index;
+            };
+
+            grid.items = function(params, callback) {
+              getJSON('https://demo.vaadin.com/demo-data/1.0/people?index=' + params.index + '&count=' + params.count, function(json) {
+                callback(json.result, json.size);
+              });
+            };
+          });
+
+          function getJSON(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                callback(JSON.parse(xhr.responseText));
+              }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+          }
+        })();
+      </script>
+    </demo-viewer>
+  </div>
+
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
+
+    <div class="elements-section">
+      <h5>Sorting, filtering and selection</h5>
+      <p>
+        Vaadin Grid supports sorting and filtering data. Here we have added simple sorting on all
+        columns
+        and filtering on the first name column. <a
+          href="https://vaadin.com/docs/-/part/elements/vaadin-grid/sort.html">Read more about the
+        available sorting options.</a>
+      </p>
+      <p>
+        This demo also shows multiple selection with keyboard navigation support. For more info on
+        selection modes, check out the <a
+          href="https://vaadin.com/docs/-/part/elements/vaadin-grid/selection.html">documentation</a>.
+      </p>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/core/grid/features-polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/core/grid/features-angular2.ts"></demo-source>
+
+        <style>
+          #sort {
+            height: 300px;
+          }
+        </style>
+        <paper-input id="filter" label="Filter by first name"></paper-input>
+        <vaadin-grid id="sort" selection-mode="multi">
+          <table>
+            <colgroup>
+              <col name="firstName" sortable/>
+              <col name="lastName" sortable/>
+              <col name="email" sortable/>
+            </colgroup>
+          </table>
+        </vaadin-grid>
+
+        <script>
+          (function() {
+            HTMLImports.whenReady(function() {
+              var grid = document.querySelector('#sort');
+              var users = [];
+
+              getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+                users = json.result;
+                grid.items = users;
+              });
+
+              grid.addEventListener('sort-order-changed', function() {
+                var sortOrder = grid.sortOrder[0];
+                var sortProperty = grid.columns[sortOrder.column].name;
+                var sortDirection = sortOrder.direction;
+                grid.items.sort(function(a, b) {
+                  var res;
+                  var path = sortProperty.split('.');
+                  for (var i = 0; i < path.length; i++) {
+                    a = a[path[i]];
+                    b = b[path[i]];
+                  }
+                  if (!isNaN(a)) {
+                    res = parseInt(a, 10) - parseInt(b, 10);
+                  } else {
+                    res = a.localeCompare(b);
+                  }
+
+                  if ('desc' === sortDirection) {
+                    res *= -1;
+                  }
+                  return res;
+                });
+              });
+
+              var filterInput = document.querySelector('#filter');
+              filterInput.addEventListener('value-changed', function() {
+                var filterText = filterInput.value.toLowerCase();
+                grid.items = users.filter(function(val) {
+                  if (filterText) {
+                    return (val.firstName.toLowerCase()).indexOf(filterText) > -1;
+                  } else {
+                    return true;
+                  }
+                });
+              });
+            });
+
+            function getJSON(url, callback) {
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                  callback(JSON.parse(xhr.responseText));
+                }
+              };
+              xhr.open('GET', url, true);
+              xhr.send();
+            }
+          })();
+        </script>
+      </demo-viewer>
+    </div>
+  </div>
+
+  <div class="elements-section">
+    <h5>Frozen and hidable columns</h5>
+    <p>
+      If you have a lot of columns, you may want to freeze some of the columns to make the table
+      easier to read. You can also turn on column hiding to allow the user to show or hide columns
+      that may not be relevant to them. <a
+        href="https://vaadin.com/docs/-/part/elements/vaadin-grid/columns.html">Read more about
+      configuring columns.</a>
+    </p>
+
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/core/grid/columns-polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/core/grid/columns-angular2.ts"></demo-source>
+
+      <style>
+
+        #frozen {
+          height: 300px;
+        }
+
+      </style>
+      <vaadin-grid id="frozen" frozen-columns="2">
+        <table>
+          <colgroup>
+            <col name="firstName"/>
+            <col name="lastName"/>
+            <col name="email" width="250"/>
+            <col name="address.phone" hidable/>
+            <col name="address.street" hidable/>
+            <col name="address.city" hidable/>
+            <col name="address.state" hidable/>
+            <col name="address.zip" hidable/>
+            <col name="address.country" hidable hidden/>
+          </colgroup>
+        </table>
+      </vaadin-grid>
+
+      <script>
+        (function() {
+          HTMLImports.whenReady(function() {
+            var grid = document.querySelector('#frozen');
 
             getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
               grid.items = json.result;
             });
+
           });
 
           function getJSON(url, callback) {
@@ -180,340 +422,92 @@
             xhr.send();
           }
         })();
-
       </script>
-    </view-source>
+    </demo-viewer>
   </div>
-</div>
 
-<div class="elements-section">
-  <h5>Lazy loading a large data set</h5>
-  <p>
-    When you have more than a few items, it makes sense to only fetch a smaller subset up front and
-    then load the rest of rows as (and if) you need them. With Vaadin Grid you can do this easily by
-    defining a function data source. We also customized the header texts with a <code>
-    &lt;thead&gt;</code>.
-  </p>
-  <p>
-    <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/datasources.html">Read more about
-      vaadin-grid data sources.</a>
-  </p>
-  <view-source>
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import"
-            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-      -->
-    </div>
-    <style>
-      #lazy {
-        height: 300px;
-      }
-    </style>
-    <vaadin-grid id="lazy">
-      <table>
-        <colgroup>
-          <col name="number" width="80"/>
-          <col name="firstName"/>
-          <col name="lastName"/>
-          <col name="email"/>
-        </colgroup>
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-        </tr>
-        </thead>
-      </table>
-    </vaadin-grid>
+    <%--
+    <div class="elements-section">
+      <h5>Details row</h5>
+      <p>
+        Sometimes you need to show more information than you can fit on a single row. In those cases,
+        you can use a details row to display any element below the row. <a
+          href="https://vaadin.com/docs/-/part/elements/vaadin-grid/details.html">Read more about
+        showing row details.</a>
+      </p>
+      <view-source externals="<%=request.getContextPath()%>/details-row.html">
+        <div class="head">
+          <!--
+          <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+          <link rel="import"
+                href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+          -->
+        </div>
+        <style>
+          #details {
+            height: 500px;
+          }
+        </style>
+        <link rel="import" href="<%=request.getContextPath()%>/details-row.html">
 
-    <script>
-      (function() {
-        HTMLImports.whenReady(function() {
-          var grid = document.querySelector('#lazy');
+        <vaadin-grid id="details">
+          <table>
+            <colgroup>
+              <col name="user.name.first"/>
+              <col name="user.name.last"/>
+              <col name="user.email"/>
+            </colgroup>
+          </table>
+        </vaadin-grid>
 
-          grid.columns[0].renderer = function(cell) {
-            cell.element.textContent = cell.row.index;
-          };
+        <script>
+          (function() {
+            HTMLImports.whenReady(function() {
+              var grid = document.querySelector('#details');
 
-          grid.items = function(params, callback) {
-            getJSON('https://demo.vaadin.com/demo-data/1.0/people?index=' + params.index + '&count=' + params.count, function(json) {
-              callback(json.result, json.size);
+              getJSON('<%=request.getContextPath()%>/users.json', function(result) {
+                grid.items = result;
+              });
+
+              grid.rowDetailsGenerator = function(index) {
+                var detailsRow = document.createElement('details-row');
+                grid.getItem(index, function(err, item) {
+                  if (!err) {
+                    detailsRow.user = item.user;
+                  }
+                });
+                return detailsRow;
+              };
+
+              var detailsOpenIndex = -1;
+
+              grid.addEventListener('selected-items-changed', function() {
+                grid.setRowDetailsVisible(detailsOpenIndex, false);
+                var selected = grid.selection.selected();
+                if (selected.length === 1) {
+                  grid.setRowDetailsVisible(selected[0], true);
+                  detailsOpenIndex = selected[0];
+                }
+              });
             });
-          };
-        });
 
-        function getJSON(url, callback) {
-          var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-              callback(JSON.parse(xhr.responseText));
+            function getJSON(url, callback) {
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                  callback(JSON.parse(xhr.responseText));
+                }
+              };
+              xhr.open('GET', url, true);
+              xhr.send();
             }
-          };
-          xhr.open('GET', url, true);
-          xhr.send();
-        }
-      })();
-    </script>
-  </view-source>
-</div>
+          })();
+        </script>
 
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
-
-  <div class="elements-section">
-    <h5>Sorting, filtering and selection</h5>
-    <p>
-      Vaadin Grid supports sorting and filtering data. Here we have added simple sorting on all
-      columns
-      and filtering on the first name column. <a
-        href="https://vaadin.com/docs/-/part/elements/vaadin-grid/sort.html">Read more about the
-      available sorting options.</a>
-    </p>
-    <p>
-      This demo also shows multiple selection with keyboard navigation support. For more info on
-      selection modes, check out the <a
-        href="https://vaadin.com/docs/-/part/elements/vaadin-grid/selection.html">documentation</a>.
-    </p>
-    <view-source>
-      <div class="head">
-        <!--
-        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import"
-              href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-        -->
-      </div>
-      <style>
-        #sort {
-          height: 300px;
-        }
-      </style>
-      <paper-input id="filter" label="Filter by first name"></paper-input>
-      <vaadin-grid id="sort" selection-mode="multi">
-        <table>
-          <colgroup>
-            <col name="firstName" sortable/>
-            <col name="lastName" sortable/>
-            <col name="email" sortable/>
-          </colgroup>
-        </table>
-      </vaadin-grid>
-
-      <script>
-        (function() {
-          HTMLImports.whenReady(function() {
-            var grid = document.querySelector('#sort');
-            var users = [];
-
-            getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
-              users = json.result;
-              grid.items = users;
-            });
-
-            grid.addEventListener('sort-order-changed', function() {
-              var sortOrder = grid.sortOrder[0];
-              var sortProperty = grid.columns[sortOrder.column].name;
-              var sortDirection = sortOrder.direction;
-              grid.items.sort(function(a, b) {
-                var res;
-                var path = sortProperty.split('.');
-                for (var i = 0; i < path.length; i++) {
-                  a = a[path[i]];
-                  b = b[path[i]];
-                }
-                if (!isNaN(a)) {
-                  res = parseInt(a, 10) - parseInt(b, 10);
-                } else {
-                  res = a.localeCompare(b);
-                }
-
-                if ('desc' === sortDirection) {
-                  res *= -1;
-                }
-                return res;
-              });
-            });
-
-            var filterInput = document.querySelector('#filter');
-            filterInput.addEventListener('value-changed', function() {
-              var filterText = filterInput.value.toLowerCase();
-              grid.items = users.filter(function(val) {
-                if (filterText) {
-                  return (val.firstName.toLowerCase()).indexOf(filterText) > -1;
-                } else {
-                  return true;
-                }
-              });
-            });
-          });
-
-          function getJSON(url, callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                callback(JSON.parse(xhr.responseText));
-              }
-            };
-            xhr.open('GET', url, true);
-            xhr.send();
-          }
-        })();
-      </script>
-    </view-source>
-  </div>
-</div>
-
-<div class="elements-section">
-  <h5>Frozen and hidable columns</h5>
-  <p>
-    If you have a lot of columns, you may want to freeze some of the columns to make the table
-    easier to read. You can also turn on column hiding to allow the user to show or hide columns
-    that may not be relevant to them. <a
-      href="https://vaadin.com/docs/-/part/elements/vaadin-grid/columns.html">Read more about
-    configuring columns.</a>
-  </p>
-
-  <view-source>
-    <div class="head">
-      <!--
-      <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import"
-            href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-      -->
+      </view-source>
     </div>
-    <style>
-
-      #frozen {
-        height: 300px;
-      }
-
-    </style>
-    <vaadin-grid id="frozen" frozen-columns="2">
-      <table>
-        <colgroup>
-          <col name="firstName"/>
-          <col name="lastName"/>
-          <col name="email" width="250"/>
-          <col name="address.phone" hidable/>
-          <col name="address.street" hidable/>
-          <col name="address.city" hidable/>
-          <col name="address.state" hidable/>
-          <col name="address.zip" hidable/>
-          <col name="address.country" hidable hidden/>
-        </colgroup>
-      </table>
-    </vaadin-grid>
-
-    <script>
-      (function() {
-        HTMLImports.whenReady(function() {
-          var grid = document.querySelector('#frozen');
-
-          getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
-            grid.items = json.result;
-          });
-
-        });
-
-        function getJSON(url, callback) {
-          var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-              callback(JSON.parse(xhr.responseText));
-            }
-          };
-          xhr.open('GET', url, true);
-          xhr.send();
-        }
-      })();
-    </script>
-  </view-source>
-</div>
-
-  <%--
-  <div class="elements-section">
-    <h5>Details row</h5>
-    <p>
-      Sometimes you need to show more information than you can fit on a single row. In those cases,
-      you can use a details row to display any element below the row. <a
-        href="https://vaadin.com/docs/-/part/elements/vaadin-grid/details.html">Read more about
-      showing row details.</a>
-    </p>
-    <view-source externals="<%=request.getContextPath()%>/details-row.html">
-      <div class="head">
-        <!--
-        <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import"
-              href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-        -->
-      </div>
-      <style>
-        #details {
-          height: 500px;
-        }
-      </style>
-      <link rel="import" href="<%=request.getContextPath()%>/details-row.html">
-
-      <vaadin-grid id="details">
-        <table>
-          <colgroup>
-            <col name="user.name.first"/>
-            <col name="user.name.last"/>
-            <col name="user.email"/>
-          </colgroup>
-        </table>
-      </vaadin-grid>
-
-      <script>
-        (function() {
-          HTMLImports.whenReady(function() {
-            var grid = document.querySelector('#details');
-
-            getJSON('<%=request.getContextPath()%>/users.json', function(result) {
-              grid.items = result;
-            });
-
-            grid.rowDetailsGenerator = function(index) {
-              var detailsRow = document.createElement('details-row');
-              grid.getItem(index, function(err, item) {
-                if (!err) {
-                  detailsRow.user = item.user;
-                }
-              });
-              return detailsRow;
-            };
-
-            var detailsOpenIndex = -1;
-
-            grid.addEventListener('selected-items-changed', function() {
-              grid.setRowDetailsVisible(detailsOpenIndex, false);
-              var selected = grid.selection.selected();
-              if (selected.length === 1) {
-                grid.setRowDetailsVisible(selected[0], true);
-                detailsOpenIndex = selected[0];
-              }
-            });
-          });
-
-          function getJSON(url, callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                callback(JSON.parse(xhr.responseText));
-              }
-            };
-            xhr.open('GET', url, true);
-            xhr.send();
-          }
-        })();
-      </script>
-
-    </view-source>
-  </div>
---%>
+  --%>
+</template>
 
 <!-- Demo section end -->
 <div class="w-wallpaper-container zebra">
