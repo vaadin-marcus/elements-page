@@ -7,7 +7,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?18"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?19"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -600,6 +600,35 @@
     </div>
     <%}%>
 
+  </div>
+</div>
+
+<div class="w-wallpaper-container zebra elements-browser-support">
+  <div class="w-wallpaper"></div>
+  <div class="content">
+    <h2 class="helvetica-light">Browser support for Vaadin elements</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>IE / Edge</th>
+          <th>Firefox</th>
+          <th>Chrome</th>
+          <th>Safari</th>
+          <th>iOS Safari</th>
+          <th>Chrome Android</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>IE11, Edge</td>
+          <td>Latest</td>
+          <td>Latest</td>
+          <td>Latest</td>
+          <td>iOS 9</td>
+          <td>Latest</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
