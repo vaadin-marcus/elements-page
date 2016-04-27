@@ -7,7 +7,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?16"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?17"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -586,6 +586,9 @@
     <%for (PolymerElement el : PolymerElements.getAll()) {%>
     <div class="tile">
       <a href="<%=el.getURL()%>">
+        <img src="<%=request.getContextPath()%>/img/preview/<%=el.getName()%>.png?2"
+             srcset="<%=request.getContextPath()%>/img/preview/<%=el.getName()%>@2x.png 2x"
+             alt="">
         <div class="tile-details">
           <div class="tile-title"><%=el.getName()%>
           </div>
