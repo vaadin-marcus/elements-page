@@ -7,7 +7,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?17"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?18"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -579,7 +579,7 @@
   </div>
 </div>
 
-<div class="w-wallpaper-container zebra elements-category-tiles elements-category-charts-tiles">
+<div class="w-wallpaper-container zebra elements-category-tiles elements-category-google-tiles">
   <div class="w-wallpaper"></div>
   <div class="tile-container">
 

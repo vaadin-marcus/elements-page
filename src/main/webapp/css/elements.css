@@ -304,6 +304,7 @@ a.button-dark:hover {
 
 .elements-category.zebra .span3 {
     background-color: #f9f9f9;
+    min-height: 137px;
 }
 
 .elements-category .span3 span {
@@ -420,6 +421,10 @@ a.button-dark:hover {
 
     .elements-category-charts-tiles .tile-details {
         height: 10.5rem;
+    }
+
+    .elements-category-google-tiles .tile-details {
+        height: 8.5rem;
     }
 }
 
