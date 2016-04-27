@@ -23,6 +23,10 @@
     margin-top: 0;
 }
 
+/* EO General Fixes */
+
+/* General Element Styles */
+
 .w-wallpaper-container.zebra .w-wallpaper {
     background-color: #f3f3f3;
 }
@@ -31,7 +35,88 @@
     background-color: #323232;
 }
 
-/* EO General Fixes */
+.button-dark,
+a.button-dark {
+    background-color: #1c2937;
+    color: #9a9db7;
+    font-size: 1.1rem;
+    line-height: 1;
+    display: inline-block;
+    padding: .6em .8rem;
+    font-weight: bold;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.button-dark:hover,
+a.button-dark:hover {
+    color: #e1e2eA;
+}
+
+.pseudo-before-container,
+.pseudo-after-container {
+    position: relative;
+}
+
+.pseudo-before-container {
+    padding-left: 3.1rem !important;
+}
+
+.pseudo-after-container {
+    padding-right: 3.1rem !important;
+}
+
+.pseudo-before-container:before,
+.pseudo-after-container:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 18px;
+    height: 100%;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 18px;
+}
+
+.pseudo-before-container:before,
+.prepend-logo-polymer:before,
+.prepend-logo-angular2:before {
+    left: .7rem;
+}
+
+.pseudo-after-container:after,
+.append-logo-git:after {
+    right: .7rem;
+}
+
+.prepend-logo-polymer:before {
+    background-image: url('../img/p-logo.png');
+    background-size: 32px;
+    width: 25px;
+}
+
+.prepend-logo-angular2:before {
+    background-image: url('../img/angular2-logo.png');
+    background-position-x: 2px;
+    width: 20px;
+}
+
+.append-logo-git:after {
+    background-image: url('../img/github-circled-logo.png');
+}
+
+.elements-demos-demo .w-arrow-button.blue {
+    margin-bottom: 1.8rem;
+}
+
+.elements-demos-demo .append-logo-git {
+    display: block;
+    margin: .6em 0;
+}
+
+/* EO General Element Styles */
 
 /* Index Hero */
 

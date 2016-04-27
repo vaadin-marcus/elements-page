@@ -7,7 +7,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?15"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?16"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -633,8 +633,16 @@
         <p class="lead helvetica-light">Fully responsive and offline enabled application that
           showcases Grid and Charts.</p>
         <a class="w-arrow-button blue" href="https://demo.vaadin.com/expense-manager/">See live
-          demo</a> <a class="w-arrow-button small"
-                      href="https://github.com/vaadin/expense-manager-demo">Fork on GitHub</a></div>
+          demo</a>
+        <a class="button-dark
+                  pseudo-before-container prepend-logo-polymer
+                  pseudo-after-container append-logo-git"
+           href="https://github.com/vaadin/expense-manager-demo">Polymer Git Demo</a>
+        <a class="button-dark
+                  pseudo-before-container prepend-logo-angular2
+                  pseudo-after-container append-logo-git"
+           href="https://github.com/vaadin/expense-manager-ng-demo">Angular 2 Git Demo</a>
+      </div>
     </div>
   </div>
 
