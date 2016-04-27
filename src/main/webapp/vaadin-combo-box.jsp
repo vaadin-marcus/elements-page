@@ -260,7 +260,13 @@
         Arrays of objects can also be used to provide the data for a vaadin-combo-box. Override the default property paths by defining <code>item-label-path</code> and <code>item-value-path</code>
         properties.
       </p>
-      <view-source>
+      <demo-viewer selected="{{selected}}">
+
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/core/combo-box/objects-polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/core/combo-box/objects-angular2.ts"></demo-source>
+
         <style>
           vaadin-combo-box {
             width: 300px;
@@ -413,7 +419,7 @@
 
 
         </script>
-      </view-source>
+      </demo-viewer>
     </div>
   </div>
 </template>
