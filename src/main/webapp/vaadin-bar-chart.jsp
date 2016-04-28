@@ -88,9 +88,9 @@
     <div class="w-wallpaper">&nbsp;</div>
 
     <div class="elements-section demo">
-
       <h4>Examples</h4>
-      <h5>Basic bar chart</h5>
+
+      <h5>Stacked bar chart</h5>
       <demo-viewer selected="{{selected}}">
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/bar/basic-polymer.html"></demo-source>
@@ -171,49 +171,14 @@
       </vaadin-bar-chart>
     </demo-viewer>
   </div>
-
-  <div class="w-wallpaper-container zebra">
-    <div class="w-wallpaper">&nbsp;</div>
-
-    <div class="elements-section demo">
-      <h5>Stacked bar chart</h5>
-      <demo-viewer selected="{{selected}}">
-        <demo-source name="Polymer"
-                     url="<%=request.getContextPath()%>/examples/charts/bar/stack-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/bar/stack-angular2.ts"></demo-source>
-
-        <vaadin-bar-chart id="stacked-bar">
-          <title>Stacked bar chart</title>
-          <x-axis>
-            <categories>Apples, Oranges, Pears, Grapes, Bananas</categories>
-          </x-axis>
-          <y-axis min="0">
-            <title>Total fruit consumption</title>
-          </y-axis>
-          <legend reversed="true"></legend>
-          <tooltip point-format="{series.name}: {point.y}. Total: {point.stackTotal}"></tooltip>
-          <plot-options>
-            <series stacking="normal">
-            </series>
-          </plot-options>
-          <data-series name="John">
-            <data>5, 3, 4, 7, 2</data>
-          </data-series>
-          <data-series name="Jane">
-            <data>2, 2, 3, 2, 1</data>
-          </data-series>
-          <data-series name="Joe">
-            <data>3, 4, 4, 2, 5</data>
-          </data-series>
-        </vaadin-bar-chart>
-      </demo-viewer>
-    </div>
-  </div>
 </template>
 <!-- Demo section end -->
 
-<jsp:include page="charts-links.jsp"/>
-<jsp:include page="suggestion-box.jsp"/>
+<div class="w-wallpaper-container zebra">
+  <div class="w-wallpaper">&nbsp;</div>
+
+  <jsp:include page="charts-links.jsp"/>
+  <jsp:include page="suggestion-box.jsp"/>
+</div>
 
 <jsp:include page="bottom-actions.jsp"/>
