@@ -621,19 +621,43 @@ a.button-dark:hover {
 .elements-browser-support table th,
 .elements-browser-support table td {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: .8rem;
 }
 
 .elements-browser-support table thead th,
 .elements-browser-support table thead td {
     border-top: 1px solid #ebebeb;
     border-bottom: 2px solid #ebebeb;
-    padding: 1em;
+    padding: .7em .3em;
 }
 
 .elements-browser-support table tbody th,
 .elements-browser-support table tbody td {
-    padding: .7em 1em;
+    padding: .7em .3em;
+}
+
+@media (min-width: 425px) {
+    .elements-browser-support table th,
+    .elements-browser-support table td {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 590px) {
+    .elements-browser-support table th,
+    .elements-browser-support table td {
+        font-size: 1.1rem;
+    }
+
+    .elements-browser-support table thead th,
+    .elements-browser-support table thead td {
+        padding: 1em;
+    }
+
+    .elements-browser-support table tbody th,
+    .elements-browser-support table tbody td {
+        padding: .7em 1em;
+    }
 }
 
 /* EO Browser support */
