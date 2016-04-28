@@ -116,7 +116,19 @@
         },
 
         _selectedChanged: function(){
-            // TODO: Trigger HubSpot CTA. Access selected value with this.selected
+            if (_hsq) {
+                if (this.selected == 'Polymer') {
+                    _hsq.push(["trackEvent", {
+                        id: "000000624307",
+                        value: null
+                    }]);
+                } else if (this.selected == 'Angular 2') {
+                    _hsq.push(["trackEvent", {
+                        id: "000000624310",
+                        value: null
+                    }]);
+                }
+            }
         },
 
         created: function() {
