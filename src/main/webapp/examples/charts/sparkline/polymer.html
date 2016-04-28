@@ -1,6 +1,6 @@
-<jsp:include page="charts-imports.jsp"/>
+<script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0/vaadin-sparkline.html">
+
 <link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-
-<link rel="import" href="<%=request.getContextPath()%>/sparkline-example.html">
-
-<sparkline-example data-url="<%=request.getContextPath()%>/stockData.json"></sparkline-example>
+<link rel="import" href="sparkline-example.html">
+<sparkline-example data-url="stockData.json"></sparkline-example>

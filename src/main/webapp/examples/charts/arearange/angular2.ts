@@ -31,7 +31,7 @@ export class MyArearangeChartBasicComponent implements OnInit {
   }
 
   setTemperatureData() {
-    this.http.get('/app/charts/data/temp-variaton.json')
+    this.http.get('temp-variation.json')
       .map((res: Response) => res.json())
       .subscribe((data) => {
         this.temperatureData = data;

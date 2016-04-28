@@ -35,7 +35,7 @@ export class MySparklineChartBasicComponent implements OnInit {
   }
 
   setGridData() {
-    this.http.get('/app/charts/data/stockData.json')
+    this.http.get('stockData.json')
       .map((res: Response) => res.json())
       .subscribe((data) => {
         this.gridData = data;

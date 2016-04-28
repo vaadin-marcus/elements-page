@@ -74,8 +74,33 @@
       <demo-source name="Angular 2"
                    url="<%=request.getContextPath()%>/examples/charts/ohlc/angular2.ts"></demo-source>
 
-      <link rel="import" href="<%=request.getContextPath()%>/ohlc-example.html">
-      <ohlc-example></ohlc-example>
+      <template is="dom-bind">
+        <iron-ajax
+            auto
+            id="dataFetcher"
+            url="<%=request.getContextPath()%>/ohlc_data.json"
+            handle-as="json"
+            last-response="{{seriesData}}"></iron-ajax>
+        <vaadin-ohlc-chart id="ohlc-series" timeline>
+          <chart-title>AAPL Stock Price</chart-title>
+          <range-selector selected="2">
+          </range-selector>
+          <data-series name="AAPL" data="[[seriesData]]">
+            <tooltip value-decimals="2">
+            </tooltip>
+            <data-grouping>
+              <units>
+                <name>week</name>
+                <multiples>[3]</multiples>
+              </units>
+              <units>
+                <name>month</name>
+                <multiples>[1, 2, 3, 4, 6]</multiples>
+              </units>
+            </data-grouping>
+          </data-series>
+        </vaadin-ohlc-chart>
+      </template>
     </demo-viewer>
   </div>
 </template>

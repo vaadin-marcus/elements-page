@@ -1,7 +1,8 @@
-<jsp:include page="charts-imports.jsp"/>
+<script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0/vaadin-areasplinerange-chart.html">
 
 <template is="dom-bind">
-	<iron-ajax auto url="<%=request.getContextPath()%>/temp-variation.json" handle-as="json" last-response="{{temperatureData}}"></iron-ajax>
+	<iron-ajax auto url="temp-variation.json" handle-as="json" last-response="{{temperatureData}}"></iron-ajax>
 	<vaadin-areasplinerange-chart id="area-range">
 		<chart zoom-type="x"></chart>
 		<title>Temperature variation by day</title>

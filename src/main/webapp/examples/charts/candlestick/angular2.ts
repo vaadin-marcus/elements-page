@@ -37,7 +37,7 @@ export class MyCandlestickChartBasicComponent implements OnInit {
   }
 
   setSeriesData() {
-    this.http.get('/app/charts/data/ohlc_data.json')
+    this.http.get('ohlc_data.json')
       .map((res: Response) => res.json())
       .subscribe((data) => {
         this.seriesData = data;

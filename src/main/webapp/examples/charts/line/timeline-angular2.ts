@@ -29,7 +29,7 @@ export class MyLineChartTimelineComponent implements OnInit {
   }
 
   setSeriesData() {
-    this.http.get('/app/charts/data/aaplData.json')
+    this.http.get('aaplData.json')
       .map((res: Response) => res.json())
       .subscribe((data) => {
         this.seriesData = data;
