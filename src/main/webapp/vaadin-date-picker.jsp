@@ -105,10 +105,8 @@
     </div>
   </div>
 </div>
-
 <!-- Info section end -->
 
-<!-- Info section end -->
 <% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-date-picker");
   if (latestReleases != null && !latestReleases.isEmpty()) {
 %>
@@ -124,30 +122,31 @@
   <%}%>
 </div>
 <%}%>
-<!-- Demo section start -->
 
 <!-- Demo section start -->
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+<template is="dom-bind">
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
 
-  <div class="elements-section">
+    <div class="elements-section">
 
-    <h4>Examples</h4>
+      <h4>Examples</h4>
 
-    <h5>Simple usage</h5>
-    <demo-viewer>
-      <demo-source name="Polymer"
-                   url="<%=request.getContextPath()%>/examples/core/date-picker/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/core/date-picker/angular2.ts"></demo-source>
+      <h5>Simple usage</h5>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/core/date-picker/polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/core/date-picker/angular2.ts"></demo-source>
 
-      <vaadin-date-picker label="Pick a date"></vaadin-date-picker>
-      <vaadin-date-picker label="Birthday" value="2000-01-01"></vaadin-date-picker>
-    </demo-viewer>
+        <vaadin-date-picker label="Pick a date"></vaadin-date-picker>
+        <vaadin-date-picker label="Birthday" value="2000-01-01"></vaadin-date-picker>
+      </demo-viewer>
 
-
+    </div>
   </div>
-</div>
+</template>
+<!-- Demo section end -->
 
 <jsp:include page="suggestion-box.jsp"/>
 

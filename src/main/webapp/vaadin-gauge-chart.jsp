@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -77,108 +77,111 @@
 
 <!-- Demo section start -->
 <%request.setAttribute("chart", "vaadin-gauge-chart.html");%>
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+
+<template is="dom-bind">
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
+
+    <div class="elements-section">
+      <h4>Examples</h4>
+      <h5>Angular gauge chart</h5>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/charts/gauge/basic-polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/charts/gauge/basic-angular2.ts"></demo-source>
+
+        <vaadin-gauge-chart id="angular-gauge">
+          <chart plot-background-color="null" plot-background-image="null" plot-border-width="0"
+                 plot-shadow="false"></chart>
+          <title>Speedometer</title>
+          <pane start-angle="-150" end-angle="150">
+            <background border-width="0" border-radius="109%">
+              <background-color>
+                <linear-gradient x1="0" y1="0" x2="0" y2="1">
+                </linear-gradient>
+                <stops>0, #ffffff</stops>
+                <stops>1, #333333</stops>
+              </background-color>
+            </background>
+            <background border-width="1" border-radius="107%">
+              <background-color>
+                <linear-gradient x1="0" y1="0" x2="0" y2="1">
+                </linear-gradient>
+                <stops>0, #ffffff</stops>
+                <stops>1, #333333</stops>
+              </background-color>
+            </background>
+            <background>
+            </background>
+            <background background-color="#DDD" border-width="0" outer-radius="105%"
+                        inner-radius="103%">
+            </background>
+          </pane>
+          <y-axis min="0" max="200" minor-tick-interval="auto" minor-tick-width="1"
+                  minor-tick-lenght="10" minor-tick-position="inside" tick-pixel-interval="30"
+                  tick-width="2" tick-position="inside" tick-length="10" tick-color="#666"
+                  grid-line-width="0">
+            <labels step="2" rotation="auto"></labels>
+            <title>km/h</title>
+            <plot-bands from="0" to="120" color="#55BF3B"></plot-bands>
+            <plot-bands from="120" to="160" color="#DDDF0D"></plot-bands>
+            <plot-bands from="160" to="200" color="#DF5353"></plot-bands>
+          </y-axis>
+          <data-series name="Speed">
+            <data>
+              80
+            </data>
+          </data-series>
+        </vaadin-gauge-chart>
+      </demo-viewer>
+    </div>
+  </div>
 
   <div class="elements-section">
-    <h4>Examples</h4>
-    <h5>Angular gauge chart</h5>
-    <view-source>
-      <div class="head">
-        <!--
-        <jsp:include page="charts-imports.jsp"/>
-        -->
-      </div>
-      <vaadin-gauge-chart id="angular-gauge">
-        <chart plot-background-color="null" plot-background-image="null" plot-border-width="0"
-               plot-shadow="false"></chart>
-        <title>Speedometer</title>
-        <pane start-angle="-150" end-angle="150">
-          <background border-width="0" border-radius="109%">
-            <background-color>
-              <linear-gradient x1="0" y1="0" x2="0" y2="1">
-              </linear-gradient>
-              <stops>0, #ffffff</stops>
-              <stops>1, #333333</stops>
-            </background-color>
-          </background>
-          <background border-width="1" border-radius="107%">
-            <background-color>
-              <linear-gradient x1="0" y1="0" x2="0" y2="1">
-              </linear-gradient>
-              <stops>0, #ffffff</stops>
-              <stops>1, #333333</stops>
-            </background-color>
-          </background>
-          <background>
-          </background>
-          <background background-color="#DDD" border-width="0" outer-radius="105%"
-                      inner-radius="103%">
-          </background>
-        </pane>
-        <y-axis min="0" max="200" minor-tick-interval="auto" minor-tick-width="1"
-                minor-tick-lenght="10" minor-tick-position="inside" tick-pixel-interval="30"
-                tick-width="2" tick-position="inside" tick-length="10" tick-color="#666"
-                grid-line-width="0">
-          <labels step="2" rotation="auto"></labels>
-          <title>km/h</title>
-          <plot-bands from="0" to="120" color="#55BF3B"></plot-bands>
-          <plot-bands from="120" to="160" color="#DDDF0D"></plot-bands>
-          <plot-bands from="160" to="200" color="#DF5353"></plot-bands>
+    <h5>Dual axis gauge chart</h5>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/gauge/dual-axis-polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/gauge/dual-axis-angular2.ts"></demo-source>
+
+      <vaadin-gauge-chart id="gauge-with-dual-axes">
+        <chart align-ticks="false" plot-background-color="null" plot-background-image="null"
+               plot-border-width="0" plot-shadow="false"></chart>
+        <title>Speedometer with dual axes</title>
+        <pane start-angle="-150" end-angle="150"></pane>
+        <y-axis min="0" max="200" line-color="#339" tick-color="#339" minor-tick-color="#339"
+                offset="-25" line-width="2" tick-length="5" minor-tick-length="5" end-on-tick="false">
+          <labels distance="-20" rotation="auto"></labels>
         </y-axis>
-        <data-series name="Speed">
-          <data>
-            80
-          </data>
+        <y-axis min="0" max="124" tick-position="outside" line-color="#933" line-width="2"
+                minor-tick-position="outside" tick-color="#933" minor-tick-color="#933"
+                tick-length="5" minor-tick-length="5" offset="-20" end-on-tick="false">
+          <labels distance="12" rotation="auto"></labels>
+        </y-axis>
+        <tooltip enabled="false"></tooltip>
+        <plot-options>
+          <gauge>
+            <data-labels
+                formatter="function () { return this.y + ' km/h<br/>' + Math.round(this.y * 0.621) + ' mph'; }">
+              <background-color>
+                <linear-gradient x1="0" y1="0" x2="0" y2="1">
+                </linear-gradient>
+                <stops>0, #DDD</stops>
+                <stops>1, #FFF</stops>
+              </background-color>
+            </data-labels>
+          </gauge>
+        </plot-options>
+        <data-series>
+          <name>Speed</name>
+          <data>80</data>
         </data-series>
       </vaadin-gauge-chart>
-    </view-source>
+    </demo-viewer>
   </div>
-</div>
-
-<div class="elements-section">
-  <h5>Dual axis gauge chart</h5>
-  <view-source>
-    <div class="head">
-      <!--
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-gauge-chart id="gauge-with-dual-axes">
-      <chart align-ticks="false" plot-background-color="null" plot-background-image="null"
-             plot-border-width="0" plot-shadow="false"></chart>
-      <title>Speedometer with dual axes</title>
-      <pane start-angle="-150" end-angle="150"></pane>
-      <y-axis min="0" max="200" line-color="#339" tick-color="#339" minor-tick-color="#339"
-              offset="-25" line-width="2" tick-length="5" minor-tick-length="5" end-on-tick="false">
-        <labels distance="-20" rotation="auto"></labels>
-      </y-axis>
-      <y-axis min="0" max="124" tick-position="outside" line-color="#933" line-width="2"
-              minor-tick-position="outside" tick-color="#933" minor-tick-color="#933"
-              tick-length="5" minor-tick-length="5" offset="-20" end-on-tick="false">
-        <labels distance="12" rotation="auto"></labels>
-      </y-axis>
-      <tooltip enabled="false"></tooltip>
-      <plot-options>
-        <gauge>
-          <data-labels
-              formatter="function () { return this.y + ' km/h<br/>' + Math.round(this.y * 0.621) + ' mph'; }">
-            <background-color>
-              <linear-gradient x1="0" y1="0" x2="0" y2="1">
-              </linear-gradient>
-              <stops>0, #DDD</stops>
-              <stops>1, #FFF</stops>
-            </background-color>
-          </data-labels>
-        </gauge>
-      </plot-options>
-      <data-series>
-        <name>Speed</name>
-        <data>80</data>
-      </data-series>
-    </vaadin-gauge-chart>
-  </view-source>
-</div>
+</template>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>

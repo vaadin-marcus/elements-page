@@ -55,7 +55,7 @@
 </div>
 
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <div class="w-wallpaper-container zebra">
@@ -87,7 +87,6 @@
 
 <!-- Info section end -->
 
-<!-- Info section end -->
 <% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-upload");
   if (latestReleases != null && !latestReleases.isEmpty()) {
 %>
@@ -103,7 +102,6 @@
   <%}%>
 </div>
 <%}%>
-<!-- Demo section start -->
 
 <!-- Demo section start -->
 <template is="dom-bind">
@@ -156,6 +154,7 @@
                      url="<%=request.getContextPath()%>/examples/core/upload/simple-polymer.html"></demo-source>
         <demo-source name="Angular 2"
                      url="<%=request.getContextPath()%>/examples/core/upload/simple-angular2.ts"></demo-source>
+
         <vaadin-upload></vaadin-upload>
       </demo-viewer>
     </div>
@@ -187,6 +186,7 @@
   </div>
 </template>
 <!-- Demo section end -->
+
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
 

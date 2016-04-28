@@ -54,7 +54,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -62,38 +62,41 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<%request.setAttribute("chart", "vaadin-pyramid-chart.html");%>
 
-  <h4>Examples</h4>
-  <view-source>
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-pyramid-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-pyramid-chart id="pyramid">
-      <title>Sales pyramid</title>
-      <plot-options>
-        <series>
-          <data-labels enabled="true" format="<b>{point.name}</b> ({point.y:.0f})" color="black"
-                       soft-connector="true">
-          </data-labels>
-        </series>
-      </plot-options>
-      <legend enabled="false"></legend>
-      <data-series name="Unique users">
-        <data>
-          ['Website visits',   15654],
-          ['Downloads',       4064],
-          ['Requested price list', 1987],
-          ['Invoice sent',    976],
-          ['Finalized',    846]
-        </data>
-      </data-series>
-    </vaadin-pyramid-chart>
-  </view-source>
-</div>
+<template is="dom-bind">
+  <div class="elements-section">
+
+    <h4>Examples</h4>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/pyramid/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/pyramid/angular2.ts"></demo-source>
+
+      <vaadin-pyramid-chart id="pyramid">
+        <title>Sales pyramid</title>
+        <plot-options>
+          <series>
+            <data-labels enabled="true" format="<b>{point.name}</b> ({point.y:.0f})" color="black"
+                         soft-connector="true">
+            </data-labels>
+          </series>
+        </plot-options>
+        <legend enabled="false"></legend>
+        <data-series name="Unique users">
+          <data>
+            ['Website visits',   15654],
+            ['Downloads',       4064],
+            ['Requested price list', 1987],
+            ['Invoice sent',    976],
+            ['Finalized',    846]
+          </data>
+        </data-series>
+      </vaadin-pyramid-chart>
+    </demo-viewer>
+  </div>
+</template>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>

@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -62,56 +62,59 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<%request.setAttribute("chart", "vaadin-boxplot-chart.html");%>
 
-  <h4>Examples</h4>
+<template is="dom-bind">
+  <div class="elements-section">
 
-  <view-source>
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-boxplot-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-boxplot-chart id="box-plot">
-      <title>Vaadin Charts Box Plot Example</title>
-      <legend enabled="false"></legend>
-      <x-axis>
-        <categories>1,2,3,4,5</categories>
-        <title>Experiment No.</title>
-      </x-axis>
-      <y-axis>
-        <title>Observations</title>
-        <plot-lines value="932" color="red" width="1">
-          <label align="center" text="Theoretical mean: 932'">
-            <style color="gray"></style>
-          </label>
-        </plot-lines>
-      </y-axis>
+    <h4>Examples</h4>
 
-      <plot-options>
-        <boxplot>
-          <tooltip header-format="<em>Experiment No {point.key}</em><br/>"></tooltip>
-        </boxplot>
-        <scatter>
-          <marker fill-color="white" line-width="1" line-color="#3090F0"></marker>
-          <tooltip point-format="Observation: {point.y}"></tooltip>
-        </scatter>
-      </plot-options>
-      <data-series name="Observations">
-        <data>
-          [760, 801, 848, 895, 965], [733, 853, 939, 980, 1080], [714, 762, 817, 870, 918], [724, 802, 806, 871, 950], [834, 836, 864, 882, 910]
-        </data>
-      </data-series>
-      <data-series name="Outlier" type="scatter">
-        <color>#3090F0</color>
-        <data>
-          [0, 644], [4, 718], [4, 951], [4, 969]
-        </data>
-      </data-series>
-    </vaadin-boxplot-chart>
-  </view-source>
-</div>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/boxplot/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/boxplot/angular2.ts"></demo-source>
+
+      <vaadin-boxplot-chart id="box-plot">
+        <title>Vaadin Charts Box Plot Example</title>
+        <legend enabled="false"></legend>
+        <x-axis>
+          <categories>1,2,3,4,5</categories>
+          <title>Experiment No.</title>
+        </x-axis>
+        <y-axis>
+          <title>Observations</title>
+          <plot-lines value="932" color="red" width="1">
+            <label align="center" text="Theoretical mean: 932'">
+              <style color="gray"></style>
+            </label>
+          </plot-lines>
+        </y-axis>
+
+        <plot-options>
+          <boxplot>
+            <tooltip header-format="<em>Experiment No {point.key}</em><br/>"></tooltip>
+          </boxplot>
+          <scatter>
+            <marker fill-color="white" line-width="1" line-color="#3090F0"></marker>
+            <tooltip point-format="Observation: {point.y}"></tooltip>
+          </scatter>
+        </plot-options>
+        <data-series name="Observations">
+          <data>
+            [760, 801, 848, 895, 965], [733, 853, 939, 980, 1080], [714, 762, 817, 870, 918], [724, 802, 806, 871, 950], [834, 836, 864, 882, 910]
+          </data>
+        </data-series>
+        <data-series name="Outlier" type="scatter">
+          <color>#3090F0</color>
+          <data>
+            [0, 644], [4, 718], [4, 951], [4, 969]
+          </data>
+        </data-series>
+      </vaadin-boxplot-chart>
+    </demo-viewer>
+  </div>
+</template>
 <!-- Demo section end -->
 
 <div class="w-wallpaper-container zebra">

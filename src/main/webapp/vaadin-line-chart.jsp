@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -92,71 +92,75 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+<%request.setAttribute("chart", "vaadin-line-chart.html");%>
+
+<template is="dom-bind">
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
+
+    <div class="elements-section">
+
+      <h4>Examples</h4>
+
+      <h5>Basic line chart</h5>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/charts/line/basic-polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/charts/line/basic-angular2.ts"></demo-source>
+
+        <vaadin-line-chart id="lines-with-complex-html-tooltip">
+          <title>Complex tooltip</title>
+
+          <x-axis>
+            <categories>Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec</categories>
+          </x-axis>
+
+          <tooltip shared="true" use-html="true" header-format="<small>{point.key}</small><table>"
+                   point-format="<tr><td style='color: {series.color}'>{series.name}: </td><td style='text-align: right'><b>{point.y} EUR</b></td></tr>"
+                   footer-format="">
+          </tooltip>
+
+          <data-series name="Short">
+            <data>29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4</data>
+          </data-series>
+          <data-series name="Long named series">
+            <data>129.9, 171.5, 126.4, 229.2, 134.0, 136.0, 35.6, 142.5, 116.4, 154.1, 195.6, 154.4
+            </data>
+          </data-series>
+        </vaadin-line-chart>
+      </demo-viewer>
+    </div>
+  </div>
 
   <div class="elements-section">
+    <h5>Timeline chart</h5>
+    <p>Any time based chart can be turned into a timeline chart by adding the <code>timeline</code>
+      attribute to the chart element.</p>
 
-    <h4>Examples</h4>
-    <%request.setAttribute("chart", "vaadin-line-chart.html");%>
-    <h5>Basic line chart</h5>
-    <view-source>
-      <div class="head">
-        <!--
-        <jsp:include page="charts-imports.jsp"/>
-        -->
-      </div>
-      <vaadin-line-chart id="lines-with-complex-html-tooltip">
-        <title>Complex tooltip</title>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/line/timeline-polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/line/timeline-angular2.ts"></demo-source>
 
-        <x-axis>
-          <categories>Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec</categories>
-        </x-axis>
-
-        <tooltip shared="true" use-html="true" header-format="<small>{point.key}</small><table>"
-                 point-format="<tr><td style='color: {series.color}'>{series.name}: </td><td style='text-align: right'><b>{point.y} EUR</b></td></tr>"
-                 footer-format="">
-        </tooltip>
-
-        <data-series name="Short">
-          <data>29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4</data>
-        </data-series>
-        <data-series name="Long named series">
-          <data>129.9, 171.5, 126.4, 229.2, 134.0, 136.0, 35.6, 142.5, 116.4, 154.1, 195.6, 154.4
-          </data>
-        </data-series>
-      </vaadin-line-chart>
-    </view-source>
+      <template is="dom-bind">
+        <iron-ajax auto id="dataFetcher" url="<%=request.getContextPath()%>/aaplData.json"
+                   handle-as="json"
+                   last-response="{{seriesData}}"></iron-ajax>
+        <vaadin-line-chart id="single-line-series" timeline>
+          <title>AAPL Stock Price</title>
+          <range-selector selected="1">
+          </range-selector>
+          <data-series name="AAPL" data="[[seriesData]]">
+            <tooltip value-decimals="2">
+            </tooltip>
+          </data-series>
+        </vaadin-line-chart>
+      </template>
+    </demo-viewer>
   </div>
-</div>
-
-<div class="elements-section">
-  <h5>Timeline chart</h5>
-  <p>Any time based chart can be turned into a timeline chart by adding the <code>timeline</code>
-    attribute to the chart element.</p>
-
-  <view-source>
-    <div class="head">
-      <!--
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <template is="dom-bind">
-      <iron-ajax auto id="dataFetcher" url="<%=request.getContextPath()%>/aaplData.json"
-                 handle-as="json"
-                 last-response="{{seriesData}}"></iron-ajax>
-      <vaadin-line-chart id="single-line-series" timeline>
-        <title>AAPL Stock Price</title>
-        <range-selector selected="1">
-        </range-selector>
-        <data-series name="AAPL" data="[[seriesData]]">
-          <tooltip value-decimals="2">
-          </tooltip>
-        </data-series>
-      </vaadin-line-chart>
-    </template>
-  </view-source>
-</div>
+</template>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>

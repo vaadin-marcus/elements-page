@@ -1,0 +1,16 @@
+<jsp:include page="charts-imports.jsp"/>
+
+<template is="dom-bind">
+	<iron-ajax auto url="<%=request.getContextPath()%>/temp-variation.json" handle-as="json" last-response="{{temperatureData}}"></iron-ajax>
+	<vaadin-areasplinerange-chart id="area-range">
+		<chart zoom-type="x"></chart>
+		<title>Temperature variation by day</title>
+		<x-axis type="datetime"></x-axis>
+		<y-axis>
+			<title text="null"></title>
+		</y-axis>
+		<tooltip crosshairs="true" shared="true" value-suffix="C"></tooltip>
+		<legend enabled="false"></legend>
+		<data-series data="[[temperatureData]]"></data-series>
+	</vaadin-areasplinerange-chart>
+</template>

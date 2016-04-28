@@ -55,7 +55,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -83,132 +83,134 @@
 <!-- Demo section start -->
 <%request.setAttribute("chart", "vaadin-bar-chart.html");%>
 
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+<template is="dom-bind">
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
 
-  <div class="elements-section demo">
+    <div class="elements-section demo">
 
-    <h4>Examples</h4>
-    <h5>Basic bar chart</h5>
-    <view-source>
-      <div class="head">
-        <!--
-        <jsp:include page="charts-imports.jsp"/>
-        -->
-      </div>
-      <vaadin-bar-chart id="basic-bar">
-        <title>Stacked bar chart</title>
-        <x-axis>
-          <categories>Apples, Oranges, Pears, Grapes, Bananas</categories>
-        </x-axis>
-        <y-axis min="0">
-          <title>Total fruit consumption</title>
-        </y-axis>
-        <legend reversed="true"></legend>
-        <tooltip point-format="{series.name}: {point.y}. Total: {point.stackTotal}"></tooltip>
-        <plot-options>
-          <series stacking="normal">
-          </series>
-        </plot-options>
-        <data-series name="John">
-          <data>5, 3, 4, 7, 2</data>
-        </data-series>
-        <data-series name="Jane">
-          <data>2, 2, 3, 2, 1</data>
-        </data-series>
-        <data-series name="Joe">
-          <data>3, 4, 4, 2, 5</data>
-        </data-series>
-      </vaadin-bar-chart>
-    </view-source>
-  </div>
-</div>
+      <h4>Examples</h4>
+      <h5>Basic bar chart</h5>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/charts/bar/basic-polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/charts/bar/basic-angular2.ts"></demo-source>
 
-<div class="elements-section demo">
-  <h5>Bar chart with negative stack</h5>
-  <view-source>
-    <div class="head">
-      <!--
-      <jsp:include page="charts-imports.jsp"/>
-      -->
+        <vaadin-bar-chart id="basic-bar">
+          <title>Stacked bar chart</title>
+          <x-axis>
+            <categories>Apples, Oranges, Pears, Grapes, Bananas</categories>
+          </x-axis>
+          <y-axis min="0">
+            <title>Total fruit consumption</title>
+          </y-axis>
+          <legend reversed="true"></legend>
+          <tooltip point-format="{series.name}: {point.y}. Total: {point.stackTotal}"></tooltip>
+          <plot-options>
+            <series stacking="normal">
+            </series>
+          </plot-options>
+          <data-series name="John">
+            <data>5, 3, 4, 7, 2</data>
+          </data-series>
+          <data-series name="Jane">
+            <data>2, 2, 3, 2, 1</data>
+          </data-series>
+          <data-series name="Joe">
+            <data>3, 4, 4, 2, 5</data>
+          </data-series>
+        </vaadin-bar-chart>
+      </demo-viewer>
     </div>
-    <vaadin-bar-chart id="bar-with-negative-stack">
-      <title>Population pyramid for Germany, midyear 2010</title>
-      <subtitle>Source: www.census.gov</subtitle>
-
-      <x-axis reversed="false">
-        <categories>0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54,
-          55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90-94, 95-99, 100 +
-        </categories>
-        <labels step="1"/>
-      </x-axis>
-      <x-axis opposite="true" reversed="false" linked-to="0">
-        <categories>0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54,
-          55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90-94, 95-99, 100 +
-        </categories>
-        <labels step="1"/>
-      </x-axis>
-      <y-axis>
-        <title text=""></title>
-        <labels formatter="function () { return Math.abs(this.value) + '%'; }"></labels>
-      </y-axis>
-      <plot-options>
-        <series stacking="normal"/>
-      </plot-options>
-      <tooltip
-          formatter="function () { return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' + 'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0) + '%'; }"></tooltip>
-      <data-series name="Male">
-        <data>-2.2, -2.2, -2.3, -2.5, -2.7, -3.1, -3.2, -3.0, -3.2, -4.3, -4.4, -3.6, -3.1, -2.4,
-          -2.5, -2.3, -1.2, -0.6, -0.2, -0.0, -0.0
-        </data>
-      </data-series>
-      <data-series name="Female">
-        <data>2.1, 2.0, 2.2, 2.4, 2.6, 3.0, 3.1, 2.9, 3.1, 4.1, 4.3, 3.6, 3.4, 2.6, 2.9, 2.9, 1.8,
-          1.2, 0.6, 0.1, 0.0
-        </data>
-      </data-series>
-    </vaadin-bar-chart>
-  </view-source>
-</div>
-
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+  </div>
 
   <div class="elements-section demo">
-    <h5>Stacked bar chart</h5>
-    <view-source>
-      <div class="head">
-        <!--
-        <jsp:include page="charts-imports.jsp"/>
-        -->
-      </div>
-      <vaadin-bar-chart id="stacked-bar">
-        <title>Stacked bar chart</title>
-        <x-axis>
-          <categories>Apples, Oranges, Pears, Grapes, Bananas</categories>
+    <h5>Bar chart with negative stack</h5>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/bar/negative-stack-polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/bar/negative-stack-angular2.ts"></demo-source>
+
+      <vaadin-bar-chart id="bar-with-negative-stack">
+        <title>Population pyramid for Germany, midyear 2010</title>
+        <subtitle>Source: www.census.gov</subtitle>
+
+        <x-axis reversed="false">
+          <categories>0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54,
+            55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90-94, 95-99, 100 +
+          </categories>
+          <labels step="1"/>
         </x-axis>
-        <y-axis min="0">
-          <title>Total fruit consumption</title>
+        <x-axis opposite="true" reversed="false" linked-to="0">
+          <categories>0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54,
+            55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90-94, 95-99, 100 +
+          </categories>
+          <labels step="1"/>
+        </x-axis>
+        <y-axis>
+          <title text=""></title>
+          <labels formatter="function () { return Math.abs(this.value) + '%'; }"></labels>
         </y-axis>
-        <legend reversed="true"></legend>
-        <tooltip point-format="{series.name}: {point.y}. Total: {point.stackTotal}"></tooltip>
         <plot-options>
-          <series stacking="normal">
-          </series>
+          <series stacking="normal"/>
         </plot-options>
-        <data-series name="John">
-          <data>5, 3, 4, 7, 2</data>
+        <tooltip
+            formatter="function () { return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' + 'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0) + '%'; }"></tooltip>
+        <data-series name="Male">
+          <data>-2.2, -2.2, -2.3, -2.5, -2.7, -3.1, -3.2, -3.0, -3.2, -4.3, -4.4, -3.6, -3.1, -2.4,
+            -2.5, -2.3, -1.2, -0.6, -0.2, -0.0, -0.0
+          </data>
         </data-series>
-        <data-series name="Jane">
-          <data>2, 2, 3, 2, 1</data>
-        </data-series>
-        <data-series name="Joe">
-          <data>3, 4, 4, 2, 5</data>
+        <data-series name="Female">
+          <data>2.1, 2.0, 2.2, 2.4, 2.6, 3.0, 3.1, 2.9, 3.1, 4.1, 4.3, 3.6, 3.4, 2.6, 2.9, 2.9, 1.8,
+            1.2, 0.6, 0.1, 0.0
+          </data>
         </data-series>
       </vaadin-bar-chart>
-    </view-source>
+    </demo-viewer>
   </div>
-</div>
+
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
+
+    <div class="elements-section demo">
+      <h5>Stacked bar chart</h5>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/charts/bar/stack-polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/charts/bar/stack-angular2.ts"></demo-source>
+
+        <vaadin-bar-chart id="stacked-bar">
+          <title>Stacked bar chart</title>
+          <x-axis>
+            <categories>Apples, Oranges, Pears, Grapes, Bananas</categories>
+          </x-axis>
+          <y-axis min="0">
+            <title>Total fruit consumption</title>
+          </y-axis>
+          <legend reversed="true"></legend>
+          <tooltip point-format="{series.name}: {point.y}. Total: {point.stackTotal}"></tooltip>
+          <plot-options>
+            <series stacking="normal">
+            </series>
+          </plot-options>
+          <data-series name="John">
+            <data>5, 3, 4, 7, 2</data>
+          </data-series>
+          <data-series name="Jane">
+            <data>2, 2, 3, 2, 1</data>
+          </data-series>
+          <data-series name="Joe">
+            <data>3, 4, 4, 2, 5</data>
+          </data-series>
+        </vaadin-bar-chart>
+      </demo-viewer>
+    </div>
+  </div>
+</template>
 <!-- Demo section end -->
 
 <jsp:include page="charts-links.jsp"/>

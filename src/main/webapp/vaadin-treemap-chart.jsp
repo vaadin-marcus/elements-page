@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -60,62 +60,65 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<%request.setAttribute("chart", "vaadin-treemap-chart.html");%>
 
-  <h4>Examples</h4>
-  <view-source>
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-treemap-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-treemap-chart id="treemap-with-color-axis">
-      <title>Vaadin Charts Treemap</title>
-      <color-axis min-color="#FFFFFF" max-color="#7BB5EF"></color-axis>
-      <data-series>
-        <layout-algorithm>squarified</layout-algorithm>
-        <data>
-          <point>
-            <name>A</name>
-            <value>6</value>
-            <color-value>1</color-value>
-          </point>
-          <point>
-            <name>B</name>
-            <value>6</value>
-            <color-value>2</color-value>
-          </point>
-          <point>
-            <name>C</name>
-            <value>4</value>
-            <color-value>3</color-value>
-          </point>
-          <point>
-            <name>D</name>
-            <value>3</value>
-            <color-value>4</color-value>
-          </point>
-          <point>
-            <name>E</name>
-            <value>2</value>
-            <color-value>5</color-value>
-          </point>
-          <point>
-            <name>F</name>
-            <value>2</value>
-            <color-value>6</color-value>
-          </point>
-          <point>
-            <name>G</name>
-            <value>1</value>
-            <color-value>7</color-value>
-          </point>
-        </data>
-      </data-series>
-    </vaadin-treemap-chart>
-  </view-source>
-</div>
+<template is="dom-bind">
+  <div class="elements-section">
+
+    <h4>Examples</h4>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/treemap/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/treemap/angular2.ts"></demo-source>
+
+      <vaadin-treemap-chart id="treemap-with-color-axis">
+        <title>Vaadin Charts Treemap</title>
+        <color-axis min-color="#FFFFFF" max-color="#7BB5EF"></color-axis>
+        <data-series>
+          <layout-algorithm>squarified</layout-algorithm>
+          <data>
+            <point>
+              <name>A</name>
+              <value>6</value>
+              <color-value>1</color-value>
+            </point>
+            <point>
+              <name>B</name>
+              <value>6</value>
+              <color-value>2</color-value>
+            </point>
+            <point>
+              <name>C</name>
+              <value>4</value>
+              <color-value>3</color-value>
+            </point>
+            <point>
+              <name>D</name>
+              <value>3</value>
+              <color-value>4</color-value>
+            </point>
+            <point>
+              <name>E</name>
+              <value>2</value>
+              <color-value>5</color-value>
+            </point>
+            <point>
+              <name>F</name>
+              <value>2</value>
+              <color-value>6</color-value>
+            </point>
+            <point>
+              <name>G</name>
+              <value>1</value>
+              <color-value>7</color-value>
+            </point>
+          </data>
+        </data-series>
+      </vaadin-treemap-chart>
+    </demo-viewer>
+  </div>
+</template>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>

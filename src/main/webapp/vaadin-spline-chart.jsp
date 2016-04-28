@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -92,24 +92,28 @@
 
 
 <!-- Demo section start -->
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+<%request.setAttribute("chart", "vaadin-spline-chart.html");%>
 
-  <div class="elements-section">
+<template is="dom-bind">
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
 
-    <h4>Examples</h4>
-    <view-source externals="<%=request.getContextPath()%>/spline-demo.html" editable="no">
-      <div class="head">
-        <!--
-        <%request.setAttribute("chart", "vaadin-spline-chart.html");%>
-        <jsp:include page="charts-imports.jsp"/>
-        -->
-      </div>
-      <link rel="import" href="<%=request.getContextPath()%>/spline-demo.html">
-      <spline-demo></spline-demo>
-    </view-source>
+    <div class="elements-section">
+
+      <h4>Examples</h4>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/charts/spline/polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/charts/spline/angular2.ts"></demo-source>
+
+        <link rel="import" href="<%=request.getContextPath()%>/spline-demo.html">
+        <spline-demo></spline-demo>
+      </demo-viewer>
+    </div>
   </div>
-</div>
+</template>
+<!-- Demo section end -->
 
 <jsp:include page="charts-links.jsp"/>
 <jsp:include page="suggestion-box.jsp"/>

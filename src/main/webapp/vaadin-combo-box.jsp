@@ -58,7 +58,7 @@
 </div>
 
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <div class="w-wallpaper-container zebra">

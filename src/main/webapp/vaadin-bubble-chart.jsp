@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -62,40 +62,43 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<%request.setAttribute("chart", "vaadin-bubble-chart.html");%>
 
-  <h4>Examples</h4>
-  <view-source>
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-bubble-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-bubble-chart id="bubble-chart">
-      <chart zoom-type="xy"></chart>
-      <title>Vaadin Charts Bubbles</title>
-      <data-series>
-        <data>
-          [97, 36, 79], [94, 74, 60], [68, 76, 58], [64, 87, 56], [68, 27, 73], [74, 99, 42], [7,
-          93, 87], [51, 69, 40], [38, 23, 33], [57, 86, 31]
-        </data>
-      </data-series>
-      <data-series>
-        <data>
-          [25, 10, 87], [2, 75, 59], [11, 54, 8], [86, 55, 93], [5, 3, 58], [90, 63, 44], [91, 33,
-          17], [97, 3, 56], [15, 67, 48], [54, 25, 81]
-        </data>
-      </data-series>
-      <data-series>
-        <data>
-          [47, 47, 21], [20, 12, 4], [6, 76, 91], [38, 30, 60], [57, 98, 64], [61, 17, 80], [83, 60,
-          13], [67, 78, 75], [64, 12, 10], [30, 77, 82]
-        </data>
-      </data-series>
-    </vaadin-bubble-chart>
-  </view-source>
-</div>
+<template is="dom-bind">
+  <div class="elements-section">
+
+    <h4>Examples</h4>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/bubble/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/bubble/angular2.ts"></demo-source>
+
+      <vaadin-bubble-chart id="bubble-chart">
+        <chart zoom-type="xy"></chart>
+        <title>Vaadin Charts Bubbles</title>
+        <data-series>
+          <data>
+            [97, 36, 79], [94, 74, 60], [68, 76, 58], [64, 87, 56], [68, 27, 73], [74, 99, 42], [7,
+            93, 87], [51, 69, 40], [38, 23, 33], [57, 86, 31]
+          </data>
+        </data-series>
+        <data-series>
+          <data>
+            [25, 10, 87], [2, 75, 59], [11, 54, 8], [86, 55, 93], [5, 3, 58], [90, 63, 44], [91, 33,
+            17], [97, 3, 56], [15, 67, 48], [54, 25, 81]
+          </data>
+        </data-series>
+        <data-series>
+          <data>
+            [47, 47, 21], [20, 12, 4], [6, 76, 91], [38, 30, 60], [57, 98, 64], [61, 17, 80], [83, 60,
+            13], [67, 78, 75], [64, 12, 10], [30, 77, 82]
+          </data>
+        </data-series>
+      </vaadin-bubble-chart>
+    </demo-viewer>
+  </div>
+</template>
 <!-- Demo section end -->
 
 <div class="w-wallpaper-container zebra">

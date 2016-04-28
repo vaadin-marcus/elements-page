@@ -54,7 +54,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -62,23 +62,24 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<%request.setAttribute("chart", "vaadin-sparkline.html");%>
 
-  <h4>Examples</h4>
-  <view-source externals="<%=request.getContextPath()%>/sparkline-example.html" editable="no">
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-sparkline.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      <link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-      -->
-    </div>
+<template is="dom-bind">
+  <div class="elements-section">
 
-    <link rel="import" href="<%=request.getContextPath()%>/sparkline-example.html">
+    <h4>Examples</h4>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/sparkline/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/sparkline/angular2.ts"></demo-source>
 
-    <sparkline-example data-url="<%=request.getContextPath()%>/stockData.json"></sparkline-example>
-  </view-source>
-</div>
+      <link rel="import" href="<%=request.getContextPath()%>/sparkline-example.html">
+
+      <sparkline-example data-url="<%=request.getContextPath()%>/stockData.json"></sparkline-example>
+    </demo-viewer>
+  </div>
+</template>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>

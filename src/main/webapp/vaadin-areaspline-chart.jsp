@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -93,51 +93,54 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+<%request.setAttribute("chart", "vaadin-areaspline-chart.html");%>
 
-  <div class="elements-section">
+<template is="dom-bind">
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
 
-    <h4>Examples</h4>
-    <view-source>
-      <div class="head">
-        <!--
-        <%request.setAttribute("chart", "vaadin-areaspline-chart.html");%>
-        <jsp:include page="charts-imports.jsp"/>
-        -->
-      </div>
-      <vaadin-areaspline-chart id="area-spline">
-        <title>Average fruit consumption during one week</title>
+    <div class="elements-section">
 
-        <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true">
-        </legend>
+      <h4>Examples</h4>
+      <demo-viewer selected="{{selected}}">
+        <demo-source name="Polymer"
+                     url="<%=request.getContextPath()%>/examples/charts/areaspline/polymer.html"></demo-source>
+        <demo-source name="Angular 2"
+                     url="<%=request.getContextPath()%>/examples/charts/areaspline/angular2.ts"></demo-source>
 
-        <x-axis>
-          <categories>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday</categories>
-          <plot-bands from="4.5" to="6.5" color="rgba(68, 170, 213, .2)">
-          </plot-bands>
-        </x-axis>
-        <y-axis>
-          <title>Fruit units</title>
-        </y-axis>
+        <vaadin-areaspline-chart id="area-spline">
+          <title>Average fruit consumption during one week</title>
 
-        <tooltip shared="true" value-suffix="units">
-        </tooltip>
-        <plot-options>
-          <areaspline fill-opacity="0.5">
-          </areaspline>
-        </plot-options>
+          <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true">
+          </legend>
 
-        <data-series name="John">
-          <data>3, 4, 3, 5, 4, 10, 12</data>
-        </data-series>
-        <data-series name="Jane">
-          <data>1, 3, 4, 3, 3, 5, 4</data>
-        </data-series>
-      </vaadin-areaspline-chart>
-    </view-source>
+          <x-axis>
+            <categories>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday</categories>
+            <plot-bands from="4.5" to="6.5" color="rgba(68, 170, 213, .2)">
+            </plot-bands>
+          </x-axis>
+          <y-axis>
+            <title>Fruit units</title>
+          </y-axis>
+
+          <tooltip shared="true" value-suffix="units">
+          </tooltip>
+          <plot-options>
+            <areaspline fill-opacity="0.5">
+            </areaspline>
+          </plot-options>
+
+          <data-series name="John">
+            <data>3, 4, 3, 5, 4, 10, 12</data>
+          </data-series>
+          <data-series name="Jane">
+            <data>1, 3, 4, 3, 3, 5, 4</data>
+          </data-series>
+        </vaadin-areaspline-chart>
+      </demo-viewer>
+    </div>
   </div>
-</div>
+</template>
 <!-- Demo section end -->
 
 <jsp:include page="charts-links.jsp"/>

@@ -57,7 +57,7 @@
 </div>
 
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <div class="w-wallpaper-container zebra">
@@ -435,7 +435,7 @@
           href="https://vaadin.com/docs/-/part/elements/vaadin-grid/details.html">Read more about
         showing row details.</a>
       </p>
-      <view-source externals="<%=request.getContextPath()%>/details-row.html">
+      <view-source>
         <div class="head">
           <!--
           <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>

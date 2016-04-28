@@ -54,7 +54,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -94,36 +94,38 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
+<%request.setAttribute("chart", "vaadin-areasplinerange-chart.html");%>
+<template is="dom-bind">
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
 
-  <div class="elements-section">
+    <div class="elements-section">
 
-    <h4>Examples</h4>
-      <view-source externals="<%=request.getContextPath()%>/temp-variation.json">
-        <div class="head">
-          <!--
-           <%request.setAttribute("chart", "vaadin-areasplinerange-chart.html");%>
-        <jsp:include page="charts-imports.jsp"/>
-          -->
-        </div>
-        <template is="dom-bind">
-          <iron-ajax auto url="<%=request.getContextPath()%>/temp-variation.json" handle-as="json" last-response="{{temperatureData}}"></iron-ajax>
-          <vaadin-areasplinerange-chart id="area-range">
-            <chart zoom-type="x"></chart>
-            <title>Temperature variation by day</title>
-            <x-axis type="datetime"></x-axis>
-            <y-axis>
-              <title text="null"></title>
-            </y-axis>
-            <tooltip crosshairs="true" shared="true" value-suffix="C"></tooltip>
-            <legend enabled="false"></legend>
-            <data-series data="[[temperatureData]]"></data-series>
-          </vaadin-areasplinerange-chart>
-        </template>
-      </view-source>
+      <h4>Examples</h4>
+        <demo-viewer selected="{{selected}}">
+          <demo-source name="Polymer"
+                       url="<%=request.getContextPath()%>/examples/charts/areasplinerange/polymer.html"></demo-source>
+          <demo-source name="Angular 2"
+                       url="<%=request.getContextPath()%>/examples/charts/areasplinerange/angular2.ts"></demo-source>
+
+          <template is="dom-bind">
+            <iron-ajax auto url="<%=request.getContextPath()%>/temp-variation.json" handle-as="json" last-response="{{temperatureData}}"></iron-ajax>
+            <vaadin-areasplinerange-chart id="area-range">
+              <chart zoom-type="x"></chart>
+              <title>Temperature variation by day</title>
+              <x-axis type="datetime"></x-axis>
+              <y-axis>
+                <title text="null"></title>
+              </y-axis>
+              <tooltip crosshairs="true" shared="true" value-suffix="C"></tooltip>
+              <legend enabled="false"></legend>
+              <data-series data="[[temperatureData]]"></data-series>
+            </vaadin-areasplinerange-chart>
+          </template>
+        </demo-viewer>
+    </div>
   </div>
-</div>
+</template>
 <!-- Demo section end -->
 
 <jsp:include page="charts-links.jsp"/>

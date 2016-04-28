@@ -54,7 +54,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -63,20 +63,23 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<%request.setAttribute("chart", "vaadin-candlestick-chart.html");%>
 
-  <h4>Examples</h4>
-  <view-source externals="<%=request.getContextPath()%>/candlestick-example.html" editable="no">
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-candlestick-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <link rel="import" href="<%=request.getContextPath()%>/candlestick-example.html">
-    <candlestick-example></candlestick-example>
-  </view-source>
-</div>
+<template is="dom-bind">
+  <div class="elements-section">
+
+    <h4>Examples</h4>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/candlestick/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/candlestick/angular2.ts"></demo-source>
+
+      <link rel="import" href="<%=request.getContextPath()%>/candlestick-example.html">
+      <candlestick-example></candlestick-example>
+    </demo-viewer>
+  </div>
+</template>
 <!-- Demo section end -->
 
 <div class="w-wallpaper-container zebra">

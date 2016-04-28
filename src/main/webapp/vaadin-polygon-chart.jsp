@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -61,41 +61,43 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<%request.setAttribute("chart", "vaadin-polygon-chart.html");%>
 
+<template is="dom-bind">
+  <div class="elements-section">
 
-  <h4>Examples</h4>
-  <view-source>
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-polygon-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-polygon-chart id="scatter-and-polygon">
-      <title>Height vs Weight</title>
-      <subtitle>Polygon series</subtitle>
+    <h4>Examples</h4>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/polygon/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/polygon/angular2.ts"></demo-source>
 
-      <x-axis grid-line-width="1" start-on-tick="true" end-on-tick="true" show-last-label="true">
-        <title>Height (cm)</title>
-      </x-axis>
+      <vaadin-polygon-chart id="scatter-and-polygon">
+        <title>Height vs Weight</title>
+        <subtitle>Polygon series</subtitle>
 
-      <y-axis>
-        <title>Weight (kg)</title>
-      </y-axis>
-      <legend layout="vertical" align="right" vertical-align="middle">
-      </legend>
-      <tooltip header-format="<b>{series.name}</b><br>" point-format="{point.x} cm; {point.y} kg">
-      </tooltip>
-      <data-series name="Target">
-        <data>[153, 42], [149, 46], [149, 55], [152, 60], [159, 70], [170, 77], [180, 70], [180,
-          60], [173, 52], [166, 45]
-        </data>
-      </data-series>
+        <x-axis grid-line-width="1" start-on-tick="true" end-on-tick="true" show-last-label="true">
+          <title>Height (cm)</title>
+        </x-axis>
 
-    </vaadin-polygon-chart>
-  </view-source>
-</div>
+        <y-axis>
+          <title>Weight (kg)</title>
+        </y-axis>
+        <legend layout="vertical" align="right" vertical-align="middle">
+        </legend>
+        <tooltip header-format="<b>{series.name}</b><br>" point-format="{point.x} cm; {point.y} kg">
+        </tooltip>
+        <data-series name="Target">
+          <data>[153, 42], [149, 46], [149, 55], [152, 60], [159, 70], [170, 77], [180, 70], [180,
+            60], [173, 52], [166, 45]
+          </data>
+        </data-series>
+
+      </vaadin-polygon-chart>
+    </demo-viewer>
+  </div>
+</template>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>

@@ -57,10 +57,7 @@
   </div>
 </div>
 
-
-<!-- Intro section start -->
-
-
+<!-- Intro section end -->
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
@@ -74,36 +71,39 @@
 </div>
 
 <!-- Demo section start -->
-<div class="elements-section">
+<template is="dom-bind">
+  <div class="elements-section">
 
-  <h4>Examples</h4>
+    <h4>Examples</h4>
 
-  <h5>Simple usage</h5>
-  <demo-viewer>
-    <demo-source name="Polymer" url="<%=request.getContextPath()%>/examples/core/icons/polymer.html"></demo-source>
-    <demo-source name="Angular 2" url="<%=request.getContextPath()%>/examples/core/icons/angular2.ts"></demo-source>
+    <h5>Simple usage</h5>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer" url="<%=request.getContextPath()%>/examples/core/icons/polymer.html"></demo-source>
+      <demo-source name="Angular 2" url="<%=request.getContextPath()%>/examples/core/icons/angular2.ts"></demo-source>
 
-    <style>
-      .example {
-        background: #fdfdfd;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        padding: .4em .8em;
-      }
-    </style>
-    <div class="example">
-      <p>
-        <iron-icon icon="vaadin-icons:arrow-forward"></iron-icon>
-        Vaadin icons can be used anywhere iron-icons can be used in Polymer apps.
-      </p>
-      <p>For instance, in
-        <paper-button raised>
-          <iron-icon icon="vaadin-icons:check"></iron-icon>
-          Buttons
-        </paper-button>
-      </p>
-    </div>
-  </demo-viewer>
-</div>
+      <style>
+        .example {
+          background: #fdfdfd;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          padding: .4em .8em;
+        }
+      </style>
+      <div class="example">
+        <p>
+          <iron-icon icon="vaadin-icons:arrow-forward"></iron-icon>
+          Vaadin icons can be used anywhere iron-icons can be used in Polymer apps.
+        </p>
+        <p>For instance, in
+          <paper-button raised>
+            <iron-icon icon="vaadin-icons:check"></iron-icon>
+            Buttons
+          </paper-button>
+        </p>
+      </div>
+    </demo-viewer>
+  </div>
+</template>
+<!-- Demo section end -->
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>

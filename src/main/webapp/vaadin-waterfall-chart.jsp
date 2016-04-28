@@ -54,7 +54,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -62,69 +62,72 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
-  <h4>Examples</h4>
-  <view-source>
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-waterfall-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-waterfall-chart id="waterfall">
-      <title>Vaadin Charts Waterfall</title>
-      <x-axis type="category"></x-axis>
-      <y-axis>
-        <title>USD</title>
-      </y-axis>
-      <legend enabled="false"></legend>
-      <tooltip point-format="<b>\${point.y:.2f}</b> USD"></tooltip>
-      <plot-options>
-        <series>
-          <data-labels enabled="true" y="-30" vertical-align="top"
-                       formatter="function () { return Highcharts.numberFormat(this.y / 1000, 0, ',') + 'k';}">
-          </data-labels>
-        </series>
-      </plot-options>
-      <data-series>
-        <up-color>#EC6464</up-color>
-        <color>#98DF58</color>
-        <data>
-          <point>
-            <name>Start</name>
-            <y>120000</y>
-          </point>
-          <point>
-            <name>Product Revenue</name>
-            <y>569000</y>
-          </point>
-          <point>
-            <name>Service Revenue</name>
-            <y>231000</y>
-          </point>
-          <point>
-            <name>Positive Balance</name>
-            <is-intermediate-sum>true</is-intermediate-sum>
-            <color>#3090F0</color>
-          </point>
-          <point>
-            <name>Fixed Costs</name>
-            <y>-342000</y>
-          </point>
-          <point>
-            <name>Variable Costs</name>
-            <y>-233000</y>
-          </point>
-          <point>
-            <name>Balance</name>
-            <is-sum>true</is-sum>
-            <color>#3090F0</color>
-          </point>
-        </data>
-      </data-series>
-    </vaadin-waterfall-chart>
-  </view-source>
-</div>
+<%request.setAttribute("chart", "vaadin-waterfall-chart.html");%>
+
+<template is="dom-bind">
+  <div class="elements-section">
+    <h4>Examples</h4>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/waterfall/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/waterfall/angular2.ts"></demo-source>
+
+      <vaadin-waterfall-chart id="waterfall">
+        <title>Vaadin Charts Waterfall</title>
+        <x-axis type="category"></x-axis>
+        <y-axis>
+          <title>USD</title>
+        </y-axis>
+        <legend enabled="false"></legend>
+        <tooltip point-format="<b>\${point.y:.2f}</b> USD"></tooltip>
+        <plot-options>
+          <series>
+            <data-labels enabled="true" y="-30" vertical-align="top"
+                         formatter="function () { return Highcharts.numberFormat(this.y / 1000, 0, ',') + 'k';}">
+            </data-labels>
+          </series>
+        </plot-options>
+        <data-series>
+          <up-color>#EC6464</up-color>
+          <color>#98DF58</color>
+          <data>
+            <point>
+              <name>Start</name>
+              <y>120000</y>
+            </point>
+            <point>
+              <name>Product Revenue</name>
+              <y>569000</y>
+            </point>
+            <point>
+              <name>Service Revenue</name>
+              <y>231000</y>
+            </point>
+            <point>
+              <name>Positive Balance</name>
+              <is-intermediate-sum>true</is-intermediate-sum>
+              <color>#3090F0</color>
+            </point>
+            <point>
+              <name>Fixed Costs</name>
+              <y>-342000</y>
+            </point>
+            <point>
+              <name>Variable Costs</name>
+              <y>-233000</y>
+            </point>
+            <point>
+              <name>Balance</name>
+              <is-sum>true</is-sum>
+              <color>#3090F0</color>
+            </point>
+          </data>
+        </data-series>
+      </vaadin-waterfall-chart>
+    </demo-viewer>
+  </div>
+</template>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>

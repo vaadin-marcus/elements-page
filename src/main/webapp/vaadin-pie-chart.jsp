@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<!-- Intro section start -->
+<!-- Intro section end -->
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
@@ -61,35 +61,38 @@
 <!-- Info section end -->
 
 <!-- Demo section start -->
-<div class="elements-section">
+<%request.setAttribute("chart", "vaadin-pie-chart.html");%>
 
-  <h4>Examples</h4>
-  <view-source>
-    <div class="head">
-      <!--
-      <%request.setAttribute("chart", "vaadin-pie-chart.html");%>
-      <jsp:include page="charts-imports.jsp"/>
-      -->
-    </div>
-    <vaadin-pie-chart id="pie-with-legend">
-      <title>Browser market shares at a specific website, 2014</title>
-      <tooltip value-decimals="1" point-format="{series.name}: <b>{point.percentage:.1f}%</b>">
-      </tooltip>
-      <plot-options>
-        <pie allow-point-select="true" show-in-legend="true" cursor="pointer">
-          <data-labels enabled="true" format="<b>{point.name}</b>:    {point.percentage} %">
-          </data-labels>
-        </pie>
-      </plot-options>
+<template is="dom-bind">
+  <div class="elements-section">
 
-      <data-series name="Browser share">
-        <data>
-          ["Firefox", 45.0], ["IE", 26.8], ["Chrome", 12.8], ["Safari", 8.5], ["Opera", 6.2], ["Others", 0.7],
-        </data>
-      </data-series>
-    </vaadin-pie-chart>
-  </view-source>
-</div>
+    <h4>Examples</h4>
+    <demo-viewer selected="{{selected}}">
+      <demo-source name="Polymer"
+                   url="<%=request.getContextPath()%>/examples/charts/pie/polymer.html"></demo-source>
+      <demo-source name="Angular 2"
+                   url="<%=request.getContextPath()%>/examples/charts/pie/angular2.ts"></demo-source>
+
+      <vaadin-pie-chart id="pie-with-legend">
+        <title>Browser market shares at a specific website, 2014</title>
+        <tooltip value-decimals="1" point-format="{series.name}: <b>{point.percentage:.1f}%</b>">
+        </tooltip>
+        <plot-options>
+          <pie allow-point-select="true" show-in-legend="true" cursor="pointer">
+            <data-labels enabled="true" format="<b>{point.name}</b>:    {point.percentage} %">
+            </data-labels>
+          </pie>
+        </plot-options>
+
+        <data-series name="Browser share">
+          <data>
+            ["Firefox", 45.0], ["IE", 26.8], ["Chrome", 12.8], ["Safari", 8.5], ["Opera", 6.2], ["Others", 0.7],
+          </data>
+        </data-series>
+      </vaadin-pie-chart>
+    </demo-viewer>
+  </div>
+</template>
 
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
