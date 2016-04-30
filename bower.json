@@ -28,11 +28,11 @@
     "neon-animation": "PolymerElements/neon-animation#^1.0.8",
     "js-beautify": "~1.5.10",
     "time-elements": "~0.4.0",
-    "vaadin-grid": "^1.0.0",
-    "vaadin-date-picker": "^1.0.0-rc1",
-    "vaadin-combo-box": "^1.0.0-rc1",
-    "vaadin-upload": "^1.0.0-rc1",
-    "vaadin-icons": "vaadin/vaadin-icons#^1.0.0-rc1",
+    "vaadin-grid": "1.0.0",
+    "vaadin-date-picker": "1.0.0-rc1",
+    "vaadin-combo-box": "1.0.0-rc1",
+    "vaadin-upload": "1.0.0-rc1",
+    "vaadin-icons": "vaadin/vaadin-icons#1.0.0-rc1",
     "mock-http-request": "philikon/MockHttpRequest#master"
   }
 }
