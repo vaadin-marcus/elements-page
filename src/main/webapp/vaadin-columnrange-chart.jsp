@@ -105,9 +105,9 @@
       <h5>Resource usage chart</h5>
       <demo-viewer selected="{{selected}}">
         <demo-source name="Polymer"
-                     url="<%=request.getContextPath()%>/examples/charts/columnrange/resource-polymer.html"></demo-source>
+                     url="<%=request.getContextPath()%>/examples/charts/columnrange/resource-usage-polymer.html"></demo-source>
         <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/columnrange/resource-angular2.ts"></demo-source>
+                     url="<%=request.getContextPath()%>/examples/charts/columnrange/resource-usage-angular2.ts"></demo-source>
 
         <vaadin-columnrange-chart id="column-range-resource-usage">
           <chart inverted="true"></chart>
