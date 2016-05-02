@@ -158,26 +158,27 @@
         </style>
 
         <script>
-          var demo = document.querySelector('#demo');
-          demo.addEventListener('dom-change', function() {
+          window.addEventListener('WebComponentsReady', function() {
+            var demo = document.querySelector('#demo');
 
-            demo.languages = [
-              'Afrikaans', 'Albanian', 'Amharic', 'Arabic', 'Armenian', 'Basque', 'Bengali',
-              'Byelorussian', 'Burmese', 'Bulgarian', 'Catalan', 'Czech', 'Chinese', 'Croatian',
-              'Danish', 'Dari', 'Dzongkha', 'Dutch', 'English', 'Esperanto', 'Estonian', 'Faroese',
-              'Farsi', 'Finnish', 'French', 'Gaelic', 'Galician', 'German', 'Greek', 'Hebrew',
-              'Hindi', 'Hungarian', 'Icelandic', 'Indonesian', 'Inuktitut (Eskimo)', 'Italian',
-              'Japanese', 'Khmer', 'Korean', 'Kurdish', 'Laotian', 'Latvian', 'Lappish', 'Lithuanian',
-              'Macedonian', 'Malay', 'Maltese', 'Nepali', 'Norwegian', 'Pashto', 'Polish',
-              'Portuguese', 'Romanian', 'Russian', 'Scots', 'Serbian', 'Slovak', 'Slovenian',
-              'Somali', 'Spanish', 'Swedish', 'Swahili', 'Tagalog-Filipino', 'Tajik', 'Tamil', 'Thai',
-              'Tibetan', 'Tigrinya', 'Tongan', 'Turkish', 'Turkmen', 'Ucrainian', 'Urdu', 'Uzbek',
-              'Vietnamese', 'Welsh'
-            ];
+              demo.languages = [
+                'Afrikaans', 'Albanian', 'Amharic', 'Arabic', 'Armenian', 'Basque', 'Bengali',
+                'Byelorussian', 'Burmese', 'Bulgarian', 'Catalan', 'Czech', 'Chinese', 'Croatian',
+                'Danish', 'Dari', 'Dzongkha', 'Dutch', 'English', 'Esperanto', 'Estonian', 'Faroese',
+                'Farsi', 'Finnish', 'French', 'Gaelic', 'Galician', 'German', 'Greek', 'Hebrew',
+                'Hindi', 'Hungarian', 'Icelandic', 'Indonesian', 'Inuktitut (Eskimo)', 'Italian',
+                'Japanese', 'Khmer', 'Korean', 'Kurdish', 'Laotian', 'Latvian', 'Lappish', 'Lithuanian',
+                'Macedonian', 'Malay', 'Maltese', 'Nepali', 'Norwegian', 'Pashto', 'Polish',
+                'Portuguese', 'Romanian', 'Russian', 'Scots', 'Serbian', 'Slovak', 'Slovenian',
+                'Somali', 'Spanish', 'Swedish', 'Swahili', 'Tagalog-Filipino', 'Tajik', 'Tamil', 'Thai',
+                'Tibetan', 'Tigrinya', 'Tongan', 'Turkish', 'Turkmen', 'Ucrainian', 'Urdu', 'Uzbek',
+                'Vietnamese', 'Welsh'
+              ];
 
-            demo.skillLevels = [
-              'Beginner', 'Intermediate', 'Advanced', 'Professional', 'Native'
-            ];
+              demo.skillLevels = [
+                'Beginner', 'Intermediate', 'Advanced', 'Professional', 'Native'
+              ];
+
           });
         </script>
       </demo-viewer>
@@ -212,6 +213,7 @@
         </div>
       </form>
       <script>
+
         var elements = ['Actinium', 'Aluminium', 'Americium', 'Antimony', 'Argon',
           'Arsenic', 'Astatine', 'Barium', 'Berkelium', 'Beryllium', 'Bismuth',
           'Bohrium', 'Boron', 'Bromine', 'Cadmium', 'Caesium', 'Calcium',
@@ -234,8 +236,7 @@
           'Ununoctium', 'Ununpentium', 'Ununseptium', 'Ununtrium', 'Uranium',
           'Vanadium', 'Xenon', 'Ytterbium', 'Yttrium', 'Zinc', 'Zirconium'];
 
-        HTMLImports.whenReady(function() {
-
+        window.addEventListener('WebComponentsReady', function() {
           var form = document.querySelector('#example-form');
           var combobox = form.querySelector('vaadin-combo-box');
           combobox.items = elements;
@@ -399,7 +400,7 @@
             {name: 'Ununoctium', symbol: 'Uuo', number: 118}
           ];
 
-          HTMLImports.whenReady(function() {
+          window.addEventListener('WebComponentsReady', function() {
             var combobox = combobox || document.querySelector('.elements-box');
 
             // elementsJson is an Array of Objects. Item object format:

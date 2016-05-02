@@ -160,7 +160,7 @@
 
         <script>
           (function() {
-            HTMLImports.whenReady(function() {
+            window.addEventListener('WebComponentsReady', function() {
               var grid = document.querySelector('#simple');
 
               getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
@@ -229,7 +229,7 @@
 
       <script>
         (function() {
-          HTMLImports.whenReady(function() {
+          window.addEventListener('WebComponentsReady', function() {
             var grid = document.querySelector('#lazy');
 
             grid.columns[0].renderer = function(cell) {
@@ -299,7 +299,7 @@
 
         <script>
           (function() {
-            HTMLImports.whenReady(function() {
+            window.addEventListener('WebComponentsReady', function() {
               var grid = document.querySelector('#sort');
               var users = [];
 
@@ -402,7 +402,7 @@
 
       <script>
         (function() {
-          HTMLImports.whenReady(function() {
+          window.addEventListener('WebComponentsReady', function() {
             var grid = document.querySelector('#frozen');
 
             getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
