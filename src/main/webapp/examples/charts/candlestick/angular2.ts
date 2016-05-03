@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {Http, HTTP_PROVIDERS, Response} from 'angular2/http';
+import {Component, OnInit} from '@angular/core';
+import {Http, HTTP_PROVIDERS, Response} from '@angular/http';
 import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
 
 @Component({

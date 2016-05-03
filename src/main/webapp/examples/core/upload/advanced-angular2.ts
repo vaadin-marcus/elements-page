@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {VaadinUpload} from '../../../bower_components/vaadin-upload/directives/vaadin-upload';
 
 @Component({

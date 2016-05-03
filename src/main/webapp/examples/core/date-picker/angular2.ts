@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {VaadinDatePicker} from '../../../bower_components/vaadin-date-picker/directives/vaadin-date-picker';
 
 @Component({
