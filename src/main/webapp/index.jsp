@@ -669,11 +669,11 @@
         <a class="button-dark
                   pseudo-before-container prepend-logo-polymer
                   pseudo-after-container append-logo-git"
-           href="https://github.com/vaadin/expense-manager-demo">Polymer Git Demo</a>
+           href="https://github.com/vaadin/expense-manager-demo">Polymer Source Code</a>
         <a class="button-dark
                   pseudo-before-container prepend-logo-angular2
                   pseudo-after-container append-logo-git"
-           href="https://github.com/vaadin/expense-manager-ng-demo">Angular 2 Git Demo</a>
+           href="https://github.com/vaadin/expense-manager-ng-demo">Angular 2 Source Code</a>
       </div>
     </div>
   </div>
