@@ -6,7 +6,7 @@
 
 <portlet:defineObjects/>
 
-<%PortalUtil.setPageTitle("Material Design Upload component for Polymer and Angular 2 | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Material design Upload component for Polymer and Angular 2 | Vaadin Elements", request);%>
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
