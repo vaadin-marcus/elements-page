@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
-<%PortalUtil.setPageTitle("Material design data table for Polymer | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Material design data table for Polymer and Angular 2 | Vaadin Elements", request);%>
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
@@ -70,16 +70,20 @@
       <div class="span6">
         <ul>
           <li><strong>Lazy loading</strong> &ndash; Lazy loading of data from any data source</li>
-          <li><strong>Big data</strong> &ndash; Easily present and scroll through 100k lines of data in a single UI
+          <li><strong>Big data</strong> &ndash; Easily present and scroll through 100k lines of data
+            in a single UI
             component
           </li>
-          <li><strong>Custom headers</strong> &ndash; Combine multiple rows and display components in your grid
+          <li><strong>Custom headers</strong> &ndash; Combine multiple rows and display components
+            in your grid
             headers
           </li>
-          <li><strong>Smooth scrolling</strong> &ndash; Lightning fast and smooth hardware accelerated scrolling by
+          <li><strong>Smooth scrolling</strong> &ndash; Lightning fast and smooth hardware
+            accelerated scrolling by
             reusing DOM elements
           </li>
-          <li><strong>Super efficient</strong> &ndash; Super efficient custom renderers for presenting custom data any
+          <li><strong>Super efficient</strong> &ndash; Super efficient custom renderers for
+            presenting custom data any
             way you need to
           </li>
           <li><strong>Expanding row details</strong></li>
@@ -87,13 +91,19 @@
       </div>
       <div class="span6">
         <ul>
-          <li><strong>Touch and keyboard</strong> &ndash; Touch event and mobile support, and keyboard navigation</li>
-          <li><strong>Various web technology support</strong> &ndash; Can be used with any JavaScript library or framework that supports Web Components, like
+          <li><strong>Touch and keyboard</strong> &ndash; Touch event and mobile support, and
+            keyboard navigation
+          </li>
+          <li><strong>Various web technology support</strong> &ndash; Can be used with any
+            JavaScript library or framework that supports Web Components, like
             Angular 2, React, Ember 2, jQuery
           </li>
           <li><strong>Built on top of Google Polymer</strong></li>
-          <li><strong>Material Design inspired</strong> &ndash; Styles to fit in with Paper Elements</li>
-          <li><strong>Customize the theme</strong> &ndash; Style the data grid to match the rest of your application</li>
+          <li><strong>Material Design inspired</strong> &ndash; Styles to fit in with Paper Elements
+          </li>
+          <li><strong>Customize the theme</strong> &ndash; Style the data grid to match the rest of
+            your application
+          </li>
           <li><strong>Free to use under Apache License 2.0</strong></li>
         </ul>
       </div>
@@ -129,7 +139,8 @@
 
       <h5>Simple use with an array data source</h5>
       <p>
-        Simple use case where the grid is populated with data from an array. The array data is fetched
+        Simple use case where the grid is populated with data from an array. The array data is
+        fetched
         from a JSON file with an Ajax request and mapped to columns with <code>&lt;col
         name="json.property.path"&gt;</code>.
       </p>
@@ -159,26 +170,24 @@
         </vaadin-grid>
 
         <script>
-          (function() {
-            window.addEventListener('WebComponentsReady', function() {
-              var grid = document.querySelector('#simple');
+          window.addEventListener('WebComponentsReady', function() {
+            var grid = document.querySelector('#simple');
 
-              getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
-                grid.items = json.result;
-              });
+            getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+              grid.items = json.result;
             });
+          });
 
-            function getJSON(url, callback) {
-              var xhr = new XMLHttpRequest();
-              xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                  callback(JSON.parse(xhr.responseText));
-                }
-              };
-              xhr.open('GET', url, true);
-              xhr.send();
-            }
-          })();
+          function getJSON(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                callback(JSON.parse(xhr.responseText));
+              }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+          }
 
         </script>
       </demo-viewer>
@@ -188,8 +197,10 @@
   <div class="elements-section">
     <h5>Lazy loading a large data set</h5>
     <p>
-      When you have more than a few items, it makes sense to only fetch a smaller subset up front and
-      then load the rest of rows as (and if) you need them. With Vaadin Grid you can do this easily by
+      When you have more than a few items, it makes sense to only fetch a smaller subset up front
+      and
+      then load the rest of rows as (and if) you need them. With Vaadin Grid you can do this easily
+      by
       defining a function data source. We also customized the header texts with a <code>
       &lt;thead&gt;</code>.
     </p>
@@ -228,32 +239,30 @@
       </vaadin-grid>
 
       <script>
-        (function() {
-          window.addEventListener('WebComponentsReady', function() {
-            var grid = document.querySelector('#lazy');
+        window.addEventListener('WebComponentsReady', function() {
+          var grid = document.querySelector('#lazy');
 
-            grid.columns[0].renderer = function(cell) {
-              cell.element.textContent = cell.row.index;
-            };
+          grid.columns[0].renderer = function(cell) {
+            cell.element.textContent = cell.row.index;
+          };
 
-            grid.items = function(params, callback) {
-              getJSON('https://demo.vaadin.com/demo-data/1.0/people?index=' + params.index + '&count=' + params.count, function(json) {
-                callback(json.result, json.size);
-              });
-            };
-          });
+          grid.items = function(params, callback) {
+            getJSON('https://demo.vaadin.com/demo-data/1.0/people?index=' + params.index + '&count=' + params.count, function(json) {
+              callback(json.result, json.size);
+            });
+          };
+        });
 
-          function getJSON(url, callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                callback(JSON.parse(xhr.responseText));
-              }
-            };
-            xhr.open('GET', url, true);
-            xhr.send();
-          }
-        })();
+        function getJSON(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              callback(JSON.parse(xhr.responseText));
+            }
+          };
+          xhr.open('GET', url, true);
+          xhr.send();
+        }
       </script>
     </demo-viewer>
   </div>
@@ -298,64 +307,62 @@
         </vaadin-grid>
 
         <script>
-          (function() {
-            window.addEventListener('WebComponentsReady', function() {
-              var grid = document.querySelector('#sort');
-              var users = [];
+          window.addEventListener('WebComponentsReady', function() {
+            var grid = document.querySelector('#sort');
+            var users = [];
 
-              getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
-                users = json.result;
-                grid.items = users;
-              });
+            getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+              users = json.result;
+              grid.items = users;
+            });
 
-              grid.addEventListener('sort-order-changed', function() {
-                var sortOrder = grid.sortOrder[0];
-                var sortProperty = grid.columns[sortOrder.column].name;
-                var sortDirection = sortOrder.direction;
-                grid.items.sort(function(a, b) {
-                  var res;
-                  var path = sortProperty.split('.');
-                  for (var i = 0; i < path.length; i++) {
-                    a = a[path[i]];
-                    b = b[path[i]];
-                  }
-                  if (!isNaN(a)) {
-                    res = parseInt(a, 10) - parseInt(b, 10);
-                  } else {
-                    res = a.localeCompare(b);
-                  }
+            grid.addEventListener('sort-order-changed', function() {
+              var sortOrder = grid.sortOrder[0];
+              var sortProperty = grid.columns[sortOrder.column].name;
+              var sortDirection = sortOrder.direction;
+              grid.items.sort(function(a, b) {
+                var res;
+                var path = sortProperty.split('.');
+                for (var i = 0; i < path.length; i++) {
+                  a = a[path[i]];
+                  b = b[path[i]];
+                }
+                if (!isNaN(a)) {
+                  res = parseInt(a, 10) - parseInt(b, 10);
+                } else {
+                  res = a.localeCompare(b);
+                }
 
-                  if ('desc' === sortDirection) {
-                    res *= -1;
-                  }
-                  return res;
-                });
-              });
-
-              var filterInput = document.querySelector('#filter');
-              filterInput.addEventListener('value-changed', function() {
-                var filterText = filterInput.value.toLowerCase();
-                grid.items = users.filter(function(val) {
-                  if (filterText) {
-                    return (val.firstName.toLowerCase()).indexOf(filterText) > -1;
-                  } else {
-                    return true;
-                  }
-                });
+                if ('desc' === sortDirection) {
+                  res *= -1;
+                }
+                return res;
               });
             });
 
-            function getJSON(url, callback) {
-              var xhr = new XMLHttpRequest();
-              xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                  callback(JSON.parse(xhr.responseText));
+            var filterInput = document.querySelector('#filter');
+            filterInput.addEventListener('value-changed', function() {
+              var filterText = filterInput.value.toLowerCase();
+              grid.items = users.filter(function(val) {
+                if (filterText) {
+                  return (val.firstName.toLowerCase()).indexOf(filterText) > -1;
+                } else {
+                  return true;
                 }
-              };
-              xhr.open('GET', url, true);
-              xhr.send();
-            }
-          })();
+              });
+            });
+          });
+
+          function getJSON(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                callback(JSON.parse(xhr.responseText));
+              }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+          }
         </script>
       </demo-viewer>
     </div>
@@ -401,112 +408,30 @@
       </vaadin-grid>
 
       <script>
-        (function() {
-          window.addEventListener('WebComponentsReady', function() {
-            var grid = document.querySelector('#frozen');
+        window.addEventListener('WebComponentsReady', function() {
+          var grid = document.querySelector('#frozen');
 
-            getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
-              grid.items = json.result;
-            });
-
+          getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
+            grid.items = json.result;
           });
 
-          function getJSON(url, callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                callback(JSON.parse(xhr.responseText));
-              }
-            };
-            xhr.open('GET', url, true);
-            xhr.send();
-          }
-        })();
+        });
+
+        function getJSON(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              callback(JSON.parse(xhr.responseText));
+            }
+          };
+          xhr.open('GET', url, true);
+          xhr.send();
+        }
       </script>
     </demo-viewer>
   </div>
 
-    <%--
-    <div class="elements-section">
-      <h5>Details row</h5>
-      <p>
-        Sometimes you need to show more information than you can fit on a single row. In those cases,
-        you can use a details row to display any element below the row. <a
-          href="https://vaadin.com/docs/-/part/elements/vaadin-grid/details.html">Read more about
-        showing row details.</a>
-      </p>
-      <view-source>
-        <div class="head">
-          <!--
-          <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-          <link rel="import"
-                href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-          -->
-        </div>
-        <style>
-          #details {
-            height: 500px;
-          }
-        </style>
-        <link rel="import" href="<%=request.getContextPath()%>/details-row.html">
-
-        <vaadin-grid id="details">
-          <table>
-            <colgroup>
-              <col name="user.name.first"/>
-              <col name="user.name.last"/>
-              <col name="user.email"/>
-            </colgroup>
-          </table>
-        </vaadin-grid>
-
-        <script>
-          (function() {
-            HTMLImports.whenReady(function() {
-              var grid = document.querySelector('#details');
-
-              getJSON('<%=request.getContextPath()%>/users.json', function(result) {
-                grid.items = result;
-              });
-
-              grid.rowDetailsGenerator = function(index) {
-                var detailsRow = document.createElement('details-row');
-                grid.getItem(index, function(err, item) {
-                  if (!err) {
-                    detailsRow.user = item.user;
-                  }
-                });
-                return detailsRow;
-              };
-
-              var detailsOpenIndex = -1;
-
-              grid.addEventListener('selected-items-changed', function() {
-                grid.setRowDetailsVisible(detailsOpenIndex, false);
-                var selected = grid.selection.selected();
-                if (selected.length === 1) {
-                  grid.setRowDetailsVisible(selected[0], true);
-                  detailsOpenIndex = selected[0];
-                }
-              });
-            });
-
-            function getJSON(url, callback) {
-              var xhr = new XMLHttpRequest();
-              xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                  callback(JSON.parse(xhr.responseText));
-                }
-              };
-              xhr.open('GET', url, true);
-              xhr.send();
-            }
-          })();
-        </script>
-
-      </view-source>
-    </div>
-  --%>
+--%>
 </template>
 
 <!-- Demo section end -->

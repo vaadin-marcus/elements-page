@@ -3,7 +3,7 @@
 
 
 <portlet:defineObjects/>
-<%PortalUtil.setPageTitle("Pie Chart for Polymer, HTML5 frameworks | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Pie Chart for Polymer, Angular 2, HTML5 | Vaadin Elements", request);%>
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>

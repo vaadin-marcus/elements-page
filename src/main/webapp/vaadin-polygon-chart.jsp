@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
-<%PortalUtil.setPageTitle("Polygon Chart for Polymer, HTML5 frameworks | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Polygon Chart for Polymer, Angular 2, HTML5 | Vaadin Elements", request);%>
 
 
 <!-- Imports -->

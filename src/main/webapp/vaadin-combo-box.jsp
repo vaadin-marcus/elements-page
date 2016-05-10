@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
-<%PortalUtil.setPageTitle("Combo Box, typeahead select for Polymer | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Material Desing combo box, filtering select for Polymer and Angular 2 | Vaadin Elements", request);%>
 
 <!-- Imports -->
 

@@ -3,7 +3,7 @@
 
 <portlet:defineObjects/>
 
-<%PortalUtil.setPageTitle("Area Chart for Polymer, HTML5 frameworks | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Area Chart for Polymer, Angular 2, HTML5 | Vaadin Elements", request);%>
 
 <jsp:include page="imports.jsp"/>
 
