@@ -1,4 +1,5 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.vaadin.elements.GitHubRelease" %>
 <%@ page import="com.vaadin.elements.PolymerElement" %>
 <%@ page import="com.vaadin.elements.PolymerElements" %>
 <%@ page import="com.vaadin.elements.Releases" %>
@@ -50,7 +51,14 @@
   <div class="row-fluid">
 
     <div class="span9">
-      <h5>Core Elements <span class="version">1.0.0</span></h5>
+      <h5>Core Elements
+        <%
+          GitHubRelease latestStableRelease = Releases.getLatestStableRelease("vaadin-grid");
+          if (latestStableRelease != null) {
+        %>
+        <span class="version"><%=latestStableRelease.tagName%></span>
+        <%}%>
+      </h5>
       <p>Vaadin Core elements is an Apache 2.0 licensed set of web components designed for
         business applications. The set contains elements like data grids, combo boxes and date
         pickers.</p>

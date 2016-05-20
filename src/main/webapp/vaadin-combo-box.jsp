@@ -117,24 +117,6 @@
   </div>
 </div>
 
-<!-- Info section end -->
-
-<%--A small part of me died writing this--%>
-<% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-combo-box");
-  if (latestReleases != null && !latestReleases.isEmpty()) {
-%>
-<div class="elements-section">
-  <h4>Latest releases</h4>
-  <% for (GitHubRelease release : latestReleases) {%>
-  <div class="row-fluid">
-    <span class="span9"><a href="<%=release.htmlUrl%>"><%=release.name%>
-    </a></span>
-    <time is="relative-time" datetime="<%=release.publishedAt%>" class="span3"></time>
-  </div>
-  <%}%>
-</div>
-<%}%>
-
 <!-- Demo section start -->
 <a name="demo"></a>
 <template is="dom-bind">

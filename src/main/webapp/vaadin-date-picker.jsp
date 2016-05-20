@@ -129,23 +129,6 @@
     </div>
   </div>
 </div>
-<!-- Info section end -->
-
-<% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-date-picker");
-  if (latestReleases != null && !latestReleases.isEmpty()) {
-%>
-<div class="elements-section">
-  <h4>Latest releases</h4>
-  <%--A small part of me died for writing this--%>
-  <% for (GitHubRelease release : latestReleases) {%>
-  <div class="row-fluid">
-    <span class="span9"><a href="<%=release.htmlUrl%>"><%=release.name%>
-    </a></span>
-    <time is="relative-time" datetime="<%=release.publishedAt%>" class="span3"></time>
-  </div>
-  <%}%>
-</div>
-<%}%>
 
 <!-- Demo section start -->
 <template is="dom-bind">
