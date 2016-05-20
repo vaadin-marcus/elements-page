@@ -528,6 +528,32 @@ a.button-dark:hover {
 
 /* Template Intro */
 
+.releases {
+    margin: 12px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.releases .release .release-type {
+    font-weight: 400;
+}
+
+.releases  .release:nth-child(2){
+    text-align: right;
+}
+
+.releases .release .version {
+    line-height: 32px;
+    font-weight: 600;
+}
+
+.releases .release .version {
+    font-size: 18px;
+}
+
+.releases .release.stable .version {
+    font-size: 28px;
+}
+
 .elements-intro {
     padding: 3.8rem 0;
     color: #a9a9a9;

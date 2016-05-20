@@ -26,7 +26,7 @@
          class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
     </div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-icons&gt; <span><%=Releases.getLatestVersionNumber("vaadin-icons", "1.0.0-rc1")%></span></h1>
+  <h1 class="helvetica-light">&lt;vaadin-icons&gt;</h1>
   <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
@@ -48,6 +48,30 @@
       <h4>Install</h4>
       <div class="elements-install">
         <code>bower install --save vaadin-icons</code>
+      </div>
+      <div class="releases">
+        <%
+          GitHubRelease latestStableRelease = Releases.getLatestStableRelease("vaadin-icons");
+          if (latestStableRelease != null) {
+        %>
+        <div class="release stable">
+          <div class="release-type">Stable</div>
+          <div class="version"><%=latestStableRelease.tagName%>
+          </div>
+          <a href="<%=latestStableRelease.htmlUrl%>" class="release-notes">Release notes</a>
+        </div>
+        <%}%>
+        <%
+          GitHubRelease latestPreRelase = Releases.getLatestPreRelease("vaadin-icons");
+          if (latestPreRelase != null) {
+        %>
+        <div class="release pre">
+          <div class="release-type">Pre-release</div>
+          <div class="version"><%=latestPreRelase.tagName%>
+          </div>
+          <a href="<%=latestPreRelase.htmlUrl%>" class="">Release notes</a>
+        </div>
+        <%}%>
       </div>
       <a href="https://vaadin.com/docs/-/part/elements/vaadin-icons/vaadin-icons-overview.html"
          class="w-button blue">Documentation</a>

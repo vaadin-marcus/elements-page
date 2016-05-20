@@ -1,5 +1,6 @@
 package com.vaadin.elements;
 
+import com.github.zafarkhaja.semver.Version;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -7,9 +8,8 @@ import com.google.gson.Gson;
 import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class Releases {
@@ -55,6 +55,34 @@ public class Releases {
         return latestRelease == null || latestRelease.tagName == null ? fallback : latestRelease.tagName;
     }
 
+    public static GitHubRelease getLatestStableRelease(String repo) {
+        try {
+            for (GitHubRelease release : getCache().get(repo)) {
+                String tag = release.tagName.startsWith("v") ? release.tagName.substring(1) : release.tagName;
+
+                if (Version.valueOf(tag).getPreReleaseVersion().isEmpty()) {
+                    return release;
+                }
+            }
+            return null;
+        } catch (ExecutionException e) {
+            return null;
+        }
+    }
+
+    public static GitHubRelease getLatestPreRelease(String repo) {
+        try {
+            GitHubRelease release = getCache().get(repo).get(0);
+            String tag = release.tagName.startsWith("v") ? release.tagName.substring(1) : release.tagName;
+            if (!Version.valueOf(tag).getPreReleaseVersion().isEmpty()) {
+                return release;
+            }
+            return null;
+        } catch (ExecutionException e) {
+            return null;
+        }
+    }
+
     private static GitHubRelease getLatestRelease(String repo) {
         try {
             return getCache().get(repo).get(0);
@@ -75,12 +103,25 @@ public class Releases {
 
     private static List<GitHubRelease> getGitHubReleases(String repository) {
         try {
-            return Arrays.asList(Unirest.get("https://api.github.com/repos/vaadin/{repo}/releases")
+            List<GitHubRelease> releases = Arrays.asList(Unirest.get("https://api.github.com/repos/vaadin/{repo}/releases")
                     .routeParam("repo", repository)
                     .header("Accept", "application/vnd.github.v3+json")
                     .header("User-Agent", "Vaadin")
                     .asObject(GitHubRelease[].class)
                     .getBody());
+            Collections.sort(releases, new Comparator<GitHubRelease>() {
+                @Override
+                public int compare(GitHubRelease o1, GitHubRelease o2) {
+                    String tag1 = o1.tagName;
+                    String tag2 = o2.tagName;
+                    Version v1 = Version.valueOf(tag1.startsWith("v") ? tag1.substring(1) : tag1);
+                    Version v2 = Version.valueOf(tag2.startsWith("v") ? tag2.substring(1) : tag2);
+
+                    return v2.compareTo(v1);
+                }
+            });
+
+            return releases;
         } catch (Exception e) {
             System.err.println("Failed to fetch releases for " + repository);
             e.printStackTrace();

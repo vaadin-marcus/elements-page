@@ -21,4 +21,7 @@ public class GitHubRelease {
     @Expose
     public String publishedAt;
 
+
+
+
 }

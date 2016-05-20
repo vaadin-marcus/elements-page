@@ -7,7 +7,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?19"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?20"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -50,7 +50,7 @@
   <div class="row-fluid">
 
     <div class="span9">
-      <h5>Core Elements <span class="version">0.3.0</span></h5>
+      <h5>Core Elements <span class="version">1.0.0</span></h5>
       <p>Vaadin Core elements is an Apache 2.0 licensed set of web components designed for
         business applications. The set contains elements like data grids, combo boxes and date
         pickers.</p>
@@ -75,8 +75,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/grid@2x.png 2x"
              alt="Polymer data table element for javascript">
         <div class="tile-details">
-          <div class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-grid", "1.0.0")%>
-          </div>
           <div class="tile-title">Grid</div>
           <div class="tile-description">
             Vaadin Grid is a fully featured datagrid for showing table data.
@@ -92,9 +90,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/combobox@2x.png?2 2x"
              alt="Filtering select for polymer and javacript">
         <div class="tile-details">
-          <div
-              class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-combo-box", "1.0.0-rc1")%>
-          </div>
           <div class="tile-title">Combo Box</div>
           <div class="tile-description">
             Vaadin ComboBox is a filterable select element for situations where you have more than a
@@ -110,9 +105,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/icons@2x.png 2x"
              alt="Free font icons for web applications">
         <div class="tile-details">
-          <div
-              class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-icons", "1.0.0-rc1")%>
-          </div>
           <div class="tile-title">Icons</div>
           <div class="tile-description">
             Vaadin Icons is a set of 530 unique icons designed for web applications.
@@ -127,9 +119,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/upload@2x.png?2 2x"
              alt="Upload component for Polymer and javascript">
         <div class="tile-details">
-          <div
-              class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-upload", "1.0.0-rc1")%>
-          </div>
           <div class="tile-title">Upload</div>
           <div class="tile-description">
             Vaadin upload allows you to upload multiple files with progress indication.
@@ -145,9 +134,6 @@
              srcset="<%=request.getContextPath()%>/img/preview/date-picker@2x.png?2 2x"
              alt="Polymer date picker">
         <div class="tile-details">
-          <div
-              class="tile-version"><%=Releases.getLatestVersionNumber("vaadin-date-picker", "1.0.0-rc1")%>
-          </div>
           <div class="tile-title">Date Picker</div>
           <div class="tile-description">
             Vaadin DatePicker allows you to select a date from a dropdown calendar.

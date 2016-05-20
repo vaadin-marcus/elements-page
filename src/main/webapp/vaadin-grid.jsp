@@ -1,7 +1,6 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.vaadin.elements.GitHubRelease" %>
 <%@ page import="com.vaadin.elements.Releases" %>
-<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
@@ -24,8 +23,7 @@
          class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
     </div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-grid&gt;
-    <span><%=Releases.getLatestVersionNumber("vaadin-grid", "1.0.0")%></span></h1>
+  <h1 class="helvetica-light">&lt;vaadin-grid&gt;</h1>
   <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
@@ -47,6 +45,30 @@
       <h4>Install</h4>
       <div class="elements-install">
         <code>bower install --save vaadin-grid</code>
+      </div>
+      <div class="releases">
+        <%
+          GitHubRelease latestStableRelease = Releases.getLatestStableRelease("vaadin-grid");
+          if (latestStableRelease != null) {
+        %>
+        <div class="release stable">
+          <div class="release-type">Stable</div>
+          <div class="version"><%=latestStableRelease.tagName%>
+          </div>
+          <a href="<%=latestStableRelease.htmlUrl%>" class="release-notes">Release notes</a>
+        </div>
+        <%}%>
+        <%
+          GitHubRelease latestPreRelase = Releases.getLatestPreRelease("vaadin-grid");
+          if (latestPreRelase != null) {
+        %>
+        <div class="release pre">
+          <div class="release-type">Pre-release</div>
+          <div class="version"><%=latestPreRelase.tagName%>
+          </div>
+          <a href="<%=latestPreRelase.htmlUrl%>" class="">Release notes</a>
+        </div>
+        <%}%>
       </div>
       <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/overview.html"
          class="w-button blue">Documentation</a>
@@ -111,22 +133,6 @@
   </div>
 </div>
 
-<!-- Info section end -->
-<% List<GitHubRelease> latestReleases = Releases.getLatestReleases("vaadin-grid");
-  if (latestReleases != null && !latestReleases.isEmpty()) {
-%>
-<div class="elements-section">
-  <h4>Latest releases</h4>
-  <%--A small part of me died for writing this--%>
-  <% for (GitHubRelease release : latestReleases) {%>
-  <div class="row-fluid">
-    <span class="span9"><a href="<%=release.htmlUrl%>"><%=release.name%>
-    </a></span>
-    <time is="relative-time" datetime="<%=release.publishedAt%>" class="span3"></time>
-  </div>
-  <%}%>
-</div>
-<%}%>
 <!-- Demo section start -->
 
 <template is="dom-bind">
@@ -431,7 +437,7 @@
     </demo-viewer>
   </div>
 
---%>
+  --%>
 </template>
 
 <!-- Demo section end -->
