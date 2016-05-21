@@ -7,6 +7,7 @@ import com.google.common.cache.LoadingCache;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -107,8 +108,7 @@ public class Releases {
         }
     }
 
-    private static List<GitHubRelease> getGitHubReleases(String repository) {
-        try {
+    private static List<GitHubRelease> getGitHubReleases(String repository) throws UnirestException {
             List<GitHubRelease> releases = Arrays.asList(Unirest.get("https://api.github.com/repos/vaadin/{repo}/releases")
                     .routeParam("repo", repository)
                     .header("Accept", "application/vnd.github.v3+json")
@@ -133,11 +133,7 @@ public class Releases {
             }
 
             return releases;
-        } catch (Exception e) {
-            System.err.println("Failed to fetch releases for " + repository);
-            e.printStackTrace();
-            return null;
-        }
+
     }
 
 }
