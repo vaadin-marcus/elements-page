@@ -57,11 +57,14 @@ public class Releases {
 
     public static GitHubRelease getLatestStableRelease(String repo) {
         try {
-            for (GitHubRelease release : getCache().get(repo)) {
-                String tag = release.tagName.startsWith("v") ? release.tagName.substring(1) : release.tagName;
+            List<GitHubRelease> releases = getCache().get(repo);
+            if (releases != null) {
+                for (GitHubRelease release : releases) {
+                    String tag = release.tagName.startsWith("v") ? release.tagName.substring(1) : release.tagName;
 
-                if (Version.valueOf(tag).getPreReleaseVersion().isEmpty()) {
-                    return release;
+                    if (Version.valueOf(tag).getPreReleaseVersion().isEmpty()) {
+                        return release;
+                    }
                 }
             }
             return null;
@@ -72,10 +75,13 @@ public class Releases {
 
     public static GitHubRelease getLatestPreRelease(String repo) {
         try {
-            GitHubRelease release = getCache().get(repo).get(0);
-            String tag = release.tagName.startsWith("v") ? release.tagName.substring(1) : release.tagName;
-            if (!Version.valueOf(tag).getPreReleaseVersion().isEmpty()) {
-                return release;
+            List<GitHubRelease> releases = getCache().get(repo);
+            if(releases != null && !releases.isEmpty()) {
+                GitHubRelease release = releases.get(0);
+                String tag = release.tagName.startsWith("v") ? release.tagName.substring(1) : release.tagName;
+                if (!Version.valueOf(tag).getPreReleaseVersion().isEmpty()) {
+                    return release;
+                }
             }
             return null;
         } catch (ExecutionException e) {
@@ -109,17 +115,22 @@ public class Releases {
                     .header("User-Agent", "Vaadin")
                     .asObject(GitHubRelease[].class)
                     .getBody());
-            Collections.sort(releases, new Comparator<GitHubRelease>() {
-                @Override
-                public int compare(GitHubRelease o1, GitHubRelease o2) {
-                    String tag1 = o1.tagName;
-                    String tag2 = o2.tagName;
-                    Version v1 = Version.valueOf(tag1.startsWith("v") ? tag1.substring(1) : tag1);
-                    Version v2 = Version.valueOf(tag2.startsWith("v") ? tag2.substring(1) : tag2);
+            try {
+                Collections.sort(releases, new Comparator<GitHubRelease>() {
+                    @Override
+                    public int compare(GitHubRelease o1, GitHubRelease o2) {
+                        String tag1 = o1.tagName;
+                        String tag2 = o2.tagName;
+                        Version v1 = Version.valueOf(tag1.startsWith("v") ? tag1.substring(1) : tag1);
+                        Version v2 = Version.valueOf(tag2.startsWith("v") ? tag2.substring(1) : tag2);
 
-                    return v2.compareTo(v1);
-                }
-            });
+                        return v2.compareTo(v1);
+                    }
+                });
+            } catch (Exception e){
+                System.out.println("Failed to sort github releases");
+                e.printStackTrace();
+            }
 
             return releases;
         } catch (Exception e) {
