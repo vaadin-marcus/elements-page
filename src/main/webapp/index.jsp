@@ -54,7 +54,7 @@
       <img alt="" class="pwa-banner-img" src="https://vaadin.com/documents/10187/11914215/pwa-competition-banner.png">
       <h5>Progressive Web App Competition</h5>
       <p>Learn to build a progressive web app and win a trip to Amsterdam in
-        Vaadin PWA-competition. Make your mark and win the price.</p>
+        Vaadin PWA-competition. Make your mark and win the prize.</p>
     </div>
     <div class="span3" style="text-align: center">
       <a href="https://vaadin.com/pwa-competition"
