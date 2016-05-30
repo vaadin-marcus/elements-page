@@ -10,6 +10,10 @@
     background-color: transparent;
 }
 
+body.vaadin2-theme #vaadintopbar {
+    min-height: 0;
+}
+
 #vaadintopbar #topitems #topnav a.selected::after {
     color: #041a25;
     top: 36px;
