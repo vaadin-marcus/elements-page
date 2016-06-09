@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-area-chart-basic-component',
@@ -46,7 +46,7 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
   </data-series>
 </vaadin-area-chart>
   `,
-  directives: [VaadinCharts, DataSeries]
+  directives: [ PolymerElement('vaadin-area-chart') ]
 })
 
 export class MyAreaChartBasicComponent {

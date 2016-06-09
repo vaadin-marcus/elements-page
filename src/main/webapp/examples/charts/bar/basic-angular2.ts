@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-bar-chart-basic-component',
@@ -29,7 +29,7 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
     </data-series>
   </vaadin-bar-chart>
   `,
-  directives: [VaadinCharts, DataSeries]
+  directives: [ PolymerElement('vaadin-bar-chart') ]
 })
 
 export class MyBarChartBasicComponent {
