@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
-import {VaadinDatePicker} from '../../../bower_components/vaadin-date-picker/directives/vaadin-date-picker';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
     selector: 'my-date-picker-simple-component',
     template: `
-    <vaadin-date-picker label="Pick a date"></vaadin-date-picker>
-    <vaadin-date-picker label="Birthday" [(value)]="birthday"></vaadin-date-picker>
-  `,
-    directives: [VaadinDatePicker]
+      <vaadin-date-picker label="Pick a date"></vaadin-date-picker>
+      <vaadin-date-picker label="Birthday" [(value)]="birthday"></vaadin-date-picker>
+    `,
+    directives: [PolymerElement('vaadin-date-picker')]
 })
 export class MyDatePickerSimpleComponent {
     birthday = "2000-01-01";

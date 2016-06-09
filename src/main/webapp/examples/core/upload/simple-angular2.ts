@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {VaadinUpload} from '../../../bower_components/vaadin-upload/directives/vaadin-upload';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
     selector: 'my-upload-simple-component',
     template: `
-    <vaadin-upload></vaadin-upload>
-  `,
-    directives: [VaadinUpload]
+      <vaadin-upload></vaadin-upload>
+    `,
+    directives: [ PolymerElement('vaadin-upload') ]
 })
 export class MyUploadSimpleComponent { }

@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HTTP_PROVIDERS, Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/observable';
+import 'rxjs/add/operator/map';
 
-import {VaadinGrid} from '../../../bower_components/vaadin-grid/directives/vaadin-grid';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 class Person {
   firstName: string;
@@ -24,7 +25,7 @@ class Person {
     </vaadin-grid>
   `,
   directives: [
-    VaadinGrid
+    PolymerElement('vaadin-grid')
   ],
   providers: [
     HTTP_PROVIDERS

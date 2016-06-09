@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinComboBox} from '../../../bower_components/vaadin-combo-box/directives/vaadin-combo-box';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 class Element {
     constructor(
@@ -15,7 +15,7 @@ class Element {
       <button [disabled]="!elementForm.form.valid">Submit</button>
     </form>
   `,
-    directives: [VaadinComboBox],
+  directives: [ PolymerElement('vaadin-combo-box') ],
     styles: [`
     vaadin-combo-box {
       width: 300px;
