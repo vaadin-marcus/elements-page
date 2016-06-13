@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinComboBox} from '../../../bower_components/vaadin-combo-box/directives/vaadin-combo-box';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
     selector: 'my-combo-box-basic-component',
@@ -9,7 +9,7 @@ import {VaadinComboBox} from '../../../bower_components/vaadin-combo-box/directi
       <vaadin-combo-box label="Skill Level" [items]="skillLevels" [(value)]="selectedSkillLevel"></vaadin-combo-box>
     </div>
   `,
-    directives: [VaadinComboBox],
+    directives: [ PolymerElement('vaadin-combo-box') ],
     styles: [`
     vaadin-combo-box {
         max-width: 300px;

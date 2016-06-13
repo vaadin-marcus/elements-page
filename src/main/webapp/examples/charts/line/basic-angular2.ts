@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-line-chart-basic-component',
@@ -23,7 +23,7 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
     </data-series>
   </vaadin-line-chart>
   `,
-  directives: [VaadinCharts, DataSeries]
+  directives: [ PolymerElement('vaadin-line-chart') ]
 })
 
 export class MyLineChartBasicComponent {

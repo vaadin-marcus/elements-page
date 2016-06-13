@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-scatter-chart-basic-component',
@@ -53,7 +53,7 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
 
   </vaadin-scatter-chart>
   `,
-  directives: [VaadinCharts, DataSeries]
+  directives: [ PolymerElement('vaadin-scatter-chart') ]
 })
 
 export class MyScatterChartBasicComponent {

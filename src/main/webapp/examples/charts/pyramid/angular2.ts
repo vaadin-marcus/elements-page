@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-pyramid-chart-basic-component',
@@ -24,7 +24,7 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
     </data-series>
   </vaadin-pyramid-chart>
   `,
-  directives: [VaadinCharts, DataSeries]
+  directives: [ PolymerElement('vaadin-pyramid-chart') ]
 })
 
 export class MyPyramidChartBasicComponent {

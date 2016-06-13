@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Http, HTTP_PROVIDERS, Response} from '@angular/http';
-import {VaadinGrid} from '../../../bower_components/vaadin-grid/directives/vaadin-grid';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import 'rxjs/Rx';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-sparkline-chart-basic-component',
   template: `
-  <vaadin-grid id="grid" [items]="gridData" (ready)="setGridRenderers($event)">
+  <vaadin-grid #grid [items]="gridData">
       <table>
         <colgroup>
           <col name="month" header-text="Month" width="100"/>
@@ -16,22 +16,29 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
       </table>
   </vaadin-grid>
   `,
-  directives: [VaadinCharts, DataSeries, VaadinGrid],
+  directives: [PolymerElement('vaadin-grid'), PolymerElement('vaadin-sparkline')],
   providers: [HTTP_PROVIDERS],
   styles: [`
     vaadin-grid {
       height: 400px;
+      width: 500px;
     }
   `]
 })
 
-export class MySparklineChartBasicComponent implements OnInit {
+export class MySparklineChartBasicComponent {
   gridData = [];
+  @ViewChild('grid') grid: any;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
-  ngOnInit() {
-    this.setGridData();
+  ngAfterViewInit() {
+    // Wait until grid is ready to configure renderers and data
+    this.grid.nativeElement.then(() => {
+      this.setGridRenderers(this.grid.nativeElement);
+      this.setGridData();
+    });
   }
 
   setGridData() {
