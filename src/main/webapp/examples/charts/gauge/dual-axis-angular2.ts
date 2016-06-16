@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-gauge-chart-dual-axis-component',
@@ -33,7 +33,7 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
   </data-series>
 </vaadin-gauge-chart>
   `,
-  directives: [VaadinCharts, DataSeries]
+  directives: [ PolymerElement('vaadin-gauge-chart') ]
 })
 
 export class MyGaugeChartDualAxisComponent {

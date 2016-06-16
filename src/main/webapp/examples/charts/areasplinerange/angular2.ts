@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Http, HTTP_PROVIDERS, Response} from '@angular/http';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-areasplinerange-chart-basic-component',
@@ -17,7 +17,7 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
     <data-series [data]="temperatureData"></data-series>
   </vaadin-areasplinerange-chart>
   `,
-  directives: [VaadinCharts, DataSeries],
+  directives: [ PolymerElement('vaadin-areasplinerange-chart') ]
   providers: [HTTP_PROVIDERS]
 })
 

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-solidgauge-chart-basic-component',
@@ -27,7 +27,7 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
     </data-series>
   </vaadin-solidgauge-chart>
   `,
-  directives: [VaadinCharts, DataSeries]
+  directives: [ PolymerElement('vaadin-solidgauge-chart') ]
 })
 
 export class MySolidgaugeChartBasicComponent {

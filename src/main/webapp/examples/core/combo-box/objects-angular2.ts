@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {VaadinComboBox} from '../../../bower_components/vaadin-combo-box/directives/vaadin-combo-box';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-combo-box-objects-component',
@@ -14,7 +14,7 @@ import {VaadinComboBox} from '../../../bower_components/vaadin-combo-box/directi
     <p>Selected element name: {{selectedItem.name}}.</p>
     <p>Value: {{value}}.</p>
   `,
-  directives: [VaadinComboBox],
+  directives: [ PolymerElement('vaadin-combo-box') ],
   styles: [`
     vaadin-combo-box {
       width: 300px;

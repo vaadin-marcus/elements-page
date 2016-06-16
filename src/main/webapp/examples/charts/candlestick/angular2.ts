@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Http, HTTP_PROVIDERS, Response} from '@angular/http';
-import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/directives/vaadin-charts';
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'my-candlestick-chart-basic-component',
@@ -23,7 +23,7 @@ import {VaadinCharts, DataSeries} from '../../../bower_components/vaadin-charts/
       </data-series>
     </vaadin-candlestick-chart>
   `,
-  directives: [VaadinCharts, DataSeries],
+  directives: [ PolymerElement('vaadin-candlestick-chart') ]
   providers: [HTTP_PROVIDERS]
 })
 
