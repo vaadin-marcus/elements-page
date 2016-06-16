@@ -513,6 +513,15 @@ a.button-dark:hover {
     }
 }
 
+
+.release-date {
+    text-align: right;
+    padding: 8px;
+}
+
+.release-description {
+    padding: 8px;
+}
 /* EO Index Listing */
 
 /* Template Hero */

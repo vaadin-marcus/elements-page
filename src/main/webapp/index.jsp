@@ -8,7 +8,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?23"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?24"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
@@ -42,6 +42,20 @@
       <a href="https://vaadin.com/docs/-/part/elements/elements-getting-started.html"
          class="button primary">Get Started</a>
     </div>
+
+  </div>
+</div>
+
+<div class="w-wallpaper-container ">
+  <div class="w-wallpaper"></div>
+  <div class="row-fluid">
+    <div class="span3"><h2>Updates</h2></div>
+
+    </div>
+  </div>
+  <div class="row-fluid">
+  <div class="span3 release-date"><b>June 17, 2016</b></div>
+    <div class="span9 release-description">Released <a href="https://vaadin.com/docs/-/part/elements/angular2-polymer/overview.html">angular2-polymer</a> directive that enables you to use Polymer Elements in Angular 2.</div>
 
   </div>
 </div>
@@ -564,6 +578,9 @@
           href="https://www.polymer-project.org">Polymer</a>.
         Polymer includes an extensive set of Material Design components and components for
         integrating with Google products like Maps.
+      </p>
+      <p>
+        All Google Polymer Elements can also be used in Angular 2 projects using the Vaadin <a href="https://vaadin.com/docs/-/part/elements/angular2-polymer/overview.html">angular2-polymer</a> directive.
       </p>
     </div>
     <div class="span3">
