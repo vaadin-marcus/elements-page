@@ -56,6 +56,13 @@
                 padding: 0.4em 0.57em;
             }
 
+            .help-link {
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-top: none;
+                padding: 8px;
+                text-align: center;
+            }
+
             @media (max-width: 600px) {
                 .edit-button {
                     display: none;
@@ -80,9 +87,12 @@
             </div>
             <iron-pages selected="{{selected}}" attr-for-selected="data-example">
                 <template is="dom-repeat" items="[[sources]]">
-                    <marked-element class="source-code" data-example="[[item.name]]" markdown="[[_getMarkdownFor(item)]]">
-                        <div class="markdown-html"></div>
-                    </marked-element>
+                    <div class="example-tab" data-example="[[item.name]]">
+                        <marked-element class="source-code" markdown="[[_getMarkdownFor(item)]]">
+                            <div class="markdown-html"></div>
+                        </marked-element>
+                        <div class="help-link">Need help getting started with Vaadin Elements and [[item.name]]? <a href="[[_getHelpUrlFor(item.name)]]">Read the quick start documentation.</a></div>
+                    </div>
                 </template>
             </iron-pages>
         </div>
@@ -128,6 +138,16 @@
                         value: null
                     }]);
                 }
+            }
+        },
+
+        _getHelpUrlFor: function(framework) {
+            if(framework === 'Polymer'){
+                return 'https://vaadin.com/docs/-/part/elements/elements-getting-started.html';
+            } else if(framework === 'Angular 2'){
+                return 'https://vaadin.com/docs/-/part/elements/angular2-polymer/overview.html';
+            } else {
+                return '#';
             }
         },
 
