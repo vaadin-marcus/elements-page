@@ -513,14 +513,21 @@ a.button-dark:hover {
     }
 }
 
+.w-wallpaper-container.updates {
+    padding: 0 20px;
+}
+
 
 .release-date {
     text-align: right;
+    font-weight: bold;
     padding: 8px;
+    font-size: 1.1em;
 }
 
 .release-description {
     padding: 8px;
+    font-size: 1.1em;
 }
 /* EO Index Listing */
 
