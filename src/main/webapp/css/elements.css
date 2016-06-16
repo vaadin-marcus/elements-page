@@ -517,6 +517,13 @@ a.button-dark:hover {
     padding: 0 20px;
 }
 
+h2.updates {
+    font-family: "Helvetica W01 Light","Helvetica Neue","Helvetica","Arial","Microsoft YaHei New","Microsoft Yahei","SimSun","STXihei",sans-serif;
+    font-weight: 300;
+    font-size: 28px;
+    letter-spacing: -0.05em;
+    line-height: 1.2;
+}
 
 .release-date {
     text-align: right;
