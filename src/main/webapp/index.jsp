@@ -48,7 +48,7 @@
 
 <div class="w-wallpaper-container updates">
   <div class="row-fluid">
-    <div class="span3"><h2>Updates</h2></div>
+    <div class="span3"><h2 class="updates">Updates</h2></div>
 
     </div>
   </div>
