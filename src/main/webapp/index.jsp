@@ -25,7 +25,7 @@
     For mobile and desktop.
   </p>
   <p>
-    Works on any HTML5 based stack.<br />
+    Works on any HTML5 based stack.<br/>
     Supports <a href="https://www.polymer-project.org">Polymer</a>
     and <a href="https://angular.io">Angular 2</a> data binding.
   </p>
@@ -49,15 +49,23 @@
 <div class="w-wallpaper-container updates">
   <div class="row-fluid">
     <div class="span3"><h2 class="updates">Updates</h2></div>
-
+  </div>
+  <div class="row-fluid">
+    <div class="span3 release-date"><b>June 17, 2016</b></div>
+    <div class="span9 release-description">Released <a
+        href="https://vaadin.com/docs/-/part/elements/angular2-polymer/overview.html">angular2-polymer</a>
+      directive that enables you to use Polymer Elements in Angular 2.
     </div>
   </div>
   <div class="row-fluid">
-  <div class="span3 release-date"><b>June 17, 2016</b></div>
-    <div class="span9 release-description">Released <a href="https://vaadin.com/docs/-/part/elements/angular2-polymer/overview.html">angular2-polymer</a> directive that enables you to use Polymer Elements in Angular 2.</div>
-
+    <div class="span3 release-date"><b>May 19, 2016</b></div>
+    <div class="span9 release-description"><a
+        href="https://vaadin.com/blog/-/blogs/announcing-vaadin-elements-1-0">Vaadin Core Elements
+      1.0</a> released.
+    </div>
   </div>
 </div>
+
 
 
 <div class="w-wallpaper-container zebra elements-category">
@@ -579,11 +587,14 @@
         integrating with Google products like Maps.
       </p>
       <p>
-        All Google Polymer Elements can also be used in Angular 2 projects using the Vaadin <a href="https://vaadin.com/docs/-/part/elements/angular2-polymer/overview.html">angular2-polymer</a> directive.
+        All Google Polymer Elements can also be used in Angular 2 projects using the Vaadin <a
+          href="https://vaadin.com/docs/-/part/elements/angular2-polymer/overview.html">angular2-polymer</a>
+        directive.
       </p>
     </div>
     <div class="span3">
-      <a href="https://www.polymer-project.org" class="w-arrow-button blue small">Visit Polymer site</a>
+      <a href="https://www.polymer-project.org" class="w-arrow-button blue small">Visit Polymer
+        site</a>
     </div>
 
   </div>
@@ -619,24 +630,24 @@
     <h2 class="helvetica-light">Browser support for Vaadin elements</h2>
     <table>
       <thead>
-        <tr>
-          <th>IE / Edge</th>
-          <th>Firefox</th>
-          <th>Chrome</th>
-          <th>Safari</th>
-          <th>iOS Safari</th>
-          <th>Chrome Android</th>
-        </tr>
+      <tr>
+        <th>IE / Edge</th>
+        <th>Firefox</th>
+        <th>Chrome</th>
+        <th>Safari</th>
+        <th>iOS Safari</th>
+        <th>Chrome Android</th>
+      </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>IE11, Edge</td>
-          <td>Latest</td>
-          <td>Latest</td>
-          <td>Latest</td>
-          <td>iOS 9</td>
-          <td>Latest</td>
-        </tr>
+      <tr>
+        <td>IE11, Edge</td>
+        <td>Latest</td>
+        <td>Latest</td>
+        <td>Latest</td>
+        <td>iOS 9</td>
+        <td>Latest</td>
+      </tr>
       </tbody>
     </table>
   </div>
