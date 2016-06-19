@@ -532,6 +532,12 @@ h2.updates {
     font-size: 1.1em;
 }
 
+@media (max-width: 767px) {
+    .release-date {
+        text-align: left;
+    }
+}
+
 .release-description {
     padding: 8px;
     font-size: 1.1em;
