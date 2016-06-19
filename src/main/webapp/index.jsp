@@ -8,7 +8,7 @@
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?24"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?25"/>
 <style>
   #footer-wrapper {
     margin-top: 0;
