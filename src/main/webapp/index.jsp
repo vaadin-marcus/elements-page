@@ -685,7 +685,7 @@
 
         <p class="lead helvetica-light">Fully responsive and offline enabled application that
           showcases Grid and Charts.</p>
-        <a class="w-arrow-button blue" href="https://demo.vaadin.com/expense-manager/">See live
+        <a class="w-arrow-button blue" href="https://wc.demo.vaadin.com/expense-manager/">See live
           demo</a>
         <a class="button-dark
                   pseudo-before-container prepend-logo-polymer
