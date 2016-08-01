@@ -436,8 +436,6 @@
       </script>
     </demo-viewer>
   </div>
-
-  --%>
 </template>
 
 <!-- Demo section end -->
