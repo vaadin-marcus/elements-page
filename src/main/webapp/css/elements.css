@@ -1090,3 +1090,16 @@ h2.updates {
     padding: .6em 2.7em;
 }
 /* EO Bottom Actions */
+
+.elements-help-links .w-wallpaper {
+    background-color: #323232;
+}
+.elements-help-links {
+    color: #fff;
+}
+
+.elements-help-links a {
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #00b4f0;
+}

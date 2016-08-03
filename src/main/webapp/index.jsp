@@ -175,6 +175,8 @@
   </div>
 </div>
 
+<jsp:include page="get-help.jsp"/>
+
 <div class="w-wallpaper-container zebra elements-category">
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
