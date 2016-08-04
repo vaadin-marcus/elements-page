@@ -81,7 +81,7 @@
 
 <!-- Intro section end -->
 
-<jsp:include page="get-help.jsp"/>
+
 
 <!-- Info section start -->
 <div class="w-wallpaper-container zebra">
@@ -135,6 +135,7 @@
   </div>
 </div>
 
+<jsp:include page="get-help.jsp"/>
 <!-- Demo section start -->
 
 <template is="dom-bind">
