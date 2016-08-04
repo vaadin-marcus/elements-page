@@ -81,6 +81,8 @@
 
 <!-- Intro section end -->
 
+<jsp:include page="get-help.jsp"/>
+
 <!-- Info section start -->
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
