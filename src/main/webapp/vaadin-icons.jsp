@@ -128,7 +128,7 @@
   </div>
 </template>
 <!-- Demo section end -->
-
+<jsp:include page="get-help.jsp"/>
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
   <jsp:include page="suggestion-box.jsp"/>

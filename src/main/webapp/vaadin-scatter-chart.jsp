@@ -56,7 +56,7 @@
 
 <!-- Info section start -->
 <jsp:include page="charts-features.jsp"/>
-
+<jsp:include page="get-help.jsp"/>
 <!-- Info section end -->
 
 <!-- Demo section start -->

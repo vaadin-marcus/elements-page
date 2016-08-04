@@ -117,6 +117,8 @@
   </div>
 </div>
 
+<jsp:include page="get-help.jsp"/>
+
 <!-- Demo section start -->
 <a name="demo"></a>
 <template is="dom-bind">
