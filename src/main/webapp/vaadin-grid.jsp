@@ -135,6 +135,7 @@
   </div>
 </div>
 
+<jsp:include page="get-help.jsp"/>
 
 <!-- Demo section start -->
 
@@ -441,7 +442,7 @@
   </div>
 
 </template>
-<jsp:include page="get-help.jsp"/>
+
 <!-- Demo section end -->
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
