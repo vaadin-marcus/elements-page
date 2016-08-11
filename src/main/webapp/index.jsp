@@ -51,6 +51,13 @@
     <div class="span3"><h2 class="updates">Updates</h2></div>
   </div>
   <div class="row-fluid">
+    <div class="span3 release-date"><b>July 1, 2016</b></div>
+    <div class="span9 release-description"><a
+        href="https://vaadin.com/blog/-/blogs/vaadin-core-elements-1-1-released">Vaadin Core
+      Elements 1.1</a> released.
+    </div>
+  </div>
+  <div class="row-fluid">
     <div class="span3 release-date"><b>June 17, 2016</b></div>
     <div class="span9 release-description">Released <a
         href="https://vaadin.com/docs/-/part/elements/angular2-polymer/overview.html">angular2-polymer</a>
@@ -65,7 +72,6 @@
     </div>
   </div>
 </div>
-
 
 
 <div class="w-wallpaper-container zebra elements-category">
@@ -182,7 +188,7 @@
   <div class="row-fluid">
 
     <div class="span9">
-      <h5>Charts <span><%=Releases.getLatestVersionNumber("vaadin-charts", "3.0.0")%></span></h5>
+      <h5>Charts <span><%=Releases.getLatestVersionNumber("vaadin-charts", "3.1.0")%></span></h5>
       <p>Vaadin Charts contains tens of different types of charts that allow you to visualize and
         interact with data. All charts support declarative and dynamic data binding.</p>
     </div>
