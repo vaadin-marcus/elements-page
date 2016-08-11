@@ -306,7 +306,7 @@
           }
         </style>
         <paper-input id="filter" label="Filter by first name"></paper-input>
-        <vaadin-grid id="sort" selection-mode="multi">
+        <vaadin-grid id="sort">
           <table>
             <colgroup>
               <col name="firstName" sortable/>
@@ -319,6 +319,7 @@
         <script>
           window.addEventListener('WebComponentsReady', function() {
             var grid = document.querySelector('#sort');
+            grid.selectionMode = 'multi';
             var users = [];
 
             getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
