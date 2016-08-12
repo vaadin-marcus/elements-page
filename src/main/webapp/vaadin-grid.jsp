@@ -319,7 +319,7 @@
         <script>
           window.addEventListener('WebComponentsReady', function() {
             var grid = document.querySelector('#sort');
-            grid.selectionMode = 'multi';
+            grid.selection.mode = 'multi';
             var users = [];
 
             getJSON('https://demo.vaadin.com/demo-data/1.0/people', function(json) {
