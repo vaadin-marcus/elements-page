@@ -448,7 +448,7 @@
 <div class="w-wallpaper-container zebra">
   <div class="w-wallpaper">&nbsp;</div>
 
-  <jsp:include page="suggestion-box.jsp"/>
+
 </div>
 
 <jsp:include page="bottom-actions.jsp"/>

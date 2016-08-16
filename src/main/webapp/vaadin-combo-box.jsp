@@ -433,6 +433,6 @@
 </template>
 <!-- Demo section end -->
 
-<jsp:include page="suggestion-box.jsp"/>
+
 
 <jsp:include page="bottom-actions.jsp"/>
