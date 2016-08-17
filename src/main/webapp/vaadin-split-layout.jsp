@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
-<%PortalUtil.setPageTitle("Split panel layout for Polymer and Angular 2 | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Resizeable split layout for Polymer and Angular 2 | Vaadin Elements", request);%>
 
 <!-- Imports -->
 
@@ -23,7 +23,7 @@
          class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
     </div>
   </div>
-  <h1 class="helvetica-light">&lt;vaadin-split-panel&gt;</h1>
+  <h1 class="helvetica-light">&lt;vaadin-split-layout&gt;</h1>
   <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
@@ -43,11 +43,11 @@
     <div class="span5">
       <h4>Install</h4>
       <div class="elements-install">
-        <code>bower install --save vaadin-split-panel</code>
+        <code>bower install --save vaadin-split-layout</code>
       </div>
       <div class="releases">
         <%
-          GitHubRelease latestStableRelease = Releases.getLatestStableRelease("vaadin-split-panel");
+          GitHubRelease latestStableRelease = Releases.getLatestStableRelease("vaadin-split-layout");
           if (latestStableRelease != null) {
         %>
         <div class="release stable">
@@ -58,7 +58,7 @@
         </div>
         <%}%>
         <%
-          GitHubRelease latestPreRelase = Releases.getLatestPreRelease("vaadin-split-panel");
+          GitHubRelease latestPreRelase = Releases.getLatestPreRelease("vaadin-split-layout");
           if (latestPreRelase != null) {
         %>
         <div class="release pre">
@@ -69,7 +69,7 @@
         </div>
         <%}%>
       </div>
-      <%--<a href="https://vaadin.com/docs/-/part/elements/vaadin-split-panel/vaadin-split-panel-overview.html"--%>
+      <%--<a href="https://vaadin.com/docs/-/part/elements/vaadin-split-layout/vaadin-split-layout-overview.html"--%>
       <%--class="w-button blue">Documentation</a>--%>
       <a href="https://github.com/vaadin/vaadin-combo-box"
          class="w-button blue github">View on GitHub</a>
@@ -112,7 +112,6 @@
 <jsp:include page="get-help.jsp"/>
 
 <!-- Demo section start -->
-<a name="demo"></a>
 <template is="dom-bind" id="demo-template">
 
   <div class="w-wallpaper-container zebra">
@@ -122,7 +121,7 @@
       <h4>Examples</h4>
 
       <h5>Basic functionality</h5>
-      In its simplest form, a vaadin-split-panel will insert a resizable slider between its
+      In its simplest form, a vaadin-split-layout will insert a resizable slider between its
       children.
 
       <demo-viewer selected="{{selected}}">
@@ -131,7 +130,7 @@
         <demo-source name="Angular 2"
                      url="<%=request.getContextPath()%>/examples/core/combo-box/basic-angular2.ts"></demo-source>
 
-        <dom-module id="simple-split-panel">
+        <dom-module id="simple-split-layout">
           <template>
             <style>
               :host {
@@ -154,7 +153,9 @@
 
               #simple {
                 height: 400px;
-                border: 1px solid #eee;
+                border: 1px solid #ddd;
+                margin: 20px 0;
+                background: #fff;
               }
 
             </style>
@@ -179,27 +180,27 @@
           </template>
           <script>
             Polymer({
-              is: 'simple-split-panel',
+              is: 'simple-split-layout',
               properties: {
                 emails: Array
               }
             });
           </script>
         </dom-module>
-        <simple-split-panel emails="[[emails]]"></simple-split-panel>
+        <simple-split-layout emails="[[emails]]"></simple-split-layout>
       </demo-viewer>
     </div>
   </div>
 
   <div class="elements-section">
     <h5>Nested split panels</h5>
-    <p>vaadin-split-panels may also be nested to create more complex configurable layouts.</p>
+    <p>vaadin-split-layout may also be nested to create more complex configurable layouts.</p>
     <demo-viewer selected="{{selected}}">
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/core/combo-box/basic-polymer.html"></demo-source>
       <demo-source name="Angular 2"
                    url="<%=request.getContextPath()%>/examples/core/combo-box/basic-angular2.ts"></demo-source>
-      <dom-module id="nested-split-panel">
+      <dom-module id="nested-split-layout">
         <template>
           <style>
             :host {
@@ -225,6 +226,7 @@
             #nested {
               height: 500px;
               border: 1px solid #ddd;
+              margin: 20px 0;
             }
           </style>
           <vaadin-split-panel id="nested">
@@ -253,7 +255,7 @@
         </template>
         <script>
           Polymer({
-            is: 'nested-split-panel',
+            is: 'nested-split-layout',
             properties: {
               emails: Array,
               selectedEmail: Object
@@ -269,10 +271,11 @@
           });
         </script>
       </dom-module>
-      <nested-split-panel emails="[[emails]]"></nested-split-panel>
+      <nested-split-layout emails="[[emails]]"></nested-split-layout>
     </demo-viewer>
   </div>
 </template>
+
 <script>
   document.addEventListener('WebComponentsReady', function() {
     var demo = document.querySelector('#demo-template');
