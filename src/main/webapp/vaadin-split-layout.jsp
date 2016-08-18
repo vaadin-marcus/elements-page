@@ -137,17 +137,17 @@
                 display: block;
               }
 
-              #nav {
+              #demo-nav {
                 width: 25%;
               }
 
-              #content {
+              #demo-content {
                 width: 75%;
                 padding: 12px;
                 box-sizing: border-box;
               }
 
-              #content paper-card {
+              #demo-content paper-card {
                 margin-bottom: 12px;
               }
 
@@ -160,12 +160,12 @@
 
             </style>
             <vaadin-split-panel id="simple">
-              <div id="nav">
+              <div id="demo-nav">
                 <paper-item focused>Inbox</paper-item>
                 <paper-item>Important</paper-item>
                 <paper-item>Spam</paper-item>
               </div>
-              <div id="content">
+              <div id="demo-content">
                 <template is="dom-repeat" items="[[emails]]">
                   <paper-card heading="From: [[item.from]]" image="" elevation="1"
                               animated-shadow="false">
