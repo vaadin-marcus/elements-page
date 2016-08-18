@@ -186,7 +186,7 @@
         <div class="tile-details">
           <div class="tile-title">Split Layout</div>
           <div class="tile-description">
-            Split Panel is a layout component that is split into resizeable
+            Split Layout is a layout component that is split into resizeable
             areas.
           </div>
         </div>

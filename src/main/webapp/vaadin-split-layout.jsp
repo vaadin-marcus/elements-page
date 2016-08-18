@@ -36,7 +36,7 @@
   <div class="row-fluid">
     <div class="span7">
       <p class="lead helvetica-light">
-        Split Panel is a layout component that allows you to partition a layout into resizeable
+        Split Layout is a component that allows you to partition a layout into resizeable
         areas.
       </p>
     </div>
@@ -130,64 +130,7 @@
         <demo-source name="Angular 2"
                      url="<%=request.getContextPath()%>/examples/core/split-layout/simple-angular2.ts"></demo-source>
 
-        <dom-module id="simple-split-layout">
-          <template>
-            <style>
-              :host {
-                display: block;
-              }
-
-              #demo-nav {
-                width: 25%;
-                min-width: 100px;
-              }
-
-              #demo-content {
-                width: 75%;
-                padding: 12px;
-                box-sizing: border-box;
-              }
-
-              #demo-content paper-card {
-                margin-bottom: 12px;
-              }
-
-              #simple {
-                height: 400px;
-                border: 1px solid #ddd;
-                margin: 20px 0;
-                background: #fff;
-              }
-
-            </style>
-            <vaadin-split-panel id="simple">
-              <div id="demo-nav">
-                <paper-item focused>Inbox</paper-item>
-                <paper-item>Important</paper-item>
-                <paper-item>Spam</paper-item>
-              </div>
-              <div id="demo-content">
-                <template is="dom-repeat" items="[[emails]]">
-                  <paper-card heading="From: [[item.from]]" image="" elevation="1"
-                              animated-shadow="false">
-                    <div class="card-content">
-                      <b>[[item.subject]]</b>
-                      <p>[[item.content]]</p>
-                    </div>
-                  </paper-card>
-                </template>
-              </div>
-            </vaadin-split-panel>
-          </template>
-          <script>
-            Polymer({
-              is: 'simple-split-layout',
-              properties: {
-                emails: Array
-              }
-            });
-          </script>
-        </dom-module>
+        <link rel="import" href="simple-split-layout.html">
         <simple-split-layout emails="[[emails]]"></simple-split-layout>
       </demo-viewer>
     </div>
@@ -201,78 +144,8 @@
                    url="<%=request.getContextPath()%>/examples/core/split-layout/nested-polymer.html"></demo-source>
       <demo-source name="Angular 2"
                    url="<%=request.getContextPath()%>/examples/core/split-layout/nested-angular2.ts"></demo-source>
-      <dom-module id="nested-split-layout">
-        <template>
-          <style>
-            :host {
-              display: block;
-            }
 
-            #demo-nav {
-              width: 25%
-              min-width: 100px;
-            }
-
-            #demo-content {
-              width: 75%;
-            }
-
-            #grid {
-            }
-
-            #email {
-              box-sizing: border-box;
-              padding: 12px;
-            }
-
-            #nested {
-              height: 500px;
-              border: 1px solid #ddd;
-              margin: 20px 0;
-            }
-          </style>
-          <vaadin-split-panel id="nested">
-            <div id="demo-nav">
-              <paper-item focused>Inbox</paper-item>
-              <paper-item>Important</paper-item>
-              <paper-item>Spam</paper-item>
-            </div>
-            <vaadin-split-panel id="demo-content" vertical>
-              <vaadin-grid id="grid" items="[[emails]]" on-selected-items-changed="_showEmail"
-                           frozen-columns="1" visible-rows="4">
-                <table>
-                  <colgroup>
-                    <col name="from" width="150">
-                    <col name="subject">
-                  </colgroup>
-                </table>
-              </vaadin-grid>
-              <div id="email">
-                <h2>[[selectedEmail.from]]</h2>
-                <p><b>[[selectedEmail.subject]]</b></p>
-                <p>[[selectedEmail.content]]</p>
-              </div>
-            </vaadin-split-panel>
-          </vaadin-split-panel>
-        </template>
-        <script>
-          Polymer({
-            is: 'nested-split-layout',
-            properties: {
-              emails: Array,
-              selectedEmail: Object
-            },
-            _showEmail: function() {
-              var grid = this.$.grid;
-              var selection = grid.selection.selected();
-
-              if (selection && !isNaN(selection[0])) {
-                this.selectedEmail = grid.items[selection[0]];
-              }
-            }
-          });
-        </script>
-      </dom-module>
+      <link rel="import" href="nested-split-layout.html">
       <nested-split-layout emails="[[emails]]"></nested-split-layout>
     </demo-viewer>
   </div>
