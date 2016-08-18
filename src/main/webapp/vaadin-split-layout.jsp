@@ -130,7 +130,7 @@
         <demo-source name="Angular 2"
                      url="<%=request.getContextPath()%>/examples/core/split-layout/simple-angular2.ts"></demo-source>
 
-        <link rel="import" href="simple-split-layout.html">
+        <link rel="import" href="<%=request.getContextPath()%>/simple-split-layout.html">
         <simple-split-layout emails="[[emails]]"></simple-split-layout>
       </demo-viewer>
     </div>
@@ -145,50 +145,48 @@
       <demo-source name="Angular 2"
                    url="<%=request.getContextPath()%>/examples/core/split-layout/nested-angular2.ts"></demo-source>
 
-      <link rel="import" href="nested-split-layout.html">
+      <link rel="import" href="<%=request.getContextPath()%>/nested-split-layout.html">
       <nested-split-layout emails="[[emails]]"></nested-split-layout>
     </demo-viewer>
   </div>
-
-
-  <script>
-    document.addEventListener('WebComponentsReady', function() {
-      var demo = document.querySelector('#demo-template');
-      demo.emails = [
-        {
-          from: 'Boss',
-          subject: 'Bring to the table win-win survival strategies to ensure proactive domination',
-          content: 'Capitalise on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.'
-        },
-        {
-          from: 'Boss',
-          subject: ' User generated content in real-time will have multiple touchpoints for offshoring',
-          content: 'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.'
-        },
-        {
-          from: 'Boss',
-          subject: 'Podcasting operational change management',
-          content: 'Taking seamless key performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration.'
-        },
-        {
-          from: 'Boss',
-          subject: 'A new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution',
-          content: 'Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.'
-        },
-        {
-          from: 'Boss',
-          subject: 'Efficiently unleash cross-media information without cross-media value',
-          content: 'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.'
-        },
-        {
-          from: 'Boss',
-          subject: 'Dramatically maintain clicks-and-mortar solutions without functional solutions',
-          content: 'Objectively innovate empowered manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis cutting-edge deliverables.'
-        }
-      ];
-    });
-  </script>
 </template>
+<script>
+  document.addEventListener('WebComponentsReady', function() {
+    var demo = document.querySelector('#demo-template');
+    demo.emails = [
+      {
+        from: 'Boss',
+        subject: 'Bring to the table win-win survival strategies to ensure proactive domination',
+        content: 'Capitalise on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.'
+      },
+      {
+        from: 'Boss',
+        subject: ' User generated content in real-time will have multiple touchpoints for offshoring',
+        content: 'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.'
+      },
+      {
+        from: 'Boss',
+        subject: 'Podcasting operational change management',
+        content: 'Taking seamless key performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration.'
+      },
+      {
+        from: 'Boss',
+        subject: 'A new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution',
+        content: 'Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.'
+      },
+      {
+        from: 'Boss',
+        subject: 'Efficiently unleash cross-media information without cross-media value',
+        content: 'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.'
+      },
+      {
+        from: 'Boss',
+        subject: 'Dramatically maintain clicks-and-mortar solutions without functional solutions',
+        content: 'Objectively innovate empowered manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis cutting-edge deliverables.'
+      }
+    ];
+  });
+</script>
 <!-- Demo section end -->
 
 
