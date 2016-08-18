@@ -36,7 +36,7 @@
   <div class="row-fluid">
     <div class="span7">
       <p class="lead helvetica-light">
-        Split Panel is a layout component that allows you to partition an area into resizeable
+        Split Panel is a layout component that allows you to partition a layout into resizeable
         areas.
       </p>
     </div>
@@ -126,9 +126,9 @@
 
       <demo-viewer selected="{{selected}}">
         <demo-source name="Polymer"
-                     url="<%=request.getContextPath()%>/examples/core/combo-box/basic-polymer.html"></demo-source>
+                     url="<%=request.getContextPath()%>/examples/core/split-layout/simple-polymer.html"></demo-source>
         <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/core/combo-box/basic-angular2.ts"></demo-source>
+                     url="<%=request.getContextPath()%>/examples/core/split-layout/simple-angular2.ts"></demo-source>
 
         <dom-module id="simple-split-layout">
           <template>
@@ -139,6 +139,7 @@
 
               #demo-nav {
                 width: 25%;
+                min-width: 100px;
               }
 
               #demo-content {
@@ -197,9 +198,9 @@
     <p>vaadin-split-layout may also be nested to create more complex configurable layouts.</p>
     <demo-viewer selected="{{selected}}">
       <demo-source name="Polymer"
-                   url="<%=request.getContextPath()%>/examples/core/combo-box/basic-polymer.html"></demo-source>
+                   url="<%=request.getContextPath()%>/examples/core/split-layout/nested-polymer.html"></demo-source>
       <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/core/combo-box/basic-angular2.ts"></demo-source>
+                   url="<%=request.getContextPath()%>/examples/core/split-layout/nested-angular2.ts"></demo-source>
       <dom-module id="nested-split-layout">
         <template>
           <style>
@@ -207,11 +208,12 @@
               display: block;
             }
 
-            #nav {
+            #demo-nav {
               width: 25%
+              min-width: 100px;
             }
 
-            #content {
+            #demo-content {
               width: 75%;
             }
 
@@ -230,12 +232,12 @@
             }
           </style>
           <vaadin-split-panel id="nested">
-            <div id="nav">
+            <div id="demo-nav">
               <paper-item focused>Inbox</paper-item>
               <paper-item>Important</paper-item>
               <paper-item>Spam</paper-item>
             </div>
-            <vaadin-split-panel id="content" vertical>
+            <vaadin-split-panel id="demo-content" vertical>
               <vaadin-grid id="grid" items="[[emails]]" on-selected-items-changed="_showEmail"
                            frozen-columns="1" visible-rows="4">
                 <table>

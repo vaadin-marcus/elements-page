@@ -178,6 +178,21 @@
       </a>
     </div>
 
+    <div class="tile">
+      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-split-layout.jsp" /></portlet:renderURL>">
+        <img src="<%=request.getContextPath()%>/img/preview/split-layout.png"
+             srcset="<%=request.getContextPath()%>/img/preview/split-layout@2x.png 2x"
+             alt="Polymer split layout">
+        <div class="tile-details">
+          <div class="tile-title">Split Layout</div>
+          <div class="tile-description">
+            Split Panel is a layout component that is split into resizeable
+            areas.
+          </div>
+        </div>
+      </a>
+    </div>
+
   </div>
 </div>
 

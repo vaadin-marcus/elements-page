@@ -1,0 +1,76 @@
+<script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-split-layout/vaadin-split-layout.html">
+<link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/vaadin-grid.html">
+
+<dom-module id="nested-split-layout">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      #demo-nav {
+        width: 25%
+      }
+
+      #demo-content {
+        width: 75%;
+      }
+
+      #grid {
+      }
+
+      #email {
+        box-sizing: border-box;
+        padding: 12px;
+      }
+
+      #nested {
+        height: 500px;
+        border: 1px solid #ddd;
+        margin: 20px 0;
+      }
+    </style>
+    <vaadin-split-panel id="nested">
+      <div id="demo-nav">
+        <paper-item focused>Inbox</paper-item>
+        <paper-item>Important</paper-item>
+        <paper-item>Spam</paper-item>
+      </div>
+      <vaadin-split-panel id="demo-content" vertical>
+        <vaadin-grid id="grid" items="[[emails]]" on-selected-items-changed="_showEmail"
+                     frozen-columns="1" visible-rows="4">
+          <table>
+            <colgroup>
+              <col name="from" width="150">
+              <col name="subject">
+            </colgroup>
+          </table>
+        </vaadin-grid>
+        <div id="email">
+          <h2>[[selectedEmail.from]]</h2>
+          <p><b>[[selectedEmail.subject]]</b></p>
+          <p>[[selectedEmail.content]]</p>
+        </div>
+      </vaadin-split-panel>
+    </vaadin-split-panel>
+  </template>
+  <script>
+    Polymer({
+      is: 'nested-split-layout',
+      properties: {
+        emails: Array,
+        selectedEmail: Object
+      },
+      _showEmail: function() {
+        var grid = this.$.grid;
+        var selection = grid.selection.selected();
+
+        if (selection && !isNaN(selection[0])) {
+          this.selectedEmail = grid.items[selection[0]];
+        }
+      }
+    });
+  </script>
+</dom-module>
+<nested-split-layout emails="[[emails]]"></nested-split-layout>
