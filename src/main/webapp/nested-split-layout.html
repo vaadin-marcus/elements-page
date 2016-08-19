@@ -59,6 +59,12 @@
         emails: Array,
         selectedEmail: Object
       },
+      ready: function(){
+        var grid = this.$.grid;
+        var items = grid.items;
+        grid.items = [];
+        grid.items = items;
+      },
       _showEmail: function() {
         var grid = this.$.grid;
         var selection = grid.selection.selected();
