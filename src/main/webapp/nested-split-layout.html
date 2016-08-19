@@ -60,10 +60,12 @@
         selectedEmail: Object
       },
       ready: function(){
-        var grid = this.$.grid;
-        var items = grid.items;
-        grid.items = [];
-        grid.items = items;
+        this.async(function(){
+          var grid = this.$.grid;
+          var items = grid.items;
+          grid.items = [];
+          grid.items = items;
+        }.bind(this));
       },
       _showEmail: function() {
         var grid = this.$.grid;
