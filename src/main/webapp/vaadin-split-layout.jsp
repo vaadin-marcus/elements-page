@@ -71,7 +71,7 @@
       </div>
       <%--<a href="https://vaadin.com/docs/-/part/elements/vaadin-split-layout/vaadin-split-layout-overview.html"--%>
       <%--class="w-button blue">Documentation</a>--%>
-      <a href="https://github.com/vaadin/vaadin-combo-box"
+      <a href="https://github.com/vaadin/vaadin-split-layout"
          class="w-button blue github">View on GitHub</a>
     </div>
   </div>
