@@ -137,7 +137,7 @@
   </div>
 
   <div class="elements-section">
-    <h5>Nested split panels</h5>
+    <h5>Nested split layouts</h5>
     <p>vaadin-split-layout may also be nested to create more complex configurable layouts.</p>
     <demo-viewer selected="{{selected}}">
       <demo-source name="Polymer"
