@@ -28,13 +28,13 @@
         margin: 20px 0;
       }
     </style>
-    <vaadin-split-panel id="nested">
+    <vaadin-split-layout id="nested">
       <div id="demo-nav">
         <paper-item focused>Inbox</paper-item>
         <paper-item>Important</paper-item>
         <paper-item>Spam</paper-item>
       </div>
-      <vaadin-split-panel id="demo-content" vertical>
+      <vaadin-split-layout id="demo-content" vertical>
         <vaadin-grid id="grid" items="[[emails]]" on-selected-items-changed="_showEmail"
                      frozen-columns="1" visible-rows="4">
           <table>
@@ -49,8 +49,8 @@
           <p><b>[[selectedEmail.subject]]</b></p>
           <p>[[selectedEmail.content]]</p>
         </div>
-      </vaadin-split-panel>
-    </vaadin-split-panel>
+      </vaadin-split-layout>
+    </vaadin-split-layout>
   </template>
   <script>
     Polymer({
