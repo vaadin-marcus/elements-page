@@ -4,7 +4,7 @@ import { PolymerElement } from '@vaadin/angular2-polymer';
 @Component({
     selector: 'simple-split-layout-component',
     template: `
-    <vaadin-split-panel id="simple">
+    <vaadin-split-layout id="simple">
       <div id="demo-nav">
         <paper-item focused>Inbox</paper-item>
         <paper-item>Important</paper-item>
@@ -19,7 +19,7 @@ import { PolymerElement } from '@vaadin/angular2-polymer';
             </div>
           </paper-card>
       </div>
-    </vaadin-split-panel>
+    </vaadin-split-layout>
   `,
     directives: [ PolymerElement('vaadin-split-layout'), PolymerElement('paper-card') ],
     styles: [`

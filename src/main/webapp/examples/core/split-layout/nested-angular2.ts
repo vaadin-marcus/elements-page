@@ -4,13 +4,13 @@ import { PolymerElement } from '@vaadin/angular2-polymer';
 @Component({
     selector: 'nested-split-layout-component',
     template: `
-    <vaadin-split-panel id="nested">
+    <vaadin-split-layout id="nested">
       <div id="demo-nav">
         <paper-item focused>Inbox</paper-item>
         <paper-item>Important</paper-item>
         <paper-item>Spam</paper-item>
       </div>
-      <vaadin-split-panel id="demo-content" vertical>
+      <vaadin-split-layout id="demo-content" vertical>
         <vaadin-grid id="grid" [items]="emails" (selected-items-changed)="showEmail($event)"
                      frozen-columns="1" visible-rows="4">
           <table>
@@ -25,8 +25,8 @@ import { PolymerElement } from '@vaadin/angular2-polymer';
           <p><b>{{selectedEmail.subject}}</b></p>
           <p>{{selectedEmail.content}}</p>
         </div>
-      </vaadin-split-panel>
-    </vaadin-split-panel>
+      </vaadin-split-layout>
+    </vaadin-split-layout>
   `,
     directives: [ PolymerElement('vaadin-split-layout'), PolymerElement('vaadin-grid') ],
     styles: [`

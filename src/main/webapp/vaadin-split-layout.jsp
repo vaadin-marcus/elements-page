@@ -71,7 +71,7 @@
       </div>
       <%--<a href="https://vaadin.com/docs/-/part/elements/vaadin-split-layout/vaadin-split-layout-overview.html"--%>
       <%--class="w-button blue">Documentation</a>--%>
-      <a href="https://github.com/vaadin/vaadin-combo-box"
+      <a href="https://github.com/vaadin/vaadin-split-layout"
          class="w-button blue github">View on GitHub</a>
     </div>
   </div>
@@ -137,7 +137,7 @@
   </div>
 
   <div class="elements-section">
-    <h5>Nested split panels</h5>
+    <h5>Nested split layouts</h5>
     <p>vaadin-split-layout may also be nested to create more complex configurable layouts.</p>
     <demo-viewer selected="{{selected}}">
       <demo-source name="Polymer"
