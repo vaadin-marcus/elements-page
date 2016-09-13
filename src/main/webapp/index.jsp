@@ -203,7 +203,7 @@
   <div class="row-fluid">
 
     <div class="span9">
-      <h5>Charts <span><%=Releases.getLatestVersionNumber("vaadin-charts", "3.1.0")%></span></h5>
+      <h5>Charts <span><%=Releases.getLatestVersionNumber("vaadin-charts", "3.2")%></span></h5>
       <p>Vaadin Charts contains tens of different types of charts that allow you to visualize and
         interact with data. All charts support declarative and dynamic data binding.</p>
     </div>
