@@ -70,7 +70,7 @@
         </div>
         <%}%>
       </div>
-      <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/overview.html"
+      <a href="https://vaadin.com/docs/-/part/elements/vaadin-grid/vaadin-grid-overview.html"
          class="w-button blue">Documentation</a>
       <a href="https://github.com/vaadin/vaadin-grid"
          class="w-button blue github">View on GitHub</a>
