@@ -39,7 +39,7 @@
   <div class="row-fluid">
     <div class="span7">
       <p class="lead helvetica-light">
-        Vaadin-icons contains 530 unique icons designed for web applications.
+        Vaadin-icons contains 630+ unique icons designed for web applications.
         Icon design is simple and favors sharp corners.
         Vaadin Icons are free to use from commercial apps to personal websites.
       </p>
