@@ -6,7 +6,7 @@
 
 <portlet:defineObjects/>
 
-<%PortalUtil.setPageTitle("530+ free Polymer compatible icons | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("630+ free Polymer compatible icons | Vaadin Elements", request);%>
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
