@@ -5,6 +5,8 @@
 <%@ page import="com.vaadin.elements.Releases" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
+<jsp:include page="imports.jsp"/>
+
 <portlet:defineObjects/>
 <%PortalUtil.setPageTitle("Web Components for business apps | Vaadin Elements", request);%>
 
@@ -47,30 +49,7 @@
 </div>
 
 <div class="w-wallpaper-container updates">
-  <div class="row-fluid">
-    <div class="span3"><h2 class="updates">Updates</h2></div>
-  </div>
-  <div class="row-fluid">
-    <div class="span3 release-date"><b>July 1, 2016</b></div>
-    <div class="span9 release-description"><a
-        href="https://vaadin.com/blog/-/blogs/vaadin-core-elements-1-1-released">Vaadin Core
-      Elements 1.1</a> released.
-    </div>
-  </div>
-  <div class="row-fluid">
-    <div class="span3 release-date"><b>June 17, 2016</b></div>
-    <div class="span9 release-description">Released <a
-        href="https://vaadin.com/docs/-/part/elements/angular2-polymer/overview.html">angular2-polymer</a>
-      directive that enables you to use Polymer Elements in Angular 2.
-    </div>
-  </div>
-  <div class="row-fluid">
-    <div class="span3 release-date"><b>May 19, 2016</b></div>
-    <div class="span9 release-description"><a
-        href="https://vaadin.com/blog/-/blogs/announcing-vaadin-elements-1-0">Vaadin Core Elements
-      1.0</a> released.
-    </div>
-  </div>
+  <elements-releases></elements-releases>
 </div>
 
 
@@ -188,6 +167,20 @@
           <div class="tile-description">
             Split Layout is a layout component that is split into resizeable
             areas.
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="tile">
+      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-context-menu.jsp" /></portlet:renderURL>">
+        <img src="<%=request.getContextPath()%>/img/preview/context-menu.png"
+             srcset="<%=request.getContextPath()%>/img/preview/context-menu@2x.png 2x"
+             alt="Polymer context menu">
+        <div class="tile-details">
+          <div class="tile-title">Context Menu</div>
+          <div class="tile-description">
+            Context Menu allows you to add a contextual menu to any element. The menu can be triggered by secondary click, long press or any other event.
           </div>
         </div>
       </a>

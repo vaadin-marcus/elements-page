@@ -1,0 +1,19 @@
+<vaadin-context-menu selector="#menuDemo">
+  <template>
+    <paper-menu>
+      <paper-item>Item 1</paper-item>
+      <paper-item>Item 2</paper-item>
+      <paper-item>Item 3</paper-item>
+      <paper-item>
+        <iron-icon icon="warning"></iron-icon>
+        <paper-item-body two-line>
+          <div>Item 4 - Line 1</div>
+          <div secondary>Item 4 - Line 2</div>
+        </paper-item-body>
+      </paper-item>
+    </paper-menu>
+  </template>
+  <div id="menuDemo">
+    Right click anywhere in this area to open the context menu.
+  </div>
+</vaadin-context-menu>
