@@ -1,6 +1,8 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.vaadin.elements.GitHubRelease" %>
 <%@ page import="com.vaadin.elements.Releases" %>
+<%@ page import="com.vaadin.elements.GitHubDemo" %>
+<%@ page import="com.vaadin.elements.Demos" %>
 <%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
@@ -119,7 +121,14 @@
 
 <jsp:include page="get-help.jsp"/>
 
-<!-- Demo section start -->
+<h1>asd sami here23</h1>
+
+<%
+	GitHubDemo firstDemo = Demos.getLatestDemo("vaadin-combo-box");
+%>
+<%=firstDemo.name%>
+
+<!-- Demo section start
 <a name="demo"></a>
 <template is="dom-bind">
   <div class="w-wallpaper-container zebra">
@@ -430,7 +439,7 @@
       </demo-viewer>
     </div>
   </div>
-</template>
+</template> -->
 <!-- Demo section end -->
 
 
