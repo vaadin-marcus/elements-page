@@ -34,7 +34,24 @@
     "vaadin-upload": "^1.0.0",
     "vaadin-context-menu": "^0.3.0",
     "vaadin-icons": "vaadin/vaadin-icons#^1.0.0",
-    "mock-http-request": "philikon/MockHttpRequest#master",
     "vaadin-split-layout": "^0.1.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "^4.0.0",
+    "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-icons": "^1.2.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "iron-form": "PolymerElements/iron-form#^1.0.15",
+    "elements-demo-resources": "Vaadin/elements-demo-resources#master",
+    "iron-flex-layout": "polymerelements/iron-flex-layout#^1.3.0",
+    "iron-meta": "polymerelements/iron-meta#^1.1.1",
+    "sugar": "^2.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "iron-icon": "^1.0.9",
+    "paper-button": "^1.0.14",
+    "mock-http-request": "philikon/MockHttpRequest#master",
+    "paper-toast": "PolymerElements/paper-toast#^1.0.0"
   }
 }
