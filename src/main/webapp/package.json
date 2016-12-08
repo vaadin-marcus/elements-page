@@ -16,6 +16,7 @@
     "gulp-vulcanize": "^6.1.0",
     "gulp-json-editor": "^2.2.1",
     "xmlhttprequest": "^1.8.0",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "request": "^2.79.0"
   }
 }

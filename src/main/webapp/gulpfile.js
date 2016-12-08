@@ -5,6 +5,7 @@ var rename = require('gulp-rename');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var runSequence = require('run-sequence');
 var jeditor = require("gulp-json-editor");
+var request = require("request")
 
 var devDependenciesToAdd = {};
 
@@ -19,9 +20,23 @@ function base64Decode(data) {
 }
 
 function fetchRepoData(repo, callback) {
-	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	var url = 'https://raw.githubusercontent.com/vaadin/' + repo + '/master/bower.json';
+	
+	request({
+	    url: url,
+	    json: true
+	}, function (error, response, body) {
+
+	    if (!error && response.statusCode === 200) {
+	    	callback(body.devDependencies);
+	    } else {
+	    	callback({});
+	    }
+	});
+	/*var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
 	xmlhttp.open('GET', 'https://api.github.com/repos/vaadin/'+repo+'/contents/bower.json');
 	xmlhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+	xmlhttp.setRequestHeader('User-Agent', 'Vaadin');
 	xmlhttp.onload = function () {
 	  try {
 		  var response = JSON.parse(this.responseText);
@@ -31,7 +46,7 @@ function fetchRepoData(repo, callback) {
 	    callback([]);
 	  }
 	}
-	xmlhttp.send();
+	xmlhttp.send();*/
 }
 
 gulp.task('default', function() {
@@ -60,8 +75,8 @@ gulp.task('update-bower', function(done) {
 			'fetch-icons', 
 			'fetch-upload',
 			'update-bower-json-file', function() {
-        console.log('bower.json is updated. Run `bower install`');
         done();
+        console.log('bower.json is updated. Go to `elements-page` directory and run `bower install`');
     });
 });
 
@@ -132,8 +147,6 @@ gulp.task('update-bower-json-file', function(done) {
 		  'mock-http-request': 'philikon/MockHttpRequest#master',
 		  'paper-toast': 'PolymerElements/paper-toast#^1.0.0'
 	}*/
-	
-	console.log(gulp.src("./../../../bower.json"));
 	
 	gulp.src("./../../../bower.json")
 		.pipe(jeditor({
