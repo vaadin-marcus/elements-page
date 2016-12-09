@@ -6,8 +6,14 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var runSequence = require('run-sequence');
 var jeditor = require("gulp-json-editor");
 var request = require("request");
+var htmlparser = require("htmlparser");
+var fs = require('fs');
 
 var devDependenciesToAdd = {};
+var vaadinElements = ['vaadin-combo-box', 'vaadin-context-menu', 'vaadin-date-picker', 'vaadin-grid', 'vaadin-icons', 'vaadin-split-layout', 'vaadin-upload'];
+var demoPaths = [];
+var importUrls = [];
+const bowerComponentsFolder = __dirname + '/bower_components';
 
 function base64Decode(data) {
   if (typeof Buffer.from === "function") {
@@ -49,6 +55,24 @@ function fetchRepoData(repo, callback) {
   xmlhttp.send();*/
 }
 
+function findChildren(data, vaadinElement) {
+  data.forEach(function(el) {
+    if (el.type === 'tag') {
+      if (el.name === 'link' && el.attribs && el.attribs.href) { // or somethign else related style, script...
+        if (el.attribs.href.includes('../../')) { // points to bower_components
+          importUrls.push(el.attribs.href.replace('../../', bowerComponentsFolder + '/'));
+        } else if (el.attribs.href.includes('../')) { // points to bower_components/element-name/
+          importUrls.push(el.attribs.href.replace('../', bowerComponentsFolder + '/' + vaadinElement + '/'));
+        } else { // points to bower_components/element-name/demo/
+          importUrls.push(bowerComponentsFolder + '/' + vaadinElement + '/demo/' + el.attribs.href);
+        }
+      } else if (el.children) {
+        findChildren(el.children, vaadinElement);
+      }
+    }
+  });
+}
+
 gulp.task('default', function() {
   return gulp.src('./imports.html')
     .pipe(vulcanize({
@@ -68,12 +92,12 @@ gulp.task('default', function() {
 gulp.task('update-bower', function(done) {
   runSequence(
     'clear',
-    'fetch-combo-box',
-    'fetch-date-picker',
-    'fetch-grid',
-    'fetch-split-layout',
-    'fetch-icons',
-    'fetch-upload',
+    'fetch-combo-box-dev-dependencies',
+    'fetch-date-picker-dev-dependencies',
+    'fetch-grid-dev-dependencies',
+    'fetch-split-layout-dev-dependencies',
+    'fetch-icons-dev-dependencies',
+    'fetch-upload-dev-dependencies',
     'update-bower-json-file',
     function() {
       done();
@@ -86,42 +110,42 @@ gulp.task('clear', function() {
   devDependenciesToAdd = {};
 });
 
-gulp.task('fetch-combo-box', function(done) {
+gulp.task('fetch-combo-box-dev-dependencies', function(done) {
   fetchRepoData('vaadin-combo-box', function(data) {
     Object.assign(devDependenciesToAdd, data);
     done();
   });
 });
 
-gulp.task('fetch-date-picker', function(done) {
+gulp.task('fetch-date-picker-dev-dependencies', function(done) {
   fetchRepoData('vaadin-date-picker', function(data) {
     Object.assign(devDependenciesToAdd, data);
     done();
   });
 });
 
-gulp.task('fetch-grid', function(done) {
+gulp.task('fetch-grid-dev-dependencies', function(done) {
   fetchRepoData('vaadin-grid', function(data) {
     Object.assign(devDependenciesToAdd, data);
     done();
   });
 });
 
-gulp.task('fetch-split-layout', function(done) {
+gulp.task('fetch-split-layout-dev-dependencies', function(done) {
   fetchRepoData('vaadin-split-layout', function(data) {
     Object.assign(devDependenciesToAdd, data);
     done();
   });
 });
 
-gulp.task('fetch-icons', function(done) {
+gulp.task('fetch-icons-dev-dependencies', function(done) {
   fetchRepoData('vaadin-icons', function(data) {
     Object.assign(devDependenciesToAdd, data);
     done();
   });
 });
 
-gulp.task('fetch-upload', function(done) {
+gulp.task('fetch-upload-dev-dependencies', function(done) {
   fetchRepoData('vaadin-upload', function(data) {
     Object.assign(devDependenciesToAdd, data);
     done();
@@ -155,4 +179,90 @@ gulp.task('update-bower-json-file', function(done) {
     }))
     .pipe(gulp.dest("./../../../"));
   done();
+});
+
+gulp.task('update-imports', function(done) {
+  runSequence(
+    'fetch-elements-demo-file-paths',
+    'fetch-elements-demo-file-imports',
+    'remove-duplicate-imports',
+    'update-imports-html',
+    function() {
+      console.log(importUrls);
+      //console.log(demoPaths);
+      done();
+    });
+});
+
+gulp.task('fetch-elements-demo-file-paths', function(done) {
+  var count = 0;
+  vaadinElements.forEach(function(el, i) {
+    fs.readdir(bowerComponentsFolder + '/' + el + '/demo/', function(err, paths) {
+      paths.forEach(function(path) {
+        demoPaths.push({
+          el: el,
+          path: bowerComponentsFolder + '/' + el + '/demo/' + path
+        });
+      });
+      count++;
+
+      if (count === vaadinElements.length) {
+        done();
+      }
+    });
+  });
+});
+
+function readFile() {
+
+}
+
+gulp.task('fetch-elements-demo-file-imports', function(done) {
+  var count = 0;
+  demoPaths.forEach(function(el) {
+    fs.readFile(el.path, 'utf8', function(err, html){
+      var handler = new htmlparser.DefaultHandler(function (error, dom) {
+        if (!error) {
+          findChildren(dom, el.el);
+        }
+        count++
+        if (count === demoPaths.length) {
+          done();
+        }
+      });
+      var parser = new htmlparser.Parser(handler);
+      parser.parseComplete(html);
+    });
+  });
+});
+
+gulp.task('remove-duplicate-imports', function(done) {
+  //TODO
+});
+
+gulp.task('update-imports-html', function(done) {
+  //TODO
+});
+
+gulp.task('fetch-combo-box-imports', function(done) {
+  /*console.log(demoPaths.length);
+  demoPaths.forEach(function() {
+
+  });*/
+
+
+
+  var element = 'vaadin-combo-box';
+
+
+  fs.readFile(bowerComponentsFolder + '/vaadin-combo-box/demo/basic.html', 'utf8', function(err, html){
+    var handler = new htmlparser.DefaultHandler(function (error, dom) {
+      if (!error) {
+        findChildren(dom, element);
+      }
+      done();
+    });
+    var parser = new htmlparser.Parser(handler);
+    parser.parseComplete(html);
+  });
 });
