@@ -1,3 +1,5 @@
+const vaadinElements = ['vaadin-combo-box', 'vaadin-context-menu', 'vaadin-date-picker', 'vaadin-grid', 'vaadin-icons', 'vaadin-split-layout', 'vaadin-upload'];
+
 var gulp = require('gulp');
 var vulcanize = require('gulp-vulcanize');
 var htmlmin = require('gulp-htmlmin');
@@ -10,10 +12,11 @@ var htmlparser = require("htmlparser");
 var fs = require('fs');
 
 var devDependenciesToAdd = {};
-var vaadinElements = ['vaadin-combo-box', 'vaadin-context-menu', 'vaadin-date-picker', 'vaadin-grid', 'vaadin-icons', 'vaadin-split-layout', 'vaadin-upload'];
 var demoPaths = [];
 var importUrls = [];
-const bowerComponentsFolder = __dirname + '/bower_components';
+var importsString = '';
+const bowerComponents = 'bower_components';
+const bowerComponentsFolder = __dirname + '/' + bowerComponents;
 
 function base64Decode(data) {
   if (typeof Buffer.from === "function") {
@@ -39,33 +42,23 @@ function fetchRepoData(repo, callback) {
       callback({});
     }
   });
-  /*var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-  xmlhttp.open('GET', 'https://api.github.com/repos/vaadin/'+repo+'/contents/bower.json');
-  xmlhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  xmlhttp.setRequestHeader('User-Agent', 'Vaadin');
-  xmlhttp.onload = function () {
-    try {
-  	  var response = JSON.parse(this.responseText);
-  	  var bowerData = JSON.parse(base64Decode(response.content));
-  	  callback(bowerData.devDependencies);
-    } catch (e) {
-      callback([]);
-    }
-  }
-  xmlhttp.send();*/
 }
 
 function findChildren(data, vaadinElement) {
   data.forEach(function(el) {
     if (el.type === 'tag') {
       if (el.name === 'link' && el.attribs && el.attribs.href) { // or somethign else related style, script...
-        if (el.attribs.href.includes('../../')) { // points to bower_components
-          importUrls.push(el.attribs.href.replace('../../', bowerComponentsFolder + '/'));
+
+        if (el.attribs.href.includes('https://cdn.vaadin.com/vaadin-core-elements/latest/')) { // points to cdn???
+          importUrls.push(el.attribs.href.replace('https://cdn.vaadin.com/vaadin-core-elements/latest/', bowerComponents + '/'));
+        } else if (el.attribs.href.includes('../../')) { // points to bower_components
+          importUrls.push(el.attribs.href.replace('../../', bowerComponents + '/'));
         } else if (el.attribs.href.includes('../')) { // points to bower_components/element-name/
-          importUrls.push(el.attribs.href.replace('../', bowerComponentsFolder + '/' + vaadinElement + '/'));
+          importUrls.push(el.attribs.href.replace('../', bowerComponents + '/' + vaadinElement + '/'));
         } else { // points to bower_components/element-name/demo/
-          importUrls.push(bowerComponentsFolder + '/' + vaadinElement + '/demo/' + el.attribs.href);
+          importUrls.push(bowerComponents + '/' + vaadinElement + '/demo/' + el.attribs.href);
         }
+        
       } else if (el.children) {
         findChildren(el.children, vaadinElement);
       }
@@ -105,9 +98,25 @@ gulp.task('update-bower', function(done) {
     });
 });
 
+gulp.task('update-imports', function(done) {
+  runSequence(
+    'fetch-elements-demo-file-paths',
+    'fetch-elements-demo-file-imports',
+    'remove-duplicate-imports',
+    'create-imports-link-tags',
+    'update-imports-html',
+    function() {
+      //console.log(importUrls);
+      done();
+    });
+});
+
+// Private tasks beneath this
+
 gulp.task('clear', function() {
   // TODO clear bower.json devDependencies
   devDependenciesToAdd = {};
+  importsString = '';
 });
 
 gulp.task('fetch-combo-box-dev-dependencies', function(done) {
@@ -181,19 +190,6 @@ gulp.task('update-bower-json-file', function(done) {
   done();
 });
 
-gulp.task('update-imports', function(done) {
-  runSequence(
-    'fetch-elements-demo-file-paths',
-    'fetch-elements-demo-file-imports',
-    'remove-duplicate-imports',
-    'update-imports-html',
-    function() {
-      console.log(importUrls);
-      //console.log(demoPaths);
-      done();
-    });
-});
-
 gulp.task('fetch-elements-demo-file-paths', function(done) {
   var count = 0;
   vaadinElements.forEach(function(el, i) {
@@ -237,32 +233,23 @@ gulp.task('fetch-elements-demo-file-imports', function(done) {
 });
 
 gulp.task('remove-duplicate-imports', function(done) {
-  //TODO
+  importUrls = importUrls.filter(function(item, pos) {
+    return importUrls.indexOf(item) == pos;
+  });
+  done();
 });
+
+gulp.task('create-imports-link-tags', function(done) {
+  importsString = '';
+  importUrls.forEach(function(url) {
+    importsString += ' <link rel="import" href="' + url + '">';
+  });
+  done();
+})
 
 gulp.task('update-imports-html', function(done) {
-  //TODO
-});
-
-gulp.task('fetch-combo-box-imports', function(done) {
-  /*console.log(demoPaths.length);
-  demoPaths.forEach(function() {
-
-  });*/
-
-
-
-  var element = 'vaadin-combo-box';
-
-
-  fs.readFile(bowerComponentsFolder + '/vaadin-combo-box/demo/basic.html', 'utf8', function(err, html){
-    var handler = new htmlparser.DefaultHandler(function (error, dom) {
-      if (!error) {
-        findChildren(dom, element);
-      }
-      done();
-    });
-    var parser = new htmlparser.Parser(handler);
-    parser.parseComplete(html);
+  fs.readFile(__dirname + '/imports.html', 'utf8', function(err, html){
+    html = html.replace(/<!-- start dynamic imports -->([\s\S]*?)<!-- end dynamic imports -->/, '<!-- start dynamic imports -->' + importsString + ' <!-- end dynamic imports -->');
+    fs.writeFile(__dirname + '/imports.html', html, 'utf8', done);
   });
 });
