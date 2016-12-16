@@ -1,4 +1,5 @@
 const vaadinElements = ['vaadin-combo-box', 'vaadin-context-menu', 'vaadin-date-picker', 'vaadin-grid', 'vaadin-icons', 'vaadin-split-layout', 'vaadin-upload'];
+const ignoredDependencies = ['web-component-tester', 'test-fixture', 'iron-test-helpers'];
 
 var gulp = require('gulp');
 var vulcanize = require('gulp-vulcanize');
@@ -37,7 +38,11 @@ function fetchRepoData(repo, callback) {
   }, function(error, response, body) {
 
     if (!error && response.statusCode === 200) {
-      callback(body.devDependencies);
+      var devDependencies = body.devDependencies;
+      ignoredDependencies.forEach(function(dependency) {
+        delete devDependencies[dependency];
+      });
+      callback(devDependencies);
     } else {
       callback({});
     }
@@ -58,7 +63,7 @@ function findChildren(data, vaadinElement) {
         } else { // points to bower_components/element-name/demo/
           importUrls.push(bowerComponents + '/' + vaadinElement + '/demo/' + el.attribs.href);
         }
-        
+
       } else if (el.children) {
         findChildren(el.children, vaadinElement);
       }
@@ -84,7 +89,6 @@ gulp.task('default', function() {
 
 gulp.task('update-bower', function(done) {
   runSequence(
-    'clear',
     'fetch-combo-box-dev-dependencies',
     'fetch-date-picker-dev-dependencies',
     'fetch-grid-dev-dependencies',
@@ -112,12 +116,6 @@ gulp.task('update-imports', function(done) {
 });
 
 // Private tasks beneath this
-
-gulp.task('clear', function() {
-  // TODO clear bower.json devDependencies
-  devDependenciesToAdd = {};
-  importsString = '';
-});
 
 gulp.task('fetch-combo-box-dev-dependencies', function(done) {
   fetchRepoData('vaadin-combo-box', function(data) {
@@ -162,26 +160,6 @@ gulp.task('fetch-upload-dev-dependencies', function(done) {
 });
 
 gulp.task('update-bower-json-file', function(done) {
-  // Mock Data when GitHub API limits hit
-  /*devDependenciesToAdd = {
-  	'web-component-tester': '^4.0.0',
-  	  'test-fixture': 'PolymerElements/test-fixture#^1.0.0',
-  	  'iron-test-helpers': 'PolymerElements/iron-test-helpers#^1.0.0',
-  	  'iron-component-page': 'PolymerElements/iron-component-page#^1.0.0',
-  	  'iron-icons': '^1.2.0',
-  	  'iron-demo-helpers': 'PolymerElements/iron-demo-helpers#^1.0.0',
-  	  'iron-form': 'PolymerElements/iron-form#^1.0.15',
-  	  'elements-demo-resources': 'Vaadin/elements-demo-resources#master',
-  	  'iron-flex-layout': 'polymerelements/iron-flex-layout#^1.3.0',
-  	  'iron-meta': 'polymerelements/iron-meta#^1.1.1',
-  	  sugar: '^2.0.0',
-  	  webcomponentsjs: 'webcomponents/webcomponentsjs#^0.7.0',
-  	  'iron-icon': '^1.0.9',
-  	  'paper-button': '^1.0.14',
-  	  'mock-http-request': 'philikon/MockHttpRequest#master',
-  	  'paper-toast': 'PolymerElements/paper-toast#^1.0.0'
-  }*/
-
   gulp.src("./../../../bower.json")
     .pipe(jeditor({
       'devDependencies': devDependenciesToAdd
@@ -208,10 +186,6 @@ gulp.task('fetch-elements-demo-file-paths', function(done) {
     });
   });
 });
-
-function readFile() {
-
-}
 
 gulp.task('fetch-elements-demo-file-imports', function(done) {
   var count = 0;
