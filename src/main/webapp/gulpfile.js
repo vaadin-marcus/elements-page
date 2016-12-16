@@ -49,23 +49,30 @@ function fetchRepoData(repo, callback) {
   });
 }
 
-function findChildren(data, vaadinElement) {
+function findChildren(data, element) {
   data.forEach(function(el) {
     if (el.type === 'tag') {
       if (el.name === 'link' && el.attribs && el.attribs.href) { // or somethign else related style, script...
 
-        if (el.attribs.href.includes('https://cdn.vaadin.com/vaadin-core-elements/latest/')) { // points to cdn???
-          importUrls.push(el.attribs.href.replace('https://cdn.vaadin.com/vaadin-core-elements/latest/', bowerComponents + '/'));
-        } else if (el.attribs.href.includes('../../')) { // points to bower_components
-          importUrls.push(el.attribs.href.replace('../../', bowerComponents + '/'));
-        } else if (el.attribs.href.includes('../')) { // points to bower_components/element-name/
-          importUrls.push(el.attribs.href.replace('../', bowerComponents + '/' + vaadinElement + '/'));
-        } else { // points to bower_components/element-name/demo/
-          importUrls.push(bowerComponents + '/' + vaadinElement + '/demo/' + el.attribs.href);
+        if (element.demo) {
+          if (el.attribs.href.includes('https://cdn.vaadin.com/vaadin-core-elements/latest/')) { // points to cdn???
+            importUrls.push(el.attribs.href.replace('https://cdn.vaadin.com/vaadin-core-elements/latest/', bowerComponents + '/'));
+          } else if (el.attribs.href.includes('../../')) { // points to bower_components
+            importUrls.push(el.attribs.href.replace('../../', bowerComponents + '/'));
+          } else if (el.attribs.href.includes('../')) { // points to bower_components/element-name/
+            importUrls.push(el.attribs.href.replace('../', bowerComponents + '/' + element.el + '/'));
+          } else { // points to bower_components/element-name/demo/
+            importUrls.push(bowerComponents + '/' + element.el + '/demo/' + el.attribs.href);
+          }
+        } else {
+          if (el.attribs.href.includes('../')) { // points to bower_components
+            importUrls.push(el.attribs.href.replace('../', bowerComponents + '/'));
+         } else { // points to bower_components/element-name/
+           importUrls.push(el.attribs.href.replace('../', bowerComponents + '/' + element.el + '/'));
+         }
         }
-
       } else if (el.children) {
-        findChildren(el.children, vaadinElement);
+        findChildren(el.children, element);
       }
     }
   });
@@ -105,6 +112,7 @@ gulp.task('update-bower', function(done) {
 gulp.task('update-imports', function(done) {
   runSequence(
     'fetch-elements-demo-file-paths',
+    'fetch-elements-api-site-paths',
     'fetch-elements-demo-file-imports',
     'remove-duplicate-imports',
     'create-imports-link-tags',
@@ -175,7 +183,8 @@ gulp.task('fetch-elements-demo-file-paths', function(done) {
       paths.forEach(function(path) {
         demoPaths.push({
           el: el,
-          path: bowerComponentsFolder + '/' + el + '/demo/' + path
+          path: bowerComponentsFolder + '/' + el + '/demo/' + path,
+          demo: true
         });
       });
       count++;
@@ -187,13 +196,25 @@ gulp.task('fetch-elements-demo-file-paths', function(done) {
   });
 });
 
+gulp.task('fetch-elements-api-site-paths', function(done) {
+  var count = 0;
+  vaadinElements.forEach(function(el, i) {
+    demoPaths.push({
+      el: el,
+      path: bowerComponentsFolder + '/' + el + '/index.html',
+      demo: false
+    });
+  });
+  done();
+});
+
 gulp.task('fetch-elements-demo-file-imports', function(done) {
   var count = 0;
   demoPaths.forEach(function(el) {
     fs.readFile(el.path, 'utf8', function(err, html){
       var handler = new htmlparser.DefaultHandler(function (error, dom) {
         if (!error) {
-          findChildren(dom, el.el);
+          findChildren(dom, el);
         }
         count++
         if (count === demoPaths.length) {
