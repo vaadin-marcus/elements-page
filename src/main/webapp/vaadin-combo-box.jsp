@@ -121,12 +121,121 @@
 
 <jsp:include page="get-help.jsp"/>
 
-<h1>asd sami here23</h1>
+<template is="dom-bind">
+  <style is="custom-style">
+    .flex-horizontal {
+      @apply(--layout-horizontal);
+    }
+    .flexchild {
+      @apply(--layout-flex);
+    }
+    iron-selector > * {
+      padding: 20px;
+      font-size: 1.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .iron-selected {
+      background-color: #000000;
+      color: #ffffff;
+    }
+    .navigation {
+      border-right: 1px solid rgba(0, 0, 0, 0.18);
+    }
+  </style>
+  <div class="w-wallpaper-container zebra">
+    <div class="w-wallpaper">&nbsp;</div>
+
+    <div class="elements-section">
+      <div class="container flex-horizontal">
+        <div class="navigation">
+          <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}">
+            <div name="demo">Demo</div>
+            <div name="docs">Documentation</div>
+            <div name="releases">Releases</div>
+          </iron-selector>
+        </div>
+        <div class="flexchild">
+          <iron-lazy-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" hide-immediately>
+            <template is="iron-lazy-page" data-nav="demo">
+              <h3>demo</h3>
+              <span>from inline template</span>
+            </template>
+            <template is="iron-lazy-page" data-nav="docs">
+              <vaadin-component-page src="bower_components/vaadin-combo-box/vaadin-combo-box.html"></vaadin-component-page>
+            </template>
+            <template is="iron-lazy-page" data-nav="releases">
+              <h3>releases</h3>
+              <span>from inline template</span>
+            </template>
+          </iron-lazy-pages>
+          <!-- add iron-lazy-pages here -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<h1>asd sami here2</h1>
 
 <%
 	GitHubDemo firstDemo = Demos.getLatestDemo("vaadin-combo-box");
 %>
 <%=firstDemo.name%>
+
+
+
+
+<!--<h3>Configuring the Combo Box</h3>
+
+<demo-snippet>
+  <template>
+    <vaadin-combo-box id='demo1' label="Element"></vaadin-combo-box>
+    <script>
+      var combobox = document.querySelector('#demo1');
+      // The elements is an array of String values.
+      combobox.items = elements;
+    </script>
+  </template>
+</demo-snippet>
+
+<h3>Selecting a Value</h3>
+<demo-snippet>
+  <template>
+    <vaadin-combo-box id="demo2" label="Element"></vaadin-combo-box>
+    <p>Selected value: <span id="selected-value"></span>.</p>
+
+    <script>
+      var combobox2 = document.querySelector('#demo2');
+      combobox2.items = elements;
+      combobox2.addEventListener('value-changed', function() {
+        document.querySelector('#selected-value').innerHTML = combobox2.value;
+      });
+      combobox2.value = 'Carbon';
+    </script>
+  </template>
+</demo-snippet>
+
+<h3>Using as a Form Field</h3>
+<demo-snippet>
+  <template>
+    <form is="iron-form" method="post" demo>
+      <vaadin-combo-box name='name' required label="Element"></vaadin-combo-box>
+      <button>Submit</button>
+    </form>
+
+    <script>
+      var form = document.querySelector('form');
+      var combobox3 = form.querySelector('vaadin-combo-box');
+      combobox3.items = elements;
+      form.addEventListener('iron-form-submit', function() {
+        alert('Form submitted with name: ' + form.serialize().name);
+        return false;
+      });
+    </script>
+  </template>
+</demo-snippet>-->
 
 <!-- Demo section start
 <a name="demo"></a>

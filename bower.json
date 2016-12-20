@@ -35,7 +35,8 @@
     "vaadin-upload": "#master",
     "vaadin-context-menu": "#master",
     "vaadin-icons": "#master",
-    "vaadin-split-layout": "#master"
+    "vaadin-split-layout": "#master",
+    "iron-lazy-pages": "TimvdLippe/iron-lazy-pages#^1.4.4"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
