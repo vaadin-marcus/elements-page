@@ -28,6 +28,7 @@
     "neon-animation": "PolymerElements/neon-animation#^1.0.8",
     "js-beautify": "~1.5.10",
     "time-elements": "~0.4.0",
+    "iron-selector": "PolymerElements/iron-selector#^1.5.2",
     "vaadin-grid": "#master",
     "vaadin-date-picker": "#master",
     "vaadin-combo-box": "#master",
