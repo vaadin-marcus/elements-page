@@ -142,6 +142,57 @@
     .navigation {
       border-right: 1px solid rgba(0, 0, 0, 0.18);
     }
+    .releases-list, .demos-list {
+      padding: 20px;
+    }
+    .release-heading, .markdown-html a {
+      color: #4078c0;
+      text-decoration: none;
+    }
+    .release-heading:hover, .markdown-html a:hover {
+      text-decoration: underline;
+    }
+    .markdown-html {
+      padding-bottom: 24px;
+    }
+    
+    code {
+      background: rgba(0,0,0,0.04);
+  	  font-size: 85%;
+  	  padding: 0;
+  	  padding-top: 0.2em;
+  	  padding-bottom: 0.2em;
+      border-radius: 3px;
+    }
+    pre {
+      background: rgba(0,0,0,0.04);
+      padding: 16px;
+    }
+    pre code {
+      background: none;
+    }
+    .lang-html {
+      
+    }
+    .avatar {
+      display: inline-block;
+      overflow: hidden;
+      line-height: 1;
+      vertical-align: middle;
+      border-radius: 3px;
+    }
+    .release-authorship {
+      color: #767676;
+    }
+    .release-authorship > a {
+      color: #666;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .release-authorship > a:hover {
+      text-decoration: underline;
+    }
+    
   </style>
   <div class="w-wallpaper-container zebra">
     <div class="w-wallpaper">&nbsp;</div>
@@ -157,7 +208,7 @@
         </div>
         <div class="flexchild">
           <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}">
-            <div data-nav="demo" id="demo_content">
+            <div data-nav="demo" id="demo_content" class="demos-list">
               <h3>Configuring the Combo Box</h3>
 
               <demo-snippet>
@@ -211,12 +262,18 @@
             <div data-nav="docs">
               <vaadin-component-page src="bower_components/vaadin-combo-box/vaadin-combo-box.html"></vaadin-component-page>
             </div>
-            <div data-nav="releases">
+            <div data-nav="releases" class="releases-list">
               <%
                 List releases = Releases.getLatestReleases("vaadin-combo-box");
 			    for(int i=0; i < releases.size(); i++){
 			  %>
-		    	<h1><%= ((GitHubRelease)releases.get(i)).name %></h1>
+		    	<h1><a href="#" target="_blank" class="release-heading"><%= ((GitHubRelease)releases.get(i)).name %></a></h1>
+		    	<p class="release-authorship">
+		          <img alt="@<%= ((GitHubRelease)releases.get(i)).author.login %>" class="avatar" height="20" src="<%= ((GitHubRelease)releases.get(i)).author.avatarUrl %>" width="20">
+		          <a href="<%= ((GitHubRelease)releases.get(i)).author.htmlUrl %>" target="_blank"><%= ((GitHubRelease)releases.get(i)).author.login %></a>
+		          released this 
+		          <%= ((GitHubRelease)releases.get(i)).publishedAt %>
+		        </p>
 		    	<marked-element>
 				  <div class="markdown-html"></div>
 				  <noscript type="text/markdown"><%=((GitHubRelease)releases.get(i)).body%></noscript>

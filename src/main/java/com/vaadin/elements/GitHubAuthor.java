@@ -11,7 +11,7 @@ public class GitHubAuthor {
 
     @SerializedName("avatar_url")
     @Expose
-    public String avatar_url;
+    public String avatarUrl;
 
     @SerializedName("tag_name")
     @Expose
@@ -19,5 +19,5 @@ public class GitHubAuthor {
 
     @SerializedName("html_url")
     @Expose
-    public String html_url;
+    public String htmlUrl;
 }
