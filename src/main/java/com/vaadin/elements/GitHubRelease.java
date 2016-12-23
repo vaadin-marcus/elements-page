@@ -20,8 +20,13 @@ public class GitHubRelease {
     @SerializedName("published_at")
     @Expose
     public String publishedAt;
-
-
-
+    
+    @SerializedName("body")
+    @Expose
+    public String body;
+    
+    @SerializedName("author")
+    @Expose
+    public GitHubAuthor author;
 
 }

@@ -556,6 +556,10 @@ h2.updates {
     color: #fff;
 }
 
+.vaadin-element-page-navigation {
+    padding: 1.6rem 0 2.2rem 0 !important;
+}
+
 .elements-hero-mini .polymer-tag {
     float: right;
 }
@@ -1108,3 +1112,10 @@ h2.updates {
     text-transform: uppercase;
     color: #00b4f0;
 }
+
+@media (max-width: 979px) {
+ 	.vaadin-element-page-navigation {
+    	display: none;
+  	}
+}
+  
