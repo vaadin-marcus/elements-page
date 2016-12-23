@@ -113,7 +113,7 @@
  					April 1, 2014
 			</relative-time>
 		  </p>
-      <my-markdown markdown="<%=((GitHubRelease)releases.get(i)).body%>"></my-markdown>
+      	  <my-markdown markdown="<%=((GitHubRelease)releases.get(i)).body%>"></my-markdown>
 		  <%
 		    }
 		  %>
