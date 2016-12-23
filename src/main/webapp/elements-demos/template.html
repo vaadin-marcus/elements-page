@@ -1,0 +1,67 @@
+<dom-module id="my-template">
+  <template>
+    <style include="demo-pages-shared-styles iron-flex iron-flex-alignment demo-pages-shared-styles">
+      :host {
+        display: block;
+      }
+      nav {
+        display: block;
+      }
+      nav.vertical-section {
+        margin-left: 0;
+        margin-right: 0;
+        padding-top: 8px;
+        padding-bottom: 1px;
+      }
+      ul {
+        padding: 0;
+      }
+      li {
+        padding: 0 24px 8px 0;
+        list-style: none;
+        @apply --paper-font-button;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+      .current {
+        color: var(--secondary-text-color) !important;
+      }
+      .centered {
+        max-width: 800px;
+      }
+    </style>
+
+    <div class="vertical-section-container centered">
+      <nav class="vertical-section">
+        <ul class="layout horizontal wrap">
+          <iron-selector attr-for-selected="name" selected="{{selectedItem}}">
+            <template is="dom-repeat" items="[[demos]]">
+              <li name="[[item.href]]">[[item.name]]</li>
+            </template>
+          </iron-selector>
+        </ul>
+      </nav>
+
+      <iron-pages selected="0" attr-for-selected="name" selected="[[selectedItem]]">
+        <!-- Start demo snippets --> <!-- End demo snippets -->
+      </iron-pages>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'my-template',
+      properties: {
+        demos: {
+          type: Array,
+          value: function() {
+            return //demosProperty;
+          }
+        },
+        selectedItem: {
+          type: String,
+          value: 'index.html'
+        }
+      }
+    });
+  </script>
+</dom-module>

@@ -19,6 +19,7 @@
     "xmlhttprequest": "^1.8.0",
     "run-sequence": "^1.2.2",
     "request": "^2.79.0",
-    "htmlparser": "^1.7.7"
+    "htmlparser": "^1.7.7",
+    "cheerio": "^0.22.0"
   }
 }

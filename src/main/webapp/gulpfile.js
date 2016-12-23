@@ -11,6 +11,7 @@ var jeditor = require("gulp-json-editor");
 var request = require("request");
 var htmlparser = require("htmlparser");
 var fs = require('fs');
+var cheerio = require('cheerio')
 
 var devDependenciesToAdd = {};
 var demoPaths = [];
@@ -121,6 +122,64 @@ gulp.task('update-imports', function(done) {
       //console.log(importUrls);
       done();
     });
+});
+
+gulp.task('update-demos', function(done) {
+  runSequence(
+    'create-combo-box-demos',
+    function() {
+      //console.log(importUrls);
+      done();
+    });
+});
+
+gulp.task('create-combo-box-demos', function(done) {
+  // Create a new file, which we'll update later
+  fs.createReadStream('elements-demos/template.html').pipe(fs.createWriteStream('elements-demos/vaadin-combo-box-demo.html'));
+  var demos = [];
+
+  // Get element's demo/index.html file, from which we'll know the demo files
+  fs.readFile('bower_components/vaadin-combo-box/demo/index.html', 'utf8', function(err, html){
+    var $ = cheerio.load(html);
+    $('li').each(function(i, elem) {
+      demos.push({
+        name: $(this).text(),
+        href: $(this).find('a').attr('href') ? $(this).find('a').attr('href') : 'index.html'
+      });
+    });
+
+    demos.forEach(function(demo) {
+      fs.readFile('bower_components/vaadin-combo-box/demo/' + demo.href, 'utf8', function(err, html){
+        console.log(html);
+      });
+    });
+    console.log(demos);
+    //console.log($('li'));
+    /*var htmlEl = document.createElement('html');
+    htmlEl.innerHTML = html;
+    console.log(htmlEl);*/
+  });
+
+
+  fs.readFile('elements-demos/vaadin-combo-box-demo.html', 'utf8', function(err, html){
+    //console.log(html);
+    // 0. get demo/index.html
+    // 1. get navigation
+    // 2. from navigation, get other files
+    // 3. from all the files, get demo-snippets
+    /*var handler = new htmlparser.DefaultHandler(function (error, dom) {
+      if (!error) {
+        findChildren(dom, el);
+      }
+      count++
+      if (count === demoPaths.length) {
+        done();
+      }
+    });
+    var parser = new htmlparser.Parser(handler);
+    parser.parseComplete(html);*/
+  });
+  done();
 });
 
 // Private tasks beneath this

@@ -155,7 +155,7 @@
     .markdown-html {
       padding-bottom: 24px;
     }
-    
+
     code {
       background: rgba(0,0,0,0.04);
   	  font-size: 85%;
@@ -172,7 +172,7 @@
       background: none;
     }
     .lang-html {
-      
+
     }
     .avatar {
       display: inline-block;
@@ -192,7 +192,7 @@
     .release-authorship > a:hover {
       text-decoration: underline;
     }
-    
+
   </style>
   <div class="w-wallpaper-container zebra">
     <div class="w-wallpaper">&nbsp;</div>
@@ -209,7 +209,7 @@
         <div class="flexchild">
           <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}">
             <div data-nav="demo" id="demo_content" class="demos-list">
-              <h3>Configuring the Combo Box</h3>
+              <!--<h3>Configuring the Combo Box</h3>
 
               <demo-snippet>
                 <template>
@@ -257,7 +257,8 @@
                     });
                   </script>
                 </template>
-              </demo-snippet>
+              </demo-snippet>-->
+              <vaadin-combo-box-demo></vaadin-combo-box-demo>
             </div>
             <div data-nav="docs">
               <vaadin-component-page src="bower_components/vaadin-combo-box/vaadin-combo-box.html"></vaadin-component-page>
@@ -265,24 +266,24 @@
             <div data-nav="releases" class="releases-list">
               <%
                 List releases = Releases.getLatestReleases("vaadin-combo-box");
-			    for(int i=0; i < releases.size(); i++){
-			  %>
-		    	<h1><a href="#" target="_blank" class="release-heading"><%= ((GitHubRelease)releases.get(i)).name %></a></h1>
-		    	<p class="release-authorship">
-		          <img alt="@<%= ((GitHubRelease)releases.get(i)).author.login %>" class="avatar" height="20" src="<%= ((GitHubRelease)releases.get(i)).author.avatarUrl %>" width="20">
-		          <a href="<%= ((GitHubRelease)releases.get(i)).author.htmlUrl %>" target="_blank"><%= ((GitHubRelease)releases.get(i)).author.login %></a>
-		          released this 
-		          <%= ((GitHubRelease)releases.get(i)).publishedAt %>
-		        </p>
-		    	<marked-element>
-				  <div class="markdown-html"></div>
-				  <noscript type="text/markdown"><%=((GitHubRelease)releases.get(i)).body%></noscript>
-				</marked-element>
-			  <%
-			    }
-			  %>
-            </div>
-          </iron-lazy-pages>
+			          for(int i=0; i < releases.size(); i++){
+			        %>
+		    	    <h1><a href="#" target="_blank" class="release-heading"><%= ((GitHubRelease)releases.get(i)).name %></a></h1>
+		    	    <p class="release-authorship">
+		            <img alt="@<%= ((GitHubRelease)releases.get(i)).author.login %>" class="avatar" height="20" src="<%= ((GitHubRelease)releases.get(i)).author.avatarUrl %>" width="20">
+		            <a href="<%= ((GitHubRelease)releases.get(i)).author.htmlUrl %>" target="_blank"><%= ((GitHubRelease)releases.get(i)).author.login %></a>
+		            released this
+		            <%= ((GitHubRelease)releases.get(i)).publishedAt %>
+		          </p>
+		    	  <marked-element>
+				      <div class="markdown-html"></div>
+				      <noscript type="text/markdown"><%=((GitHubRelease)releases.get(i)).body%></noscript>
+				    </marked-element>
+    			  <%
+    			    }
+    			  %>
+          </div>
+          </iron-pages>
         </div>
       </div>
     </div>

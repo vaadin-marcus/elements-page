@@ -20,4 +20,6 @@ public class GitHubAuthor {
     @SerializedName("html_url")
     @Expose
     public String htmlUrl;
+    
+    
 }
