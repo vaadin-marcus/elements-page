@@ -85,6 +85,7 @@ documentation page including demos (if available).
         max-width: var(--vaadin-component-page-max-width, 48em);
         @apply(--vaadin-component-page-container);
         padding: 20px;
+        margin: 0 auto;
       }
       #active {
         font-size: 20px;
@@ -333,6 +334,11 @@ documentation page including demos (if available).
           },
           /** The complete URL to this component's source. */
           _srcUrl: String,
+
+          _vaadinActiveElement: {
+            type: String,
+            observer: '_setActiveFromVaadinActiveElement'
+          }
         },
         observers: [
           '_updateFrameSrc(view, base)',
@@ -340,15 +346,15 @@ documentation page including demos (if available).
         ],
         attached: function() {
           // In the catalog, let the catalog do all the routing
-          if (!this.catalog) {
+          /*if (!this.catalog) {
             this._setActiveFromHash();
             this.listen(window, 'hashchange', '_setActiveFromHash');
-          }
+          }*/
         },
         detached: function() {
-          if (!this.catalog) {
+          /*if (!this.catalog) {
             this.unlisten(window, 'hashchange', '_setActiveFromHash');
-          }
+          }*/
         },
         ready: function() {
           var elements = this._loadJson();
@@ -387,20 +393,13 @@ documentation page including demos (if available).
         /**
          * Load the page identified in the fragment identifier.
          */
-        _setActiveFromHash: function(hash) {
-          // hash is either element-name or element-name:{properties|methods|events} or
-          // element-name:{property|method|event}.member-name
-          var hash = window.location.hash;
-          if (hash) {
-            var elementDelimiter = hash.indexOf(':');
-            elementDelimiter = (elementDelimiter == -1) ? hash.length : elementDelimiter;
-            var el = hash.slice(1, elementDelimiter);
-            if (this.active != el) {
-              this.active = el;
-            }
-            this.$.viewer.scrollToAnchor(hash);
-          }
-        },
+         _setActiveFromVaadinActiveElement: function(activeElement) {
+           if (activeElement) {
+             if (this.active != activeElement) {
+               this.active = activeElement;
+             }
+           }
+         },
         _srcChanged: function() {
           var srcUrl;
           if (this.docSrc) {
@@ -538,7 +537,6 @@ documentation page including demos (if available).
               // On initial load, scroll to the selected anchor (if any).
               // This probably shouldn't be required when we're running
               // in the catalog, but at the moment it is.
-              this.$.viewer.scrollToAnchor(window.location.hash);
             }
           }
         },
@@ -561,7 +559,7 @@ documentation page including demos (if available).
         },
         _handleMenuItemSelected: function(e) {
           if (e.target && e.target.value) {
-            window.location.hash = '#' + e.target.value;
+            this._vaadinActiveElement = e.target.value;
           }
         },
         _handleAjaxResponse: function(e, req) {

@@ -91,7 +91,7 @@
              <iframe src="http://localhost:8081/components/vaadin-combo-box/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
            </div>
            <div data-nav="docs">
-             <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/vaadin-combo-box.html"></vaadin-component-page>
+             <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/doc-imports.html"></vaadin-component-page>
            </div>
            <div data-nav="releases" class="releases-list">
              <%
@@ -125,7 +125,6 @@
 </template>
 <script>
   document.querySelector('#dynamicDataTemplate').selectedNavItem = 'demo';
-
 </script>
 <!-- Demo section end -->
 
