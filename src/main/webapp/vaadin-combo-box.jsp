@@ -69,10 +69,7 @@
   </div>
 </div>
 
-
 <!-- Intro section end -->
-
-
 
 <!-- Demo section start -->
 <a name="demo"></a>
@@ -86,7 +83,7 @@
        </iron-selector>
        <a href="https://jsbin.com/nafuwadebi/edit?html,output" class="try-out-link" target="_blank">
          <div class="try-out">
-           Try out
+           Try it out
            <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
              <path d="M0 0h24v24H0z" fill="none"/>
 	         <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
@@ -104,7 +101,7 @@
          
          <a href="https://jsbin.com/nafuwadebi/edit?html,output" class="try-out-link" target="_blank">
            <div class="try-out">
-	         Try out
+	         Try it out
 	         <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
 	           <path d="M0 0h24v24H0z" fill="none"/>
 	           <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
@@ -115,7 +112,7 @@
        <div class="flexchild">
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}">
            <div data-nav="demo" id="demo_content" class="demos-list">
-             <iframe src="http://localhost:8081/components/vaadin-combo-box/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
+             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
            </div>
            <div data-nav="docs">
              <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/doc-imports.html"></vaadin-component-page>
@@ -142,10 +139,10 @@
 		  </p>
 		  <marked-element id="markdown_<%=((GitHubRelease)releases.get(i)).id%>">
       		<div class="markdown-html"></div>
+      		<noscript type="text/markdown">
+    	      <%=((GitHubRelease)releases.get(i)).body%>
+			</noscript>
     	  </marked-element>
-    	  <noscript id="template_<%=((GitHubRelease)releases.get(i)).id%>">
-    	    <%=((GitHubRelease)releases.get(i)).body%>
-    	  </noscript>
 		  <%
 		    }
 		  %>
@@ -159,7 +156,5 @@
   document.querySelector('#dynamicDataTemplate').selectedNavItem = 'demo';
 </script>
 <!-- Demo section end -->
-
-
 
 <jsp:include page="bottom-actions.jsp"/>
