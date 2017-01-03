@@ -28,5 +28,9 @@ public class GitHubRelease {
     @SerializedName("author")
     @Expose
     public GitHubAuthor author;
+    
+    @SerializedName("id")
+    @Expose
+    public String id;
 
 }
