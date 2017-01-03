@@ -1,0 +1,21 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<dom-module id="local-time-element">
+  <template>
+    [[_localeString]]
+  </template>
+  <script>
+    Polymer({
+      is: 'local-time-element',
+      properties: {
+        time: {
+          type: Date,
+          observer: '_timeChanged'
+        },
+        _localeString: String
+      },
+      _timeChanged: function(time) {
+        this._localeString = time.toLocaleDateString();
+      }
+    });
+  </script>
+</dom-module>

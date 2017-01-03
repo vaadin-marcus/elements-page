@@ -63,7 +63,8 @@
       </div>
     </div>
     <div class="span5">
-     <p>add image here</p>
+     <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-combo-box.png"
+          alt="vaadin-combo-box">
     </div>
   </div>
 </div>
@@ -84,6 +85,16 @@
            <div name="docs">Documentation</div>
            <div name="releases">Releases</div>
          </iron-selector>
+         
+         <a href="#" class="try-out-link" target="_blank">
+           <div class="try-out">
+	         Try out
+	         <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+	           <path d="M0 0h24v24H0z" fill="none"/>
+	           <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+	         </svg>
+           </div>
+         </a>
        </div>
        <div class="flexchild">
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}">
@@ -98,7 +109,7 @@
                List releases = Releases.getLatestReleases("vaadin-combo-box");
                for(int i=0; i < releases.size(); i++){
 		  %>
-		  <h1><a href="#" target="_blank" class="release-heading"><%= ((GitHubRelease)releases.get(i)).name %></a></h1>
+		  <h1><a href="<%=((GitHubRelease)releases.get(i)).htmlUrl%>" target="_blank" class="release-heading"><%= ((GitHubRelease)releases.get(i)).name %></a></h1>
 		  <p class="release-authorship">
 		    <img alt="@<%= ((GitHubRelease)releases.get(i)).author.login %>"
 		        class="avatar"
@@ -109,11 +120,16 @@
 		      <%= ((GitHubRelease)releases.get(i)).author.login %>
 		    </a>
 		    released this
-		    <relative-time datetime="<%= ((GitHubRelease)releases.get(i)).publishedAt %>">
- 					April 1, 2014
-			</relative-time>
+		    <local-time-element time="<%= ((GitHubRelease)releases.get(i)).publishedAt %>">
+ 			  <%= ((GitHubRelease)releases.get(i)).publishedAt %>
+			</local-time-element>
 		  </p>
-      	  <my-markdown markdown="<%=((GitHubRelease)releases.get(i)).body%>"></my-markdown>
+		  <marked-element id="markdown_<%=((GitHubRelease)releases.get(i)).id%>">
+      		<div class="markdown-html"></div>
+    	  </marked-element>
+    	  <noscript id="template_<%=((GitHubRelease)releases.get(i)).id%>">
+    	    <%=((GitHubRelease)releases.get(i)).body%>
+    	  </noscript>
 		  <%
 		    }
 		  %>
