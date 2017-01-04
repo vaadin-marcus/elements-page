@@ -93,7 +93,7 @@
          <div name="docs">Documentation</div>
          <div name="releases">Releases</div>
        </iron-selector>
-       <a href="https://jsbin.com/nafuwadebi/edit?html,output" class="try-out-link" target="_blank">
+       <a href="https://jsbin.com/cidexax/1/edit?html,output" class="try-out-link" target="_blank">
          <div class="try-out">
            Try it out
            <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +111,7 @@
            <div name="releases">Releases</div>
          </iron-selector>
          
-         <a href="https://jsbin.com/nafuwadebi/edit?html,output" class="try-out-link" target="_blank">
+         <a href="https://jsbin.com/cidexax/1/edit?html,output" class="try-out-link" target="_blank">
            <div class="try-out">
 	         Try it out
 	         <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
