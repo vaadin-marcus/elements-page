@@ -64,6 +64,7 @@
     </div>
     <div class="span5">
      <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-combo-box.png"
+     	  class="element-image"
           alt="vaadin-combo-box">
     </div>
   </div>
@@ -76,7 +77,7 @@
 <template is="dom-bind" id="dynamicDataTemplate">
   <div class="w-wallpaper-container zebra elements-dynamic-content">
      <div class="top-navigation">
-       <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector">
+       <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector" on-iron-select="navigationChanged">
          <div name="demo">Demo</div>
          <div name="docs">Documentation</div>
          <div name="releases">Releases</div>
@@ -91,9 +92,9 @@
          </div>
        </a>
      </div>
-     <div class="flex-container">
+     <div class="flex-container dynamic-list-top">
        <div class="navigation">
-         <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="nav_selector">
+         <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="nav_selector" on-iron-select="navigationChanged">
            <div name="demo">Demo</div>
            <div name="docs">Documentation</div>
            <div name="releases">Releases</div>
@@ -137,12 +138,10 @@
  			  <%= ((GitHubRelease)releases.get(i)).publishedAt %>
 			</local-time-element>
 		  </p>
-		  <marked-element id="markdown_<%=((GitHubRelease)releases.get(i)).id%>">
-      		<div class="markdown-html"></div>
-      		<noscript type="text/markdown">
-    	      <%=((GitHubRelease)releases.get(i)).body%>
-			</noscript>
-    	  </marked-element>
+		  <marked-element>
+		    <div class="markdown-html"></div>
+		    <noscript type="text/markdown"><%=((GitHubRelease)releases.get(i)).body%></noscript>
+          </marked-element>
 		  <%
 		    }
 		  %>
@@ -152,9 +151,8 @@
      </div>
   </div>
 </template>
-<script>
-  document.querySelector('#dynamicDataTemplate').selectedNavItem = 'demo';
-</script>
+<script src="<%=request.getContextPath()%>/dynamic-content-changer.js"></script>
+
 <!-- Demo section end -->
 
 <jsp:include page="bottom-actions.jsp"/>

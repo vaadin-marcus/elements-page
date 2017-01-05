@@ -21,7 +21,8 @@
 <link rel="import" href="bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
 
-<!--<link rel="import" href="bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="bower_components/vaadin-grid/vaadin-grid.html">
+<!--
 <link rel="import" href="bower_components/vaadin-combo-box/vaadin-combo-box.html">
 <link rel="import" href="bower_components/vaadin-icons/vaadin-icons.html">
 <link rel="import" href="bower_components/vaadin-upload/vaadin-upload.html">
@@ -84,11 +85,14 @@
   .elements-dynamic-content .flexchild {
     @apply(--layout-flex);
   }
-  .elements-dynamic-content #nav_selector > * {
-    padding: 20px;
+  .elements-dynamic-content #nav_selector > *, .elements-dynamic-content #top_nav_selector > * {
+    padding: 16px 20px 16px 20px;
     font-size: 1.2em;
     text-transform: uppercase;
     cursor: pointer;
+  }
+  .elements-dynamic-content #nav_selector > *:hover, .elements-dynamic-content #top_nav_selector > *:hover, .try-out:hover {
+    background-color: #fafafa;
   }
   .elements-dynamic-content #nav_selector > .iron-selected, .elements-dynamic-content #top_nav_selector > .iron-selected {
     background-color: #404040;
@@ -101,10 +105,17 @@
     padding: 20px;
     background: #fafafa;
   }
+  .release-heading {
+    font-size: 30px;
+    font-weight: bold;
+  }
   .elements-dynamic-content .release-heading, .elements-dynamic-content .markdown-html a {
     color: #4078c0;
     text-decoration: none;
   }
+   .elements-dynamic-content .markdown-html a {
+     font-size: 16px;
+   }
   .elements-dynamic-content .release-heading:hover, .elements-dynamic-content .markdown-html a:hover {
     text-decoration: underline;
   }
@@ -152,7 +163,7 @@
   }
   
   .try-out {
-    padding: 20px;
+    padding: 16px 20px 16px 20px;
     font-size: 1.2em;
     text-transform: uppercase;
     cursor: pointer;
@@ -167,12 +178,6 @@
     display: flex;
     flex-wrap: wrap;
   }
-  .elements-dynamic-content #top_nav_selector > * {
-    padding: 20px;
-    font-size: 1.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
   
   @media (max-width: 767px) {
     .elements-dynamic-content .navigation {
@@ -186,4 +191,19 @@
     }
   }
 
+  .dynamic-list-top {
+    border-top: 1px solid rgba(0, 0, 0, 0.18);
+  }
+  .markdown-html h1 {
+    font-size: 28.5px;
+  }
+  .markdown-html h2 {
+    font-size: 23.5px;
+  }
+  .markdown-html h3 {
+    font-size: 17.5px;
+  }
+  .markdown-html {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  }
 </style>

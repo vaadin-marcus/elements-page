@@ -1118,4 +1118,10 @@ h2.updates {
     	display: none;
   	}
 }
+
+.element-image {
+  max-height: 400px;
+  margin: 0 auto;
+  display: block;
+}
   
