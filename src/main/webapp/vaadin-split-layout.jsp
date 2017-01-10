@@ -120,25 +120,25 @@
              <%
                List releases = Releases.getLatestReleases("vaadin-split-layout");
                for(int i=0; i < releases.size(); i++){
+                 GitHubRelease release = (GitHubRelease) releases.get(i);
 		  %>
-		  <h1><a href="<%=((GitHubRelease)releases.get(i)).htmlUrl%>" target="_blank" class="release-heading"><%= ((GitHubRelease)releases.get(i)).name %></a></h1>
+		  <h1><a href="<%=release.htmlUrl%>" target="_blank" class="release-heading"><%= release.name %></a></h1>
 		  <p class="release-authorship">
-		    <img alt="@<%= ((GitHubRelease)releases.get(i)).author.login %>"
+		    <img alt="@<%= release.author.login %>"
 		        class="avatar"
 		        height="20"
 		        width="20"
-		        src="<%= ((GitHubRelease)releases.get(i)).author.avatarUrl %>">
-		    <a href="<%= ((GitHubRelease)releases.get(i)).author.htmlUrl %>" target="_blank">
-		      <%= ((GitHubRelease)releases.get(i)).author.login %>
+		        src="<%= release.author.avatarUrl %>">
+		    <a href="<%= release.author.htmlUrl %>" target="_blank">
+		      <%= release.author.login %>
 		    </a>
 		    released this
-		    <local-time-element time="<%= ((GitHubRelease)releases.get(i)).publishedAt %>">
- 			  <%= ((GitHubRelease)releases.get(i)).publishedAt %>
+		    <local-time-element time="<%= release.publishedAt %>">
+ 			  <%= release.publishedAt %>
 			</local-time-element>
 		  </p>
-		  <marked-element>
+		  <marked-element markdown="<%= release.getBodyEscapedAsAttribute() %>">
 		    <div class="markdown-html"></div>
-		    <noscript type="text/markdown"><%=((GitHubRelease)releases.get(i)).body%></noscript>
           </marked-element>
 		  <%
 		    }

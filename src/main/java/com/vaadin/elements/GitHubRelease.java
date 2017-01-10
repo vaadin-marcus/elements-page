@@ -32,5 +32,17 @@ public class GitHubRelease {
     @SerializedName("id")
     @Expose
     public String id;
+    
+    public String getBodyEscapedAsAttribute() {
+    	return this.body
+			.replace("&", "&amp;")
+			.replace("\r", "")
+			.replace("\n", "&#10;")
+			.replace("\t", "&#9;")
+			.replace(" ", "&#32;")
+			.replace("<", "&lt;")
+			.replace(">", "&gt;")
+			.replace("\"", "&quot;");
+    }
 
 }
