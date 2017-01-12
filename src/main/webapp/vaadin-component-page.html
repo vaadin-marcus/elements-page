@@ -8,7 +8,7 @@
 <link rel="import" href="bower_components/paper-styles/color.html">
 <link rel="import" href="bower_components/paper-styles/typography.html">
 <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
-
+<link rel="import" href="bower_components/vaadin-combo-box/vaadin-combo-box.html">
 <!--
 Loads Polymer element and behavior documentation using
 [Hydrolysis](https://github.com/PolymerLabs/hydrolysis) and renders a complete
@@ -23,7 +23,7 @@ documentation page including demos (if available).
         @apply(--layout);
         @apply(--layout-vertical);
         overflow: hidden;
-        background: var(--paper-grey-50);
+        background: #fff;
         width: 100%;
       }
       [hidden] {
@@ -39,7 +39,7 @@ documentation page including demos (if available).
       }
       #content {
         display: block;
-        background: var(--paper-grey-50);
+        background: #fff;
       }
       paper-toolbar a {
         margin: 0 10px;
@@ -93,6 +93,9 @@ documentation page including demos (if available).
         border: 0;
         background: transparent;
       }
+      paper-toolbar {
+        --paper-toolbar-background: #fff;
+      }
       paper-toolbar a {
         font-size: 14px;
         text-transform: uppercase;
@@ -133,6 +136,14 @@ documentation page including demos (if available).
       }
       .docs-header {
         @apply(--layout-flex);
+        @apply(--layout-center);
+        @apply(--layout);
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 8px;
+      }
+      .docs-header .not-a-liferay-label {
+        font-size: 20px;
+        font-weight: bold;
       }
     </style>
 
@@ -141,7 +152,7 @@ documentation page including demos (if available).
 
     <paper-toolbar catalog-hidden>
       <div class="docs-header">
-        <!-- TODO: Replace with paper-dropdown-menu when available -->
+        <span class="not-a-liferay-label">Show documentation for: </span>
         <select id="active" value="[[active]]" on-change="_handleMenuItemSelected">
           <template is="dom-repeat" items="[[docElements]]">
             <option value="[[item.is]]">[[item.is]]</option>
