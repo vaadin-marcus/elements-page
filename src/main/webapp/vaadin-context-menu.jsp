@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
-<%PortalUtil.setPageTitle("Context menu component for Polymer and Angular 2 | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Context menu web component for HTML and JS frameworks | Vaadin Elements", request);%>
 
 <!-- Imports -->
 

@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
-<%PortalUtil.setPageTitle("Resizeable split layout for Polymer and Angular 2 | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Resizeable split layout web component | Vaadin Elements", request);%>
 
 <!-- Imports -->
 

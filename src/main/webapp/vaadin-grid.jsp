@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
-<%PortalUtil.setPageTitle("Material design data table for Polymer and Angular 2 | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Advanced data grid / data table web component | Vaadin Elements", request);%>
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>

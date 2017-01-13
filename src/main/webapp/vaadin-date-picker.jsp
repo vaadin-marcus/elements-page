@@ -6,7 +6,7 @@
 
 <portlet:defineObjects/>
 
-<%PortalUtil.setPageTitle("Material design datepicker for Polymer and Angular 2 | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Advanced date picker web component for HTML and JS | Vaadin Elements", request);%>
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
