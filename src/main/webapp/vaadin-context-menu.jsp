@@ -1,10 +1,11 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.vaadin.elements.GitHubRelease" %>
 <%@ page import="com.vaadin.elements.Releases" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects/>
-<%PortalUtil.setPageTitle("Context menu component for Polymer and Angular 2 | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Context menu web component for HTML and JS frameworks | Vaadin Elements", request);%>
 
 <!-- Imports -->
 
@@ -13,18 +14,8 @@
 
 <!-- Hero section start -->
 
-<div class="w-wallpaper-container elements-hero-mini">
+<div class="w-wallpaper-container elements-hero-mini vaadin-element-page-navigation">
   <div class="w-wallpaper"></div>
-  <div class="elements-hero-title row-fluid">
-    <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5>
-    </div>
-    <div class="span3 hidden-phone">
-      <a href="https://www.polymer-project.org"
-         class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
-    </div>
-  </div>
-  <h1 class="helvetica-light">&lt;vaadin-context-menu&gt;</h1>
-  <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
 <!-- Hero section end -->
@@ -35,12 +26,11 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
+      <h1>&lt;vaadin-context-menu&gt;</h1>
       <p class="lead helvetica-light">
         Component for showing a contextual menu for additional settings or options to the user.
         The menu can be attached to any element and you can configure which event to show it with.
       </p>
-    </div>
-    <div class="span5">
       <h4>Install</h4>
       <div class="elements-install">
         <code>bower install --save vaadin-context-menu</code>
@@ -69,9 +59,11 @@
         </div>
         <%}%>
       </div>
-
-      <a href="https://github.com/vaadin/vaadin-context-menu"
-         class="w-button blue github">View on GitHub</a>
+    </div>
+    <div class="span5">
+     <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-context-menu.png"
+     	  class="element-image"
+          alt="vaadin-context-menu">
     </div>
   </div>
 </div>
@@ -79,98 +71,95 @@
 
 <!-- Intro section end -->
 
-<!-- Info section start -->
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
-
-  <div class="elements-section">
-    <h4>Features</h4>
-
-    <div class="row-fluid">
-      <div class="span6">
-        <ul>
-          <li>
-            Right click or long press activation
-          </li>
-          <li>Customizable items</li>
-        </ul>
-      </div>
-      <div class="span6">
-        <ul>
-          <li>
-            Define which event you want to trigger the menu
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<jsp:include page="get-help.jsp"/>
-
 <!-- Demo section start -->
-<template is="dom-bind" id="demo-template">
-
-  <div class="w-wallpaper-container zebra">
-    <div class="w-wallpaper">&nbsp;</div>
-
-    <div class="elements-section">
-      <h4>Examples</h4>
-
-      <h5>Basic functionality</h5>
-      In this example you can see how to use <code>paper-menu</code>, <code>paper-items</code> and
-      <code>paper-item-body</code> elements to configure the content of the context menu.
-
-      <demo-viewer selected="{{selected}}">
-        <demo-source name="Polymer"
-                     url="<%=request.getContextPath()%>/examples/core/context-menu/simple-polymer.html"></demo-source>
-
-        <style>
-          vaadin-context-menu {
-            --vaadin-context-menu-overlay: {
-              background: #fff;
-            };
-          }
-
-          paper-menu {
-            width: 100%;
-          }
-
-          #menuDemo {
-            border: 1px solid #ddd;
-            background: #eee;
-            width: 300px;
-            height: 50px;
-            margin: 20px auto;
-            padding: 20px;
-          }
-
-        </style>
-        <vaadin-context-menu selector="#menuDemo">
-          <template>
-            <paper-menu>
-              <paper-item>Item 1</paper-item>
-              <paper-item>Item 2</paper-item>
-              <paper-item>Item 3</paper-item>
-              <paper-item>
-                <iron-icon icon="warning"></iron-icon>
-                <paper-item-body two-line>
-                  <div>Item 4 - Line 1</div>
-                  <div secondary>Item 4 - Line 2</div>
-                </paper-item-body>
-              </paper-item>
-            </paper-menu>
-          </template>
-          <div id="menuDemo">
-            Right click anywhere in this area to open the context menu.
-          </div>
-        </vaadin-context-menu>
-      </demo-viewer>
-    </div>
+<a name="demo"></a>
+<template is="dom-bind" id="dynamicDataTemplate">
+  <div class="w-wallpaper-container zebra elements-dynamic-content">
+     <div class="top-navigation">
+       <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector" on-iron-select="navigationChanged">
+         <div name="demo">Demo</div>
+         <div name="docs">Documentation</div>
+         <div name="releases">Releases</div>
+       </iron-selector>
+       <a href="https://github.com/vaadin/vaadin-context-menu" class="try-out-link" target="_blank">
+         <div class="try-out">
+           Github
+           <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+             <path d="M0 0h24v24H0z" fill="none"/>
+             <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+           </svg>
+         </div>
+       </a>
+       <a href="https://jsbin.com/yihupap/1/edit?html,output" class="try-out-link" target="_blank">
+         <div class="try-out">
+           Try it out
+           <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+             <path d="M0 0h24v24H0z" fill="none"/>
+	         <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+	       </svg>
+         </div>
+       </a>
+     </div>
+     <div class="flex-container dynamic-list-top">
+       <div class="navigation">
+         <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="nav_selector" on-iron-select="navigationChanged">
+           <div name="demo">Demo</div>
+           <div name="docs">Documentation</div>
+           <div name="releases">Releases</div>
+         </iron-selector>
+         
+         <a href="https://jsbin.com/yihupap/1/edit?html,output" class="try-out-link" target="_blank">
+           <div class="try-out">
+	         Try it out
+	         <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+	           <path d="M0 0h24v24H0z" fill="none"/>
+	           <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+	         </svg>
+           </div>
+         </a>
+       </div>
+       <div class="flexchild">
+         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}">
+           <div data-nav="demo" id="demo_content" class="demos-list">
+             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-context-menu/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
+           </div>
+           <div data-nav="docs">
+             <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-context-menu/vaadin-context-menu.html"></vaadin-component-page>
+           </div>
+           <div data-nav="releases" class="releases-list">
+             <%
+               List releases = Releases.getLatestReleases("vaadin-context-menu");
+               for(int i=0; i < releases.size(); i++){
+                 GitHubRelease release = (GitHubRelease) releases.get(i);
+		  %>
+		  <h1><a href="<%=release.htmlUrl%>" target="_blank" class="release-heading"><%= release.name %></a></h1>
+		  <p class="release-authorship">
+		    <img alt="@<%= release.author.login %>"
+		        class="avatar"
+		        height="20"
+		        width="20"
+		        src="<%= release.author.avatarUrl %>">
+		    <a href="<%= release.author.htmlUrl %>" target="_blank">
+		      <%= release.author.login %>
+		    </a>
+		    released this
+		    <local-time-element time="<%= release.publishedAt %>">
+ 			  <%= release.publishedAt %>
+			</local-time-element>
+		  </p>
+		  <marked-element markdown="<%= release.getBodyEscapedAsAttribute() %>">
+		    <div class="markdown-html"></div>
+          </marked-element>
+		  <%
+		    }
+		  %>
+           </div>
+         </iron-pages>
+       </div>
+     </div>
   </div>
-
 </template>
-
+<script src="<%=request.getContextPath()%>/dynamic-content-changer.js"></script>
 <!-- Demo section end -->
 
 

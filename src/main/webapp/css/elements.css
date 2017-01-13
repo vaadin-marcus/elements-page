@@ -556,6 +556,10 @@ h2.updates {
     color: #fff;
 }
 
+.vaadin-element-page-navigation {
+    padding: 1.6rem 0 2.2rem 0 !important;
+}
+
 .elements-hero-mini .polymer-tag {
     float: right;
 }
@@ -670,6 +674,12 @@ h2.updates {
 .elements-intro h4 {
     margin-top: .4rem;
     color: #fff;
+}
+
+.elements-intro h1 {
+    font-family: "Helvetica W01 Light","Helvetica Neue","Helvetica","Arial","Microsoft YaHei New","Microsoft Yahei","SimSun","STXihei",sans-serif;
+    font-weight: 300;
+    letter-spacing: -0.05em;
 }
 
 .elements-install {
@@ -1108,3 +1118,16 @@ h2.updates {
     text-transform: uppercase;
     color: #00b4f0;
 }
+
+@media (max-width: 979px) {
+ 	.vaadin-element-page-navigation {
+    	display: none;
+  	}
+}
+
+.element-image {
+  max-height: 400px;
+  margin: 0 auto;
+  display: block;
+}
+  
