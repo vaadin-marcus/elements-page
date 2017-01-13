@@ -6,7 +6,7 @@
 
 <portlet:defineObjects/>
 
-<%PortalUtil.setPageTitle("Material design datepicker for Polymer and Angular 2 | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Advanced date picker web component for HTML and JS | Vaadin Elements", request);%>
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
@@ -16,18 +16,8 @@
 
 <!-- Hero section start -->
 
-<div class="w-wallpaper-container elements-hero-mini">
+<div class="w-wallpaper-container elements-hero-mini vaadin-element-page-navigation">
   <div class="w-wallpaper"></div>
-  <div class="elements-hero-title row-fluid">
-    <div class="span9"><h5 class="helvetica-light"><a href="/elements">Vaadin Elements</a></h5>
-    </div>
-    <div class="span3 hidden-phone">
-      <a href="https://www.polymer-project.org"
-         class="polymer-tag polymer-tag-white polymer-tag-inline">Based on Polymer</a>
-    </div>
-  </div>
-  <h1 class="helvetica-light">&lt;vaadin-date-picker&gt;</h1>
-  <a class="back-link" href="/elements">&laquo; Back to listing</a>
 </div>
 
 <!-- Hero section end -->
@@ -38,10 +28,11 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <p class="lead helvetica-light">Vaadin DatePicker allows you to select a date from a dropdown
-        calendar.</p>
-    </div>
-    <div class="span5">
+      <h1>&lt;vaadin-date-picker&gt;</h1>
+      <p class="lead helvetica-light">
+        Vaadin DatePicker allows you to select a date from a dropdown
+        calendar.
+      </p>
       <h4>Install</h4>
       <div class="elements-install">
         <code>bower install --save vaadin-date-picker</code>
@@ -70,89 +61,95 @@
         </div>
         <%}%>
       </div>
-      <a href="https://vaadin.com/docs/-/part/elements/vaadin-date-picker/vaadin-date-picker-overview.html"
-         class="w-button blue">Documentation</a>
-      <a href="https://github.com/vaadin/vaadin-date-picker"
-         class="w-button blue github">View on GitHub</a>
+    </div>
+    <div class="span5">
+     <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-date-picker.png"
+     	  class="element-image"
+          alt="vaadin-date-picker">
     </div>
   </div>
 </div>
 
-
-<!-- Info section start -->
-<div class="w-wallpaper-container zebra">
-  <div class="w-wallpaper">&nbsp;</div>
-
-  <div class="elements-section">
-    <style>
-      vaadin-date-picker {
-        max-width: 300px;
-      }
-
-      vaadin-date-picker input[readonly] {
-        background: transparent !important;
-      }
-
-      /* Hacks needed for Liferay*/
-      vaadin-date-picker input[type='text'],
-      vaadin-date-picker input[type='text']:focus,
-      vaadin-date-picker input[type='text']:active {
-        border: none !important;
-        box-shadow: none !important;
-        background-color: transparent !important;
-        padding: 0;
-      }
-
-      vaadin-date-picker input[readonly] {
-        cursor: inherit !important;
-      }
-    </style>
-    <h4>Features</h4>
-    <div class="row-fluid">
-      <div class="span6">
-        <ul>
-          <li>Scrollable calendar view</li>
-          <li>Desktop and mobile support</li>
-
-        </ul>
-      </div>
-      <div class="span6">
-        <ul>
-          <li>Two way data binding</li>
-          <li>
-            Material Design inspired styles to fit in with <a
-              href="https://elements.polymer-project.org/browse?package=paper-elements">Paper
-            Elements</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<jsp:include page="get-help.jsp"/>
 <!-- Demo section start -->
-<template is="dom-bind">
-  <div class="w-wallpaper-container zebra">
-    <div class="w-wallpaper">&nbsp;</div>
-
-    <div class="elements-section">
-
-      <h4>Examples</h4>
-
-      <h5>Simple usage</h5>
-      <demo-viewer selected="{{selected}}">
-        <demo-source name="Polymer"
-                     url="<%=request.getContextPath()%>/examples/core/date-picker/polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/core/date-picker/angular2.ts"></demo-source>
-
-        <vaadin-date-picker label="Pick a date"></vaadin-date-picker>
-        <vaadin-date-picker label="Birthday" value="2000-01-01"></vaadin-date-picker>
-      </demo-viewer>
-
-    </div>
+<a name="demo"></a>
+<template is="dom-bind" id="dynamicDataTemplate">
+  <div class="w-wallpaper-container zebra elements-dynamic-content">
+     <div class="top-navigation">
+       <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector" on-iron-select="navigationChanged">
+         <div name="demo">Demo</div>
+         <div name="docs">Documentation</div>
+         <div name="releases">Releases</div>
+       </iron-selector>
+       <a href="https://jsbin.com/fonuped/1/edit?html,output" class="try-out-link" target="_blank">
+         <div class="try-out">
+           Try it out
+           <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+             <path d="M0 0h24v24H0z" fill="none"/>
+	         <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+	       </svg>
+         </div>
+       </a>
+     </div>
+     <div class="flex-container dynamic-list-top">
+       <div class="navigation">
+         <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="nav_selector" on-iron-select="navigationChanged">
+           <div name="demo">Demo</div>
+           <div name="docs">Documentation</div>
+           <div name="releases">Releases</div>
+         </iron-selector>
+         
+         <a href="https://jsbin.com/fonuped/1/edit?html,output" class="try-out-link" target="_blank">
+           <div class="try-out">
+	         Try it out
+	         <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+	           <path d="M0 0h24v24H0z" fill="none"/>
+	           <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+	         </svg>
+           </div>
+         </a>
+       </div>
+       <div class="flexchild">
+         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}">
+           <div data-nav="demo" id="demo_content" class="demos-list">
+             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
+           </div>
+           <div data-nav="docs">
+             <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/vaadin-date-picker.html"></vaadin-component-page>
+           </div>
+           <div data-nav="releases" class="releases-list">
+             <%
+               List releases = Releases.getLatestReleases("vaadin-date-picker");
+               for(int i=0; i < releases.size(); i++){
+                 GitHubRelease release = (GitHubRelease) releases.get(i);
+		  %>
+		  <h1><a href="<%=release.htmlUrl%>" target="_blank" class="release-heading"><%= release.name %></a></h1>
+		  <p class="release-authorship">
+		    <img alt="@<%= release.author.login %>"
+		        class="avatar"
+		        height="20"
+		        width="20"
+		        src="<%= release.author.avatarUrl %>">
+		    <a href="<%= release.author.htmlUrl %>" target="_blank">
+		      <%= release.author.login %>
+		    </a>
+		    released this
+		    <local-time-element time="<%= release.publishedAt %>">
+ 			  <%= release.publishedAt %>
+			</local-time-element>
+		  </p>
+		  <marked-element markdown="<%= release.getBodyEscapedAsAttribute() %>">
+		    <div class="markdown-html"></div>
+          </marked-element>
+		  <%
+		    }
+		  %>
+           </div>
+         </iron-pages>
+       </div>
+     </div>
   </div>
 </template>
+<script src="<%=request.getContextPath()%>/dynamic-content-changer.js"></script>
 <!-- Demo section end -->
 
 

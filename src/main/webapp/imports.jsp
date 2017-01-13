@@ -2,8 +2,8 @@
 
 <portlet:defineObjects />
 <script src="<%=request.getContextPath()%>/script/webcomponents-lite.min.js" async></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?30" media="screen" charset="utf-8" async>
-<link rel="import" href="<%=request.getContextPath()%>/all-the-things.html?30" async>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/elements.css?31" media="screen" charset="utf-8" async>
+<link rel="import" href="<%=request.getContextPath()%>/all-the-things.html?31" async>
 <style is="custom-style">
   :root {
     --primary-color: #00b4f0;

@@ -1,0 +1,26 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/marked-element/marked-element.html">
+
+<dom-module id="my-markdown">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <marked-element>
+      <div class="markdown-html"></div>
+			<noscript type="text/markdown">[[markdown]]</noscript>
+    </marked-element>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'my-markdown',
+      properties: {
+        markdown: String
+      }
+    });
+  </script>
+</dom-module>
