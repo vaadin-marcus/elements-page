@@ -80,6 +80,15 @@
          <div name="docs">Documentation</div>
          <div name="releases">Releases</div>
        </iron-selector>
+       <a href="https://github.com/vaadin/vaadin-date-picker" class="try-out-link" target="_blank">
+         <div class="try-out">
+           Github
+           <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+             <path d="M0 0h24v24H0z" fill="none"/>
+             <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+           </svg>
+         </div>
+       </a>
        <a href="https://jsbin.com/fonuped/1/edit?html,output" class="try-out-link" target="_blank">
          <div class="try-out">
            Try it out
@@ -117,7 +126,8 @@
          </a>
        </div>
        <div class="flexchild">
-         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}">
+         <iron-location hash="{{selectedNavItem}}"></iron-location>
+         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demo">
            <div data-nav="demo" id="demo_content" class="demos-list">
              <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
            </div>
@@ -157,7 +167,6 @@
      </div>
   </div>
 </template>
-<script src="<%=request.getContextPath()%>/dynamic-content-changer.js"></script>
 <!-- Demo section end -->
 
 

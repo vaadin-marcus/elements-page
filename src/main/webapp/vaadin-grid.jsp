@@ -128,7 +128,8 @@
          </a>
        </div>
        <div class="flexchild">
-         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}">
+         <iron-location hash="{{selectedNavItem}}"></iron-location>
+         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demo">
            <div data-nav="demo" id="demo_content" class="demos-list">
              <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
            </div>
@@ -168,7 +169,6 @@
      </div>
   </div>
 </template>
-<script src="<%=request.getContextPath()%>/dynamic-content-changer.js"></script>
 <!-- Demo section end -->
 
 <jsp:include page="bottom-actions.jsp"/>
