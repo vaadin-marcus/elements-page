@@ -12,21 +12,14 @@
 
 <!-- Imports end -->
 
-<!-- Hero section start -->
-
-<div class="w-wallpaper-container elements-hero-mini vaadin-element-page-navigation">
-  <div class="w-wallpaper"></div>
-</div>
-
-<!-- Hero section end -->
-
 <!-- Intro section start -->
 
 <div class="w-wallpaper-container elements-intro">
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <h1>&lt;vaadin-grid&gt;</h1>
+      <a class="back-link" href="/elements">&laquo; Browse all components</a>
+      <h1>Vaadin Grid</h1>
       <p class="lead helvetica-light">
         Vaadin Grid is a fully featured datagrid for showing table
         data. It performs great even with huge data sets, fully supporting paging and lazy loading
@@ -79,7 +72,7 @@
      <div class="top-navigation">
        <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector" on-iron-select="navigationChanged">
          <div name="demo">Demo</div>
-         <div name="docs">Documentation</div>
+         <div name="docs">Docs</div>
          <div name="releases">Releases</div>
        </iron-selector>
        <a href="https://github.com/vaadin/vaadin-grid" class="try-out-link" target="_blank">
