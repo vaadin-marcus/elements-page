@@ -18,7 +18,6 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <a class="back-link" href="/elements">&laquo; Browse all components</a>
       <h1>Vaadin Grid</h1>
       <p class="lead helvetica-light">
         Vaadin Grid is a fully featured datagrid for showing table
@@ -54,6 +53,7 @@
         </div>
         <%}%>
       </div>
+      <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
     <div class="span5">
      <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-grid.png"

@@ -616,6 +616,8 @@ h2.updates {
 
 .elements-intro a.back-link {
     font-weight: bold;
+    margin: 24px 0;
+    display: block;
     font-size: 1.2rem;
 }
 
@@ -658,7 +660,7 @@ h2.updates {
 }
 
 .elements-intro {
-    padding: 3.8rem 0;
+    padding: 3.8rem 0 0 0;
     color: #fff;
 }
 
