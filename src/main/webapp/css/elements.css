@@ -130,7 +130,7 @@ a.button-dark:hover {
 }
 
 .elements-hero .w-wallpaper {
-    background: #1eb5ed url('../img/hero-bg.png?2') center top no-repeat;
+    background: #49B3EA url('../img/hero-bg.png?2') center top no-repeat;
 }
 
 .elements-hero-buttons .w-wallpaper {
@@ -547,7 +547,7 @@ h2.updates {
 /* Template Hero */
 
 .elements-hero-mini .w-wallpaper {
-    background: #1eb5ed url('../img/hero-bg.png?2') center top no-repeat;
+    background: #49B3EA url('../img/hero-bg.png?2') center top no-repeat;
     background-size: cover;
 }
 
@@ -664,8 +664,15 @@ h2.updates {
     color: #fff;
 }
 
+@media (max-width: 767px) {
+    .elements-intro {
+        padding: 3.8rem 0;
+    }
+}
+
+
 .elements-intro .w-wallpaper {
-    background: #1eb5ed url('../img/hero-bg.png?2') center top no-repeat;
+    background: #49B3EA url('../img/hero-bg.png?2') center top no-repeat;
 }
 
 .elements-intro p.lead {
