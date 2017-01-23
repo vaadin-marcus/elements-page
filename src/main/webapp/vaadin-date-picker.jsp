@@ -28,9 +28,9 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <h1>&lt;vaadin-date-picker&gt;</h1>
+      <h1>Vaadin Date Picker</h1>
       <p class="lead helvetica-light">
-        Vaadin DatePicker allows you to select a date from a dropdown
+        Vaadin Date Picker allows you to select a date from a dropdown
         calendar.
       </p>
       <h4>Install</h4>
@@ -61,6 +61,7 @@
         </div>
         <%}%>
       </div>
+      <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
     <div class="span5">
      <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-date-picker.png"

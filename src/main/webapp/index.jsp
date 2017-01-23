@@ -23,13 +23,13 @@
     <h1>Vaadin Elements</h1>
   </div>
   <p class="lead">
-    Material design inspired UI components for building great web apps.
-    For mobile and desktop.
+    Kick-ass components for web apps.
+    Mobile and desktop.
   </p>
   <p>
-    Works on any HTML5 based stack.<br/>
-    Supports <a href="https://www.polymer-project.org">Polymer</a>
-    and <a href="https://angular.io">Angular 2</a> data binding.
+    Works great together with <a href="https://www.polymer-project.org">Polymer</a> Elements.
+    <br/>
+    Supports any HTML5 based stack.
   </p>
 </div>
 

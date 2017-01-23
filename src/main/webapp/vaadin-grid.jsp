@@ -56,9 +56,9 @@
       <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
     <div class="span5">
-     <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-grid.png"
-     	  class="element-image"
-          alt="vaadin-grid">
+      <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-grid.png"
+           class="element-image"
+           alt="vaadin-grid">
     </div>
   </div>
 </div>
@@ -69,99 +69,132 @@
 <a name="demo"></a>
 <template is="dom-bind" id="dynamicDataTemplate">
   <div class="w-wallpaper-container zebra elements-dynamic-content">
-     <div class="top-navigation">
-       <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector" on-iron-select="navigationChanged">
-         <div name="demo">Demo</div>
-         <div name="docs">Docs</div>
-         <div name="releases">Releases</div>
-       </iron-selector>
-       <a href="https://github.com/vaadin/vaadin-grid" class="try-out-link" target="_blank">
-         <div class="try-out">
-           Github
-           <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
-             <path d="M0 0h24v24H0z" fill="none"/>
-             <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-           </svg>
-         </div>
-       </a>
-       <a href="https://jsbin.com/yokewut/1/edit?html,output" class="try-out-link" target="_blank">
-         <div class="try-out">
-           Try it out
-           <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
-             <path d="M0 0h24v24H0z" fill="none"/>
-	         <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-	       </svg>
-         </div>
-       </a>
-     </div>
-     <div class="flex-container dynamic-list-top">
-       <div class="navigation">
-         <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="nav_selector" on-iron-select="navigationChanged">
-           <div name="demo">Demo</div>
-           <div name="docs">Documentation</div>
-           <div name="releases">Releases</div>
-         </iron-selector>
-         <a href="https://github.com/vaadin/vaadin-grid" class="try-out-link" target="_blank">
-           <div class="try-out">
-             Github
-             <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
-               <path d="M0 0h24v24H0z" fill="none"/>
-               <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-             </svg>
-           </div>
-         </a>
-         <a href="https://jsbin.com/yokewut/1/edit?html,output" class="try-out-link" target="_blank">
-           <div class="try-out">
-	         Try it out
-	         <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
-	           <path d="M0 0h24v24H0z" fill="none"/>
-	           <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-	         </svg>
-           </div>
-         </a>
-       </div>
-       <div class="flexchild">
-         <iron-location hash="{{selectedNavItem}}"></iron-location>
-         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}">
-           <div data-nav="demo" id="demo_content" class="demos-list">
-             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
-           </div>
-           <div data-nav="docs">
-             <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/vaadin-grid-doc.html"></vaadin-component-page>
-           </div>
-           <div data-nav="releases" class="releases-list">
-             <%
-               List releases = Releases.getLatestReleases("vaadin-grid");
-               for(int i=0; i < releases.size(); i++){
-                 GitHubRelease release = (GitHubRelease) releases.get(i);
-		  %>
-		  <h1><a href="<%=release.htmlUrl%>" target="_blank" class="release-heading"><%= release.name %></a></h1>
-		  <p class="release-authorship">
-		    <img alt="@<%= release.author.login %>"
-		        class="avatar"
-		        height="20"
-		        width="20"
-		        src="<%= release.author.avatarUrl %>">
-		    <a href="<%= release.author.htmlUrl %>" target="_blank">
-		      <%= release.author.login %>
-		    </a>
-		    released this
-		    <local-time-element time="<%= release.publishedAt %>">
- 			  <%= release.publishedAt %>
-			</local-time-element>
-		  </p>
-		  <marked-element markdown="<%= release.getBodyEscapedAsAttribute() %>">
-		    <div class="markdown-html"></div>
-          </marked-element>
-		  <%
-		    }
-		  %>
-           </div>
-         </iron-pages>
-       </div>
-     </div>
+    <div class="top-navigation">
+      <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector"
+                     on-iron-select="navigationChanged">
+        <div name="demo">Demo</div>
+        <div name="docs">Docs</div>
+        <div name="releases">Releases</div>
+      </iron-selector>
+      <a href="https://github.com/vaadin/vaadin-grid" class="try-out-link" target="_blank">
+        <div class="try-out">
+          Github
+          <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path
+                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+          </svg>
+        </div>
+      </a>
+      <a href="https://jsbin.com/yokewut/1/edit?html,output" class="try-out-link" target="_blank">
+        <div class="try-out">
+          Try it out
+          <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path
+                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+    <div class="flex-container dynamic-list-top">
+      <div class="navigation">
+        <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="nav_selector">
+          <div name="demo">Demo</div>
+          <div name="docs">Documentation</div>
+          <div name="releases">Releases</div>
+        </iron-selector>
+        <a href="https://github.com/vaadin/vaadin-grid" class="try-out-link" target="_blank">
+          <div class="try-out">
+            Github
+            <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0z" fill="none"/>
+              <path
+                  d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+            </svg>
+          </div>
+        </a>
+        <a href="https://jsbin.com/yokewut/1/edit?html,output" class="try-out-link" target="_blank">
+          <div class="try-out">
+            Try it out
+            <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0z" fill="none"/>
+              <path
+                  d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+      <div class="flexchild">
+        <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demo">
+          <div data-nav="demo" id="demo_content" class="demos-list">
+            <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/" frameborder="0"
+                    scrolling="no" class="element-demo-iframe"></iframe>
+          </div>
+          <div data-nav="docs">
+            <vaadin-component-page
+                src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/vaadin-grid-doc.html"></vaadin-component-page>
+          </div>
+          <div data-nav="releases" class="releases-list">
+            <%
+              List releases = Releases.getLatestReleases("vaadin-grid");
+              for (int i = 0; i < releases.size(); i++) {
+                GitHubRelease release = (GitHubRelease) releases.get(i);
+            %>
+            <h1><a href="<%=release.htmlUrl%>" target="_blank" class="release-heading"><%= release.name %>
+            </a></h1>
+            <p class="release-authorship">
+              <img alt="@<%= release.author.login %>"
+                   class="avatar"
+                   height="20"
+                   width="20"
+                   src="<%= release.author.avatarUrl %>">
+              <a href="<%= release.author.htmlUrl %>" target="_blank">
+                <%= release.author.login %>
+              </a>
+              released this
+              <local-time-element time="<%= release.publishedAt %>">
+                <%= release.publishedAt %>
+              </local-time-element>
+            </p>
+            <marked-element markdown="<%= release.getBodyEscapedAsAttribute() %>">
+              <div class="markdown-html"></div>
+            </marked-element>
+            <%
+              }
+            %>
+          </div>
+        </iron-pages>
+      </div>
+    </div>
   </div>
 </template>
+
+<script>
+  var dynamicContent = document.querySelector('#dynamicDataTemplate');
+  dynamicContent.hash = '';
+  dynamicContent.selectedNavItem = '';
+
+  function hashChanged() {
+    var hash = location.hash ? location.hash.substring(1) : '';
+    console.log('Hash change: ' + hash);
+    if (hash) {
+      dynamicContent.set('selectedNavItem', hash);
+    } else {
+      dynamicContent.set('selectedNavItem', 'demo');
+    }
+  }
+
+  dynamicContent.navigationChanged = function () {
+    console.log('Nav changed: ' + dynamicContent.selectedNavItem);
+
+    location.hash = dynamicContent.selectedNavItem === 'demo' ? '' : '#' + dynamicContent.selectedNavItem;
+  };
+
+  window.addEventListener('hashchange', hashChanged);
+
+  hashChanged();
+</script>
 <!-- Demo section end -->
 
 <jsp:include page="bottom-actions.jsp"/>

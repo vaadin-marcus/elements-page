@@ -25,7 +25,7 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <h1>&lt;vaadin-split-layout&gt;</h1>
+      <h1>Vaadin Split Layout</h1>
       <p class="lead helvetica-light">
         Split Layout is a component that allows you to partition a layout into resizeable
         areas.
@@ -58,6 +58,7 @@
         </div>
         <%}%>
       </div>
+      <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
     <div class="span5">
      <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-split-layout.png"

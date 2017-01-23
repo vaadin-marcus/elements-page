@@ -28,7 +28,7 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <h1>&lt;vaadin-upload&gt;</h1>
+      <h1>Vaadin Upload</h1>
       <p class="lead helvetica-light">
         Vaadin Upload is an element for uploading multiple files.
       </p>
@@ -60,6 +60,7 @@
         </div>
         <%}%>
       </div>
+      <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
     <div class="span5">
      <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-upload.png"

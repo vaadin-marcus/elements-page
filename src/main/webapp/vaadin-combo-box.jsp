@@ -61,6 +61,7 @@
         </div>
         <%}%>
       </div>
+      <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
     <div class="span5">
      <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-combo-box.png"

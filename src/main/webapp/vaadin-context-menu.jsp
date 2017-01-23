@@ -26,9 +26,9 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <h1>&lt;vaadin-context-menu&gt;</h1>
+      <h1>Vaadin Context Menu</h1>
       <p class="lead helvetica-light">
-        Component for showing a contextual menu for additional settings or options to the user.
+        Vaadin Context Menu is a component for showing a contextual menu for additional settings or options to the user.
         The menu can be attached to any element and you can configure which event to show it with.
       </p>
       <h4>Install</h4>
@@ -59,6 +59,7 @@
         </div>
         <%}%>
       </div>
+      <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
     <div class="span5">
      <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-context-menu.png"
