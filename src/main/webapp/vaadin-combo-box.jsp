@@ -26,7 +26,7 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <h1>&lt;vaadin-combo-box&gt;</h1>
+      <h1>Vaadin ComboBox</h1>
       <p class="lead helvetica-light">
         Vaadin ComboBox is a filterable select element for
         situations where you have more than a few dozen item to select from. It provides an optimal
@@ -131,7 +131,6 @@
          </a>
        </div>
        <div class="flexchild">
-         <iron-location hash="{{selectedNavItem}}"></iron-location>
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demo">
            <div data-nav="demo" id="demo_content" class="demos-list">
              <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
@@ -172,7 +171,7 @@
      </div>
   </div>
 </template>
-
+<script src="<%=request.getContextPath()%>/hash-nav.js"></script>
 <!-- Demo section end -->
 
 <jsp:include page="bottom-actions.jsp"/>

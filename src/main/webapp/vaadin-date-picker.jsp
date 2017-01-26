@@ -127,7 +127,6 @@
          </a>
        </div>
        <div class="flexchild">
-         <iron-location hash="{{selectedNavItem}}"></iron-location>
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demo">
            <div data-nav="demo" id="demo_content" class="demos-list">
              <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
@@ -170,6 +169,5 @@
 </template>
 <!-- Demo section end -->
 
-
-
+<script src="<%=request.getContextPath()%>/hash-nav.js"></script>
 <jsp:include page="bottom-actions.jsp"/>

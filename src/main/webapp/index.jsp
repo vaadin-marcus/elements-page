@@ -23,11 +23,11 @@
     <h1>Vaadin Elements</h1>
   </div>
   <p class="lead">
-    Kick-ass components for web apps.
+    Components for building awesome web apps.
     Mobile and desktop.
   </p>
   <p>
-    Works great together with <a href="https://www.polymer-project.org">Polymer</a> Elements.
+    Designed to work seamlessly with <a href="https://www.polymer-project.org">Polymer</a> Elements.
     <br/>
     Supports any HTML5 based stack.
   </p>
