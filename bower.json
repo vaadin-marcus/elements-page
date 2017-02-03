@@ -36,6 +36,7 @@
     "vaadin-split-layout": "^1.0.0",
     "vaadin-icons": "vaadin/vaadin-icons#^2.0.0",
     "mock-http-request": "philikon/MockHttpRequest#master",
-    "iframe-resizer": "^3.5.7"
+    "iframe-resizer": "^3.5.7",
+    "iron-lazy-pages": "^1.4.4"
   }
 }
