@@ -14,7 +14,7 @@
 <link rel="import" href="bower_components/paper-card/paper-card.html">
 <link rel="import" href="bower_components/paper-menu/paper-menu.html">
 <link rel="import" href="bower_components/paper-item/paper-item-body.html">
-<link rel="import" href="bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="bower_components/iron-lazy-pages/iron-lazy-pages-imports.html">
 <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="bower_components/iron-form/iron-form.html">
 <link rel="import" href="bower_components/iron-localstorage/iron-localstorage.html">
@@ -60,18 +60,10 @@
 <link rel="import" href="vaadin-component-page.html">
 <link rel="import" href="local-time-element.html">
 
-
 <link rel="import" href="elements-releases.html">
 
 <link rel="import" href="demo-viewer.html">
 <link rel="import" href="demo-source.html">
-
-<script>
-  window.addEventListener('WebComponentsReady', function(e) {
-	iFrameResize({}, '.element-demo-iframe');
-  });
-</script>
-
 
 <style is="custom-style">
   :root {
@@ -184,13 +176,13 @@
     display: flex;
     flex-wrap: wrap;
   }
-  
+
   @media (max-width: 767px) {
     .elements-dynamic-content .navigation {
       display: none;
     }
   }
-  
+
   @media (min-width: 768px) {
     .elements-dynamic-content .top-navigation {
       display: none;

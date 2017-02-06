@@ -128,42 +128,44 @@
          </a>
        </div>
        <div class="flexchild">
-         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demo">
-           <div data-nav="demo" id="demo_content" class="demos-list">
-             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-context-menu/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
-           </div>
-           <div data-nav="docs">
+         <iron-lazy-pages attr-for-selected="data-route" selected="{{selectedNavItem}}" load-async hide-immediately>
+           <template is="iron-lazy-page" data-route="demo">
+             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-context-menu/demo/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
+           </template>
+           <template is="iron-lazy-page" data-route="docs">
              <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-context-menu/vaadin-context-menu.html"></vaadin-component-page>
-           </div>
-           <div data-nav="releases" class="releases-list">
-             <%
-               List releases = Releases.getLatestReleases("vaadin-context-menu");
-               for(int i=0; i < releases.size(); i++){
-                 GitHubRelease release = (GitHubRelease) releases.get(i);
-		  %>
-		  <h1><a href="<%=release.htmlUrl%>" target="_blank" class="release-heading"><%= release.name %></a></h1>
-		  <p class="release-authorship">
-		    <img alt="@<%= release.author.login %>"
-		        class="avatar"
-		        height="20"
-		        width="20"
-		        src="<%= release.author.avatarUrl %>">
-		    <a href="<%= release.author.htmlUrl %>" target="_blank">
-		      <%= release.author.login %>
-		    </a>
-		    released this
-		    <local-time-element time="<%= release.publishedAt %>">
- 			  <%= release.publishedAt %>
-			</local-time-element>
-		  </p>
-		  <marked-element markdown="<%= release.getBodyEscapedAsAttribute() %>">
-		    <div class="markdown-html"></div>
-          </marked-element>
-		  <%
-		    }
-		  %>
-           </div>
-         </iron-pages>
+           </template>
+           <template is="iron-lazy-page" data-route="releases">
+             <div class="releases-list">
+               <%
+                 List releases = Releases.getLatestReleases("vaadin-context-menu");
+                 for(int i=0; i < releases.size(); i++){
+                   GitHubRelease release = (GitHubRelease) releases.get(i);
+       %>
+       <h1><a href="<%=release.htmlUrl%>" target="_blank" class="release-heading"><%= release.name %></a></h1>
+       <p class="release-authorship">
+         <img alt="@<%= release.author.login %>"
+             class="avatar"
+             height="20"
+             width="20"
+             src="<%= release.author.avatarUrl %>">
+         <a href="<%= release.author.htmlUrl %>" target="_blank">
+           <%= release.author.login %>
+         </a>
+         released this
+         <local-time-element time="<%= release.publishedAt %>">
+           <%= release.publishedAt %>
+       </local-time-element>
+       </p>
+       <marked-element markdown="<%= release.getBodyEscapedAsAttribute() %>">
+         <div class="markdown-html"></div>
+            </marked-element>
+       <%
+         }
+       %>
+             </div>
+           </template>
+         </iron-lazy-pages>
        </div>
      </div>
   </div>
