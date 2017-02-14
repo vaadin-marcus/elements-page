@@ -119,7 +119,7 @@
              </svg>
            </div>
          </a>
-         
+
          <a href="https://jsbin.com/licubadeko/1/edit?html,output" class="try-out-link" target="_blank">
            <div class="try-out">
 	         Try it out
@@ -133,7 +133,7 @@
        <div class="flexchild">
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demo">
            <div data-nav="demo" id="demo_content" class="demos-list">
-             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/demo/" frameborder="0" scrolling="no" class="element-demo-iframe"></iframe>
+             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/demo/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="docs">
              <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/doc-imports.html"></vaadin-component-page>
@@ -171,6 +171,14 @@
      </div>
   </div>
 </template>
+<script>
+  function importDocsElement() {
+    console.log('<%=request.getContextPath()%>/vaadin-component-page.html');
+    console.log(Polymer.Base.resolveUrl('<%=request.getContextPath()%>/vaadin-component-page.html'));
+    Polymer.Base.importHref(
+          Polymer.Base.resolveUrl('<%=request.getContextPath()%>/vaadin-component-page.html'), null, null, true);
+  }
+</script>
 <script src="<%=request.getContextPath()%>/hash-nav.js"></script>
 <!-- Demo section end -->
 
