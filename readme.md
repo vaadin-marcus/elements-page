@@ -1,3 +1,4 @@
+
 # Vaadin Elements Page
 
 ## Development instructions.
@@ -32,7 +33,7 @@
 2. Make sure you have `npm`, `bower`, `vulcanize`, `crisper` and `minifier` installed
 3. Run `bower install`
 4. Run `./vulcanize.sh`
-5. In `all-the-things_html.html` change the first row to use the minified file (TODO: AUTOMATE)
-6. In `bower_components/hydrolysis/hydrolysis-analyzer.html` remove polymer import (so it is not imported multiple times) (breaks if it is crisped into .js file) (TODO: AUTOMATE OR FIND A BETTER SOLUTION)
+5. In `all-the-things_html.html` change the first row to use the minified file (all-the-things_js.min.js) (TODO: AUTOMATE)
+6. In `bower_components/hydrolysis/hydrolysis-analyzer.html` remove polymer import on the first lines (so it is not imported multiple times) (breaks if it is crisped into .js file) (TODO: AUTOMATE)
 7. Run `mvn clean package liferay:deploy`
-8. Works nicely in Chrome, IE11, Edge. (Maybe in Safari, not in FF) :( (TODO: WHY NOT STILL WORKING IN FF)
+8. Works at least in Chrome, IE11, Edge and Firefox. (Not that fast tough).
