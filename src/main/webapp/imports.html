@@ -161,8 +161,14 @@
   }
 
   .elements-dynamic-content iframe {
-    width: 100%;
+    width: 1px; /* iOS Safari Fix */
+    min-width: 100%;
     min-height: 500px;
+  }
+
+  .elements-dynamic-content vaadin-component-page {
+    width: 1px; /* iOS Safari Fix */
+    min-width: 100%;
   }
 
   .try-out {
