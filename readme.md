@@ -32,8 +32,5 @@
 
 2. Make sure you have `npm`, `bower`, `vulcanize`, `crisper` and `minifier` installed
 3. Run `bower install`
-4. Run `./vulcanize.sh`
-5. In `all-the-things_html.html` change the first row to use the minified file (all-the-things_js.min.js) (TODO: AUTOMATE)
-6. In `bower_components/hydrolysis/hydrolysis-analyzer.html` remove polymer import on the first lines (so it is not imported multiple times) (breaks if it is crisped into .js file) (TODO: AUTOMATE)
-7. Run `mvn clean package liferay:deploy`
-8. Works at least in Chrome, IE11, Edge and Firefox. (Not that fast tough).
+4. Run `./bundle.sh`
+5. Run `mvn clean package liferay:deploy`
