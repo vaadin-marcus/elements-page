@@ -1,10 +1,11 @@
+
 # Vaadin Elements Page
 
-## Development instructions. 
+## Development instructions.
 
 0. Install Liferay
 1. Make sure you have a liferay profile set up in ~/.m2/settings.xml. Here is one that works:
-``` 
+```
 <?xml version="1.0"?>
 <settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/SETTINGS/1.0.0" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
@@ -29,7 +30,7 @@
 </settings>
 ```
 
-2. Make sure you have `npm`, `bower` and `vulcanize` installed
+2. Make sure you have `npm`, `bower`, `vulcanize`, `crisper` and `minifier` installed
 3. Run `bower install`
-4. Run `./vulcanize.sh`
+4. Run `./bundle.sh`
 5. Run `mvn clean package liferay:deploy`

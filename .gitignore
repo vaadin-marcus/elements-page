@@ -7,3 +7,6 @@ target
 bower_components
 node_modules
 all-the-things.html
+src/main/webapp/all-the-things_html.html
+src/main/webapp/all-the-things_js.js
+src/main/webapp/all-the-things_js.min.js

@@ -9,6 +9,10 @@ function hashChanged() {
   } else {
     dynamicContent.set('selectedNavItem', 'demo');
   }
+
+  if (hash === 'docs' && importDocsElement) {
+    importDocsElement();
+  }
 }
 
 dynamicContent.navigationChanged = function () {
