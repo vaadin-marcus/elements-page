@@ -1,0 +1,135 @@
+<dom-module id="chart-demo-viewer">
+    <template>
+        <style>
+            :host {
+                display: block;
+                position: relative;
+            }
+
+            .source-code > .markdown-html {
+                background: #fdfdfd;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                padding: .4em .8em;
+                overflow: scroll;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            pre,
+            pre code {
+                /* Override stupid Liferay AUI "enhancements" */
+                border: none !important;
+                background: transparent !important;
+                white-space: pre !important;
+                word-break: normal !important;
+                word-wrap: normal !important;
+            }
+
+            .help-link {
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-top: none;
+                padding: 8px;
+                text-align: center;
+                background: #fdfdfd;
+            }
+        </style>
+        <div class="demo">
+            <content></content>
+        </div>
+        <div class="sources">
+          <div class="example-tab" data-example="[[source.name]]">
+              <marked-element class="source-code" markdown="[[_getMarkdownFor(source)]]">
+                  <div class="markdown-html"></div>
+              </marked-element>
+              <div class="help-link">Need help getting started with Vaadin Elements for [[item.name]]? <a href="[[_getHelpUrlFor(source.name)]]">Read the quick start documentation.</a></div>
+          </div>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'chart-demo-viewer',
+
+        properties: {
+
+            examples: Array,
+
+            source: {
+                type: Object,
+                value: function() {
+                    return {};
+                }
+            }
+        },
+
+        _getHelpUrlFor: function(framework) {
+            if(framework === 'Polymer'){
+                return 'https://vaadin.com/docs/-/part/elements/elements-getting-started.html';
+            } else {
+                return '#';
+            }
+        },
+
+        created: function() {
+
+            // Add only one Prism highlighter on the page
+            if (!window._viewSource) {
+                window._viewSource = {};
+                window._viewSource.prism = document.createElement('prism-highlighter');
+                this.ownerDocument.body.appendChild(window._viewSource.prism);
+            }
+        },
+
+        attached: function() {
+            this.examples = Polymer.dom(this).querySelectorAll('demo-source');
+
+            this._fetchExamples();
+        },
+
+        _getMarkdownFor: function(sourceItem) {
+            return '\`\`\`' + sourceItem.type + '\n' + sourceItem.source + '\n\`\`\`';
+        },
+
+        _fetchExamples: function() {
+            if (this.examples && this.examples.length > 0) {
+                var self = this;
+                Promise.all(this.examples.map(function(external) {
+                    return self._fetchExample(external);
+                }));
+            }
+        },
+
+        _fetchExample: function(external) {
+            var self = this;
+
+            var filename = external.url.substr(external.url.lastIndexOf('/') + 1);
+            var name = external.name || filename;
+            var type = 'html';
+            if (filename.indexOf('.css') > 0) {
+                type = 'css';
+            } else if (filename.indexOf('.js') > 0 || filename.indexOf('.json') > 0) {
+                type = 'js';
+            } else if (filename.indexOf('.ts') > 0) {
+                type = 'ts';
+            }
+
+            return new Promise(function(resolve) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            self.source = {
+                              name: name,
+                              source: xhr.responseText,
+                              type: type
+                            }
+                            resolve();
+                        }
+                    }
+                };
+                xhr.open('GET', external.url, true);
+                xhr.send();
+            });
+        }
+    });
+</script>

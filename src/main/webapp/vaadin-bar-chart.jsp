@@ -92,11 +92,9 @@
       <h4>Examples</h4>
 
       <h5>Stacked bar chart</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/bar/basic-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/bar/basic-angular2.ts"></demo-source>
 
         <vaadin-bar-chart id="basic-bar">
           <title>Stacked bar chart</title>
@@ -122,17 +120,15 @@
             <data>3, 4, 4, 2, 5</data>
           </data-series>
         </vaadin-bar-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 
   <div class="elements-section demo">
     <h5>Bar chart with negative stack</h5>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/bar/negative-stack-polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/bar/negative-stack-angular2.ts"></demo-source>
 
       <vaadin-bar-chart id="bar-with-negative-stack">
         <title>Population pyramid for Germany, midyear 2010</title>
@@ -170,7 +166,7 @@
           </data>
         </data-series>
       </vaadin-bar-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 <!-- Demo section end -->

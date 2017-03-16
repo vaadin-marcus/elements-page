@@ -103,11 +103,9 @@
     <div class="elements-section">
 
       <h4>Examples</h4>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/arearange/polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/arearange/angular2.ts"></demo-source>
 
         <template is="dom-bind">
           <iron-ajax auto url="<%=request.getContextPath()%>/temp-variation.json" handle-as="json"
@@ -124,7 +122,7 @@
             <data-series data="[[temperatureData]]"></data-series>
           </vaadin-arearange-chart>
         </template>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 </template>

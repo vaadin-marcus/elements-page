@@ -69,11 +69,9 @@
 
     <h4>Examples</h4>
 
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/boxplot/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/boxplot/angular2.ts"></demo-source>
 
       <vaadin-boxplot-chart id="box-plot">
         <title>Vaadin Charts Box Plot Example</title>
@@ -112,7 +110,7 @@
           </data>
         </data-series>
       </vaadin-boxplot-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 <!-- Demo section end -->

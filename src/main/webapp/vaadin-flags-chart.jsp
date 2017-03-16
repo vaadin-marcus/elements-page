@@ -68,11 +68,9 @@
   <div class="elements-section">
 
     <h4>Examples</h4>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/flags/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/flags/angular2.ts"></demo-source>
 
       <link rel="import" href="<%=request.getContextPath()%>/ohlc-example.html">
       <vaadin-flags-chart id="flags-placement" timeline>
@@ -767,7 +765,7 @@
           </data>
         </data-series>
       </vaadin-flags-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 <!-- Demo section end -->

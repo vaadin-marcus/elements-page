@@ -68,16 +68,14 @@
   <div class="elements-section">
 
     <h4>Examples</h4>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/sparkline/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/sparkline/angular2.ts"></demo-source>
 
       <link rel="import" href="<%=request.getContextPath()%>/sparkline-example.html">
 
       <sparkline-example data-url="<%=request.getContextPath()%>/stockData.json"></sparkline-example>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 

@@ -102,11 +102,9 @@
     <div class="elements-section">
 
       <h4>Examples</h4>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/areaspline/polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/areaspline/angular2.ts"></demo-source>
 
         <vaadin-areaspline-chart id="area-spline">
           <title>Average fruit consumption during one week</title>
@@ -137,7 +135,7 @@
             <data>1, 3, 4, 3, 3, 5, 4</data>
           </data-series>
         </vaadin-areaspline-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 </template>

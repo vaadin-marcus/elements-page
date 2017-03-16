@@ -68,11 +68,9 @@
   <div class="elements-section">
 
     <h4>Examples</h4>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/ohlc/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/ohlc/angular2.ts"></demo-source>
 
       <template is="dom-bind">
         <iron-ajax
@@ -101,7 +99,7 @@
           </data-series>
         </vaadin-ohlc-chart>
       </template>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 <!-- Demo section end -->
