@@ -60,7 +60,7 @@
     <div class="span9">
       <h5>Core Elements
         <%
-          GitHubRelease latestStableRelease = Releases.getLatestStableRelease("vaadin-grid");
+          GitHubRelease latestStableRelease = Releases.getLatestStableRelease("vaadin-core-elements");
           if (latestStableRelease != null) {
         %>
         <span class="version"><%=latestStableRelease.tagName%></span>
