@@ -100,11 +100,9 @@
     <div class="elements-section">
       <h4>Examples</h4>
       <h5>Basic area chart</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/area/basic-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/area/basic-angular2.ts"></demo-source>
 
         <vaadin-area-chart id="basic-area">
           <title>US and USSR nuclear stockpiles</title>
@@ -148,17 +146,15 @@
             </data>
           </data-series>
         </vaadin-area-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 
   <div class="elements-section">
     <h5>Area chart with negative values</h5>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/area/negative-values-polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/area/negative-values-angular2.ts"></demo-source>
 
       <vaadin-area-chart id="area-with-negative-values">
         <title>Area chart with negative values</title>
@@ -180,7 +176,7 @@
           <data>3, 4, 4, -2, 5</data>
         </data-series>
       </vaadin-area-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 
   <div class="w-wallpaper-container zebra">
@@ -188,11 +184,9 @@
 
     <div class="elements-section">
       <h5>Area chart with missing points</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/area/missing-points-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/area/missing-points-angular2.ts"></demo-source>
 
         <vaadin-area-chart id="area-with-missing-points">
           <title>Fruit consumption *</title>
@@ -215,17 +209,15 @@
             <data>1, 0, 3, null, 3, 1, 2, 1</data>
           </data-series>
         </vaadin-area-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 
   <div class="elements-section">
     <h5>Area chart with inverted axis</h5>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/area/inverted-axis-polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/area/inverted-axis-angular2.ts"></demo-source>
 
       <vaadin-area-chart id="inverted-axes">
         <chart inverted="true"></chart>
@@ -254,7 +246,7 @@
           <data>1, 3, 4, 3, 3, 5, 4</data>
         </data-series>
       </vaadin-area-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 
   <div class="w-wallpaper-container zebra">
@@ -262,11 +254,9 @@
 
     <div class="elements-section">
       <h5>Percentage area chart</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/area/percentage-area-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/area/percentage-area-angular2.ts"></demo-source>
 
         <vaadin-area-chart id="percentage-area">
           <title>Historic World Population by Region</title>
@@ -303,17 +293,15 @@
             <data>2, 2, 2, 6, 13, 30, 46</data>
           </data-series>
         </vaadin-area-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 
   <div class="elements-section">
     <h5>Stacked area chart</h5>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/area/stacked-area-polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/area/stacked-area-angular2.ts"></demo-source>
 
       <vaadin-area-chart id="stacked-area">
         <title>Historic and Estimated Worldwide Population Growth by Region</title>
@@ -348,7 +336,7 @@
           <data>2, 2, 2, 6, 13, 30, 46</data>
         </data-series>
       </vaadin-area-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
 
   </div>
 </template>

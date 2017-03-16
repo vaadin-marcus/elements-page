@@ -67,11 +67,9 @@
   <div class="elements-section">
 
     <h4>Examples</h4>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/polygon/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/polygon/angular2.ts"></demo-source>
 
       <vaadin-polygon-chart id="scatter-and-polygon">
         <title>Height vs Weight</title>
@@ -95,7 +93,7 @@
         </data-series>
 
       </vaadin-polygon-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 

@@ -86,11 +86,9 @@
     <div class="elements-section">
       <h4>Examples</h4>
       <h5>Angular gauge chart</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/gauge/basic-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/gauge/basic-angular2.ts"></demo-source>
 
         <vaadin-gauge-chart id="angular-gauge">
           <chart plot-background-color="null" plot-background-image="null" plot-border-width="0"
@@ -135,17 +133,15 @@
             </data>
           </data-series>
         </vaadin-gauge-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 
   <div class="elements-section">
     <h5>Dual axis gauge chart</h5>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/gauge/dual-axis-polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/gauge/dual-axis-angular2.ts"></demo-source>
 
       <vaadin-gauge-chart id="gauge-with-dual-axes">
         <chart align-ticks="false" plot-background-color="null" plot-background-image="null"
@@ -180,7 +176,7 @@
           <data>80</data>
         </data-series>
       </vaadin-gauge-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 

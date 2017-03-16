@@ -66,11 +66,9 @@
 <template is="dom-bind">
   <div class="elements-section">
     <h4>Examples</h4>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/heatmap/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/heatmap/angular2.ts"></demo-source>
 
       <vaadin-heatmap-chart id="heat-map">
         <title>Sales per employee per weekday</title>
@@ -95,7 +93,7 @@
           </data>
         </data-series>
       </vaadin-heatmap-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 

@@ -67,11 +67,9 @@
 <template is="dom-bind">
   <div class="elements-section">
     <h4>Examples</h4>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/waterfall/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/waterfall/angular2.ts"></demo-source>
 
       <vaadin-waterfall-chart id="waterfall">
         <title>Vaadin Charts Waterfall</title>
@@ -125,7 +123,7 @@
           </data>
         </data-series>
       </vaadin-waterfall-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 

@@ -83,11 +83,9 @@
 
     <div class="elements-section">
       <h4>Examples</h4>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/solidgauge/polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/solidgauge/angular2.ts"></demo-source>
 
         <vaadin-solidgauge-chart id="solid-gauge">
           <title text=""></title>
@@ -112,7 +110,7 @@
             <data>80</data>
           </data-series>
         </vaadin-solidgauge-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 </template>

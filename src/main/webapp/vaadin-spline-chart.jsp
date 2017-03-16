@@ -102,15 +102,13 @@
     <div class="elements-section">
 
       <h4>Examples</h4>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/spline/polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/spline/angular2.ts"></demo-source>
 
         <link rel="import" href="<%=request.getContextPath()%>/spline-demo.html">
         <spline-demo></spline-demo>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 </template>

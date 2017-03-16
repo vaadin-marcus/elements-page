@@ -66,11 +66,9 @@
   <div class="elements-section">
 
     <h4>Examples</h4>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/scatter/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/scatter/angular2.ts"></demo-source>
 
       <vaadin-scatter-chart id="basic-3d-scatter">
         <title>Scatterbox</title>
@@ -120,7 +118,7 @@
         </data-series>
 
       </vaadin-scatter-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 

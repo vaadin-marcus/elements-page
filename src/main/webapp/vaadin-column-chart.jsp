@@ -90,11 +90,9 @@
     <div class="elements-section">
       <h4>Examples</h4>
       <h5>Column chart with drilldown</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/column/drilldown-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/column/drilldown-angular2.ts"></demo-source>
 
         <vaadin-column-chart class="chart">
           <title>Browser market shares at a specific website, March 2015</title>
@@ -182,17 +180,15 @@
             </data>
           </data-series>
         </vaadin-column-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 
   <div class="elements-section">
     <h5>Stacked column chart</h5>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/column/stacked-polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/column/stacked-angular2.ts"></demo-source>
 
       <vaadin-column-chart class="chart">
         <title>Total fruit consumption, grouped by gender</title>
@@ -224,7 +220,7 @@
           <data>3, 0, 4, 4, 3</data>
         </data-series>
       </vaadin-column-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 
   <div class="w-wallpaper-container zebra">
@@ -232,11 +228,9 @@
 
     <div class="elements-section">
       <h5>Column chart with negative values</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/column/negative-values-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/column/negative-values-angular2.ts"></demo-source>
 
         <vaadin-column-chart class="chart">
           <title>Column chart with negative values</title>
@@ -259,17 +253,15 @@
             <data>3, 4, 4, -2, 5</data>
           </data-series>
         </vaadin-column-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 
   <div class="elements-section">
     <h5>3D column chart</h5>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/column/3d-polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/column/3d-angular2.ts"></demo-source>
 
       <vaadin-column-chart class="chart">
         <title>Monthly Average Rainfall</title>
@@ -308,7 +300,7 @@
           <data>42.4, 33.2, 34.5, 39.7</data>
         </data-series>
       </vaadin-column-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 
   <div class="w-wallpaper-container zebra">
@@ -316,11 +308,9 @@
 
     <div class="elements-section">
       <h5>Wind rose chart</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/column/rose-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/column/rose-angular2.ts"></demo-source>
 
         <vaadin-column-chart id="windrose">
           <chart polar="true"></chart>
@@ -376,7 +366,7 @@
             </data>
           </data-series>
         </vaadin-column-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 </template>

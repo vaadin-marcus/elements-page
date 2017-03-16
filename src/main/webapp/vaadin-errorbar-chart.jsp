@@ -66,11 +66,9 @@
   <div class="elements-section">
 
     <h4>Examples</h4>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/errorbar/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/errorbar/angular2.ts"></demo-source>
 
       <vaadin-errorbar-chart id="error-bar">
         <title>Temperature vs Rainfall</title>
@@ -123,7 +121,7 @@
           </data>
         </data-series>
       </vaadin-errorbar-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 

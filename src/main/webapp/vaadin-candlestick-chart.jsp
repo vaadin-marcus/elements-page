@@ -69,15 +69,13 @@
   <div class="elements-section">
 
     <h4>Examples</h4>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/candlestick/polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/candlestick/angular2.ts"></demo-source>
 
       <link rel="import" href="<%=request.getContextPath()%>/candlestick-example.html">
       <candlestick-example></candlestick-example>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 <!-- Demo section end -->

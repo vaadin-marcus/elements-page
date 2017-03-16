@@ -67,11 +67,9 @@
 
     <h4>Examples</h4>
     <h5>Basic column range chart</h5>
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/columnrange/basic-polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/columnrange/basic-angular2.ts"></demo-source>
 
       <vaadin-columnrange-chart id="column-range">
         <chart inverted="true"></chart>
@@ -96,7 +94,7 @@
           </data>
         </data-series>
       </vaadin-columnrange-chart>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 
   <div class="w-wallpaper-container zebra">
@@ -104,11 +102,9 @@
 
     <div class="elements-section">
       <h5>Resource usage chart</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/columnrange/resource-usage-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/columnrange/resource-usage-angular2.ts"></demo-source>
 
         <vaadin-columnrange-chart id="column-range-resource-usage">
           <chart inverted="true"></chart>
@@ -139,7 +135,7 @@
             </data>
           </data-series>
         </vaadin-columnrange-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 </template>

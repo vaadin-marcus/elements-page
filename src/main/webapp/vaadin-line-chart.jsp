@@ -104,11 +104,9 @@
       <h4>Examples</h4>
 
       <h5>Basic line chart</h5>
-      <demo-viewer selected="{{selected}}">
+      <chart-demo-viewer>
         <demo-source name="Polymer"
                      url="<%=request.getContextPath()%>/examples/charts/line/basic-polymer.html"></demo-source>
-        <demo-source name="Angular 2"
-                     url="<%=request.getContextPath()%>/examples/charts/line/basic-angular2.ts"></demo-source>
 
         <vaadin-line-chart id="lines-with-complex-html-tooltip">
           <title>Complex tooltip</title>
@@ -130,7 +128,7 @@
             </data>
           </data-series>
         </vaadin-line-chart>
-      </demo-viewer>
+      </chart-demo-viewer>
     </div>
   </div>
 
@@ -139,11 +137,9 @@
     <p>Any time based chart can be turned into a timeline chart by adding the <code>timeline</code>
       attribute to the chart element.</p>
 
-    <demo-viewer selected="{{selected}}">
+    <chart-demo-viewer>
       <demo-source name="Polymer"
                    url="<%=request.getContextPath()%>/examples/charts/line/timeline-polymer.html"></demo-source>
-      <demo-source name="Angular 2"
-                   url="<%=request.getContextPath()%>/examples/charts/line/timeline-angular2.ts"></demo-source>
 
       <template is="dom-bind">
         <iron-ajax auto id="dataFetcher" url="<%=request.getContextPath()%>/aaplData.json"
@@ -159,7 +155,7 @@
           </data-series>
         </vaadin-line-chart>
       </template>
-    </demo-viewer>
+    </chart-demo-viewer>
   </div>
 </template>
 
