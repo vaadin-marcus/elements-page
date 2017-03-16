@@ -16,7 +16,7 @@ function hashChanged() {
 }
 
 dynamicContent.navigationChanged = function () {
-  location.hash = dynamicContent.selectedNavItem === 'demo' ? '' : '#' + dynamicContent.selectedNavItem;
+  location.hash = '#' + dynamicContent.selectedNavItem;
 };
 
 window.addEventListener('hashchange', hashChanged);
