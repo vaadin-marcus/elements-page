@@ -91,7 +91,7 @@
   <div class="w-wallpaper-container zebra elements-dynamic-content">
      <div class="top-navigation">
        <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector" on-iron-select="navigationChanged">
-         <div name="demo">Demo</div>
+         <div name="demos">Demo</div>
          <div name="docs">Documentation</div>
          <div name="releases">Releases</div>
        </iron-selector>
@@ -126,7 +126,7 @@
      <div class="flex-container dynamic-list-top">
        <div class="navigation">
          <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="nav_selector" on-iron-select="navigationChanged">
-           <div name="demo">Demo</div>
+           <div name="demos">Demo</div>
            <div name="docs">Documentation</div>
            <div name="releases">Releases</div>
          </iron-selector>
@@ -150,8 +150,8 @@
          </a>
        </div>
        <div class="flexchild">
-         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demo">
-           <div data-nav="demo" id="demo_content" class="demos-list">
+         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demos">
+           <div data-nav="demos" id="demo_content" class="demos-list">
              <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-icons/demo/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="docs">
@@ -197,5 +197,5 @@
           Polymer.Base.resolveUrl('<%=request.getContextPath()%>/vaadin-component-page.html'), null, null, true);
   }
 </script>
-<script src="<%=request.getContextPath()%>/hash-nav.js?1"></script>
+<script src="<%=request.getContextPath()%>/hash-nav.js?6"></script>
 <jsp:include page="bottom-actions.jsp"/>

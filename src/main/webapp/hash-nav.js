@@ -7,7 +7,7 @@ function hashChanged() {
   if (hash) {
     dynamicContent.set('selectedNavItem', hash);
   } else {
-    dynamicContent.set('selectedNavItem', 'demo');
+    dynamicContent.set('selectedNavItem', 'demos');
   }
 
   if (hash === 'docs' && importDocsElement) {
