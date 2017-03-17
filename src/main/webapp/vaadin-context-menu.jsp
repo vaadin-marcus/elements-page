@@ -176,5 +176,5 @@
           Polymer.Base.resolveUrl('<%=request.getContextPath()%>/vaadin-component-page.html'), null, null, true);
   }
 </script>
-<script src="<%=request.getContextPath()%>/hash-nav.js"></script>
+<script src="<%=request.getContextPath()%>/hash-nav?1.js"></script>
 <jsp:include page="bottom-actions.jsp"/>
