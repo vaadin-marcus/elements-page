@@ -1137,6 +1137,11 @@ h2.updates {
 
 .element-image {
   max-height: 400px;
-  margin: 0 auto;
   display: block;
+}
+
+@media (max-width: 767px) {
+  .element-image {
+    margin: 0 auto;
+  }
 }

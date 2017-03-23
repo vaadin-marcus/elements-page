@@ -59,6 +59,17 @@
       <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-grid.png"
            class="element-image"
            alt="vaadin-grid">
+      <div class="row-fluid" style="margin-top:15px;">
+        <div class="span12" style="margin-left: 2.5641%; font-size: 18px; font-weight: 600; margin-bottom: -5px;">
+          Show documentation for:
+        </div>
+        <div class="span12" style="margin-left: 2.5641%;">
+          <select name="grid-version" style="max-width:95%; margin:0;" onchange="gridVersionChange()" id="grid-version-select">
+            <option value="2" selected>Vaadin Grid 2</option>
+            <option value="1">Vaadin Grid 1</option>
+          </select>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -67,7 +78,7 @@
 
 <!-- Demo section start -->
 <a name="demo"></a>
-<template is="dom-bind" id="dynamicDataTemplate">
+<template is="dom-bind" id="dynamicDataTemplate" demo-url="https://cdn.vaadin.com/vaadin-grid/2.0.0-alpha4/demo/" docs-url="https://cdn.vaadin.com/vaadin-grid/2.0.0-alpha4/index.html">
   <div class="w-wallpaper-container zebra elements-dynamic-content">
     <div class="top-navigation">
       <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector"
@@ -128,12 +139,12 @@
       <div class="flexchild">
         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demos">
           <div data-nav="demos" id="demo_content" class="demos-list">
-            <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/" frameborder="0"
+            <iframe src$="[[demoUrl]]" frameborder="0"
                     scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
           </div>
           <div data-nav="docs">
             <vaadin-component-page
-                src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/vaadin-grid-doc.html"></vaadin-component-page>
+                src="[[docsUrl]]"></vaadin-component-page>
           </div>
           <div data-nav="releases" class="releases-list">
             <%
@@ -175,6 +186,21 @@
     Polymer.Base.importHref(
           Polymer.Base.resolveUrl('<%=request.getContextPath()%>/vaadin-component-page.html'), null, null, true);
   }
+  function gridVersionChange() {
+    var dynamicContent = document.querySelector('#dynamicDataTemplate');
+    var value = document.querySelector('#grid-version-select').value;
+
+    if (value === '1') {
+      dynamicContent.set('demoUrl', 'https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/');
+      dynamicContent.set('docsUrl', 'https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/vaadin-grid-doc.html');
+    } else {
+      dynamicContent.set('demoUrl', 'https://cdn.vaadin.com/vaadin-grid/2.0.0-alpha4/demo/');
+      dynamicContent.set('docsUrl', 'https://cdn.vaadin.com/vaadin-grid/2.0.0-alpha4/index.html');
+    }
+  }
+  window.addEventListener('WebComponentsReady', function() {
+    gridVersionChange();
+  });
 </script>
 <script src="<%=request.getContextPath()%>/hash-nav.js?6"></script>
 <!-- Demo section end -->
