@@ -558,8 +558,20 @@ documentation page including demos (if available).
         },
         _analyzerChanged: function() {
           var analyzer = this._analyzer;
-          this._setDocElements(analyzer && analyzer.elements ? analyzer.elements : []);
-          this._setDocBehaviors(analyzer && analyzer.behaviors ? analyzer.behaviors : []);
+          var elements = analyzer && analyzer.elements ? analyzer.elements : [];
+          var behaviors = analyzer && analyzer.behaviors ? analyzer.behaviors : [];
+          if (this.src.indexOf('vaadin-grid/2') > -1) {
+            elements = elements.filter(function(el, index) {
+              //whitelist public vaadin elements
+              return /vaadin-$|column|filter|sorter/.test(el.is) || el.is === 'vaadin-grid';
+            });
+            behaviors = behaviors.filter(function(beh, index) {
+              // blacklist internal APIs
+              return !/Polymer|iron|Iron|Table|FocusableCellContainer/.test(beh.is);
+            });
+          }
+          this._setDocElements(elements);
+          this._setDocBehaviors(behaviors);
           if (!this._findDescriptor(this.active)) {
             this.active = this._getDefaultActive();
           }

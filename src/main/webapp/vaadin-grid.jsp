@@ -184,7 +184,7 @@
 <script>
   function importDocsElement() {
     Polymer.Base.importHref(
-          Polymer.Base.resolveUrl('<%=request.getContextPath()%>/vaadin-component-page.html'), null, null, true);
+          Polymer.Base.resolveUrl('<%=request.getContextPath()%>/vaadin-component-page.html?1'), null, null, true);
   }
   function gridVersionChange() {
     var dynamicContent = document.querySelector('#dynamicDataTemplate');

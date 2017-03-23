@@ -174,7 +174,7 @@
 <script>
   function importDocsElement() {
     Polymer.Base.importHref(
-          Polymer.Base.resolveUrl('<%=request.getContextPath()%>/vaadin-component-page.html'), null, null, true);
+          Polymer.Base.resolveUrl('<%=request.getContextPath()%>/vaadin-component-page.html?1'), null, null, true);
   }
 </script>
 <script src="<%=request.getContextPath()%>/hash-nav.js?6"></script>
