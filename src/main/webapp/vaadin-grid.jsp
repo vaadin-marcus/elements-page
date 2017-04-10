@@ -97,7 +97,7 @@
           </svg>
         </div>
       </a>
-      <a href="https://jsbin.com/yokewut/1/edit?html,output" class="try-out-link" target="_blank">
+      <a href="https://jsbin.com/yokewut/edit?html,output" class="try-out-link" target="_blank">
         <div class="try-out">
           Try it out
           <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
@@ -125,7 +125,7 @@
             </svg>
           </div>
         </a>
-        <a href="https://jsbin.com/yokewut/1/edit?html,output" class="try-out-link" target="_blank">
+        <a href="https://jsbin.com/yokewut/edit?html,output" class="try-out-link" target="_blank">
           <div class="try-out">
             Try it out
             <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
