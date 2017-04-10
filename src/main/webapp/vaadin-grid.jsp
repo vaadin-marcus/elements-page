@@ -191,8 +191,8 @@
     var value = document.querySelector('#grid-version-select').value;
 
     if (value === '1') {
-      dynamicContent.set('demoUrl', 'https://cdn.vaadin.com/vaadin-core-elements/1.2.0/vaadin-grid/demo/');
-      dynamicContent.set('docsUrl', 'https://cdn.vaadin.com/vaadin-core-elements/1.2.0/vaadin-grid/');
+      dynamicContent.set('demoUrl', 'https://cdn.vaadin.com/vaadin-core-elements/1.5.0/vaadin-grid/demo/');
+      dynamicContent.set('docsUrl', 'https://cdn.vaadin.com/vaadin-core-elements/1.5.0/vaadin-grid/');
     } else {
       dynamicContent.set('demoUrl', 'https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/');
       dynamicContent.set('docsUrl', 'https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/');
