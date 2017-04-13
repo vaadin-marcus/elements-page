@@ -189,6 +189,42 @@
   </div>
 </div>
 
+
+<div class="w-wallpaper-container zebra elements-category">
+  <div class="w-wallpaper"></div>
+  <div class="row-fluid">
+
+    <div class="span9">
+      <h5>Pro Elements</h5>
+    </div>
+    <div class="span3">
+      <span>Commercial license</span>
+      <a href="https://vaadin.com/pricing" class="w-arrow-button blue small">See pricing</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="w-wallpaper-container zebra elements-category-tiles elements-category-core-tiles">
+  <div class="w-wallpaper"></div>
+
+  <div class="tile-container">
+    <div class="tile">
+      <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-board.jsp" /></portlet:renderURL>">
+        <img src="<%=request.getContextPath()%>/img/preview/board.png"
+             srcset="<%=request.getContextPath()%>/img/preview/board@2x.png 2x"
+             alt="Dashboard component for web apps">
+        <div class="tile-details">
+          <div class="tile-title">Board</div>
+          <div class="tile-description">Vaadin Board is a flexible and easy layout that allows you to build great looking dashboards and intro screens to your application. It uses intelligent layouting that gives responsive behaviour out of the box.</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+
 <jsp:include page="get-help.jsp"/>
 
 <div class="w-wallpaper-container zebra elements-category">

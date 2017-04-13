@@ -1,0 +1,23 @@
+{
+  "name": "board",
+  "homepage": "https://github.com/vaadin/elements-page",
+  "authors": [
+    "anezthes <joacim@vaadin.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/main/webapp/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vaadin-board": "^1.0.0-alpha3",
+    "iron-demo-helpers": "2.0-preview",
+    "paper-styles": "2.0-preview"
+  }
+}

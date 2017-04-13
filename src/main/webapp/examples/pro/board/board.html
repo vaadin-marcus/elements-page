@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Vaadin Board | Features</title>
+
+  <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="src/main/webapp/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="demo.css">
+
+  <link rel="import" href="src/main/webapp/bower_components/polymer/polymer.html">
+  <link rel="import" href="src/main/webapp/bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="src/main/webapp/bower_components/iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="src/main/webapp/bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+  <link rel="import" href="src/main/webapp/bower_components/paper-styles/default-theme.html">
+  <link rel="import" href="src/main/webapp/bower_components/vaadin-board/vaadin-board.html">
+</head>
+
+<body unresolved>
+  <div class="vertical-section-container centered">
+    <h3>Responsive</h3>
+    <p>Responsive behaviour is built-in and doesn’t require any custom development, extremely easy. Layouting is automatically done based on screen size while making sure all widgets used all of the available space.</p>
+    <h3>Simple and easy to use API</h3>
+    <p>The vaadin-board is divided into rows using vaadin-board-row. Within a row you can have any Web Component or HTML elements inside it. Sizing, layouting and wrapping is automatic.</p>
+    <demo-snippet>
+      <template>
+        <vaadin-board>
+          <vaadin-board-row>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+          </vaadin-board-row>
+          <vaadin-board-row>
+            <div>4</div>
+            <div>5</div>
+          </vaadin-board-row>
+        </vaadin-board>
+      </template>
+    </demo-snippet>
+
+    <h3>Up to four columns supported</h3>
+    <p>Vaadin Board supports one to four columns on each row.</p>
+    <demo-snippet>
+      <template>
+        <vaadin-board>
+          <vaadin-board-row>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+          </vaadin-board-row>
+          <vaadin-board-row>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+          </vaadin-board-row>
+          <vaadin-board-row>
+            <div>8</div>
+            <div>9</div>
+          </vaadin-board-row>
+          <vaadin-board-row>
+            <div>10</div>
+          </vaadin-board-row>
+        </vaadin-board>
+      </template>
+    </demo-snippet>
+
+    <h3>Nested rows</h3>
+    <p>You can have rows inside rows for more fine grained control on how certain areas of your layout behave on resize and how they are rendered.</p>
+    <demo-snippet>
+      <template>
+        <vaadin-board>
+          <vaadin-board-row>
+            <div>1</div>
+            <div>2</div>
+            <vaadin-board-row>
+              <div>3A</div>
+              <div>3B</div>
+            </vaadin-board-row>
+          </vaadin-board-row>
+          <vaadin-board-row>
+            <div>4</div>
+            <div>5</div>
+          </vaadin-board-row>
+        </vaadin-board>
+      </template>
+    </demo-snippet>
+
+    <h3>Column span</h3>
+    <p>An element inside a vaadin-board-row can have a board-cols modifier for controlling the area used within the row. Choosing values of 2 or 3 you get to layout rows such as 25%-50%-25%, 33%-67% or 75%-25%.</p>
+    <demo-snippet>
+      <template>
+        <vaadin-board>
+          <vaadin-board-row>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+          </vaadin-board-row>
+          <vaadin-board-row>
+            <div board-cols="2">4</div>
+            <div>5</div>
+          </vaadin-board-row>
+        </vaadin-board>
+      </template>
+    </demo-snippet>
+
+    <h3>Upcoming features</h3>
+    <p>We are building a lot of new cool stuff to Vaadin Board and here are the things we have thought of. Please feel free to comment on these, say what you’d like to get next or propose something totally new.</p>
+    <table class="upcoming-features">
+      <tr>
+        <td>Java API for Vaadin Framework 8</td>
+        <td>Coming in 1.1 release</td>
+      </tr>
+      <tr>
+        <td>Gutters<br>Easy API to control gutters, groupings and space</td>
+        <td>Schedule not set</td>
+      </tr>
+      <tr>
+        <td>Chrome for widgets<br>Built-in support for headers, borders and control buttons</td>
+        <td>Schedule not set</td>
+      </tr>
+      <tr>
+        <td>Minimize and maximize widgets</td>
+        <td>Schedule not set</td>
+      </tr>
+      <tr>
+        <td>Customizable dashboards<br>Reordering widgets with drag and drop, storing user layouts, widget menu</td>
+        <td>Schedule not set</td>
+      </tr>
+      <tr>
+        <td>Fine grained rules for widgets based on screen size</td>
+        <td>Schedule not set</td>
+      </tr>
+      <tr>
+        <td>Widget gallery<br>Ready made widgets for images, tickers, tables, common charts, etc.</td>
+        <td>Schedule not set</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
