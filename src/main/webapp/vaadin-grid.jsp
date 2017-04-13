@@ -78,7 +78,7 @@
 
 <!-- Demo section start -->
 <a name="demo"></a>
-<template is="dom-bind" id="dynamicDataTemplate" demo-url="https://cdn.vaadin.com/vaadin-grid/2.0.0-beta1/demo/" docs-url="https://cdn.vaadin.com/vaadin-grid/2.0.0-beta1/index.html">
+<template is="dom-bind" id="dynamicDataTemplate" demo-url="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/" docs-url="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/">
   <div class="w-wallpaper-container zebra elements-dynamic-content">
     <div class="top-navigation">
       <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector"
@@ -191,11 +191,11 @@
     var value = document.querySelector('#grid-version-select').value;
 
     if (value === '1') {
-      dynamicContent.set('demoUrl', 'https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/');
-      dynamicContent.set('docsUrl', 'https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/vaadin-grid-doc.html');
+      dynamicContent.set('demoUrl', 'https://cdn.vaadin.com/vaadin-core-elements/1.5.0/vaadin-grid/demo/');
+      dynamicContent.set('docsUrl', 'https://cdn.vaadin.com/vaadin-core-elements/1.5.0/vaadin-grid/');
     } else {
-      dynamicContent.set('demoUrl', 'https://cdn.vaadin.com/vaadin-grid/2.0.0-beta1/demo/');
-      dynamicContent.set('docsUrl', 'https://cdn.vaadin.com/vaadin-grid/2.0.0-beta1/index.html');
+      dynamicContent.set('demoUrl', 'https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/');
+      dynamicContent.set('docsUrl', 'https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/');
     }
   }
   window.addEventListener('WebComponentsReady', function() {

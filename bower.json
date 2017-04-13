@@ -39,5 +39,8 @@
     "iframe-resizer": "^3.5.7",
     "iron-lazy-pages": "^1.4.4",
     "elements-demo-resources": "*"
+  },
+  "resolutions": {
+    "iron-iconset-svg": "^1.1.0"
   }
 }
