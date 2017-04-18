@@ -189,7 +189,7 @@
   </div>
 </div>
 
-
+<%-- 
 <div class="w-wallpaper-container zebra elements-category">
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
@@ -223,7 +223,7 @@
 
   </div>
 </div>
-
+--%>
 
 <jsp:include page="get-help.jsp"/>
 
