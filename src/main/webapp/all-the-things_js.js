@@ -1316,7 +1316,7 @@ default:
 return value != null ? value : undefined;
 }
 }
-});Polymer.version = "1.8.1";Polymer.Base._addFeature({
+});Polymer.version = "1.9.1";Polymer.Base._addFeature({
 _registerFeatures: function () {
 this._prepIs();
 this._prepBehaviors();
@@ -1333,10 +1333,83 @@ this._marshalHostAttributes();
 this._marshalBehaviors();
 }
 });
-Polymer.Base._addFeature({
+(function () {
+function resolveCss(cssText, ownerDocument) {
+return cssText.replace(CSS_URL_RX, function (m, pre, url, post) {
+return pre + '\'' + resolve(url.replace(/["']/g, ''), ownerDocument) + '\'' + post;
+});
+}
+function resolveAttrs(element, ownerDocument) {
+for (var name in URL_ATTRS) {
+var a$ = URL_ATTRS[name];
+for (var i = 0, l = a$.length, a, at, v; i < l && (a = a$[i]); i++) {
+if (name === '*' || element.localName === name) {
+at = element.attributes[a];
+v = at && at.value;
+if (v && v.search(BINDING_RX) < 0) {
+at.value = a === 'style' ? resolveCss(v, ownerDocument) : resolve(v, ownerDocument);
+}
+}
+}
+}
+}
+function resolve(url, ownerDocument) {
+if (url && ABS_URL.test(url)) {
+return url;
+}
+var resolver = getUrlResolver(ownerDocument);
+resolver.href = url;
+return resolver.href || url;
+}
+var tempDoc;
+var tempDocBase;
+function resolveUrl(url, baseUri) {
+if (!tempDoc) {
+tempDoc = document.implementation.createHTMLDocument('temp');
+tempDocBase = tempDoc.createElement('base');
+tempDoc.head.appendChild(tempDocBase);
+}
+tempDocBase.href = baseUri;
+return resolve(url, tempDoc);
+}
+function getUrlResolver(ownerDocument) {
+return ownerDocument.body.__urlResolver || (ownerDocument.body.__urlResolver = ownerDocument.createElement('a'));
+}
+function pathFromUrl(url) {
+return url.substring(0, url.lastIndexOf('/') + 1);
+}
+var CSS_URL_RX = /(url\()([^)]*)(\))/g;
+var URL_ATTRS = {
+'*': [
+'href',
+'src',
+'style',
+'url'
+],
+form: ['action']
+};
+var ABS_URL = /(^\/)|(^#)|(^[\w-\d]*:)/;
+var BINDING_RX = /\{\{|\[\[/;
+Polymer.ResolveUrl = {
+resolveCss: resolveCss,
+resolveAttrs: resolveAttrs,
+resolveUrl: resolveUrl,
+pathFromUrl: pathFromUrl
+};
+Polymer.rootPath = Polymer.Settings.rootPath || pathFromUrl(document.baseURI || window.location.href);
+}());Polymer.Base._addFeature({
 _prepTemplate: function () {
+var module;
 if (this._template === undefined) {
-this._template = Polymer.DomModule.import(this.is, 'template');
+module = Polymer.DomModule.import(this.is);
+this._template = module && module.querySelector('template');
+}
+if (module) {
+var assetPath = module.getAttribute('assetpath') || '';
+var importURL = Polymer.ResolveUrl.resolveUrl(assetPath, module.ownerDocument.baseURI);
+this._importPath = Polymer.ResolveUrl.pathFromUrl(importURL);
+} else {
+this._importPath = '';
 }
 if (this._template && this._template.hasAttribute('is')) {
 this._warn(this._logf('_prepTemplate', 'top-level Polymer template ' + 'must not be a type-extension, found', this._template, 'Move inside simple <template>.'));
@@ -3727,65 +3800,6 @@ return root;
 }
 }
 };
-}());(function () {
-function resolveCss(cssText, ownerDocument) {
-return cssText.replace(CSS_URL_RX, function (m, pre, url, post) {
-return pre + '\'' + resolve(url.replace(/["']/g, ''), ownerDocument) + '\'' + post;
-});
-}
-function resolveAttrs(element, ownerDocument) {
-for (var name in URL_ATTRS) {
-var a$ = URL_ATTRS[name];
-for (var i = 0, l = a$.length, a, at, v; i < l && (a = a$[i]); i++) {
-if (name === '*' || element.localName === name) {
-at = element.attributes[a];
-v = at && at.value;
-if (v && v.search(BINDING_RX) < 0) {
-at.value = a === 'style' ? resolveCss(v, ownerDocument) : resolve(v, ownerDocument);
-}
-}
-}
-}
-}
-function resolve(url, ownerDocument) {
-if (url && ABS_URL.test(url)) {
-return url;
-}
-var resolver = getUrlResolver(ownerDocument);
-resolver.href = url;
-return resolver.href || url;
-}
-var tempDoc;
-var tempDocBase;
-function resolveUrl(url, baseUri) {
-if (!tempDoc) {
-tempDoc = document.implementation.createHTMLDocument('temp');
-tempDocBase = tempDoc.createElement('base');
-tempDoc.head.appendChild(tempDocBase);
-}
-tempDocBase.href = baseUri;
-return resolve(url, tempDoc);
-}
-function getUrlResolver(ownerDocument) {
-return ownerDocument.body.__urlResolver || (ownerDocument.body.__urlResolver = ownerDocument.createElement('a'));
-}
-var CSS_URL_RX = /(url\()([^)]*)(\))/g;
-var URL_ATTRS = {
-'*': [
-'href',
-'src',
-'style',
-'url'
-],
-form: ['action']
-};
-var ABS_URL = /(^\/)|(^#)|(^[\w-\d]*:)/;
-var BINDING_RX = /\{\{|\[\[/;
-Polymer.ResolveUrl = {
-resolveCss: resolveCss,
-resolveAttrs: resolveAttrs,
-resolveUrl: resolveUrl
-};
 }());Polymer.Path = {
 root: function (path) {
 var dotIndex = path.indexOf('.');
@@ -5571,6 +5585,8 @@ node._configValue(name, value);
 }
 },
 _afterClientsReady: function () {
+this.importPath = this._importPath;
+this.rootPath = Polymer.rootPath;
 this._executeStaticEffects();
 this._applyConfig(this._config, this._aboveConfig);
 this._flushHandlers();
@@ -5909,13 +5925,7 @@ _getPathParts: Polymer.Base._getPathParts
 });
 }());Polymer.Base._addFeature({
 resolveUrl: function (url) {
-var module = Polymer.DomModule.import(this.is);
-var root = '';
-if (module) {
-var assetPath = module.getAttribute('assetpath') || '';
-root = Polymer.ResolveUrl.resolveUrl(assetPath, module.ownerDocument.baseURI);
-}
-return Polymer.ResolveUrl.resolveUrl(url, root);
+return Polymer.ResolveUrl.resolveUrl(url, this._importPath);
 }
 });Polymer.CssParse = function () {
 return {
@@ -8240,9 +8250,17 @@ this._detachInstance(i);
 attached: function () {
 if (this.__isDetached) {
 this.__isDetached = false;
-var parent = Polymer.dom(Polymer.dom(this).parentNode);
+var refNode;
+var parentNode = Polymer.dom(this).parentNode;
+if (parentNode.localName == this.is) {
+refNode = parentNode;
+parentNode = Polymer.dom(parentNode).parentNode;
+} else {
+refNode = this;
+}
+var parent = Polymer.dom(parentNode);
 for (var i = 0; i < this._instances.length; i++) {
-this._attachInstance(i, parent);
+this._attachInstance(i, parent, refNode);
 }
 }
 },
@@ -8526,10 +8544,10 @@ Polymer.dom(inst.root).appendChild(el);
 return inst;
 }
 },
-_attachInstance: function (idx, parent) {
+_attachInstance: function (idx, parent, refNode) {
 var inst = this._instances[idx];
 if (!inst.isPlaceholder) {
-parent.insertBefore(inst.root, this);
+parent.insertBefore(inst.root, refNode);
 }
 },
 _detachAndRemoveInstance: function (idx) {
@@ -8562,6 +8580,12 @@ inst = this._stampInstance(idx, key);
 var beforeRow = this._instances[idx + 1];
 var beforeNode = beforeRow && !beforeRow.isPlaceholder ? beforeRow._children[0] : this;
 var parentNode = Polymer.dom(this).parentNode;
+if (parentNode.localName == this.is) {
+if (beforeNode == this) {
+beforeNode = parentNode;
+}
+parentNode = Polymer.dom(parentNode).parentNode;
+}
 Polymer.dom(parentNode).insertBefore(inst.root, beforeNode);
 this._instances[idx] = inst;
 return inst;
@@ -8757,7 +8781,11 @@ _queueRender: function () {
 this._debounceTemplate(this._render);
 },
 detached: function () {
-if (!this.parentNode || this.parentNode.nodeType == Node.DOCUMENT_FRAGMENT_NODE && (!Polymer.Settings.hasShadow || !(this.parentNode instanceof ShadowRoot))) {
+var parentNode = this.parentNode;
+if (parentNode && parentNode.localName == this.is) {
+parentNode = Polymer.dom(parentNode).parentNode;
+}
+if (!parentNode || parentNode.nodeType == Node.DOCUMENT_FRAGMENT_NODE && (!Polymer.Settings.hasShadow || !(parentNode instanceof ShadowRoot))) {
 this._teardownInstance();
 }
 },
@@ -8790,20 +8818,26 @@ this._lastIf = this.if;
 }
 },
 _ensureInstance: function () {
+var refNode;
 var parentNode = Polymer.dom(this).parentNode;
+if (parentNode && parentNode.localName == this.is) {
+refNode = parentNode;
+parentNode = Polymer.dom(parentNode).parentNode;
+} else {
+refNode = this;
+}
 if (parentNode) {
-var parent = Polymer.dom(parentNode);
 if (!this._instance) {
 this._instance = this.stamp();
 var root = this._instance.root;
-parent.insertBefore(root, this);
+Polymer.dom(parentNode).insertBefore(root, refNode);
 } else {
 var c$ = this._instance._children;
 if (c$ && c$.length) {
-var lastChild = Polymer.dom(this).previousSibling;
+var lastChild = Polymer.dom(refNode).previousSibling;
 if (lastChild !== c$[c$.length - 1]) {
 for (var i = 0, n; i < c$.length && (n = c$[i]); i++) {
-parent.insertBefore(n, this);
+Polymer.dom(parentNode).insertBefore(n, refNode);
 }
 }
 }
@@ -8868,8 +8902,15 @@ _registerFeatures: function () {
 this._prepConstructor();
 },
 _insertChildren: function () {
-var parentDom = Polymer.dom(Polymer.dom(this).parentNode);
-parentDom.insertBefore(this.root, this);
+var refNode;
+var parentNode = Polymer.dom(this).parentNode;
+if (parentNode.localName == this.is) {
+refNode = parentNode;
+parentNode = Polymer.dom(parentNode).parentNode;
+} else {
+refNode = this;
+}
+Polymer.dom(parentNode).insertBefore(this.root, refNode);
 },
 _removeChildren: function () {
 if (this._children) {
@@ -11034,7 +11075,7 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
     },
 
     observers: [
-      '_detectKeyboardFocus(focused)',
+      '_focusChanged(focused)',
       '_activeChanged(active, ariaActiveAttribute)'
     ],
 
@@ -11052,6 +11093,14 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
         this._userActivate(!this.active);
       } else {
         this.active = false;
+      }
+    },
+
+    _focusChanged: function(focused) {
+      this._detectKeyboardFocus(focused);
+
+      if (!focused) {
+        this._setPressed(false);
       }
     },
 
@@ -14135,7 +14184,7 @@ Promise.race = Promise.race || function(values) {
       },
 
       /**
-       * True if this element is currently notifying its descedant elements of
+       * True if this element is currently notifying its descendant elements of
        * resize.
        */
       _notifyingDescendant: {
@@ -14234,7 +14283,7 @@ Promise.race = Promise.race || function(values) {
         return;
       }
 
-      // NOTE(cdata): In ShadowDOM, event retargetting makes echoing of the
+      // NOTE(cdata): In ShadowDOM, event retargeting makes echoing of the
       // otherwise non-bubbling event "just work." We do it manually here for
       // the case where Polymer is not using shadow roots for whatever reason:
       if (!Polymer.Settings.useShadow) {
