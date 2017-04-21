@@ -58,6 +58,33 @@ a.button-dark:hover {
     color: #e1e2eA;
 }
 
+.button-on-blue,
+a.button-on-blue,
+.elements-intro .button-on-blue {
+    box-sizing: border-box;
+    background-color: #40b527;
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1;
+    display: block;
+    padding: .6em .8rem;
+    font-weight: bold;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 3px solid rgba(255, 255, 255, .9);
+    text-align: center;
+    transition: all .3s;
+}
+
+.button-on-blue:hover,
+a.button-on-blue:hover,
+.elements-intro .button-on-blue:hover {
+    background-color: #5dd742;
+    color: #fff;
+    border-color: rgba(255, 255, 255, .3);
+}
+
 .pseudo-before-container,
 .pseudo-after-container {
     position: relative;

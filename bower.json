@@ -37,7 +37,8 @@
     "vaadin-icons": "vaadin/vaadin-icons#^2.0.0",
     "mock-http-request": "philikon/MockHttpRequest#master",
     "iframe-resizer": "^3.5.7",
-    "iron-lazy-pages": "^1.4.4"
+    "iron-lazy-pages": "^1.4.4",
+    "javascript-equal-height-responsive-rows": "*"
   },
   "resolutions": {
     "iron-iconset-svg": "^1.1.0"

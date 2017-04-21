@@ -10,6 +10,7 @@
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
+<script src="<%=request.getContextPath()%>/bower_components/javascript-equal-height-responsive-rows/grids.min.js"></script>
 
 <!-- Imports end -->
 
@@ -62,13 +63,29 @@
       </div>
       <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
-    <div class="span5">
-     <img src="<%=request.getContextPath()%>/img/pro-elements/vaadin-board.png"
-     	  class="element-image"
-          alt="vaadin-board">
+    <div class="span5" style="position:relative">
+      <img src="<%=request.getContextPath()%>/img/pro-elements/vaadin-board.png"
+           class="element-image"
+           alt="vaadin-board">
+      <style media="screen">
+        .pricing-button {
+          margin-top: 28px;
+        }
+        @media (min-width: 768px) {
+          .pricing-button {
+            position: absolute;
+            bottom: 1.5rem;
+            width: 100%;
+          }
+        }
+      </style>
+      <a href="/pricing" class="button-on-blue pricing-button">See pricing</a>
     </div>
   </div>
 </div>
+<script>
+  $('.elements-intro .span7, .elements-intro .span5').responsiveEqualHeightGrid();
+</script>
 
 <!-- Demo section start -->
 <a name="demo"></a>
@@ -76,7 +93,7 @@
   <div class="w-wallpaper-container zebra elements-dynamic-content">
      <div class="top-navigation">
        <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="top_nav_selector" on-iron-select="navigationChanged">
-         <div name="demos">Features</div>
+         <div name="features">Features</div>
          <div name="releases">Releases</div>
        </iron-selector>
        <a href="https://vaadin.com/docs" class="try-out-link" target="_blank">
@@ -110,10 +127,10 @@
      <div class="flex-container dynamic-list-top">
        <div class="navigation">
          <iron-selector attr-for-selected="name" selected="{{selectedNavItem}}" id="nav_selector" on-iron-select="navigationChanged">
-           <div name="demos">Features</div>
+           <div name="features">Features</div>
            <div name="releases">Releases</div>
          </iron-selector>
-         <a href="http://vaadin.com/docs" class="try-out-link" target="_blank">
+         <a href="https://vaadin.com/docs/-/part/board/board-overview.html" class="try-out-link" target="_blank">
            <div class="try-out">
              Documentation
              <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
@@ -142,8 +159,8 @@
          </a>
        </div>
        <div class="flexchild">
-         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demos">
-           <div data-nav="demos" id="demo_content" class="demos-list">
+         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="features">
+           <div data-nav="features" class="features-list">
              <iframe src="<%=request.getContextPath()%>/examples/pro/board/board.html" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="releases" class="releases-list">
