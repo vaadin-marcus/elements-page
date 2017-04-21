@@ -187,7 +187,7 @@
     <div id="panel">
       <div id="form">
         <h4 style="margin: 2em 0 .5em;">Want to vote for your favourite, propose something new or just give feedback?</h4>
-        <input type="hidden" name="name" value="Vaadin Board Features"> <input
+        <input type="hidden" name="name" value="Vaadin Board product page features"> <input
           type="hidden" name="idea" value="355150">
         <textarea id="feedback" name="feedback" cols="40" rows="5"
         style="border-radius: 5px;
@@ -242,7 +242,7 @@
 
         if (feedback.value !== 'It would be awesome if ') {
           var formData = new FormData();
-          formData.append('name', 'Vaadin Board Features');
+          formData.append('name', 'Vaadin Board product page features');
           formData.append('ideas[0][id]', '355150');
           formData.append('feedback', feedback.value);
           formData.append('email', email.value);
