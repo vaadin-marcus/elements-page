@@ -35,7 +35,7 @@
       </p>
       <h4>Install</h4>
       <div class="elements-install">
-        <code>bower install --save vaadin/vaadin-board</code>
+        <code>bower install --save vaadin-board</code>
       </div>
       <div class="releases">
         <%
