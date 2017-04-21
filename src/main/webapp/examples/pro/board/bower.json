@@ -1,23 +1,12 @@
 {
-  "name": "board",
-  "homepage": "https://github.com/vaadin/elements-page",
-  "authors": [
-    "anezthes <joacim@vaadin.com>"
-  ],
-  "description": "",
-  "main": "",
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "src/main/webapp/bower_components",
-    "test",
-    "tests"
-  ],
+  "name": "board-features",
+  "main": "index.html",
   "dependencies": {
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.10",
+    "polymer": "Polymer/polymer#^2.0.0-rc.7",
     "vaadin-board": "^1.0.0-alpha3",
     "iron-demo-helpers": "2.0-preview",
-    "paper-styles": "2.0-preview"
+    "paper-styles": "2.0-preview",
+    "iframe-resizer": "^3.5.7"
   }
 }

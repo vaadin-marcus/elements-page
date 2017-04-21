@@ -12,4 +12,4 @@ rm -f $WEBAPP_PATH/all-the-things_html.html.bak
 sed -i.bak -E '10s/<link.+polymer\/polymer.html">//g' $WEBAPP_PATH/bower_components/hydrolysis/hydrolysis-analyzer.html
 rm -f $WEBAPP_PATH/bower_components/hydrolysis/hydrolysis-analyzer.html.bak
 
-$(cd src/main/webapp/examples/pro/board && bower install --quiet)
+$(cd src/main/webapp/examples/pro/board && npm install && bower install --quiet && node_modules/polymer-cli/bin/polymer.js build)

@@ -161,7 +161,7 @@
        <div class="flexchild">
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="features">
            <div data-nav="features" class="features-list">
-             <iframe src="<%=request.getContextPath()%>/examples/pro/board/board.html" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
+             <iframe src="<%=request.getContextPath()%>/examples/pro/board/build/default/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="releases" class="releases-list">
              <%
