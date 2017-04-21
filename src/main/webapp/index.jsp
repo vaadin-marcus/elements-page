@@ -762,7 +762,7 @@
 
         <p class="lead helvetica-light">Fully responsive and offline enabled application that
           showcases Grid and Charts.</p>
-        <a class="w-arrow-button blue" href="http://demo.vaadin.com/fitness-tracker/">See live
+        <a class="w-arrow-button blue" href="https://demo.vaadin.com/fitness-tracker/">See live
           demo</a> <a class="w-arrow-button small"
                       href="https://github.com/vaadin/fitness-tracker-demo">Fork on GitHub</a></div>
     </div>

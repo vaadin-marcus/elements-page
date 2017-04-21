@@ -105,7 +105,7 @@
            </svg>
          </div>
        </a>
-       <a href="http://demo.vaadin.com/vaadin-board" class="try-out-link" target="_blank">
+       <a href="https://demo.vaadin.com/vaadin-board" class="try-out-link" target="_blank">
          <div class="try-out">
            Live Demo
            <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +139,7 @@
              </svg>
            </div>
          </a>
-         <a href="http://demo.vaadin.com/vaadin-board" class="try-out-link" target="_blank">
+         <a href="https://demo.vaadin.com/vaadin-board" class="try-out-link" target="_blank">
            <div class="try-out">
              Live Demo
              <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">

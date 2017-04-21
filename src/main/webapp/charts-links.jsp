@@ -5,5 +5,5 @@
   <a class="w-arrow-button blue span6"
      href="https://vaadin.com/charts">Vaadin Charts product page</a>
   <a class="w-arrow-button blue span6"
-     href="http://demo.vaadin.com/vaadin-charts/">Additional examples</a>
+     href="https://demo.vaadin.com/vaadin-charts/">Additional examples</a>
 </div>
