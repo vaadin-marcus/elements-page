@@ -125,13 +125,13 @@
       }
     </style>
       <h3>Responsive</h3>
-      <p>Responsive behaviour is built-in and doesn’t require any custom development, extremely easy. Layouting is automatically done based on screen size while making sure all widgets used all of the available space.</p>
+      <p>Responsive behaviour is built-in and doesn’t require any custom development, it just works. Layouting is automatically done based on screen size while making sure all widgets used all of the available space.</p>
       <video autoplay loop>
         <source src="board-demo.mp4" type="video/mp4">
       </video>
 
       <h3>Simple and easy to use API</h3>
-      <p>The vaadin-board is divided into rows using vaadin-board-row. Within a row you can have any Web Component or HTML elements inside it. Sizing, layouting and wrapping is automatic.</p>
+      <p>The vaadin-board is divided into rows using vaadin-board-row. You can use any Web Components or HTML elements within a row. Sizing, layouting and wrapping is automatic.</p>
       <vaadin-board>
         <vaadin-board-row>
           <div class="code-container"><pre><code class="language-markup">&lt;vaadin-board&gt;
@@ -153,7 +153,7 @@
       </vaadin-board>
 
       <h3>Up to four columns supported</h3>
-      <p>Vaadin Board supports one to four columns on each row.</p>
+      <p>Vaadin Board supports one to four columns on each row. Columns are wrapped in a predictable manner when the screen gets narrower, e.g from 4 to 2 and then to 1 column per row.</p>
       <vaadin-board>
         <vaadin-board-row>
           <div class="code-container"><pre><code class="language-markup">&lt;vaadin-board&gt;
@@ -209,7 +209,7 @@
       </vaadin-board>
 
       <h3>Column span</h3>
-      <p>An element inside a vaadin-board-row can have a board-cols modifier for controlling the area used within the row. Choosing values of 2 or 3 you get to layout rows such as 25%-50%-25%, 33%-67% or 75%-25%.</p>
+      <p>An element inside a vaadin-board-row can have a board-cols modifier for controlling the area used within the row. Choosing values of 2 or 3 you get to layout rows such as ¼-½-¼, ⅓-⅔ or ¾-¼.</p>
       <vaadin-board>
         <vaadin-board-row>
           <div class="code-container"><pre><code class="language-markup">&lt;vaadin-board&gt;

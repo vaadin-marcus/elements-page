@@ -31,7 +31,7 @@
     <div class="span7">
       <h1>Vaadin Board</h1>
       <p class="lead helvetica-light">
-        Vaadin Board is a flexible layout that allows you to build nice looking dashboards and intro screens to your application. It uses intelligent layouting that gives responsive behaviour for free. It reorders your widgets on different screen sizes, maximising the use of space and looking stunning. Combining Vaadin Board with Vaadin Charts will result in beautiful and functional dashboards that can be used on any screen size.
+        Vaadin Board is a powerful and easy to use layout element for building responsive views. It reorders your widgets on different screen sizes while maximising the use of available space. Combining Vaadin Board with Vaadin Charts allows you to build beautiful and functional dashboards and intro screens that can be used on any screens size.
       </p>
       <h4>Install</h4>
       <div class="elements-install">
