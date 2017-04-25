@@ -232,14 +232,14 @@
   <div class="row-fluid">
 
     <div class="span9">
-      <h5>Charts <span><%=Releases.getLatestVersionNumber("vaadin-charts", "3.2")%></span></h5>
+      <h5>Charts <span><%=Releases.getLatestVersionNumber("vaadin-charts", "4.0")%></span></h5>
       <p>Vaadin Charts contains tens of different types of charts that allow you to visualize and
         interact with data. All charts support declarative and dynamic data binding.</p>
     </div>
     <div class="span3">
       Commercial license
-      <a href="https://vaadin.com/charts"
-         class="w-arrow-button blue small">See more</a>
+      <a href="https://vaadin.com/pricing"
+         class="w-arrow-button blue small">See pricing</a>
     </div>
 
   </div>
