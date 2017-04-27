@@ -189,7 +189,6 @@
   </div>
 </div>
 
-<%-- 
 <div class="w-wallpaper-container zebra elements-category">
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
@@ -216,14 +215,13 @@
              alt="Dashboard component for web apps">
         <div class="tile-details">
           <div class="tile-title">Board</div>
-          <div class="tile-description">Vaadin Board is a flexible and easy layout that allows you to build great looking dashboards and intro screens to your application. It uses intelligent layouting that gives responsive behaviour out of the box.</div>
+          <div class="tile-description">Vaadin Board is a powerful and easy to use layout element for building responsive views. It reorders your widgets on different screen sizes while maximising the use of available space.</div>
         </div>
       </a>
     </div>
 
   </div>
 </div>
---%>
 
 <jsp:include page="get-help.jsp"/>
 
