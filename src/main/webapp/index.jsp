@@ -189,6 +189,8 @@
   </div>
 </div>
 
+<jsp:include page="get-help.jsp"/>
+
 <div class="w-wallpaper-container zebra elements-category">
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
@@ -204,7 +206,7 @@
   </div>
 </div>
 
-<div class="w-wallpaper-container zebra elements-category-tiles elements-category-core-tiles">
+<div class="w-wallpaper-container zebra elements-category-tiles elements-category-pro-tiles">
   <div class="w-wallpaper"></div>
 
   <div class="tile-container">
@@ -223,8 +225,6 @@
   </div>
 </div>
 
-<jsp:include page="get-help.jsp"/>
-
 <div class="w-wallpaper-container zebra elements-category">
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
@@ -235,7 +235,7 @@
         interact with data. All charts support declarative and dynamic data binding.</p>
     </div>
     <div class="span3">
-      Commercial license
+      <span>Commercial license</span>
       <a href="https://vaadin.com/pricing"
          class="w-arrow-button blue small">See pricing</a>
     </div>
