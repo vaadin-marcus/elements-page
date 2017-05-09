@@ -87,6 +87,18 @@
   $('.elements-intro .span7, .elements-intro .span5').responsiveEqualHeightGrid();
 </script>
 
+<div class="w-wallpaper-container dark">
+  <div class="w-wallpaper"></div>
+  <div class="bottom-action-container">
+    <h3 style="color: white; font-size: 1.6rem;">
+      Limited time offer
+    </h3>
+    <p style="color: whitesmoke; font-size: 1.2rem; max-width: 40em; margin: 0 auto 1.7rem;">
+      Have a feedback call with our dev team over Skype and receive a free license in exchange for your valuable time. Just ping us via <a href="mailto:protools@vaadin.com">protools@vaadin.com</a> when ready.
+    </p>
+  </div>
+</div>
+
 <!-- Demo section start -->
 <a name="demo"></a>
 <template is="dom-bind" id="dynamicDataTemplate">
