@@ -560,7 +560,7 @@ documentation page including demos (if available).
           var analyzer = this._analyzer;
           var elements = analyzer && analyzer.elements ? analyzer.elements : [];
           var behaviors = analyzer && analyzer.behaviors ? analyzer.behaviors : [];
-          if (this.src.indexOf('vaadin-grid/2') > -1) {
+          if (this.src.indexOf('vaadin-grid/2') > -1 || this.src.indexOf('master/vaadin-grid') > -1) {
             elements = elements.filter(function(el, index) {
               //whitelist public vaadin elements
               return /vaadin-$|column|filter|sorter/.test(el.is) || el.is === 'vaadin-grid';
