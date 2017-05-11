@@ -10270,6 +10270,14 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
         value: null
       },
       /**
+       * Enable GFM line breaks (regular newlines instead of two spaces for breaks)
+       */
+      breaks: {
+        observer: 'render',
+        type: Boolean,
+        value: false
+      },
+      /**
        * Conform to obscure parts of markdown.pl as much as possible. Don't fix any of the original markdown bugs or poor behavior.
        */
       pedantic: {
@@ -10311,17 +10319,40 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
         observer: 'render',
         type: Function,
         value: null
+      },
+      /**
+       * A reference to the XMLHttpRequest instance used to generate the
+       * network request.
+       *
+       * @type {XMLHttpRequest}
+       */
+      xhr: {
+        type: Object,
+        notify: true,
+        readOnly: true
       }
     },
 
     ready: function() {
-      if (!this.markdown) {
-        // Use the Markdown from the first `<script>` descendant whose MIME type starts with
-        // "text/markdown". Script elements beyond the first are ignored.
-        var markdownElement = Polymer.dom(this).querySelector('[type^="text/markdown"]');
-        if (markdownElement != null) {
-          this.markdown = this._unindent(markdownElement.textContent);
-        }
+      if (this.markdown) {
+        return;
+      }
+
+      // Use the Markdown from the first `<script>` descendant whose MIME type starts with
+      // "text/markdown". Script elements beyond the first are ignored.
+      this._markdownElement = Polymer.dom(this).querySelector('[type="text/markdown"]');
+      if (!this._markdownElement) {
+        return;
+      }
+
+      this.markdown = this._unindent(this._markdownElement.textContent);
+
+      if (this._markdownElement.src) {
+        this._request(this._markdownElement.src);
+      } else {
+        var observer = new MutationObserver(this._onScriptAttributeChanged
+            .bind(this));
+        observer.observe(this._markdownElement, { attributes: true })
       }
     },
 
@@ -10394,6 +10425,7 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
       var opts = {
         renderer: renderer,
         highlight: this._highlight.bind(this),
+        breaks: this.breaks,
         sanitize: this.sanitize,
         pedantic: this.pedantic,
         smartypants: this.smartypants
@@ -10419,8 +10451,60 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
       }, null);
 
       return lines.map(function(l) { return l.substr(indent); }).join('\n');
-    }
+    },
 
+    /**
+     * Fired when the XHR finishes loading
+     *
+     * @event marked-loadend
+     */
+    _request: function(url) {
+      this._setXhr(new XMLHttpRequest());
+      var xhr = this.xhr;
+
+      if (xhr.readyState > 0) {
+        return null;
+      }
+
+      xhr.addEventListener('error', this._handleError.bind(this));
+      xhr.addEventListener('loadend', function(e) {
+        var status = this.xhr.status || 0;
+        // Note: if we are using the file:// protocol, the status code will be 0
+        // for all outcomes (successful or otherwise).
+        if (status === 0 || (status >= 200 && status < 300)) {
+          this.sanitize = true;
+          this.markdown = e.target.response;
+        } else {
+          this._handleError(e);
+        }
+
+        this.fire('marked-loadend', e);
+      }.bind(this));
+
+      xhr.open('GET', url);
+      xhr.setRequestHeader('Accept', 'text/markdown');
+      xhr.send();
+    },
+
+    /**
+     * Fired when an error is received while fetching remote markdown content.
+     *
+     * @event marked-request-error
+     */
+    _handleError: function(e) {
+      var evt = this.fire('marked-request-error', e, {cancelable: true});
+      if (!evt.defaultPrevented) {
+        this.markdown = 'Failed loading markdown source';
+      }
+    },
+
+    _onScriptAttributeChanged: function(mutation) {
+      if (mutation[0].attributeName !== 'src') {
+        return;
+      }
+
+      this._request(this._markdownElement.src);
+    }
   });
 (function() {
     'use strict';

@@ -87,6 +87,11 @@
         <div name="docs">Docs</div>
         <div name="releases">Releases</div>
       </iron-selector>
+      <a href="https://vaadin.com/elements/javascript-grid-comparison" class="try-out-link">
+        <div class="try-out">
+          Compare
+        </div>
+      </a>
       <a href="https://github.com/vaadin/vaadin-grid" class="try-out-link" target="_blank">
         <div class="try-out">
           Github
@@ -115,6 +120,11 @@
           <div name="docs">Documentation</div>
           <div name="releases">Releases</div>
         </iron-selector>
+        <a href="https://vaadin.com/elements/javascript-grid-comparison" class="try-out-link">
+          <div class="try-out">
+            Compare
+          </div>
+        </a>
         <a href="https://github.com/vaadin/vaadin-grid" class="try-out-link" target="_blank">
           <div class="try-out">
             Github
