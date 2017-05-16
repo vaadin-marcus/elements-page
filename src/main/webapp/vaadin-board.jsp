@@ -7,6 +7,9 @@
 <portlet:defineObjects/>
 
 <%PortalUtil.setPageTitle("Advanced dashboard web component for HTML and JS | Vaadin Elements", request);%>
+<script>
+  window.showZopim = true;
+</script>
 
 <!-- Imports -->
 <jsp:include page="imports.jsp"/>
