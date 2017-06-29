@@ -7,7 +7,7 @@
 
 <portlet:defineObjects/>
 
-<%PortalUtil.setPageTitle("Advanced dashboard component for Vaadin Framework | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Vaadin Board for Java | Advanced dashboard component for Vaadin Framework | Vaadin Elements", request);%>
 <script>
   window.showZopim = true;
 </script>
@@ -33,14 +33,13 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <h1>Vaadin Board</h1>
+      <h1>Vaadin Board <small>for Java</small></h1>
       <p class="lead helvetica-light">
         Vaadin Board is a powerful and easy to use layout element for building responsive views. It reorders your widgets on different screen sizes while maximising the use of available space. Combining Vaadin Board with Vaadin Charts allows you to build beautiful and functional dashboards and intro screens that can be used on any screens size.
       </p>
-      <h4>Install</h4>
-      <div class="elements-install">
-        <code>bower install --save vaadin-board</code>
-      </div>
+      <p>
+        <a href="/docs/-/part/board/java-api/getting-started.html" class="w-arrow-button" style="display: inline-block;">Get started</a>
+      </p>
       <div class="releases">
         <%
           GitHubRelease latestStableRelease = Releases.getLatestStableRelease("board");
@@ -65,25 +64,15 @@
         </div>
         <%}%>
       </div>
-      <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
     <div class="span5" style="position:relative">
       <img src="<%=request.getContextPath()%>/img/pro-elements/vaadin-board.png"
            class="element-image"
            alt="Vaadin Board">
-      <style media="screen">
-        .pricing-button {
-          margin-top: 28px;
-        }
-        @media (min-width: 768px) {
-          .pricing-button {
-            position: absolute;
-            bottom: 1.5rem;
-            width: 100%;
-          }
-        }
-      </style>
-      <a href="/pricing" class="button-on-blue pricing-button">See pricing</a>
+      <div class="side-buttons">
+        <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-board.jsp" /></portlet:renderURL>" class="button">See Vaadin Board for HTML</a>
+        <a href="/pricing" class="button green">See pricing</a>
+      </div>
     </div>
   </div>
 </div>

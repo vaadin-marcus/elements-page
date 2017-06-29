@@ -53,6 +53,7 @@
     border: 0;
     cursor: pointer;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
     background-color: #00b4f0;
     color: #fff;
     font-size: 16px;
@@ -66,6 +67,7 @@
 
   .board-features .button:hover {
     background-color: #25c9ff;
+    color: #fff;
   }
 
   .board-features demo-snippet vaadin-board-row div {
@@ -200,10 +202,10 @@ board.addRow(new Label("10"));</code></pre></div>
     <div class="code-container"><pre><code class="language-java">Board board = new Board();
 Row firstRow = board.addRow(new Label("1"), 
                             new Label("2"));
-Row innerRow = new Row();
-innerRow.addComponents(new Label("3A"),
-                       new Label("3B"));
-firstRow.addComponent(innerRow);
+<span class="hl">Row innerRow = new Row();</span>
+<span class="hl">innerRow.addComponents(new Label("3A"),</span>
+                       <span class="hl">new Label("3B"));</span>
+<span class="hl">firstRow.addComponent(innerRow);</span>
 
 board.addRow(new Label("4"),
              new Label("5"));</code></pre></div>
@@ -227,7 +229,7 @@ board.addRow(new Label("1"),
 Label labelFour = new Label("4");
 Row row = board.addRow(labelFour, 
                        new Label("5"));
-row.setCols(labelFour, 2);</code></pre></div>
+<span class="hl">row.setCols(labelFour, 2);</span></code></pre></div>
   </div>
 
   <div class="board-code-sample-section__item">
@@ -237,13 +239,11 @@ row.setCols(labelFour, 2);</code></pre></div>
   </div>
 </div>
 
+<a href="https://vaadin.com/docs/-/part/board/java-api/getting-started.html" class="w-arrow-button green" style="margin-top: 2rem;">Get started</a>
+
 <h3>Potential upcoming features</h3>
 <p>We are building a lot of cool new stuff to Vaadin Board and here are the things we have thought of. Please feel free to comment on these, say what you’d like to get next or propose something totally new.</p>
 <table class="upcoming-features">
-  <tr>
-    <td>Java API for Vaadin Framework 8</td>
-    <td>Coming in 1.1 release</td>
-  </tr>
   <tr>
     <td>Easy API to control gutters, groupings and space</td>
     <td>Schedule not set</td>

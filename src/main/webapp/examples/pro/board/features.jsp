@@ -53,6 +53,7 @@
     border: 0;
     cursor: pointer;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
     background-color: #00b4f0;
     color: #fff;
     font-size: 16px;
@@ -66,6 +67,7 @@
 
   .board-features .button:hover {
     background-color: #25c9ff;
+    color: #fff;
   }
 
   .board-features demo-snippet vaadin-board-row div {
@@ -254,13 +256,11 @@
   </div>
 </div>
 
+<a href="https://vaadin.com/docs/-/part/board/webcomponents-api/getting-started.html" class="w-arrow-button green" style="margin-top: 2rem;">Get started</a>
+
 <h3>Potential upcoming features</h3>
 <p>We are building a lot of cool new stuff to Vaadin Board and here are the things we have thought of. Please feel free to comment on these, say what you’d like to get next or propose something totally new.</p>
 <table class="upcoming-features">
-  <tr>
-    <td>Java API for Vaadin Framework 8</td>
-    <td>Coming in 1.1 release</td>
-  </tr>
   <tr>
     <td>Easy API to control gutters, groupings and space</td>
     <td>Schedule not set</td>

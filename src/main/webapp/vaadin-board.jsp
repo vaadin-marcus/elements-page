@@ -7,7 +7,7 @@
 
 <portlet:defineObjects/>
 
-<%PortalUtil.setPageTitle("Advanced dashboard web component for HTML and JS | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Vaadin Board for HTML | Advanced dashboard web component for HTML and JS | Vaadin Elements", request);%>
 <script>
   window.showZopim = true;
 </script>
@@ -33,7 +33,7 @@
   <div class="w-wallpaper"></div>
   <div class="row-fluid">
     <div class="span7">
-      <h1>Vaadin Board</h1>
+      <h1>Vaadin Board <small>for HTML</small></h1>
       <p class="lead helvetica-light">
         Vaadin Board is a powerful and easy to use layout element for building responsive views. It reorders your widgets on different screen sizes while maximising the use of available space. Combining Vaadin Board with Vaadin Charts allows you to build beautiful and functional dashboards and intro screens that can be used on any screens size.
       </p>
@@ -71,19 +71,10 @@
       <img src="<%=request.getContextPath()%>/img/pro-elements/vaadin-board.png"
            class="element-image"
            alt="vaadin-board">
-      <style media="screen">
-        .pricing-button {
-          margin-top: 28px;
-        }
-        @media (min-width: 768px) {
-          .pricing-button {
-            position: absolute;
-            bottom: 1.5rem;
-            width: 100%;
-          }
-        }
-      </style>
-      <a href="/pricing" class="button-on-blue pricing-button">See pricing</a>
+      <div class="side-buttons">
+        <a href="<portlet:renderURL><portlet:param name="jspPage" value="/vaadin-board-java.jsp" /></portlet:renderURL>" class="button">See Vaadin Board for Java</a>
+        <a href="/pricing" class="button green">See pricing</a>
+      </div>
     </div>
   </div>
 </div>
