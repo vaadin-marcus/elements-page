@@ -7,7 +7,7 @@
 
 <portlet:defineObjects/>
 
-<%PortalUtil.setPageTitle("Advanced dashboard web component for HTML and JS | Vaadin Elements", request);%>
+<%PortalUtil.setPageTitle("Advanced dashboard component for Vaadin Framework | Vaadin Elements", request);%>
 <script>
   window.showZopim = true;
 </script>
@@ -43,7 +43,7 @@
       </div>
       <div class="releases">
         <%
-          GitHubRelease latestStableRelease = Releases.getLatestStableRelease("vaadin-board");
+          GitHubRelease latestStableRelease = Releases.getLatestStableRelease("board");
           if (latestStableRelease != null) {
         %>
         <div class="release stable">
@@ -54,7 +54,7 @@
         </div>
         <%}%>
         <%
-          GitHubRelease latestPreRelase = Releases.getLatestPreRelease("vaadin-board");
+          GitHubRelease latestPreRelase = Releases.getLatestPreRelease("board");
           if (latestPreRelase != null) {
         %>
         <div class="release pre">
@@ -70,7 +70,7 @@
     <div class="span5" style="position:relative">
       <img src="<%=request.getContextPath()%>/img/pro-elements/vaadin-board.png"
            class="element-image"
-           alt="vaadin-board">
+           alt="Vaadin Board">
       <style media="screen">
         .pricing-button {
           margin-top: 28px;
@@ -130,7 +130,7 @@
            </svg>
          </div>
        </a>
-       <a href="https://github.com/vaadin/vaadin-board" class="try-out-link" target="_blank">
+       <a href="https://github.com/vaadin/board" class="try-out-link" target="_blank">
          <div class="try-out">
            GitHub
            <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
@@ -164,7 +164,7 @@
              </svg>
            </div>
          </a>
-         <a href="https://github.com/vaadin/vaadin-board" class="try-out-link" target="_blank">
+         <a href="https://github.com/vaadin/board" class="try-out-link" target="_blank">
            <div class="try-out">
              GitHub
              <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
@@ -177,11 +177,11 @@
        <div class="flexchild">
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="features">
            <div data-nav="features" class="features-list">
-             <jsp:include page="examples/pro/board/features.jsp"/>
+             <jsp:include page="examples/pro/board/features-java.jsp"/>
            </div>
            <div data-nav="releases" class="releases-list">
              <%
-               List releases = Releases.getLatestReleases("vaadin-board");
+               List releases = Releases.getLatestReleases("board");
                for(int i=0; i < releases.size(); i++){
                  GitHubRelease release = (GitHubRelease) releases.get(i);
 		  %>
