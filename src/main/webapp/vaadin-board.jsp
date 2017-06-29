@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.vaadin.elements.GitHubRelease" %>
 <%@ page import="com.vaadin.elements.Releases" %>
@@ -165,7 +166,7 @@
          </a>
          <a href="https://github.com/vaadin/vaadin-board" class="try-out-link" target="_blank">
            <div class="try-out">
-             Github
+             GitHub
              <svg fill="#555" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
                <path d="M0 0h24v24H0z" fill="none"/>
                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
@@ -176,7 +177,7 @@
        <div class="flexchild">
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="features">
            <div data-nav="features" class="features-list">
-             <iframe src="<%=request.getContextPath()%>/examples/pro/board/build/default/index.html" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
+             <jsp:include page="examples/pro/board/features.jsp"/>
            </div>
            <div data-nav="releases" class="releases-list">
              <%
@@ -213,5 +214,6 @@
 </template>
 <!-- Demo section end -->
 
-<script src="<%=request.getContextPath()%>/hash-nav.js?6"></script>
 <jsp:include page="bottom-actions.jsp"/>
+
+<script src="<%=request.getContextPath()%>/hash-nav.js?6"></script>
