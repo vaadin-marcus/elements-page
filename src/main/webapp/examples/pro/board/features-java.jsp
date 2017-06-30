@@ -153,7 +153,7 @@
 </video>
 
 <h3>Simple and easy to use API</h3>
-<p>The Vaadin Board is divided into rows. Within a row you can use any HTML element with the HTML API or any Vaadin component with the Java API. Sizing, layouting and wrapping is automatic.</p>
+<p>The Vaadin Board is divided into rows. Within a row you can use any Vaadin component. Sizing, layouting and wrapping is automatic.</p>
 <div class="board-code-sample-section">
   <div class="board-code-sample-section__item">
     <div class="code-container"><pre><code class="language-java">Board board = new Board();
@@ -200,15 +200,18 @@ board.addRow(new Label("10"));</code></pre></div>
 <div class="board-code-sample-section">
   <div class="board-code-sample-section__item">
     <div class="code-container"><pre><code class="language-java">Board board = new Board();
-Row firstRow = board.addRow(new Label("1"), 
-                            new Label("2"));
-<span class="hl">Row innerRow = new Row();</span>
-<span class="hl">innerRow.addComponents(new Label("3A"),</span>
-                       <span class="hl">new Label("3B"));</span>
-<span class="hl">firstRow.addComponent(innerRow);</span>
-
-board.addRow(new Label("4"),
-             new Label("5"));</code></pre></div>
+board.addRow(
+    new Label("1"), 
+    new Label("2"),
+    <span class="hl">new Row(</span>
+        new Label("3A"),
+        new Label("3B")
+    <span class="hl">)</span>
+);
+board.addRow(
+    new Label("4"),
+    new Label("5")
+);</code></pre></div>
   </div>
 
   <div class="board-code-sample-section__item">
@@ -219,7 +222,7 @@ board.addRow(new Label("4"),
 </div>
 
 <h3>Column span</h3>
-<p>An element inside a vaadin-board-row can have a board-cols modifier for controlling the area used within the row. Choosing values of 2 or 3, you get to layout rows such as &frac14;-&frac12;-&frac14;, &frac13;-&frac23; or &frac34;-&frac14;.</p>
+<p>You can control the column spanning of a component by calling setComponentSpan. Choosing values of 2 or 3, you get to layout rows such as &frac14;-&frac12;-&frac14;, &frac13;-&frac23; or &frac34;-&frac14;.</p>
 <div class="board-code-sample-section">
   <div class="board-code-sample-section__item">
     <div class="code-container"><pre><code class="language-java">Board board = new Board();
@@ -229,7 +232,7 @@ board.addRow(new Label("1"),
 Label labelFour = new Label("4");
 Row row = board.addRow(labelFour, 
                        new Label("5"));
-<span class="hl">row.setCols(labelFour, 2);</span></code></pre></div>
+<span class="hl">row.setComponentSpan(labelFour, 2);</span></code></pre></div>
   </div>
 
   <div class="board-code-sample-section__item">
