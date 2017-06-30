@@ -82,7 +82,7 @@
   $('.elements-intro .span7, .elements-intro .span5').responsiveEqualHeightGrid();
 </script>
 
-<div class="w-wallpaper-container dark">
+<%-- <div class="w-wallpaper-container dark">
   <div class="w-wallpaper"></div>
   <div class="bottom-action-container">
     <h3 style="color: white; font-size: 1.6rem;">
@@ -92,7 +92,7 @@
       Have a feedback call with our dev team over Skype and receive a free license in exchange for your valuable time. Just ping us via <a href="mailto:protools@vaadin.com">protools@vaadin.com</a> when ready.
     </p>
   </div>
-</div>
+</div> --%>
 
 <!-- Demo section start -->
 <a name="demo"></a>
