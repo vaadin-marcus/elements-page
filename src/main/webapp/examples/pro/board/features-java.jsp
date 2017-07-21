@@ -242,7 +242,7 @@ Row row = board.addRow(labelFour,
   </div>
 </div>
 
-<a href="https://vaadin.com/docs/-/part/board/java-api/getting-started.html" class="w-arrow-button green" style="margin-top: 2rem;">Get started</a>
+<a href="https://vaadin.com/docs/-/part/board/java-api/getting-started.html" class="w-arrow-button green get-started-button" style="margin-top: 2rem;">Get started</a>
 
 <h3>Potential upcoming features</h3>
 <p>We are building a lot of cool new stuff to Vaadin Board and here are the things we have thought of. Please feel free to comment on these, say what you’d like to get next or propose something totally new.</p>
