@@ -136,7 +136,7 @@
              <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/demo/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="docs">
-             <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/doc-imports.html"></vaadin-component-page>
+             <vaadin-component-page src="https://cdn.rawgit.com/vaadin/vaadin-combo-box/<%=latestStableRelease.tagName%>/doc-imports.html"></vaadin-component-page>
            </div>
            <div data-nav="releases" class="releases-list">
              <%

@@ -386,6 +386,7 @@ documentation page including demos (if available).
          */
         _loadJson: function() {
           var textContent = '';
+          console.log(this);
           Array.prototype.forEach.call(Polymer.dom(this).childNodes, function(node) {
             textContent = textContent + node.textContent;
           });
@@ -394,6 +395,7 @@ documentation page including demos (if available).
           try {
             var json = JSON.parse(textContent);
             if (!Array.isArray(json)) return [];
+            console.log(json);
             return json;
           } catch(error) {
             console.error('Failure when parsing JSON:', textContent, error);

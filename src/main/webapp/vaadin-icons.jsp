@@ -155,7 +155,7 @@
              <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-icons/demo/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="docs">
-             <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-icons/vaadin-icons.html"></vaadin-component-page>
+             <vaadin-component-page src="https://cdn.rawgit.com/vaadin/vaadin-icons/<%=latestStableRelease.tagName%>/vaadin-icons.html"></vaadin-component-page>
            </div>
            <div data-nav="releases" class="releases-list">
              <%

@@ -132,7 +132,7 @@
              <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/demo/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="docs">
-             <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/vaadin-date-picker.html"></vaadin-component-page>
+             <vaadin-component-page src="https://cdn.rawgit.com/vaadin/vaadin-date-picker/<%=latestStableRelease.tagName%>/vaadin-date-picker.html"></vaadin-component-page>
            </div>
            <div data-nav="releases" class="releases-list">
              <%

@@ -133,7 +133,7 @@
              <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-context-menu/demo/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="docs">
-             <vaadin-component-page src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-context-menu/vaadin-context-menu.html"></vaadin-component-page>
+             <vaadin-component-page src="https://cdn.rawgit.com/vaadin/vaadin-context-menu/<%=latestStableRelease.tagName%>/vaadin-context-menu.html"></vaadin-component-page>
            </div>
            <div data-nav="releases" class="releases-list">
              <%
