@@ -133,10 +133,10 @@
        <div class="flexchild">
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demos">
            <div data-nav="demos" id="demo_content" class="demos-list">
-             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/demo/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
+             <iframe src="https://cdn.vaadin.com/vaadin-combo-box/2.0.0/demo/index.html" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="docs">
-             <vaadin-component-page src="https://cdn.rawgit.com/vaadin/vaadin-combo-box/<%=latestStableRelease.tagName%>/doc-imports.html"></vaadin-component-page>
+             <vaadin-component-page src="https://cdn.rawgit.com/vaadin/vaadin-combo-box/v2.0.0/doc-imports.html"></vaadin-component-page>
            </div>
            <div data-nav="releases" class="releases-list">
              <%

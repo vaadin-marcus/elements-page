@@ -129,10 +129,10 @@
        <div class="flexchild">
          <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demos">
            <div data-nav="demos" id="demo_content" class="demos-list">
-             <iframe src="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-date-picker/demo/" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
+             <iframe src="https://cdn.vaadin.com/vaadin-date-picker/2.0.0-alpha1/demo/index.html" frameborder="0" scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
            </div>
            <div data-nav="docs">
-             <vaadin-component-page src="https://cdn.rawgit.com/vaadin/vaadin-date-picker/<%=latestStableRelease.tagName%>/vaadin-date-picker.html"></vaadin-component-page>
+             <vaadin-component-page src="https://cdn.rawgit.com/vaadin/vaadin-date-picker/v2.0.0-alpha1/vaadin-date-picker.html"></vaadin-component-page>
            </div>
            <div data-nav="releases" class="releases-list">
              <%

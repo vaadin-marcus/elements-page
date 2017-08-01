@@ -55,22 +55,7 @@
       </div>
       <a class="back-link" href="/elements">&laquo; Browse all components</a>
     </div>
-    <div class="span5">
-      <img src="<%=request.getContextPath()%>/img/core-elements/vaadin-grid.png"
-           class="element-image"
-           alt="vaadin-grid">
-      <div class="row-fluid" style="margin-top:15px;">
-        <div class="span12" style="margin-left: 2.5641%; font-size: 18px; font-weight: 600; margin-bottom: -5px;">
-          Show documentation for:
-        </div>
-        <div class="span12" style="margin-left: 2.5641%;">
-          <select name="grid-version" style="max-width:95%; margin:0;" onchange="gridVersionChange()" id="grid-version-select">
-            <option value="2" selected>Vaadin Grid 2</option>
-            <option value="1">Vaadin Grid 1</option>
-          </select>
-        </div>
-      </div>
-    </div>
+
   </div>
 </div>
 
@@ -149,12 +134,12 @@
       <div class="flexchild">
         <iron-pages attr-for-selected="data-nav" selected="{{selectedNavItem}}" fallback-selection="demos">
           <div data-nav="demos" id="demo_content" class="demos-list">
-            <iframe src$="[[demoUrl]]" frameborder="0"
+            <iframe src="https://cdn.vaadin.com/vaadin-grid/3.0.0/demo/index.html" frameborder="0"
                     scrolling="no" class="element-demo-iframe" onload="setIframeResize()"></iframe>
           </div>
           <div data-nav="docs">
             <vaadin-component-page
-                src="[[docsUrl]]"></vaadin-component-page>
+                src="https://cdn.rawgit.com/vaadin/vaadin-grid/v3.0.0/vaadin-grid.html"></vaadin-component-page>
           </div>
           <div data-nav="releases" class="releases-list">
             <%
